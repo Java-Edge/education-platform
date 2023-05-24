@@ -1,0 +1,37 @@
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  type-aliases-package: com.ye.back.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+server:
+  port: 8088
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.52.239.29:3306/education?serverTimezone=GMT
+    username: root
+    password: Zxcvbnm1234567890
+  application:
+    name: back-server
+eureka:
+  client:
+    service-url:
+      # 注册中心地址
+      defaultZone: http://localhost:9001/eureka
+    # 注册到治理中心后，显示ip和端口
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: localhost
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mpp:
+  entityBasePath: com.ye.back.entity
