@@ -1,0 +1,42 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: education-gateway-server
+  # 路由配置
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: back-server
+          uri: lb://back-server
+          predicates:
+            - Path=/back-server/**
+          filters:
+            - StripPrefix=1
+
+#        - id: provide8083
+#          uri: lb://cloudprovideservice
+#          predicates:
+#            - Path=/provide/**
+#          filters:
+#            #            - 转发做拼接，去掉provide后缀，uri/** 而不是 uri/provide/**
+#            - StripPrefix=1
+#        #            与之对于的还有 PrefixPath=/Huterox
+#        #  当访问 http://localhost:8762/aaa，加上前缀就变成 http://localhost:8762/Huterox/aaa
+#        - id: test
+#          uri: https://cn.bing.com
+#          predicates:
+#            - Path=/test/**
+
+eureka:
+  client:
+    service-url:
+      # 注册中心地址
+      defaultZone: http://106.52.239.29:9000/eureka
+    # 注册到治理中心后，显示ip和端口
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: 106.52.239.29

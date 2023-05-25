@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9000
 spring:
   application:
     name: eureka-server
@@ -10,6 +10,6 @@ eureka:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   instance:
-    hostname: localhost
+    hostname: 106.52.239.29
   server:
     enable-self-preservation: false
