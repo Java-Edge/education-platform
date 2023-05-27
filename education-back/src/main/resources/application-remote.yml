@@ -25,7 +25,7 @@ eureka:
     # 注册到治理中心后，显示ip和端口
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    hostname: localhost
+    hostname: 106.52.239.29
 
 pagehelper:
   helperDialect: mysql
