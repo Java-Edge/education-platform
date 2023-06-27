@@ -46,8 +46,8 @@ public class JwtFilter extends AuthenticatingFilter {
                 HttpServletResponse response = (HttpServletResponse)servletResponse;
                 response.setContentType("application/plain;charset=utf-8");
                 PrintWriter writer = response.getWriter();
-                writer.write(JSON.toJSONString(new Result().setCode(401).setMessage("身份已过期，请重新登录")));
-                return false;
+//                writer.write(JSON.toJSONString(new Result().setCode(401).setMessage("身份已过期，请重新登录")));
+                return true;
 //                throw new ExpiredCredentialsException("token已失效，请重新登录");
             }
 

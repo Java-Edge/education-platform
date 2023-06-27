@@ -69,6 +69,7 @@ public class ShrioConfig {
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-resources/**", "anon");
         filterMap.put("/webjars/**", "anon");
+//        filterMap.put("/*","anon");
 //        filterMap.put("/css/**", "anon");
 //        filterMap.put("/js/**", "anon");
 //        filterMap.put("/index.html", "anon");
