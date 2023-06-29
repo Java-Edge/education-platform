@@ -5,6 +5,7 @@ import com.ye.back.entity.SourceCourseEntity;
 import com.ye.back.service.SourceCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,13 @@ public class SourceCourseController {
     public ResultBody list(){
         List<SourceCourseEntity> list = sourceCourseService.list();
         return ResultBody.success(list);
+    }
+
+
+    @GetMapping("/course/{id}")
+    public ResultBody courseDetail(@PathVariable("id")Integer id){
+        SourceCourseEntity entity = sourceCourseService.getById(id);
+        return ResultBody.success(entity);
     }
 
 
