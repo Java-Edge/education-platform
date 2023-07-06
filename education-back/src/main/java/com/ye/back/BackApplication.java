@@ -6,15 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
 @SpringBootApplication(scanBasePackages = "com.ye.back")
 @EnableMPP
-@EnableEurekaClient
-@EnableDiscoveryClient
 public class BackApplication {
 
     public static void main(String[] args) {

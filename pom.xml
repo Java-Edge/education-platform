@@ -34,8 +34,6 @@
 
     <modules>
         <!--这是父工程下的三个子项目-->
-        <module>eureka-core</module>
-        <module>education-core</module>
         <module>education-back</module>
     </modules>
     <dependencyManagement>

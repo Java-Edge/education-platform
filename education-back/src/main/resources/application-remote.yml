@@ -17,15 +17,6 @@ spring:
     password: Zxcvbnm1234567890
   application:
     name: back-server
-eureka:
-  client:
-    service-url:
-      # 注册中心地址
-      defaultZone: http://106.52.239.29:9000/eureka
-    # 注册到治理中心后，显示ip和端口
-  instance:
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    hostname: 106.52.239.29
 
 pagehelper:
   helperDialect: mysql
