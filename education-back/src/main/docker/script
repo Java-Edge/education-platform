@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# 构建Docker镜像
+docker build -t back:01 .
+
+# 停止并删除容器
+docker stop back
+docker rm back
+
+# 运行容器
+docker run --name back -p 8088:8088 -d back:01
