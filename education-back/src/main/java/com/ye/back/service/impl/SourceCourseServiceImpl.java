@@ -1,7 +1,6 @@
 package com.ye.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ye.back.entity.SourceCourseEntity;
 import com.ye.back.mapper.SourceCourseMapper;
@@ -25,9 +24,7 @@ public class SourceCourseServiceImpl extends ServiceImpl<SourceCourseMapper, Sou
         LambdaQueryWrapper<SourceCourseEntity> wrapper = new LambdaQueryWrapper<SourceCourseEntity>()
                 .orderByDesc(SourceCourseEntity::getCreatTime)
                 .last("limit 5");
-
         List<SourceCourseEntity> list = this.getBaseMapper().selectList(wrapper);
-
         return list;
     }
 
@@ -36,7 +33,6 @@ public class SourceCourseServiceImpl extends ServiceImpl<SourceCourseMapper, Sou
         LambdaQueryWrapper<SourceCourseEntity> wrapper = new LambdaQueryWrapper<SourceCourseEntity>()
                 .orderByDesc(SourceCourseEntity::getCreatTime)
                 .last("limit 4");
-
         List<SourceCourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
     }
