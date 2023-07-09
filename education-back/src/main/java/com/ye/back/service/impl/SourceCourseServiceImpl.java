@@ -32,7 +32,7 @@ public class SourceCourseServiceImpl extends ServiceImpl<SourceCourseMapper, Sou
     public List<SourceCourseEntity> getRecommendCourses() {
         LambdaQueryWrapper<SourceCourseEntity> wrapper = new LambdaQueryWrapper<SourceCourseEntity>()
                 .orderByDesc(SourceCourseEntity::getCreatTime)
-                .last("limit 4");
+                .last("limit 6");
         List<SourceCourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
     }
