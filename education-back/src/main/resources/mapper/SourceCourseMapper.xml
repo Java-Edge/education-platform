@@ -15,12 +15,13 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="updater" column="updater" jdbcType="VARCHAR"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="sourceUrl" column="source_url" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,name,image,
         description,price,creat_time,
         creator,update_time,updater,
-        remark
+        remark,source_url
     </sql>
 </mapper>

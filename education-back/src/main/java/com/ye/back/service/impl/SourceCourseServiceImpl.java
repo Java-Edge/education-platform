@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author MSIK
 * @description 针对表【source_course】的数据库操作Service实现
-* @createDate 2023-06-27 20:48:40
+* @createDate 2023-07-09 13:40:08
 */
 @Service
 public class SourceCourseServiceImpl extends ServiceImpl<SourceCourseMapper, SourceCourseEntity>

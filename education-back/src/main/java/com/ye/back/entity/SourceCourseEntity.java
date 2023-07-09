@@ -7,17 +7,19 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import lombok.Data;
 
 /**
  * 
  * @TableName source_course
  */
 @TableName(value ="source_course")
+@Data
 public class SourceCourseEntity implements Serializable {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -65,148 +67,13 @@ public class SourceCourseEntity implements Serializable {
      */
     private String remark;
 
+    /**
+     * 
+     */
+    private String sourceUrl;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * 
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * 
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * 
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    /**
-     * 
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * 
-     */
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    /**
-     * 
-     */
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    /**
-     * 
-     */
-    public Date getCreatTime() {
-        return creatTime;
-    }
-
-    /**
-     * 
-     */
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
-    }
-
-    /**
-     * 
-     */
-    public String getCreator() {
-        return creator;
-    }
-
-    /**
-     * 
-     */
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    /**
-     * 
-     */
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * 
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    /**
-     * 
-     */
-    public String getUpdater() {
-        return updater;
-    }
-
-    /**
-     * 
-     */
-    public void setUpdater(String updater) {
-        this.updater = updater;
-    }
-
-    /**
-     * 
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
 
     @Override
     public boolean equals(Object that) {
@@ -229,7 +96,8 @@ public class SourceCourseEntity implements Serializable {
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getUpdater() == null ? other.getUpdater() == null : this.getUpdater().equals(other.getUpdater()))
-            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()));
+            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
+            && (this.getSourceUrl() == null ? other.getSourceUrl() == null : this.getSourceUrl().equals(other.getSourceUrl()));
     }
 
     @Override
@@ -246,6 +114,7 @@ public class SourceCourseEntity implements Serializable {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getUpdater() == null) ? 0 : getUpdater().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
+        result = prime * result + ((getSourceUrl() == null) ? 0 : getSourceUrl().hashCode());
         return result;
     }
 
@@ -265,6 +134,7 @@ public class SourceCourseEntity implements Serializable {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", updater=").append(updater);
         sb.append(", remark=").append(remark);
+        sb.append(", sourceUrl=").append(sourceUrl);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
