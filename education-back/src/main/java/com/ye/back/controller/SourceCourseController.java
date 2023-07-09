@@ -37,4 +37,10 @@ public class SourceCourseController {
     }
 
 
+    @GetMapping("/getFiveCourse")
+    public ResultBody getFiveCourse(){
+        List<SourceCourseEntity> list = sourceCourseService.getFiveCourse();
+        return ResultBody.success(list);
+    }
+
 }
