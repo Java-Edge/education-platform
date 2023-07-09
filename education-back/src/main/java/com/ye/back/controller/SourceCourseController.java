@@ -43,4 +43,10 @@ public class SourceCourseController {
         return ResultBody.success(list);
     }
 
+    @GetMapping("/getRecommendCourses")
+    public ResultBody getRecommendCourses(){
+        List<SourceCourseEntity> list = sourceCourseService.getRecommendCourses();
+        return ResultBody.success(list);
+    }
+
 }

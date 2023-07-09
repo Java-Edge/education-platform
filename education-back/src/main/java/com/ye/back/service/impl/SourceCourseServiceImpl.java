@@ -30,6 +30,16 @@ public class SourceCourseServiceImpl extends ServiceImpl<SourceCourseMapper, Sou
 
         return list;
     }
+
+    @Override
+    public List<SourceCourseEntity> getRecommendCourses() {
+        LambdaQueryWrapper<SourceCourseEntity> wrapper = new LambdaQueryWrapper<SourceCourseEntity>()
+                .orderByDesc(SourceCourseEntity::getCreatTime)
+                .last("limit 4");
+
+        List<SourceCourseEntity> list = this.getBaseMapper().selectList(wrapper);
+        return list;
+    }
 }
 
 

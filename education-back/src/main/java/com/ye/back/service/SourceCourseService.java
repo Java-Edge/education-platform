@@ -19,4 +19,13 @@ public interface SourceCourseService extends IService<SourceCourseEntity> {
     List<SourceCourseEntity> getFiveCourse();
 
 
+    /**
+     * 获取推荐课程
+     *
+     * @return
+     */
+    List<SourceCourseEntity> getRecommendCourses();
+
+
+
 }
