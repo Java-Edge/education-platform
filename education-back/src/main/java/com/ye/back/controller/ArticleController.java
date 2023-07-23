@@ -7,8 +7,11 @@ import com.ye.back.entity.ArticleEntity;
 import com.ye.back.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 @RestController
@@ -37,6 +40,7 @@ public class ArticleController {
         Page<ArticleEntity> page = new Page<>(current, size);
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
         qw.eq("delete_flag", 0);
+        qw.orderByDesc("create_time");
         articleService.page(page, qw);
         return ResultBody.success(page);
     }
@@ -45,6 +49,19 @@ public class ArticleController {
     public ResultBody updateById(@RequestBody ArticleEntity article) {
         articleService.updateById(article);
         return ResultBody.success("修改成功");
+    }
+
+    @PostMapping("/uploadImg")
+    public ResultBody upload(MultipartFile file) {
+        File targetFile = new File("D:/myImg/" + file.getOriginalFilename());
+
+        try {
+            file.transferTo(targetFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(file);
+        return ResultBody.success("1");
     }
 
 }
