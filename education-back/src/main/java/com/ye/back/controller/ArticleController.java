@@ -36,10 +36,11 @@ public class ArticleController {
     }
 
     @GetMapping("/getByPage")
-    public ResultBody getByPage(Integer current, Integer size) {
+    public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
         Page<ArticleEntity> page = new Page<>(current, size);
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
         qw.eq("delete_flag", 0);
+        qw.eq(article.getType() != null, "type", article.getType());
         qw.orderByDesc("create_time");
         articleService.page(page, qw);
         return ResultBody.success(page);
