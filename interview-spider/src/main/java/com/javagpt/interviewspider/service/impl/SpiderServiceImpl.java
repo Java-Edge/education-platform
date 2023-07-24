@@ -1,5 +1,10 @@
 package com.javagpt.interviewspider.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.javagpt.interviewspider.data.ContentData;
+import com.javagpt.interviewspider.data.ImageMoment;
+import com.javagpt.interviewspider.data.InterviewData;
+import com.javagpt.interviewspider.data.MomentData;
 import com.javagpt.interviewspider.dto.*;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.entity.InterviewExperienceImageEntity;
@@ -40,71 +45,18 @@ public class SpiderServiceImpl implements SpiderService {
 
     @Override
     public void work() {
-        Page<InterviewEntity> response = getResponse();
+
+
+        Page<InterviewData> response = getResponse(1);
 
         handleData(response);
 
-    }
-
-    /**
-     * 处理数据
-     *
-     * @param page
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public void handleData(Page<InterviewEntity> page){
-
-        List<InterviewEntity> records = page.getRecords();
-
-        List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
-        List<InterviewExperienceImageEntity> imageEntities = new ArrayList<>();
-
-        for (InterviewEntity record : records) {
-            InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
-            List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
-            if (record.getContentType() == 74){
-                MomentData momentData = record.getMomentData();
-                BeanUtils.copyProperties(momentData,articleEntity);
-//                articleEntity.setUserId(momentData.getUserId());
-                List<ImageMoment> imageList = momentData.getImgMoment();
-
-                // 保存图片
-                for (int i = 0; i < imageList.size(); i++) {
-                    ImageMoment imageMoment = imageList.get(i);
-                    InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                    BeanUtils.copyProperties(imageMoment,imageEntity);
-
-                    imageEntity.setRecordId(momentData.getId());
-                    imageEntity.setSort(i);
-
-                    imageEntityList.add(imageEntity);
-                }
-            }else if (record.getContentType() == 250){
-                ContentData contentData = record.getContentData();
-                BeanUtils.copyProperties(contentData,articleEntity);
-                articleEntity.setUserId(contentData.getAuthorId());
-                List<ImageMoment> imageList = contentData.getContentImageUrls();
-
-                // 保存图片
-                for (int i = 0; i < imageList.size(); i++) {
-                    ImageMoment imageMoment = imageList.get(i);
-                    InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                    BeanUtils.copyProperties(imageMoment,imageEntity);
-
-                    imageEntity.setRecordId(contentData.getId());
-                    imageEntity.setSort(i);
-
-                    imageEntityList.add(imageEntity);
-                }
-            }
-            articleEntities.add(articleEntity);
-            // 将每个文章的图片均存储到集合里面，统一存储
-            imageEntities.addAll(imageEntityList);
+        Integer totalPage = response.getTotalPage();
+        for (int i = 2; i <totalPage; i++) {
+            response = getResponse(i);
+            handleData(response);
         }
 
-        // 存储到数据库中
-        experienceArticleService.saveBatch(articleEntities);
-        experienceImageService.saveBatch(imageEntities);
 
     }
 
@@ -113,7 +65,7 @@ public class SpiderServiceImpl implements SpiderService {
      *
      * @return
      */
-    public Page<InterviewEntity> getResponse() {
+    public Page<InterviewData> getResponse(int currentPage) {
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(org.springframework.http.MediaType.parseMediaType("application/json;charset=UTF-8"));
@@ -141,14 +93,22 @@ public class SpiderServiceImpl implements SpiderService {
                     "    \"isNewJob\": true\n" +
                     "}";
 
+            ExperienceParam experienceParam = new ExperienceParam();
+            experienceParam.setCompanyList(new ArrayList<>());
+            experienceParam.setJobId(11002);
+            experienceParam.setLevel(3);
+            experienceParam.setOrder(3);
+            experienceParam.setPage(currentPage);
+            experienceParam.setIsNewJob(true);
+
 
             String url = "https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/list?_=1690036293557";
 
-            HttpEntity<String> httpEntity = new HttpEntity<>(param, httpHeaders);
+            HttpEntity<String> httpEntity = new HttpEntity<>(JSON.toJSONString(experienceParam), httpHeaders);
             ResponseEntity<ResultBody> response = restTemplate.postForEntity(url, httpEntity, ResultBody.class);
             ResultBody body = response.getBody();
 
-            Page<InterviewEntity> data = body.getData();
+            Page<InterviewData> data = body.getData();
 
             if (response.getStatusCodeValue() != 200) {
                 log.error("response status code not 200, response = {}", response);
@@ -160,5 +120,74 @@ public class SpiderServiceImpl implements SpiderService {
             log.error("update on es  exception", e);
         }
         return null;
+    }
+
+
+    /**
+     * 处理数据
+     *
+     * @param page
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void handleData(Page<InterviewData> page){
+
+        List<InterviewData> records = page.getRecords();
+
+        List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
+        List<InterviewExperienceImageEntity> imageEntities = new ArrayList<>();
+
+        for (InterviewData record : records) {
+            InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
+            List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
+            if (record.getContentType() == 74){
+                MomentData momentData = record.getMomentData();
+                BeanUtils.copyProperties(momentData,articleEntity);
+//                articleEntity.setUserId(momentData.getUserId());
+                articleEntity.setCreateAt(momentData.getCreatedAt());
+                List<ImageMoment> imageList = momentData.getImgMoment();
+
+                // 保存图片
+                if (imageList != null && imageList.size() > 0){
+                    for (int i = 0; i < imageList.size(); i++) {
+                        ImageMoment imageMoment = imageList.get(i);
+                        InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
+                        BeanUtils.copyProperties(imageMoment,imageEntity);
+
+                        imageEntity.setRecordId(momentData.getId());
+                        imageEntity.setSort(i);
+
+                        imageEntityList.add(imageEntity);
+                    }
+                }
+            }else if (record.getContentType() == 250){
+                ContentData contentData = record.getContentData();
+                BeanUtils.copyProperties(contentData,articleEntity);
+                articleEntity.setUserId(contentData.getAuthorId());
+                articleEntity.setCreateAt(contentData.getCreateTime());
+                List<ImageMoment> imageList = contentData.getContentImageUrls();
+
+                // 保存图片
+                if (imageList != null && imageList.size() > 0){
+                    for (int i = 0; i < imageList.size(); i++) {
+                        ImageMoment imageMoment = imageList.get(i);
+                        InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
+                        BeanUtils.copyProperties(imageMoment,imageEntity);
+
+                        imageEntity.setRecordId(contentData.getId());
+                        imageEntity.setSort(i);
+
+                        imageEntityList.add(imageEntity);
+                    }
+                }
+            }
+            articleEntities.add(articleEntity);
+            // 将每个文章的图片均存储到集合里面，统一存储
+            imageEntities.addAll(imageEntityList);
+        }
+
+        // 存储到数据库中
+        experienceArticleService.saveOrUpdateBatch(articleEntities);
+        experienceImageService.saveOrUpdateBatch(imageEntities);
+
     }
 }

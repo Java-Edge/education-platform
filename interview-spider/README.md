@@ -76,3 +76,11 @@
                 }
             }
 ```
+
+```sql
+
+delete from interview_experience_article where 1=1;
+
+delete from interview_experience_image where 1=1;
+
+```

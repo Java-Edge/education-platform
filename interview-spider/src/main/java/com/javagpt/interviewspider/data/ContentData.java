@@ -1,12 +1,13 @@
-package com.javagpt.interviewspider.dto;
+package com.javagpt.interviewspider.data;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 /**
  * @author JavaGPT
  * @date 2023/7/23 0:01
- * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
+ * @description this is a class file created by JavaGPT in 2023/7/23 0:01
  */
 @Data
 public class ContentData {
@@ -44,12 +45,12 @@ public class ContentData {
     /**
      * 创建时间
      */
-    private Long createTime;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private Long editTime;
+    private Date editTime;
 
     /**
      * 实体id

@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.dto;
+package com.javagpt.interviewspider.data;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author JavaGPT
  * @date 2023/7/23 0:01
- * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
+ * @description this is a class file created by JavaGPT in 2023/7/23 0:01
  */
 @Data
 public class UserBrief {

@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.dto;
+package com.javagpt.interviewspider.data;
 
 import lombok.Data;
 
