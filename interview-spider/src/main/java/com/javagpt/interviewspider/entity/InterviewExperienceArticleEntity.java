@@ -1,6 +1,5 @@
 package com.javagpt.interviewspider.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -15,16 +14,17 @@ import lombok.Data;
 @TableName(value ="interview_experience_article")
 @Data
 public class InterviewExperienceArticleEntity implements Serializable {
+
     /**
      * 主键
      */
     @TableId
-    private Integer id;
+    private Long id;
 
     /**
      * 
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 

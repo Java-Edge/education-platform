@@ -24,7 +24,7 @@ public class ContentData {
     /**
      * 作者主键
      */
-    private String authorId;
+    private Long authorId;
 
     /**
      * beMyOnly

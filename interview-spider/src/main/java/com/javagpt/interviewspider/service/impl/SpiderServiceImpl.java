@@ -62,9 +62,10 @@ public class SpiderServiceImpl implements SpiderService {
         for (InterviewEntity record : records) {
             InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
             List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
-            if (record.getContentType() == 70){
+            if (record.getContentType() == 74){
                 MomentData momentData = record.getMomentData();
                 BeanUtils.copyProperties(momentData,articleEntity);
+//                articleEntity.setUserId(momentData.getUserId());
                 List<ImageMoment> imageList = momentData.getImgMoment();
 
                 // 保存图片
@@ -81,6 +82,7 @@ public class SpiderServiceImpl implements SpiderService {
             }else if (record.getContentType() == 250){
                 ContentData contentData = record.getContentData();
                 BeanUtils.copyProperties(contentData,articleEntity);
+                articleEntity.setUserId(contentData.getAuthorId());
                 List<ImageMoment> imageList = contentData.getContentImageUrls();
 
                 // 保存图片
