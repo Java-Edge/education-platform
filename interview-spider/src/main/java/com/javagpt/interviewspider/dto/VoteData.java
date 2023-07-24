@@ -8,27 +8,27 @@ import lombok.Data;
  * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
  */
 @Data
-public class ResultBody {
+public class VoteData {
 
     /**
-     * 是否成功
+     * 投票id
      */
-    private boolean success;
+    private Long voteId;
 
     /**
-     * 状态码
+     * 投票标题
      */
-    private int code;
+    private Object voteTitle;
 
     /**
-     * 信息
+     * 投票类型
      */
-    private String msg;
+    private Object voteType;
 
     /**
-     * 数据
+     * 投票
      */
-    private Page<InterviewEntity> Data;
+    private Boolean withVote;
 
 
 }

@@ -1,23 +1,29 @@
 package com.javagpt.interviewspider.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.javagpt.interviewspider.dto.Page;
-import com.javagpt.interviewspider.dto.ResultBody;
-import com.javagpt.interviewspider.entity.InterviewEntity;
+import com.javagpt.interviewspider.dto.*;
+import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
+import com.javagpt.interviewspider.entity.InterviewExperienceImageEntity;
+import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
+import com.javagpt.interviewspider.service.InterviewExperienceImageService;
 import com.javagpt.interviewspider.service.SpiderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author bubaiwantong
- * @date 2023/7/22 23:54
- * @description this is a class file created by bubaiwantong in 2023/7/22 23:54
+ * @author JavaGPT
+ * @date 2023/7/23 0:01
+ * @description this is a class file created by JavaGPT in 2023/7/23 0:01
  */
 @Service
 @Slf4j
@@ -26,11 +32,85 @@ public class SpiderServiceImpl implements SpiderService {
     @Resource
     private RestTemplate restTemplate;
 
+    @Autowired
+    private InterviewExperienceImageService experienceImageService;
+
+    @Autowired
+    private InterviewExperienceArticleService experienceArticleService;
+
     @Override
     public void work() {
         Page<InterviewEntity> response = getResponse();
+
+        handleData(response);
+
     }
 
+    /**
+     * 处理数据
+     *
+     * @param page
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void handleData(Page<InterviewEntity> page){
+
+        List<InterviewEntity> records = page.getRecords();
+
+        List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
+        List<InterviewExperienceImageEntity> imageEntities = new ArrayList<>();
+
+        for (InterviewEntity record : records) {
+            InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
+            List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
+            if (record.getContentType() == 70){
+                MomentData momentData = record.getMomentData();
+                BeanUtils.copyProperties(momentData,articleEntity);
+                List<ImageMoment> imageList = momentData.getImgMoment();
+
+                // 保存图片
+                for (int i = 0; i < imageList.size(); i++) {
+                    ImageMoment imageMoment = imageList.get(i);
+                    InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
+                    BeanUtils.copyProperties(imageMoment,imageEntity);
+
+                    imageEntity.setRecordId(momentData.getId());
+                    imageEntity.setSort(i);
+
+                    imageEntityList.add(imageEntity);
+                }
+            }else if (record.getContentType() == 250){
+                ContentData contentData = record.getContentData();
+                BeanUtils.copyProperties(contentData,articleEntity);
+                List<ImageMoment> imageList = contentData.getContentImageUrls();
+
+                // 保存图片
+                for (int i = 0; i < imageList.size(); i++) {
+                    ImageMoment imageMoment = imageList.get(i);
+                    InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
+                    BeanUtils.copyProperties(imageMoment,imageEntity);
+
+                    imageEntity.setRecordId(contentData.getId());
+                    imageEntity.setSort(i);
+
+                    imageEntityList.add(imageEntity);
+                }
+            }
+            articleEntities.add(articleEntity);
+            // 将每个文章的图片均存储到集合里面，统一存储
+            imageEntities.addAll(imageEntityList);
+        }
+
+        // 存储到数据库中
+        experienceArticleService.saveBatch(articleEntities);
+        experienceImageService.saveBatch(imageEntities);
+
+    }
+
+    /**
+     * 获取数据
+     *
+     * @return
+     */
     public Page<InterviewEntity> getResponse() {
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -78,15 +158,5 @@ public class SpiderServiceImpl implements SpiderService {
             log.error("update on es  exception", e);
         }
         return null;
-
-      /*      PageUtil pageUtils = JSON.parseObject(JSON.toJSONString(response.getBody().getResult()), PageUtil.class);
-            postVOS = JSON.parseArray(JSON.toJSONString(pageUtils.getRows()), PostVO.class);
-
-            page.setRecords(postVOS);
-            page.setTotal(pageUtils.getTotalCount());
-            page.setSize(pageUtils.getPageSize());
-            page.setCurrent(pageUtils.getPageNum());
-            page.setPages(pageUtils.getTotalPages());          */
-
     }
 }

@@ -1,9 +1,18 @@
 package com.javagpt.interviewspider;
 
+import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+/**
+ * @author bubaiwantong
+ * @date 2023/7/23 0:01
+ * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
+ */
+
+@SpringBootApplication(scanBasePackages = "com.javagpt.interviewspider")
+@EnableMPP
 public class InterviewSpiderApplication {
 
     public static void main(String[] args) {

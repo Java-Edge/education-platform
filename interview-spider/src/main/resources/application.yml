@@ -1,6 +1,6 @@
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  type-aliases-package: com.ye.back.entity
+  type-aliases-package: com.javagpt.interviewspider.entity
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
@@ -16,7 +16,7 @@ spring:
     username: root
     password: Zxcvbnm1234567890
   application:
-    name: back-server
+    name: interview-spider
 
 pagehelper:
   helperDialect: mysql
@@ -25,4 +25,4 @@ pagehelper:
   params: count=countSql
 
 mpp:
-  entityBasePath: com.ye.back.entity
+  entityBasePath: com.javagpt.interviewspider.entity

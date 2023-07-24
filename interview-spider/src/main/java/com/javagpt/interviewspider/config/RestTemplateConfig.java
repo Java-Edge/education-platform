@@ -7,14 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 
 /**
- * All rights Reserved, Designed By www.tom.com
- *
- * @Author bubaiwantong
- * @Date 2023/5/8 16:32
- * @PackageName:com.javagpt.interviewspider.config
- * @ClassName: RestTemplateConfig
- * @Description: 请求配置
- * @Version 1.0
+ * @author JavaGPT
+ * @date 2023/7/23 0:01
+ * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
  */
 @Configuration
 public class RestTemplateConfig {

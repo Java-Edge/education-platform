@@ -1,9 +1,13 @@
-package com.javagpt.interviewspider.entity;
+package com.javagpt.interviewspider.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
- * JavaGPT
+ * @author JavaGPT
+ * @date 2023/7/23 0:01
+ * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
  */
 @Data
 public class MomentData {
@@ -16,7 +20,7 @@ public class MomentData {
     private Long editTime;
     private Boolean hasEdit;
     private Long id;
-    private Object imgMoment;
+    private List<ImageMoment> imgMoment;
     private String ip4;
     private String ip4Location;
     private Boolean isAnonymousFlag;

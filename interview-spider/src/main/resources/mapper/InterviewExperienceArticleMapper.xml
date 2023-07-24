@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javagpt.interviewspider.mapper.InterviewExperienceArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
+            <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
+            <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
+            <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,title,
+        new_title,content,new_content,
+        type,status,has_edit,
+        is_anonymous_flag,create_at,edit_time
+    </sql>
+</mapper>

@@ -1,15 +1,13 @@
-package com.javagpt.interviewspider.entity;
+package com.javagpt.interviewspider.dto;
 
 import lombok.Data;
 
 import java.util.List;
 
 /**
- * @Author bubaiwantong
- * @Date 2023/7/24 17:40
- * @PackageName:com.javagpt.interviewspider.InterviewEntity
- * @ClassName: InterviewEntity
- * @Version 1.0
+ * @author JavaGPT
+ * @date 2023/7/23 0:01
+ * @description this is a class file created by bubaiwantong in 2023/7/23 0:01
  */
 @Data
 public class InterviewEntity {
