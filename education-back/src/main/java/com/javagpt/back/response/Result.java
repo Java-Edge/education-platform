@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * @PackageName:com.ye.background.result
+ * @PackageName:com.javagpt.background.result
  * @ClassName:Result
  * @Description:
  * @author:何进业

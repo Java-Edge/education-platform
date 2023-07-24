@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@MapperScan("com.ye.back.mapper")
+@MapperScan("com.javagpt.back.mapper")
 public class MybatisPlusConfig {
 //	/**
 //	 * SQL打印

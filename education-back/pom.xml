@@ -7,7 +7,7 @@
         <artifactId>education</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.ye</groupId>
+    <groupId>com.javagpt</groupId>
     <artifactId>back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>education-back</name>

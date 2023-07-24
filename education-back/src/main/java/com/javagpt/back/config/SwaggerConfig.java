@@ -30,7 +30,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .enable(true)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ye.back.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.javagpt.back.controller"))
                 //.paths()过滤什么路经
                 .paths(PathSelectors.any())
                 .build();

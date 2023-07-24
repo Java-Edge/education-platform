@@ -30,8 +30,8 @@ public class InterviewController {
         page.setCurrent(pageQueryParam.getPageNo());
         page.setSize(pageQueryParam.getPageSize());
 
-        page = articleService.page(page);
-        return ResultBody.success(page);
+        Page<InterviewExperienceArticleEntity> articleEntityPage = articleService.page(page);
+        return ResultBody.success(articleEntityPage);
     }
 
 }

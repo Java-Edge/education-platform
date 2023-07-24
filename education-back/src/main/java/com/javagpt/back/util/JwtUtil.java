@@ -8,7 +8,7 @@ import java.security.Key;
 import java.util.Date;
 
 /**
- * @PackageName:com.ye.back.util
+ * @PackageName:com.javagpt.back.util
  * @ClassName:JwtUtil
  * @Description:
  * @author:何进业
