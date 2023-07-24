@@ -35,6 +35,7 @@
     <modules>
         <!--这是父工程下的三个子项目-->
         <module>education-back</module>
+        <module>interview-spider</module>
     </modules>
     <dependencyManagement>
         <dependencies>

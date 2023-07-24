@@ -1,5 +1,9 @@
 package com.javagpt.interviewspider.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.javagpt.interviewspider.dto.Page;
+import com.javagpt.interviewspider.dto.ResultBody;
+import com.javagpt.interviewspider.entity.InterviewEntity;
 import com.javagpt.interviewspider.service.SpiderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -24,6 +28,10 @@ public class SpiderServiceImpl implements SpiderService {
 
     @Override
     public void work() {
+        Page<InterviewEntity> response = getResponse();
+    }
+
+    public Page<InterviewEntity> getResponse() {
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(org.springframework.http.MediaType.parseMediaType("application/json;charset=UTF-8"));
@@ -55,12 +63,30 @@ public class SpiderServiceImpl implements SpiderService {
             String url = "https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/list?_=1690036293557";
 
             HttpEntity<String> httpEntity = new HttpEntity<>(param, httpHeaders);
-            ResponseEntity<Object> response = restTemplate.postForEntity(url, httpEntity, Object.class);
+            ResponseEntity<ResultBody> response = restTemplate.postForEntity(url, httpEntity, ResultBody.class);
+            ResultBody body = response.getBody();
+
+            Page<InterviewEntity> data = body.getData();
+
             if (response.getStatusCodeValue() != 200) {
                 log.error("response status code not 200, response = {}", response);
             }
+
+            return data;
+
         } catch (Exception e) {
             log.error("update on es  exception", e);
         }
+        return null;
+
+      /*      PageUtil pageUtils = JSON.parseObject(JSON.toJSONString(response.getBody().getResult()), PageUtil.class);
+            postVOS = JSON.parseArray(JSON.toJSONString(pageUtils.getRows()), PostVO.class);
+
+            page.setRecords(postVOS);
+            page.setTotal(pageUtils.getTotalCount());
+            page.setSize(pageUtils.getPageSize());
+            page.setCurrent(pageUtils.getPageNum());
+            page.setPages(pageUtils.getTotalPages());          */
+
     }
 }
