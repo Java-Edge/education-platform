@@ -199,22 +199,24 @@ public class SpiderServiceImpl implements SpiderService {
         try {
             String url = "https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/level3CareerJob?careerJobId=11200&_=1690270527713";
             ResponseEntity<ResultBody> response = restTemplate.getForEntity(url, ResultBody.class);
-            ResultBody body = response.getBody();
+            ResultBody<Result> body = response.getBody();
 
-            Result result = JSON.parseObject(JSON.toJSONString(body.getData()), Result.class);
+            Result<CareerDTO> result = JSON.parseObject(JSON.toJSONString(body.getData()), Result.class);
 
-            if (response.getStatusCodeValue() != 200) {
-                log.error("response status code not 200, response = {}", response);
-            }
-            boolean b = careerService.saveOrUpdateBatch(result.getResult());
-/*            ArrayList<CareerEntity> careerEntities = new ArrayList<>();
-            for (CareerDTO careerDTO : result.getResult()) {
+            List<CareerDTO> list = JSON.parseArray(JSON.toJSONString(result.getResult()), CareerDTO.class);
+
+            List<CareerEntity> careerEntities = new ArrayList<>();
+            for (CareerDTO careerDTO : list) {
                 CareerEntity careerEntity = new CareerEntity();
                 BeanUtils.copyProperties(careerDTO, careerEntity);
                 careerEntities.add(careerEntity);
             }
-            boolean b = careerService.saveOrUpdateBatch(careerEntities);*/
 
+            boolean b = careerService.saveOrUpdateBatch(careerEntities);
+
+            if (response.getStatusCodeValue() != 200) {
+                log.error("response status code not 200, response = {}", response);
+            }
             return null;
         } catch (Exception e) {
             log.error("can not grab career", e);

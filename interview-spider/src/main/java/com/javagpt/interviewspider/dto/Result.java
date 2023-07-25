@@ -18,8 +18,8 @@ import java.util.List;
  * @Version 1.0
  */
 @Data
-public class Result {
+public class Result<T> {
 
-    private List<CareerEntity> result;
+    private List<T> result;
 
 }

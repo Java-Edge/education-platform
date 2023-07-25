@@ -84,3 +84,23 @@ delete from interview_experience_article where 1=1;
 delete from interview_experience_image where 1=1;
 
 ```
+
+**职位筛选栏**
+```shell
+curl 'https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/selector?_=1690278216728' \
+  -H 'authority: gw-c.nowcoder.com' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh-CN,zh;q=0.9' \
+  -H 'cookie: gr_user_id=ebb5a2ba-7dcb-4e8d-8ae1-6f33ed7dcf95; NOWCODERCLINETID=7C0BF16CD0F23DBB37E0873852CCE5B2; NOWCODERUID=37A176E36523BA951A59078A11617D44; Hm_lvt_a808a1326b6c06c437de769d1b85b870=1689138478,1689313498,1689758270; isAgreementChecked=true; t=D6AB53541BF826DE9638EABA5249EBF2; c196c3667d214851b11233f5c17f99d5_gr_last_sent_cs1=675723764; Hm_lpvt_a808a1326b6c06c437de769d1b85b870=1690270527; acw_tc=32a7d1a5722224950eae59d2de728e262269ef1c80eb20a414460b70446b4d08; c196c3667d214851b11233f5c17f99d5_gr_session_id=4016b2bb-ebf9-4afd-bfa1-6fe5db9d8fc9; c196c3667d214851b11233f5c17f99d5_gr_last_sent_sid_with_cs1=4016b2bb-ebf9-4afd-bfa1-6fe5db9d8fc9; c196c3667d214851b11233f5c17f99d5_gr_cs1=675723764; c196c3667d214851b11233f5c17f99d5_gr_session_id_4016b2bb-ebf9-4afd-bfa1-6fe5db9d8fc9=true' \
+  -H 'origin: https://www.nowcoder.com' \
+  -H 'referer: https://www.nowcoder.com/' \
+  -H 'sec-ch-ua: "Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --compressed
+```
