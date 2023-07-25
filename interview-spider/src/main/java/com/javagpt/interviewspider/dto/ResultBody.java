@@ -9,7 +9,7 @@ import lombok.Data;
  * @description this is a class file created by JavaGPT in 2023/7/23 0:01
  */
 @Data
-public class ResultBody {
+public class ResultBody<T> {
 
     /**
      * 是否成功
@@ -29,7 +29,7 @@ public class ResultBody {
     /**
      * 数据
      */
-    private Page<InterviewData> data;
+    private T data;
 
 
 }

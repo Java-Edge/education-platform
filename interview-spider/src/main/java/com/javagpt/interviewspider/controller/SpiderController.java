@@ -24,4 +24,12 @@ public class SpiderController {
         spiderService.work();
     }
 
+
+
+    @GetMapping("/grabCareer")
+    public void grabCareer(){
+        spiderService.grabCareer();
+    }
+
+
 }

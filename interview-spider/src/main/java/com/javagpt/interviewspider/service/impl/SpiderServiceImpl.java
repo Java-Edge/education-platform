@@ -6,8 +6,10 @@ import com.javagpt.interviewspider.data.ImageMoment;
 import com.javagpt.interviewspider.data.InterviewData;
 import com.javagpt.interviewspider.data.MomentData;
 import com.javagpt.interviewspider.dto.*;
+import com.javagpt.interviewspider.entity.CareerEntity;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.entity.InterviewExperienceImageEntity;
+import com.javagpt.interviewspider.service.CareerService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
 import com.javagpt.interviewspider.service.InterviewExperienceImageService;
 import com.javagpt.interviewspider.service.SpiderService;
@@ -20,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -43,6 +46,9 @@ public class SpiderServiceImpl implements SpiderService {
     @Autowired
     private InterviewExperienceArticleService experienceArticleService;
 
+    @Autowired
+    private CareerService careerService;
+
     @Override
     public void work() {
 
@@ -52,13 +58,14 @@ public class SpiderServiceImpl implements SpiderService {
         handleData(response);
 
         Integer totalPage = response.getTotalPage();
-        for (int i = 2; i <totalPage; i++) {
+        for (int i = 2; i < totalPage; i++) {
             response = getResponse(i);
             handleData(response);
         }
 
 
     }
+
 
     /**
      * 获取数据
@@ -84,14 +91,7 @@ public class SpiderServiceImpl implements SpiderService {
             httpHeaders.set("sec-fetch-site", "same-site");
             httpHeaders.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36");
 
-            String param = "{\n" +
-                    "    \"companyList\": [],\n" +
-                    "    \"jobId\": 11002,\n" +
-                    "    \"level\": 3,\n" +
-                    "    \"order\": 3,\n" +
-                    "    \"page\": 1,\n" +
-                    "    \"isNewJob\": true\n" +
-                    "}";
+            String param = "{\n" + "    \"companyList\": [],\n" + "    \"jobId\": 11002,\n" + "    \"level\": 3,\n" + "    \"order\": 3,\n" + "    \"page\": 1,\n" + "    \"isNewJob\": true\n" + "}";
 
             ExperienceParam experienceParam = new ExperienceParam();
             experienceParam.setCompanyList(new ArrayList<>());
@@ -108,7 +108,7 @@ public class SpiderServiceImpl implements SpiderService {
             ResponseEntity<ResultBody> response = restTemplate.postForEntity(url, httpEntity, ResultBody.class);
             ResultBody body = response.getBody();
 
-            Page<InterviewData> data = body.getData();
+            Page<InterviewData> data = (Page<InterviewData>) body.getData();
 
             if (response.getStatusCodeValue() != 200) {
                 log.error("response status code not 200, response = {}", response);
@@ -129,7 +129,7 @@ public class SpiderServiceImpl implements SpiderService {
      * @param page
      */
     @Transactional(rollbackFor = Exception.class)
-    public void handleData(Page<InterviewData> page){
+    public void handleData(Page<InterviewData> page) {
 
         List<InterviewData> records = page.getRecords();
 
@@ -139,19 +139,19 @@ public class SpiderServiceImpl implements SpiderService {
         for (InterviewData record : records) {
             InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
             List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
-            if (record.getContentType() == 74){
+            if (record.getContentType() == 74) {
                 MomentData momentData = record.getMomentData();
-                BeanUtils.copyProperties(momentData,articleEntity);
+                BeanUtils.copyProperties(momentData, articleEntity);
 //                articleEntity.setUserId(momentData.getUserId());
                 articleEntity.setCreateAt(momentData.getCreatedAt());
                 List<ImageMoment> imageList = momentData.getImgMoment();
 
                 // 保存图片
-                if (imageList != null && imageList.size() > 0){
+                if (imageList != null && imageList.size() > 0) {
                     for (int i = 0; i < imageList.size(); i++) {
                         ImageMoment imageMoment = imageList.get(i);
                         InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                        BeanUtils.copyProperties(imageMoment,imageEntity);
+                        BeanUtils.copyProperties(imageMoment, imageEntity);
 
                         imageEntity.setRecordId(momentData.getId());
                         imageEntity.setSort(i);
@@ -159,19 +159,19 @@ public class SpiderServiceImpl implements SpiderService {
                         imageEntityList.add(imageEntity);
                     }
                 }
-            }else if (record.getContentType() == 250){
+            } else if (record.getContentType() == 250) {
                 ContentData contentData = record.getContentData();
-                BeanUtils.copyProperties(contentData,articleEntity);
+                BeanUtils.copyProperties(contentData, articleEntity);
                 articleEntity.setUserId(contentData.getAuthorId());
                 articleEntity.setCreateAt(contentData.getCreateTime());
                 List<ImageMoment> imageList = contentData.getContentImageUrls();
 
                 // 保存图片
-                if (imageList != null && imageList.size() > 0){
+                if (imageList != null && imageList.size() > 0) {
                     for (int i = 0; i < imageList.size(); i++) {
                         ImageMoment imageMoment = imageList.get(i);
                         InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                        BeanUtils.copyProperties(imageMoment,imageEntity);
+                        BeanUtils.copyProperties(imageMoment, imageEntity);
 
                         imageEntity.setRecordId(contentData.getId());
                         imageEntity.setSort(i);
@@ -189,5 +189,36 @@ public class SpiderServiceImpl implements SpiderService {
         experienceArticleService.saveOrUpdateBatch(articleEntities);
         experienceImageService.saveOrUpdateBatch(imageEntities);
 
+    }
+
+    /**
+     * 获取职业
+     */
+    @Override
+    public List<CareerDTO> grabCareer() {
+        try {
+            String url = "https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/level3CareerJob?careerJobId=11200&_=1690270527713";
+            ResponseEntity<ResultBody> response = restTemplate.getForEntity(url, ResultBody.class);
+            ResultBody body = response.getBody();
+
+            Result result = JSON.parseObject(JSON.toJSONString(body.getData()), Result.class);
+
+            if (response.getStatusCodeValue() != 200) {
+                log.error("response status code not 200, response = {}", response);
+            }
+            boolean b = careerService.saveOrUpdateBatch(result.getResult());
+/*            ArrayList<CareerEntity> careerEntities = new ArrayList<>();
+            for (CareerDTO careerDTO : result.getResult()) {
+                CareerEntity careerEntity = new CareerEntity();
+                BeanUtils.copyProperties(careerDTO, careerEntity);
+                careerEntities.add(careerEntity);
+            }
+            boolean b = careerService.saveOrUpdateBatch(careerEntities);*/
+
+            return null;
+        } catch (Exception e) {
+            log.error("can not grab career", e);
+        }
+        return null;
     }
 }

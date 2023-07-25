@@ -1,5 +1,10 @@
 package com.javagpt.interviewspider.service;
 
+import com.javagpt.interviewspider.dto.CareerDTO;
+import com.javagpt.interviewspider.entity.CareerEntity;
+
+import java.util.List;
+
 /**
  * @author bubaiwantong
  * @date 2023/7/23 0:01
@@ -8,5 +13,12 @@ package com.javagpt.interviewspider.service;
 public interface SpiderService {
 
     void work();
+
+    /**
+     * 获取职业
+     *
+     * @return
+     */
+    List<CareerDTO> grabCareer();
 
 }
