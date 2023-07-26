@@ -27,6 +27,7 @@ import springfox.documentation.spring.web.json.Json;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author JavaGPT
@@ -51,19 +52,35 @@ public class SpiderServiceImpl implements SpiderService {
 
     @Override
     public void work() {
+        List<CareerEntity> list = careerService.list();
+
+        for (CareerEntity careerEntity : list) {
+            System.out.println(careerEntity.getId());
+            ExperienceParam experienceParam = new ExperienceParam();
+            experienceParam.setJobId(careerEntity.getId());
+            experienceParam.setPage(1);
+            experienceParam.setLevel(experienceParam.getLevel());
+            saveInterviewByJobId(experienceParam);
+        }
+    }
 
 
-        Page<InterviewData> response = getResponse(1);
-
-        handleData(response);
-
+    /**
+     * 根据职业获取这个职业的全部面经
+     *
+     * @param experienceParam
+     */
+    public void saveInterviewByJobId(ExperienceParam experienceParam) {
+        Page<InterviewData> response = getResponse(experienceParam);
+        handleData(experienceParam.getJobId(),response);
         Integer totalPage = response.getTotalPage();
         for (int i = 2; i < totalPage; i++) {
-            response = getResponse(i);
-            handleData(response);
+            experienceParam.setPage(i);
+            response = getResponse(experienceParam);
+            handleData(experienceParam.getJobId(),response);
         }
 
-
+        log.debug( "============"+ experienceParam.getJobId() + "岗位一共存储"    + response.getTotal() +  "条数据============");
     }
 
 
@@ -72,7 +89,7 @@ public class SpiderServiceImpl implements SpiderService {
      *
      * @return
      */
-    public Page<InterviewData> getResponse(int currentPage) {
+    public Page<InterviewData> getResponse(ExperienceParam experienceParam) {
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(org.springframework.http.MediaType.parseMediaType("application/json;charset=UTF-8"));
@@ -93,12 +110,9 @@ public class SpiderServiceImpl implements SpiderService {
 
             String param = "{\n" + "    \"companyList\": [],\n" + "    \"jobId\": 11002,\n" + "    \"level\": 3,\n" + "    \"order\": 3,\n" + "    \"page\": 1,\n" + "    \"isNewJob\": true\n" + "}";
 
-            ExperienceParam experienceParam = new ExperienceParam();
             experienceParam.setCompanyList(new ArrayList<>());
-            experienceParam.setJobId(11002);
             experienceParam.setLevel(3);
             experienceParam.setOrder(3);
-            experienceParam.setPage(currentPage);
             experienceParam.setIsNewJob(true);
 
 
@@ -108,7 +122,7 @@ public class SpiderServiceImpl implements SpiderService {
             ResponseEntity<ResultBody> response = restTemplate.postForEntity(url, httpEntity, ResultBody.class);
             ResultBody body = response.getBody();
 
-            Page<InterviewData> data = (Page<InterviewData>) body.getData();
+            Page<InterviewData> data = JSON.parseObject(JSON.toJSONString(body.getData()), Page.class);
 
             if (response.getStatusCodeValue() != 200) {
                 log.error("response status code not 200, response = {}", response);
@@ -129,9 +143,9 @@ public class SpiderServiceImpl implements SpiderService {
      * @param page
      */
     @Transactional(rollbackFor = Exception.class)
-    public void handleData(Page<InterviewData> page) {
+    public void handleData(int jobId,Page<InterviewData> page) {
 
-        List<InterviewData> records = page.getRecords();
+        List<InterviewData> records = JSON.parseArray(JSON.toJSONString(page.getRecords()), InterviewData.class);
 
         List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
         List<InterviewExperienceImageEntity> imageEntities = new ArrayList<>();
@@ -144,6 +158,9 @@ public class SpiderServiceImpl implements SpiderService {
                 BeanUtils.copyProperties(momentData, articleEntity);
 //                articleEntity.setUserId(momentData.getUserId());
                 articleEntity.setCreateAt(momentData.getCreatedAt());
+                articleEntity.setContentType(record.getContentType().intValue());
+                articleEntity.setId(UUID.randomUUID().toString());
+                articleEntity.setSourceId(momentData.getId());
                 List<ImageMoment> imageList = momentData.getImgMoment();
 
                 // 保存图片
@@ -153,7 +170,7 @@ public class SpiderServiceImpl implements SpiderService {
                         InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
                         BeanUtils.copyProperties(imageMoment, imageEntity);
 
-                        imageEntity.setRecordId(momentData.getId());
+                        imageEntity.setRecordId(articleEntity.getId());
                         imageEntity.setSort(i);
 
                         imageEntityList.add(imageEntity);
@@ -164,6 +181,9 @@ public class SpiderServiceImpl implements SpiderService {
                 BeanUtils.copyProperties(contentData, articleEntity);
                 articleEntity.setUserId(contentData.getAuthorId());
                 articleEntity.setCreateAt(contentData.getCreateTime());
+                articleEntity.setContentType(record.getContentType().intValue());
+                articleEntity.setId(UUID.randomUUID().toString());
+                articleEntity.setSourceId(contentData.getId());
                 List<ImageMoment> imageList = contentData.getContentImageUrls();
 
                 // 保存图片
@@ -173,21 +193,23 @@ public class SpiderServiceImpl implements SpiderService {
                         InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
                         BeanUtils.copyProperties(imageMoment, imageEntity);
 
-                        imageEntity.setRecordId(contentData.getId());
+                        imageEntity.setRecordId(articleEntity.getId());
                         imageEntity.setSort(i);
 
                         imageEntityList.add(imageEntity);
                     }
                 }
             }
+            articleEntity.setId(null);
+            articleEntity.setJobId(jobId);
             articleEntities.add(articleEntity);
             // 将每个文章的图片均存储到集合里面，统一存储
             imageEntities.addAll(imageEntityList);
         }
 
         // 存储到数据库中
-        experienceArticleService.saveOrUpdateBatch(articleEntities);
-        experienceImageService.saveOrUpdateBatch(imageEntities);
+        experienceArticleService.saveBatch(articleEntities);
+        experienceImageService.saveBatch(imageEntities);
 
     }
 

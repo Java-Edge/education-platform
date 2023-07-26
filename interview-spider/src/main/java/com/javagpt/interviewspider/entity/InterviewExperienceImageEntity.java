@@ -43,7 +43,7 @@ public class InterviewExperienceImageEntity implements Serializable {
     /**
      * 文章id
      */
-    private Long recordId;
+    private String recordId;
 
     /**
      * 图片顺序

@@ -26,3 +26,8 @@ pagehelper:
 
 mpp:
   entityBasePath: com.javagpt.interviewspider.entity
+
+
+logging:
+  level:
+    root: debug
