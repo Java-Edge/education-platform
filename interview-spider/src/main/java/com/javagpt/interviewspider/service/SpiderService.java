@@ -12,13 +12,7 @@ import java.util.List;
  */
 public interface SpiderService {
 
-    void work();
+    void obtainInterviewExperience();
 
-    /**
-     * 获取职业
-     *
-     * @return
-     */
-    List<CareerDTO> grabCareer();
 
 }

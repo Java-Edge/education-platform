@@ -30,6 +30,40 @@ public class CareerServiceImpl extends ServiceImpl<CareerMapper, CareerEntity>
     @Autowired
     private RestTemplate restTemplate;
 
+
+    /**
+     * 获取职业
+     */
+    @Override
+    public List<CareerDTO> grabLevel3Career() {
+        try {
+            String url = "https://gw-c.nowcoder.com/api/sparta/job-experience/experience/job/level3CareerJob?careerJobId=11200&_=1690270527713";
+            ResponseEntity<ResultBody> response = restTemplate.getForEntity(url, ResultBody.class);
+            ResultBody<Result> body = response.getBody();
+
+            Result<CareerDTO> result = JSON.parseObject(JSON.toJSONString(body.getData()), Result.class);
+
+            List<CareerDTO> list = JSON.parseArray(JSON.toJSONString(result.getResult()), CareerDTO.class);
+
+            List<CareerEntity> careerEntities = new ArrayList<>();
+            for (CareerDTO careerDTO : list) {
+                CareerEntity careerEntity = new CareerEntity();
+                BeanUtils.copyProperties(careerDTO, careerEntity);
+                careerEntities.add(careerEntity);
+            }
+
+            boolean b = saveOrUpdateBatch(careerEntities);
+
+            if (response.getStatusCodeValue() != 200) {
+                log.error("response status code not 200");
+            }
+            return null;
+        } catch (Exception e) {
+            log.error("can not grab career", e);
+        }
+        return null;
+    }
+
     @Override
     public List<CareerDTO> grabAllCareer() {
         try {

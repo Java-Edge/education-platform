@@ -19,17 +19,9 @@ public class SpiderController {
     @Autowired
     private SpiderService spiderService;
 
-    @GetMapping("/test")
-    public void test(){
-        spiderService.work();
+    @GetMapping("/obtainInterviewExperience")
+    public void obtainInterviewExperience(){
+        spiderService.obtainInterviewExperience();
     }
-
-
-
-    @GetMapping("/grabCareer")
-    public void grabCareer(){
-        spiderService.grabCareer();
-    }
-
 
 }

@@ -15,7 +15,18 @@ public interface CareerService extends IService<CareerEntity> {
 
     /**
      * 抓取所有职业
+     *
+     * @return
      */
     List<CareerDTO> grabAllCareer();
+
+
+    /**
+     * 获取职业
+     *
+     * @return
+     */
+    List<CareerDTO> grabLevel3Career();
+
 
 }

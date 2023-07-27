@@ -40,5 +40,11 @@ public class CareerController {
     }
 
 
+    @GetMapping("/grabLevel3Career")
+    public void grabLevel3Career(){
+        careerService.grabLevel3Career();
+    }
+
+
 
 }
