@@ -1,6 +1,7 @@
 package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.javagpt.interviewspider.data.ContentData;
 import com.javagpt.interviewspider.data.ImageMoment;
 import com.javagpt.interviewspider.data.InterviewData;
@@ -52,7 +53,8 @@ public class SpiderServiceImpl implements SpiderService {
 
     @Override
     public void work() {
-        List<CareerEntity> list = careerService.list();
+        LambdaQueryWrapper<CareerEntity> queryWrapper = new LambdaQueryWrapper<CareerEntity>().eq(CareerEntity::getIsGrab, 1);
+        List<CareerEntity> list = careerService.list(queryWrapper);
 
         for (CareerEntity careerEntity : list) {
             System.out.println(careerEntity.getId());

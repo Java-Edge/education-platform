@@ -8,12 +8,13 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 
+ *
  * @TableName career
  */
 @TableName(value ="career")
 @Data
 public class CareerEntity implements Serializable {
+
     /**
      * 主键
      */
@@ -29,6 +30,16 @@ public class CareerEntity implements Serializable {
      * 职位名称
      */
     private String name;
+
+    /**
+     * 父类别
+     */
+    private Integer parentId;
+
+    /**
+     * 是否抓取
+     */
+    private Integer isGrab;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

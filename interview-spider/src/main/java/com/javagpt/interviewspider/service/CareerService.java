@@ -1,7 +1,10 @@
 package com.javagpt.interviewspider.service;
 
+import com.javagpt.interviewspider.dto.CareerDTO;
 import com.javagpt.interviewspider.entity.CareerEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author JavaGPT
@@ -10,7 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CareerService extends IService<CareerEntity> {
 
-
-
+    /**
+     * 抓取所有职业
+     */
+    List<CareerDTO> grabAllCareer();
 
 }
