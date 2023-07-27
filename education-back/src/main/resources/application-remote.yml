@@ -26,3 +26,7 @@ pagehelper:
 
 mpp:
   entityBasePath: com.javagpt.back.entity
+
+logging:
+  level:
+    root: debug

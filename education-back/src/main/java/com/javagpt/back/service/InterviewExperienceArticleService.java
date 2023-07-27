@@ -1,7 +1,13 @@
 package com.javagpt.back.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.javagpt.back.dto.InterviewArticleDto;
+import com.javagpt.back.dto.PageQueryParam;
 import com.javagpt.back.entity.InterviewExperienceArticleEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.javagpt.back.vo.ArticleVO;
+
+import java.util.List;
 
 /**
 * @author MSIK
@@ -9,5 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-07-24 23:36:50
 */
 public interface InterviewExperienceArticleService extends IService<InterviewExperienceArticleEntity> {
+
+
+
+    IPage<ArticleVO> selectByCondition(PageQueryParam<InterviewArticleDto> pageQueryParam);
 
 }

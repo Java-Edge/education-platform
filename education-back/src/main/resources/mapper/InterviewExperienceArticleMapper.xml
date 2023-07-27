@@ -5,18 +5,18 @@
 <mapper namespace="com.javagpt.back.mapper.InterviewExperienceArticleMapper">
 
     <resultMap id="BaseResultMap" type="com.javagpt.back.entity.InterviewExperienceArticleEntity">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
-            <result property="type" column="type" jdbcType="VARCHAR"/>
-            <result property="status" column="status" jdbcType="VARCHAR"/>
-            <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
-            <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
-            <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
-            <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
+        <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
+        <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -25,4 +25,56 @@
         type,status,has_edit,
         is_anonymous_flag,create_at,edit_time
     </sql>
+
+
+    <resultMap id="ArticleVOMap" type="com.javagpt.back.vo.ArticleVO">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
+        <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
+        <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
+        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
+        <result property="jobId" column="job_id" jdbcType="INTEGER"/>
+        <result property="contentType" column="content_type" jdbcType="INTEGER"/>
+        <result property="careerName" column="career_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByCondition" parameterType="com.javagpt.back.dto.InterviewArticleDto" resultMap="ArticleVOMap">
+
+        select article.id                id,
+               article.user_id           user_id,
+               article.title             title,
+               article.new_title         new_title,
+               article.content           content,
+               article.new_content       new_content,
+               article.type              type,
+               article.status            status,
+               article.has_edit          has_edit,
+               article.is_anonymous_flag is_anonymous_flag,
+               article.create_at         create_at,
+               article.edit_time         edit_time,
+               article.job_id            job_id,
+               article.content_type      content_type,
+               article.source_id         source_id,
+               career.name               career_name
+        from interview_experience_article article
+                 left join career career on article.job_id = career.id
+        <where>
+            <if test="dto.jobId != null and dto.jobId != ''">
+                and article.job_id = #{dto.jobId,jdbcType=INTEGER}
+            </if>
+            <if test="dto.title != null and dto.title != ''">
+                and article.job_id = #{dto.title,jdbcType=VARCHAR}
+            </if>
+            <if test="dto.content != null and dto.content != ''">
+                and article.job_id = #{dto.content,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>
