@@ -6,8 +6,10 @@ import com.javagpt.back.dto.InterviewArticleDto;
 import com.javagpt.back.dto.PageQueryParam;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.ArticleEntity;
+import com.javagpt.back.entity.Career;
 import com.javagpt.back.entity.InterviewExperienceArticleEntity;
 import com.javagpt.back.entity.SourceCourseEntity;
+import com.javagpt.back.service.CareerService;
 import com.javagpt.back.service.InterviewExperienceArticleService;
 import com.javagpt.back.vo.ArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class InterviewController {
 
     @Autowired
     private InterviewExperienceArticleService articleService;
+
+    @Autowired
+    private CareerService careerService;
+
 
     @PostMapping("/getPage")
     public ResultBody getPage(@RequestBody PageQueryParam<InterviewArticleDto> pageQueryParam){
@@ -50,6 +56,11 @@ public class InterviewController {
     @GetMapping("/getById/{id}")
     public ResultBody getById(@PathVariable String id) {
         InterviewExperienceArticleEntity article = articleService.getById(id);
+        Integer jobId = article.getJobId();
+        if (jobId != null) {
+            Career byId = careerService.getById(jobId);
+            article.setCareerName(byId.getName());
+        }
         return ResultBody.success(article);
     }
 

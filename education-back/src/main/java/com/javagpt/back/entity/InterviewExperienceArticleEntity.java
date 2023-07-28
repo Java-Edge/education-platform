@@ -68,6 +68,12 @@ public class InterviewExperienceArticleEntity implements Serializable {
      */
     private Integer isAnonymousFlag;
 
+    private Integer jobId;
+
+    // 面经分类
+    @TableField(exist = false)
+    private String careerName;
+
     /**
      * 
      */
