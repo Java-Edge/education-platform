@@ -1,9 +1,15 @@
 package com.javagpt.back.aspect;
 
+import com.google.common.util.concurrent.RateLimiter;
+import com.javagpt.back.dto.ResultBody;
+import lombok.SneakyThrows;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.weaver.ast.Var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -25,6 +31,12 @@ public class ServiceLogAspect {
 
     }
 
+    /**
+     * 对 controller 限流
+     */
+    @Pointcut("execution(* com.javagpt.back.controller.*.*(..))")
+    public void rateLimitPointCut() {}
+
     @Before("pointCut()")
     public void before(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -37,6 +49,23 @@ public class ServiceLogAspect {
         String target = joinPoint.getSignature().getDeclaringTypeName() + "." +joinPoint.getSignature().getName();
         logger.info(String.format("用户[%s],在[%s],访问了[%s].", ip, now, target));
     }
+
+    private static final RateLimiter rateLimiter = RateLimiter.create(10);
+
+    @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
+    @Around("rateLimitPointCut()")
+    public Object rateLimit(ProceedingJoinPoint joinPoint) {
+        double rate = rateLimiter.getRate();
+        System.out.println(rate);
+        if (rateLimiter.tryAcquire()) {
+            return joinPoint.proceed();
+        } else {
+            // 如果超出限流次数
+            ResultBody resultBody = ResultBody.error("访问太过频繁");
+            return resultBody;
+        }
+    }
+
 }
 
 
