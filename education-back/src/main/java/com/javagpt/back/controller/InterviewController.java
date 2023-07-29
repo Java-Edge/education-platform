@@ -47,7 +47,7 @@ public class InterviewController {
 
     @PostMapping("/selectByCondition")
     public ResultBody selectByCondition(@RequestBody PageQueryParam<InterviewArticleDto> pageQueryParam){
-        if (pageQueryParam.getParam().getJobId() != null && pageQueryParam.getParam().getJobId() == -1) {
+        if (pageQueryParam.getParam() != null && pageQueryParam.getParam().getJobId() != null && pageQueryParam.getParam().getJobId() == -1) {
             pageQueryParam.getParam().setJobId(null);
         }
         IPage<ArticleVO> articleVOS = articleService.selectByCondition(pageQueryParam);

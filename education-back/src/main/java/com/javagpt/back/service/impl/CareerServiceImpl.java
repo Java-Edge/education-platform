@@ -37,25 +37,25 @@ public class CareerServiceImpl extends ServiceImpl<CareerMapper, Career> impleme
 
     public JSONArray resolve(Integer level, List<Career> careers, Integer parentId) {
         JSONArray curResult = new JSONArray();
-        System.out.println(parentId + "," + level);
+//        System.out.println(parentId + "," + level);
         for (Career career : careers) {
             JSONObject obj = new JSONObject();
             obj.put("value", career.getId());
             obj.put("label", career.getName());
-            System.out.println(career.getName() + "," + career.getParentId() + "," + parentId);
+//            System.out.println(career.getName() + "," + career.getParentId() + "," + parentId);
 //            // 根节点
             if (career.getParentId() == null && parentId == null) {
                 JSONArray children = resolve(level+1, careers, career.getId());
-                System.out.println(children + "," + career.getName() + "," + career.getId());
+//                System.out.println(children + "," + career.getName() + "," + career.getId());
                 if (children != null && children.size() > 0) {
-                    System.out.println(career.getName() + " children:" + children.toJSONString());
+//                    System.out.println(career.getName() + " children:" + children.toJSONString());
                     obj.put("children", children);
                 }
                 curResult.add(obj);
             } else if (career.getParentId() != null && parentId != null && career.getParentId().equals(parentId)){
                 JSONArray children = resolve(level+1, careers, career.getId());
                 if (children != null && children.size() > 0) {
-                    System.out.println(career.getName() + " children:" + children.toJSONString());
+//                    System.out.println(career.getName() + " children:" + children.toJSONString());
                     obj.put("children", children);
                 }
                 curResult.add(obj);
