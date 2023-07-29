@@ -8,12 +8,7 @@ import lombok.Data;
  * @description this is a class file created by JavaGPT in 2023/7/23 0:01
  */
 @Data
-public class ResultBody<T> {
-
-    /**
-     * 是否成功
-     */
-    private boolean success;
+public class BossResultBody<T> {
 
     /**
      * 状态码
@@ -23,12 +18,12 @@ public class ResultBody<T> {
     /**
      * 信息
      */
-    private String msg;
+    private String message;
 
     /**
      * 数据
      */
-    private T data;
+    private T zpData;
 
 
 }

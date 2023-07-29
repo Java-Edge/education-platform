@@ -2,10 +2,10 @@ package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.javagpt.interviewspider.data.ContentData;
-import com.javagpt.interviewspider.data.ImageMoment;
-import com.javagpt.interviewspider.data.InterviewData;
-import com.javagpt.interviewspider.data.MomentData;
+import com.javagpt.interviewspider.data.nowcoder.ContentData;
+import com.javagpt.interviewspider.data.nowcoder.ImageMoment;
+import com.javagpt.interviewspider.data.nowcoder.InterviewData;
+import com.javagpt.interviewspider.data.nowcoder.MomentData;
 import com.javagpt.interviewspider.dto.*;
 import com.javagpt.interviewspider.entity.CareerEntity;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
@@ -23,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

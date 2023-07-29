@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.data;
+package com.javagpt.interviewspider.data.nowcoder;
 
 import lombok.Data;
 
