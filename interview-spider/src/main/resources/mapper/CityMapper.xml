@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javagpt.interviewspider.mapper.CityMapper">
+
+    <resultMap id="BaseResultMap" type="com.javagpt.interviewspider.entity.CityEntity">
+            <result property="code" column="code" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="parentCode" column="parent_code" jdbcType="BIGINT"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        code,name,parent_code,
+        url
+    </sql>
+</mapper>

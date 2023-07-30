@@ -1,5 +1,7 @@
 package com.javagpt.interviewspider.controller;
 
+import com.javagpt.interviewspider.service.BossCityService;
+import com.javagpt.interviewspider.service.BossQuestionService;
 import com.javagpt.interviewspider.service.BossService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,29 @@ public class BossController {
     @Autowired
     private BossService bossService;
 
+    @Autowired
+    private BossQuestionService bossQuestionService;
+
+    @Autowired
+    private BossCityService bossCityService;
+
+
     @GetMapping("/grabInterviewExperience")
-    public void grabInterviewExperience(){
+    public void grabInterviewExperience() {
         bossService.grabInterviewExperience();
     }
+
+
+    @GetMapping("/grabQuestions")
+    public void grabQuestions() {
+        bossQuestionService.grabQuestions();
+    }
+
+    @GetMapping("/grabCities")
+    public void grabCities() {
+        bossCityService.grabCities();
+    }
+
+
 
 }

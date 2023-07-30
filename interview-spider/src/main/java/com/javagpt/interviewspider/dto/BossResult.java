@@ -1,5 +1,6 @@
 package com.javagpt.interviewspider.dto;
 
+import com.javagpt.interviewspider.data.boss.SiteGroupInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +13,29 @@ import java.util.List;
 @Data
 public class BossResult<T> {
 
+    /**
+     * 数据列表
+     */
     private List<T> list;
+
+    /**
+     * 全国城市分类
+     */
+    private List<T> siteList;
+
+    /**
+     * 热门城市
+     */
+    private List<T> hotCitySites;
+
+    /**
+     * 根据拼音首字母分类城市
+     */
+    private List<SiteGroupInfo> siteGroup;
+
+    /**
+     *
+     */
+    private List<T> otherCitySites;
 
 }

@@ -12,9 +12,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://106.52.239.29:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
     username: root
-    password: 123456
+    password: Zxcvbnm1234567890
   application:
     name: interview-spider
 
