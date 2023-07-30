@@ -72,6 +72,7 @@ public class BossCityServiceImpl extends ServiceImpl<CityMapper, CityEntity>
     private List<CityEntity> handleResponse(BossResult<CityData> result) {
         List<CityData> list = JSON.parseArray(JSON.toJSONString(result.getSiteList()), CityData.class);
 
+        // 1. 将中国的城市分为省市存入集合中
         List<CityEntity> cityEntities = new ArrayList<>();
         for (CityData city : list) {
             CityEntity cityEntity = new CityEntity();
@@ -93,7 +94,7 @@ public class BossCityServiceImpl extends ServiceImpl<CityMapper, CityEntity>
 
         List<SiteGroupInfo> groupInfoList = result.getSiteGroup();
 
-        // 设置城市的首字母
+        // 2. 设置城市的首字母
         for (SiteGroupInfo siteGroupInfo : groupInfoList) {
             List<Long> ids = siteGroupInfo.getCityList().stream().map(item -> item.getCode()).collect(Collectors.toList());
 
@@ -103,10 +104,10 @@ public class BossCityServiceImpl extends ServiceImpl<CityMapper, CityEntity>
                 }
             }
         }
+
+        // 3. 设置热门城市
         List<CityData> hotCitySites = JSON.parseArray(JSON.toJSONString(result.getHotCitySites()), CityData.class);
-
         List<Long> hotCityIds = hotCitySites.stream().map(item -> item.getCode()).collect(Collectors.toList());
-
         for (CityEntity cityEntity : cityEntities) {
             if (hotCityIds.contains(cityEntity.getId())) {
                 cityEntity.setIsHotCity(1);
