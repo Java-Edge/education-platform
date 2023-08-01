@@ -2,10 +2,10 @@ package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.interviewspider.dto.CareerDTO;
-import com.javagpt.interviewspider.dto.CareerJobSelector;
-import com.javagpt.interviewspider.dto.Result;
-import com.javagpt.interviewspider.dto.ResultBody;
+import com.javagpt.interviewspider.dto.nowcoder.CareerDTO;
+import com.javagpt.interviewspider.dto.nowcoder.CareerJobSelector;
+import com.javagpt.interviewspider.dto.nowcoder.Result;
+import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
 import com.javagpt.interviewspider.service.CareerService;
 import com.javagpt.interviewspider.mapper.CareerMapper;

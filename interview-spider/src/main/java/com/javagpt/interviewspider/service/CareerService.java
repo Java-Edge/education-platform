@@ -1,6 +1,6 @@
 package com.javagpt.interviewspider.service;
 
-import com.javagpt.interviewspider.dto.CareerDTO;
+import com.javagpt.interviewspider.dto.nowcoder.CareerDTO;
 import com.javagpt.interviewspider.entity.CareerEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
