@@ -70,10 +70,10 @@
                 and article.job_id = #{dto.jobId,jdbcType=INTEGER}
             </if>
             <if test="dto.title != null and dto.title != ''">
-                and article.job_id = #{dto.title,jdbcType=VARCHAR}
+                and article.title like  concat('%',#{dto.title,jdbcType=VARCHAR},'%')
             </if>
             <if test="dto.content != null and dto.content != ''">
-                and article.job_id = #{dto.content,jdbcType=VARCHAR}
+                and article.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
             </if>
         </where>
     </select>

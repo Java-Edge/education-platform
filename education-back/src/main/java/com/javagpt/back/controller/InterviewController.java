@@ -47,6 +47,7 @@ public class InterviewController {
 
     @PostMapping("/selectByCondition")
     public ResultBody selectByCondition(@RequestBody PageQueryParam<InterviewArticleDto> pageQueryParam){
+        // 如果传入的 jobId 是 -1 表示查询全部岗位
         if (pageQueryParam.getParam() != null && pageQueryParam.getParam().getJobId() != null && pageQueryParam.getParam().getJobId() == -1) {
             pageQueryParam.getParam().setJobId(null);
         }
