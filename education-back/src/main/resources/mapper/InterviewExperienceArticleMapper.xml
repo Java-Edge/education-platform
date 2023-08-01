@@ -70,8 +70,11 @@
                 and article.job_id = #{dto.jobId,jdbcType=INTEGER}
             </if>
             <if test="dto.content != null and dto.content != ''">
-                and article.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
+                and (article.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
                 or article.title like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
+                )
+
+
             </if>
         </where>
     </select>
