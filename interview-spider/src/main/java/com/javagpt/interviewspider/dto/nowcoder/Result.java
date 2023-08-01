@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.dto;
+package com.javagpt.interviewspider.dto.nowcoder;
 
 import lombok.Data;
 
@@ -16,6 +16,8 @@ public class Result<T> {
     private List<T> result;
 
     private List<T> careerJobSelectors;
+
+    private List<T> allJobs;
 
 
 }

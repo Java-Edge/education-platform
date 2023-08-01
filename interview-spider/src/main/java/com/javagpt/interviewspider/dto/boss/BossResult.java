@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.dto;
+package com.javagpt.interviewspider.dto.boss;
 
 import com.javagpt.interviewspider.data.boss.SiteGroupInfo;
 import lombok.Data;
