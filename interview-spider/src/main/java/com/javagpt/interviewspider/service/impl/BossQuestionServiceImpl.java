@@ -2,9 +2,9 @@ package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.boss.BossContentInfo;
-import com.javagpt.interviewspider.dto.BossResult;
-import com.javagpt.interviewspider.dto.BossResultBody;
-import com.javagpt.interviewspider.dto.Result;
+import com.javagpt.interviewspider.dto.boss.BossResult;
+import com.javagpt.interviewspider.dto.boss.BossResultBody;
+import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.service.BossQuestionService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
