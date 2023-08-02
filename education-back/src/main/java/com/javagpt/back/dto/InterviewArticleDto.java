@@ -2,6 +2,8 @@ package com.javagpt.back.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author bubaiwantong
  * @date 2023/7/24 23:44
@@ -26,5 +28,8 @@ public class InterviewArticleDto {
      */
     private String title;
 
-
+    /**
+     * 公司筛选条件
+     */
+    private List<String> company;
 }
