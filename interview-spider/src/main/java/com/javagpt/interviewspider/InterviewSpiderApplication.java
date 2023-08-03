@@ -1,6 +1,5 @@
 package com.javagpt.interviewspider;
 
-import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication(scanBasePackages = "com.javagpt.interviewspider")
-@EnableMPP
 public class InterviewSpiderApplication {
 
     public static void main(String[] args) {
