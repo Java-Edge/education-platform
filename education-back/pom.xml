@@ -17,12 +17,6 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.4.0</version>
-        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
