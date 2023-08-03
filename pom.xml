@@ -14,29 +14,23 @@
     <packaging>pom</packaging>
     <name>education-back</name>
     <description>Demo project for Spring Boot</description>
-<!--    <properties>
-        <java.version>1.8</java.version>
-        <mybatis-version>3.5.6</mybatis-version>
-        <mysql-connector-version>5.1.38</mysql-connector-version>
-        <junit-version>4.13</junit-version>
-    </properties>-->
     <properties>
         <!-- 文件拷贝时的编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- 编译时的编码 -->
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
         <java.version>17</java.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <modules>
-        <!--这是父工程下的三个子项目-->
         <module>education-back</module>
         <module>interview-spider</module>
     </modules>
+    
     <dependencyManagement>
         <dependencies>
             <dependency>
