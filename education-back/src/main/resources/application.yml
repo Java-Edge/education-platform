@@ -1,5 +1,3 @@
 spring:
   profiles:
     active: remote
-  main:
-    allow-circular-references: true
