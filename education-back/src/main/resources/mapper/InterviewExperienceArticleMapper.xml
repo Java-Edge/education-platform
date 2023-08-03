@@ -69,11 +69,18 @@
             <if test="dto.jobId != null and dto.jobId != ''">
                 and article.job_id = #{dto.jobId,jdbcType=INTEGER}
             </if>
-            <if test="dto.title != null and dto.title != ''">
-                and article.job_id = #{dto.title,jdbcType=VARCHAR}
-            </if>
             <if test="dto.content != null and dto.content != ''">
-                and article.job_id = #{dto.content,jdbcType=VARCHAR}
+                and (article.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
+                or article.title like concat('%',#{dto.content,jdbcType=VARCHAR},'%'))
+            </if>
+            <if test="dto.company != null and dto.company.size > 0">
+                and (
+                <trim prefixOverrides="or">
+                    <foreach collection="dto.company" item="company">
+                        or article.content like concat('%',#{company,jdbcType=VARCHAR},'%')
+                    </foreach>
+                </trim>
+                )
             </if>
         </where>
     </select>

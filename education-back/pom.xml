@@ -18,11 +18,11 @@
     </properties>
     <dependencies>
 
-        <dependency>
-            <groupId>com.javagpt</groupId>
-            <artifactId>interview-spider</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.javagpt</groupId>-->
+<!--            <artifactId>interview-spider</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
