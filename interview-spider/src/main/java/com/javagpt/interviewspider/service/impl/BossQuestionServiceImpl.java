@@ -9,6 +9,7 @@ import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.service.BossQuestionService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
 import com.javagpt.interviewspider.service.InterviewExperienceImageService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -18,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

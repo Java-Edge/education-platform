@@ -16,6 +16,7 @@ import com.javagpt.interviewspider.service.CareerService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
 import com.javagpt.interviewspider.service.InterviewExperienceImageService;
 import com.javagpt.interviewspider.service.SpiderService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

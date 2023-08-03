@@ -5,12 +5,12 @@ import com.javagpt.interviewspider.data.nowcoder.JobData;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.service.NowCoderCityService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

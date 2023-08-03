@@ -10,12 +10,12 @@ import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.entity.CityEntity;
 import com.javagpt.interviewspider.mapper.CityMapper;
 import com.javagpt.interviewspider.service.BossCityService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
