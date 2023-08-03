@@ -5,7 +5,7 @@
 <mapper namespace="com.javagpt.interviewspider.mapper.CityMapper">
 
     <resultMap id="BaseResultMap" type="com.javagpt.interviewspider.entity.CityEntity">
-            <result property="code" column="code" jdbcType="BIGINT"/>
+            <result property="id" column="code" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="parentCode" column="parent_code" jdbcType="BIGINT"/>
             <result property="url" column="url" jdbcType="VARCHAR"/>

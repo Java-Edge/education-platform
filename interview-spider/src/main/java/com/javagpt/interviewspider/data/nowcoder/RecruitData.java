@@ -2,6 +2,7 @@ package com.javagpt.interviewspider.data.nowcoder;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,31 +28,31 @@ public class RecruitData {
     private Long companyId;
     private Boolean companyTopJob;
     private Long conversationId;
-    private Long createTime;
-    private Long deliverBegin;
-    private Long deliverEnd;
+    private Date createTime;
+    private Date deliverBegin;
+    private Date deliverEnd;
     private Long deliverId;
     private Long dockSource;
     private Object dockSourceProjectId;
     private Object dockSourceProjectName;
-    private Long durationDays;
-    private Long durationMonths;
+    private Integer durationDays;
+    private Integer durationMonths;
     private Long eduLevel;
     private String ext;
-    private Long feedbackDays;
+    private Integer feedbackDays;
     private String graduationYear;
     private Object greeting;
     private Boolean hasSigned;
     private Boolean hot;
     private Boolean hotJob;
     private Long id;
-    private Object industryName;
+    private String industryName;
     private Object jobAddress;
     private JobBoostScore jobBoostScore;
     private String jobCity;
     private List<String> jobCityList;
     private JobExpInfo jobExpInfo;
-    private Long jobFlag;
+    private Integer jobFlag;
     private List<Object> jobFlagList;
     private String jobKeys;
     private String jobName;
@@ -62,20 +63,20 @@ public class RecruitData {
     private Long openConversation;
     private Long projectId;
     private RecommendInternCompany recommendInternCompany;
-    private Long recruitType;
+    private Integer recruitType;
     private Long refreshTime;
-    private Long salaryMax;
-    private Long salaryMin;
-    private Long salaryMonth;
-    private Long salaryType;
+    private Integer salaryMax;
+    private Integer salaryMin;
+    private Integer salaryMonth;
+    private Integer salaryType;
     private Object secondJobType;
-    private Long status;
+    private Integer status;
     private Object topTag;
-    private Long updateTime;
+    private Date updateTime;
     private User user;
     private Object videoIntroductionImage;
     private Object videoIntroductionUrl;
-    private Long workYearType;
+    private Integer workYearType;
 
 
 }

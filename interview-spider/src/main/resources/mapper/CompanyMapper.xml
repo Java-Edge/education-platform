@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javagpt.interviewspider.mapper.CompanyMapper">
+
+    <resultMap id="BaseResultMap" type="com.javagpt.interviewspider.entity.CompanyEntity">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="picUrl" column="pic_url" jdbcType="VARCHAR"/>
+            <result property="companyName" column="company_name" jdbcType="VARCHAR"/>
+            <result property="scaleTagName" column="scale_tag_name" jdbcType="VARCHAR"/>
+            <result property="personScales" column="person_scales" jdbcType="VARCHAR"/>
+            <result property="companyShortName" column="company_short_name" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="followCount" column="follow_count" jdbcType="VARCHAR"/>
+            <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+            <result property="searchSource" column="search_source" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,pic_url,company_name,
+        scale_tag_name,person_scales,company_short_name,
+        address,follow_count,project_id,
+        search_source
+    </sql>
+</mapper>

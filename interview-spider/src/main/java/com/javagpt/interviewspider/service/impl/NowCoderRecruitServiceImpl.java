@@ -1,16 +1,19 @@
 package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.javagpt.interviewspider.data.nowcoder.InterviewData;
-import com.javagpt.interviewspider.data.nowcoder.JobData;
+import com.javagpt.interviewspider.data.nowcoder.RecommendInternCompany;
 import com.javagpt.interviewspider.data.nowcoder.RecruitData;
 import com.javagpt.interviewspider.dto.nowcoder.NowCoderPage;
-import com.javagpt.interviewspider.dto.nowcoder.Page;
-import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
+import com.javagpt.interviewspider.entity.CompanyEntity;
+import com.javagpt.interviewspider.entity.RecruitEntity;
 import com.javagpt.interviewspider.param.RecruitParam;
+import com.javagpt.interviewspider.service.CompanyService;
 import com.javagpt.interviewspider.service.NowCoderRecruitService;
+import com.javagpt.interviewspider.service.RecruitService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,8 +21,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,12 @@ import java.util.List;
 public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
     @Resource
     private RestTemplate restTemplate;
+
+    @Autowired
+    private RecruitService recruitService;
+
+    @Autowired
+    private CompanyService companyService;
 
     @Override
     public void grabRecruits() {
@@ -97,13 +104,25 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
 
     private List<Object> handleResult(List<RecruitData> list){
 
+        List<RecruitEntity> recruitEntities = new ArrayList<>();
+        List<CompanyEntity> companyEntities  = new ArrayList<>();
         for (RecruitData recruitData : list) {
+            RecruitEntity recruitEntity = new RecruitEntity();
+            BeanUtils.copyProperties(recruitData,recruitEntity);
+            recruitEntity.setTitle(recruitData.getJobName());
+            recruitEntity.setContent(recruitData.getExt());
+            recruitEntities.add(recruitEntity);
 
-
+            RecommendInternCompany recommendInternCompany = recruitData.getRecommendInternCompany();
+            CompanyEntity companyEntity = new CompanyEntity();
+            BeanUtils.copyProperties(recommendInternCompany,companyEntity);
+            companyEntity.setId(recommendInternCompany.getCompanyId());
+            companyEntities.add(companyEntity);
             log.debug(recruitData.toString());
         }
 
-
+        recruitService.saveOrUpdateBatch(recruitEntities);
+        companyService.saveOrUpdateBatch(companyEntities);
 
         return null;
     }
