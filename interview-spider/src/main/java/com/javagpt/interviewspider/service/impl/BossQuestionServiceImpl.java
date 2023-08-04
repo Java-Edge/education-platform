@@ -8,7 +8,6 @@ import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.service.BossQuestionService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
-import com.javagpt.interviewspider.service.InterviewExperienceImageService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ public class BossQuestionServiceImpl implements BossQuestionService {
 
     @Resource
     private RestTemplate restTemplate;
-
-    @Autowired
-    private InterviewExperienceImageService imageService;
 
     @Autowired
     private InterviewExperienceArticleService articleService;

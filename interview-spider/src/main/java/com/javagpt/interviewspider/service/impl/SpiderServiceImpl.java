@@ -11,10 +11,8 @@ import com.javagpt.interviewspider.dto.nowcoder.Page;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
 import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
-import com.javagpt.interviewspider.entity.InterviewExperienceImageEntity;
 import com.javagpt.interviewspider.service.CareerService;
 import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
-import com.javagpt.interviewspider.service.InterviewExperienceImageService;
 import com.javagpt.interviewspider.service.SpiderService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +41,6 @@ public class SpiderServiceImpl implements SpiderService {
     @Resource
     private RestTemplate restTemplate;
 
-    @Autowired
-    private InterviewExperienceImageService experienceImageService;
 
     @Autowired
     private InterviewExperienceArticleService experienceArticleService;
@@ -151,11 +147,9 @@ public class SpiderServiceImpl implements SpiderService {
         List<InterviewData> records = JSON.parseArray(JSON.toJSONString(page.getRecords()), InterviewData.class);
 
         List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
-        List<InterviewExperienceImageEntity> imageEntities = new ArrayList<>();
 
         for (InterviewData record : records) {
             InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
-            List<InterviewExperienceImageEntity> imageEntityList = new ArrayList<>();
             if (record.getContentType() == 74) {
                 MomentData momentData = record.getMomentData();
                 BeanUtils.copyProperties(momentData, articleEntity);
@@ -165,20 +159,6 @@ public class SpiderServiceImpl implements SpiderService {
                 articleEntity.setId(UUID.randomUUID().toString());
                 articleEntity.setSourceId(momentData.getId());
                 List<ImageMoment> imageList = momentData.getImgMoment();
-
-                // 保存图片
-                if (imageList != null && imageList.size() > 0) {
-                    for (int i = 0; i < imageList.size(); i++) {
-                        ImageMoment imageMoment = imageList.get(i);
-                        InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                        BeanUtils.copyProperties(imageMoment, imageEntity);
-
-                        imageEntity.setRecordId(articleEntity.getId());
-                        imageEntity.setSort(i);
-
-                        imageEntityList.add(imageEntity);
-                    }
-                }
             } else if (record.getContentType() == 250) {
                 ContentData contentData = record.getContentData();
                 BeanUtils.copyProperties(contentData, articleEntity);
@@ -188,31 +168,14 @@ public class SpiderServiceImpl implements SpiderService {
                 articleEntity.setId(UUID.randomUUID().toString());
                 articleEntity.setSourceId(contentData.getId());
                 List<ImageMoment> imageList = contentData.getContentImageUrls();
-
-                // 保存图片
-                if (imageList != null && imageList.size() > 0) {
-                    for (int i = 0; i < imageList.size(); i++) {
-                        ImageMoment imageMoment = imageList.get(i);
-                        InterviewExperienceImageEntity imageEntity = new InterviewExperienceImageEntity();
-                        BeanUtils.copyProperties(imageMoment, imageEntity);
-
-                        imageEntity.setRecordId(articleEntity.getId());
-                        imageEntity.setSort(i);
-
-                        imageEntityList.add(imageEntity);
-                    }
-                }
             }
             articleEntity.setId(null);
             articleEntity.setJobId(jobId);
             articleEntities.add(articleEntity);
-            // 将每个文章的图片均存储到集合里面，统一存储
-            imageEntities.addAll(imageEntityList);
         }
 
         // 存储到数据库中
         experienceArticleService.saveBatch(articleEntities);
-        experienceImageService.saveBatch(imageEntities);
 
     }
 
