@@ -1,5 +1,6 @@
 package com.javagpt.back.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.SourceCourseEntity;
 import com.javagpt.back.service.SourceCourseService;
@@ -25,10 +26,21 @@ public class SourceCourseController {
 
     @GetMapping("/list")
     public ResultBody list(){
-        List<SourceCourseEntity> list = sourceCourseService.list();
+        QueryWrapper<SourceCourseEntity> qw = new QueryWrapper<>();
+        qw.eq("type", 0);
+        List<SourceCourseEntity> list = sourceCourseService.list(qw);
+
         return ResultBody.success(list);
     }
 
+    @GetMapping("listSpecialList")
+    public ResultBody listSpecialList() {
+        QueryWrapper<SourceCourseEntity> qw = new QueryWrapper<>();
+        // 获取专栏内容
+        qw.eq("type", 1);
+        List<SourceCourseEntity> list = sourceCourseService.list(qw);
+        return ResultBody.success(list);
+    }
 
     @GetMapping("/course/{id}")
     public ResultBody courseDetail(@PathVariable("id")Integer id){

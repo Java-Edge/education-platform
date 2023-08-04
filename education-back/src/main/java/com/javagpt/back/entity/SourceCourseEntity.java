@@ -75,6 +75,11 @@ public class SourceCourseEntity implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 0: 视频  1:专栏
+     */
+    private Integer type;
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -97,6 +102,7 @@ public class SourceCourseEntity implements Serializable {
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getUpdater() == null ? other.getUpdater() == null : this.getUpdater().equals(other.getUpdater()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
             && (this.getSourceUrl() == null ? other.getSourceUrl() == null : this.getSourceUrl().equals(other.getSourceUrl()));
     }
 
@@ -114,6 +120,7 @@ public class SourceCourseEntity implements Serializable {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getUpdater() == null) ? 0 : getUpdater().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getSourceUrl() == null) ? 0 : getSourceUrl().hashCode());
         return result;
     }
