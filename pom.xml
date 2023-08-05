@@ -27,6 +27,7 @@
     <modules>
         <module>education-back</module>
         <module>interview-spider</module>
+        <module>base</module>
     </modules>
 
     <!-- 统一管理依赖的版本号 -->
