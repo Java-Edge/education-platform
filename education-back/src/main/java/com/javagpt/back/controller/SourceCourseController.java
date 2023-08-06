@@ -14,11 +14,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * @author bubaiwantong
- * @date 2023/6/27 20:49
- * @description this is a class file created by bubaiwantong in 2023/6/27 20:49
- */
 @RestController
 @RequestMapping("/sourceCourse")
 public class SourceCourseController {
