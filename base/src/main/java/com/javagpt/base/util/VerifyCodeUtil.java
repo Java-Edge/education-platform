@@ -14,6 +14,7 @@ public class VerifyCodeUtil {
 
     private static String baseNumLetter = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
     private static String font = "微软雅黑";
+//    private static String font = null;
 
     /**
      * description: 绘制验证码图片,返回验证码文本内容

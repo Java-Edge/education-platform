@@ -23,6 +23,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
 
     @Override
     public boolean chkUsername(String username) {
+
         return true;
     }
 
