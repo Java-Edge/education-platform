@@ -28,11 +28,18 @@
         <module>education-back</module>
         <module>interview-spider</module>
         <module>base</module>
+        <module>common</module>
     </modules>
 
     <!-- 统一管理依赖的版本号 -->
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.javagpt</groupId>
+                <artifactId>common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
 
             <!--mybatis plus -->
             <dependency>

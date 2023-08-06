@@ -1,4 +1,4 @@
-package com.javagpt.base.util;
+package com.javagpt.common.util;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

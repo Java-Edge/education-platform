@@ -6,7 +6,6 @@ import com.javagpt.base.dto.UserDTO;
 import com.javagpt.base.entity.UserEntity;
 import com.javagpt.base.service.UserService;
 import com.javagpt.base.mapper.UserMapper;
-import com.javagpt.base.util.Md5Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

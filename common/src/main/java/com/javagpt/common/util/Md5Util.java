@@ -1,4 +1,4 @@
-package com.javagpt.base.util;
+package com.javagpt.common.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
