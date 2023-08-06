@@ -1,4 +1,4 @@
-package com.javagpt.common.utils;
+package com.javagpt.common.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

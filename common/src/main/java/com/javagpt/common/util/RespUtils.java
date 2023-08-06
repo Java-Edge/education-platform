@@ -1,4 +1,4 @@
-package com.javagpt.common.utils;
+package com.javagpt.common.util;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.common.resp.RespResult;

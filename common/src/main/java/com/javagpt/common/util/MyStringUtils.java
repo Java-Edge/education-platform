@@ -1,4 +1,4 @@
-package com.javagpt.common.utils;
+package com.javagpt.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 

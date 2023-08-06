@@ -1,12 +1,11 @@
 package com.javagpt.base.controller;
 
 
-import cn.hutool.core.date.DateUtil;
 import com.javagpt.base.dto.ResultBody;
 import com.javagpt.base.entity.UserEntity;
 import com.javagpt.base.service.UserService;
-import com.javagpt.base.util.Md5Util;
-import com.javagpt.base.util.VerifyCodeUtil;
+import com.javagpt.common.util.Md5Util;
+import com.javagpt.common.util.VerifyCodeUtil;
 import com.javagpt.base.dto.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
