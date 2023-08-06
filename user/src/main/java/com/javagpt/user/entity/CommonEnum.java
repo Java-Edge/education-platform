@@ -1,7 +1,7 @@
-package com.javagpt.base.entity;
+package com.javagpt.user.entity;
 
 
-import com.javagpt.base.service.BaseInfoInterface;
+import com.javagpt.user.service.BaseInfoInterface;
 
 public enum CommonEnum implements BaseInfoInterface {
  

@@ -13,7 +13,7 @@ import lombok.Data;
  */
 @TableName(value ="interview_experience_article")
 @Data
-public class InterviewExperienceArticleEntity implements Serializable {
+public class ArticleEntity implements Serializable {
 
     /**
      * 主键

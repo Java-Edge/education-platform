@@ -1,11 +1,11 @@
-package com.javagpt.base.service.impl;
+package com.javagpt.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.base.dto.UserDTO;
-import com.javagpt.base.entity.UserEntity;
-import com.javagpt.base.mapper.UserMapper;
-import com.javagpt.base.service.UserService;
+import com.javagpt.user.dto.UserDTO;
+import com.javagpt.user.entity.UserEntity;
+import com.javagpt.user.mapper.UserMapper;
+import com.javagpt.user.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

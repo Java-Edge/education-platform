@@ -1,4 +1,4 @@
-package com.javagpt.base.entity;
+package com.javagpt.user.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.javagpt.base.service;
+package com.javagpt.user.service;
 
 public interface BaseInfoInterface {
  

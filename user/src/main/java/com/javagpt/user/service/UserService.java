@@ -1,7 +1,7 @@
-package com.javagpt.base.service;
+package com.javagpt.user.service;
 
-import com.javagpt.base.dto.UserDTO;
-import com.javagpt.base.entity.UserEntity;
+import com.javagpt.user.dto.UserDTO;
+import com.javagpt.user.entity.UserEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

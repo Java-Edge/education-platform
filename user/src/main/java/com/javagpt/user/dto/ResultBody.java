@@ -1,8 +1,8 @@
-package com.javagpt.base.dto;
+package com.javagpt.user.dto;
 
 
-import com.javagpt.base.entity.CommonEnum;
-import com.javagpt.base.service.BaseInfoInterface;
+import com.javagpt.user.entity.CommonEnum;
+import com.javagpt.user.service.BaseInfoInterface;
 
 /**
  * 自定义返回数据格式

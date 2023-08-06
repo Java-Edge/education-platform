@@ -1,4 +1,4 @@
-package com.javagpt.base.vo;
+package com.javagpt.user.vo;
 
 
 import io.swagger.annotations.ApiModel;

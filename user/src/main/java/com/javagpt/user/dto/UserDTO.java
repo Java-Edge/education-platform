@@ -1,4 +1,4 @@
-package com.javagpt.base.dto;
+package com.javagpt.user.dto;
 
 import lombok.Data;
 

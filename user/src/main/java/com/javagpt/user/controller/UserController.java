@@ -1,12 +1,12 @@
-package com.javagpt.base.controller;
+package com.javagpt.user.controller;
 
 
-import com.javagpt.base.dto.ResultBody;
-import com.javagpt.base.entity.UserEntity;
-import com.javagpt.base.service.UserService;
+import com.javagpt.user.dto.ResultBody;
+import com.javagpt.user.entity.UserEntity;
+import com.javagpt.user.service.UserService;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
-import com.javagpt.base.dto.UserDTO;
+import com.javagpt.user.dto.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

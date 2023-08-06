@@ -1,6 +1,6 @@
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  type-aliases-package: com.javagpt.interviewspider.entity
+  type-aliases-package: com.javagpt.user.entity
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
@@ -29,7 +29,7 @@ spring:
     username: root
     password: 123456
   application:
-    name: interview-spider
+    name: user-provider
   thymeleaf:
     cache: false #关闭缓存
 
@@ -38,11 +38,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-mpp:
-  entityBasePath: com.javagpt.interviewspider.entity
-
-
 logging:
   level:
     root: debug
