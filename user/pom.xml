@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.javagpt</groupId>
-    <artifactId>base</artifactId>
+    <artifactId>user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>base</name>
+    <name>user</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
