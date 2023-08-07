@@ -12,14 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author zqy
- * @since 2023-07-23
- */
 @RestController
 @RequestMapping("/recruit")
 public class RecruitController {
@@ -41,6 +33,7 @@ public class RecruitController {
         List<Recruit> list = recruitService.list();
         return ResultBody.success(list);
     }
+
     @PostMapping("/save")
     public ResultBody save(@RequestBody Recruit recruit) {
         recruit.setCreateTime(LocalDateTime.now());

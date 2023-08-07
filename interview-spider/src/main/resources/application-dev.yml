@@ -24,10 +24,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-mpp:
-  entityBasePath: com.javagpt.interviewspider.entity
-
-
 logging:
   level:
     root: debug

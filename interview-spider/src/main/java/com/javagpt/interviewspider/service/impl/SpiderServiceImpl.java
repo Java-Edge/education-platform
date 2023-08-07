@@ -6,13 +6,13 @@ import com.javagpt.interviewspider.data.nowcoder.ContentData;
 import com.javagpt.interviewspider.data.nowcoder.ImageMoment;
 import com.javagpt.interviewspider.data.nowcoder.InterviewData;
 import com.javagpt.interviewspider.data.nowcoder.MomentData;
+import com.javagpt.interviewspider.entity.ArticleEntity;
 import com.javagpt.interviewspider.param.ExperienceParam;
 import com.javagpt.interviewspider.dto.nowcoder.Page;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
-import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
 import com.javagpt.interviewspider.service.CareerService;
-import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
+import com.javagpt.interviewspider.service.ArticleService;
 import com.javagpt.interviewspider.service.SpiderService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public class SpiderServiceImpl implements SpiderService {
 
 
     @Autowired
-    private InterviewExperienceArticleService experienceArticleService;
+    private ArticleService articleService;
 
     @Autowired
     private CareerService careerService;
@@ -146,10 +146,10 @@ public class SpiderServiceImpl implements SpiderService {
 
         List<InterviewData> records = JSON.parseArray(JSON.toJSONString(page.getRecords()), InterviewData.class);
 
-        List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
+        List<ArticleEntity> articleEntities = new ArrayList<>();
 
         for (InterviewData record : records) {
-            InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
+            ArticleEntity articleEntity = new ArticleEntity();
             if (record.getContentType() == 74) {
                 MomentData momentData = record.getMomentData();
                 BeanUtils.copyProperties(momentData, articleEntity);
@@ -175,7 +175,7 @@ public class SpiderServiceImpl implements SpiderService {
         }
 
         // 存储到数据库中
-        experienceArticleService.saveBatch(articleEntities);
+        articleService.saveBatch(articleEntities);
 
     }
 

@@ -15,14 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author zqy
- * @since 2023-07-28
- */
 @RestController
 @RequestMapping("/dictionary")
 public class DictionaryController {

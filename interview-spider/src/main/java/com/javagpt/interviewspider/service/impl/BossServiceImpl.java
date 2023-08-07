@@ -5,9 +5,9 @@ import com.javagpt.interviewspider.data.boss.BossContentInfo;
 import com.javagpt.interviewspider.dto.boss.BossResult;
 import com.javagpt.interviewspider.dto.boss.BossResultBody;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
-import com.javagpt.interviewspider.entity.InterviewExperienceArticleEntity;
+import com.javagpt.interviewspider.entity.ArticleEntity;
 import com.javagpt.interviewspider.service.BossService;
-import com.javagpt.interviewspider.service.InterviewExperienceArticleService;
+import com.javagpt.interviewspider.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -36,7 +36,7 @@ public class BossServiceImpl implements BossService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private InterviewExperienceArticleService articleService;
+    private ArticleService articleService;
 
 
     @Override
@@ -110,9 +110,9 @@ public class BossServiceImpl implements BossService {
      */
     private void handleData(List<BossContentInfo> list) {
 
-        List<InterviewExperienceArticleEntity> articleEntities = new ArrayList<>();
+        List<ArticleEntity> articleEntities = new ArrayList<>();
         for (BossContentInfo bossContentInfo : list) {
-            InterviewExperienceArticleEntity articleEntity = new InterviewExperienceArticleEntity();
+            ArticleEntity articleEntity = new ArticleEntity();
 
             articleEntity.setContent(bossContentInfo.getContent());
             articleEntity.setNewContent(bossContentInfo.getContentDescBackup());

@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @author bubaiwantong
- * @date 2023/7/24 23:39
- * @description this is a class file created by bubaiwantong in 2023/7/24 23:39
- */
 @RestController
 @RequestMapping("/interview-experience")
 public class InterviewController {
