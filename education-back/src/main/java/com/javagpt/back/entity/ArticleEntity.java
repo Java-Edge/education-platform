@@ -1,6 +1,7 @@
 package com.javagpt.back.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,6 +36,9 @@ public class ArticleEntity implements Serializable {
 
     private Integer userId;
 
+    private Integer pageView;
 
+    @TableField(exist = false)
+    private Integer ranking;
 
 }
