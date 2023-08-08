@@ -19,21 +19,7 @@ import java.util.List;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity>
         implements ArticleService {
 
-    @Resource
-    ArticleMapper articleMapper;
 
-    @Override
-    public List<ArticleEntity> getRanking(ArticleEntity article) {
-        QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
-        qw.orderByDesc("page_view");
-        qw.last("limit 10");
-        List<ArticleEntity> articles = articleMapper.selectList(qw);
-        if (articles == null) return null;
-        for (int i = 0; i < articles.size(); i ++) {
-            articles.get(i).setRanking(i+1);
-        }
-        return articles;
-    }
 }
 
 

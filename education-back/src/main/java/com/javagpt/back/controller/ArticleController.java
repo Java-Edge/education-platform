@@ -64,11 +64,4 @@ public class ArticleController {
         System.out.println(file);
         return ResultBody.success("1");
     }
-
-    @GetMapping("/getRanking")
-    public ResultBody getRanking(ArticleEntity article) {
-        List<ArticleEntity> articles = articleService.getRanking(article);
-        return ResultBody.success(articles);
-    }
-
 }
