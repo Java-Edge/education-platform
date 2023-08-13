@@ -17,6 +17,19 @@ spring:
     password: 123456
   application:
     name: back-server
+  data:
+    redis:
+      host: 106.52.239.29
+      port: 6379
+      password:
+      database: 3
+      lettuce:
+        pool:
+          max-active: 50  # 连接池最大连接数（使用负值表示没有限制）
+          max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-idle: 10  # 连接池中的最大空闲连接
+          min-idle: 5 # 连接池中的最小空闲连接
+        shutdown-timeout: 500ms # 关闭超时时间，默认值100ms
 
 pagehelper:
   helperDialect: mysql

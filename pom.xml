@@ -27,7 +27,6 @@
     <modules>
         <module>education-back</module>
         <module>interview-spider</module>
-        <module>user</module>
         <module>common</module>
     </modules>
 

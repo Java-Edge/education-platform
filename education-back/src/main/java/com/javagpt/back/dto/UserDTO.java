@@ -1,4 +1,4 @@
-package com.javagpt.user.dto;
+package com.javagpt.back.dto;
 
 import lombok.Data;
 
@@ -40,5 +40,11 @@ public class UserDTO {
      * 信息
      */
     private String message;
+
+    /**
+     * token
+     */
+    private String token;
+
 
 }

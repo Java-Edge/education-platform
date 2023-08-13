@@ -1,7 +1,7 @@
-package com.javagpt.user.mapper;
+package com.javagpt.back.mapper;
 
-import com.javagpt.user.entity.UserEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.javagpt.back.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
