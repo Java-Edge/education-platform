@@ -2,10 +2,17 @@ package com.javagpt.back.dto;
 
 import com.javagpt.back.entity.CommonEnum;
 import com.javagpt.back.service.BaseInfoInterface;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 自定义返回数据格式
  */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResultBody {
  
     //响应代码
@@ -16,9 +23,6 @@ public class ResultBody {
  
     //响应结果
     private Object result;
- 
-    public ResultBody() {
-    }
  
     public ResultBody(BaseInfoInterface infoInterface) {
         this.code = infoInterface.getResultCode();
