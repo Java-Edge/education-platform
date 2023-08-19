@@ -100,9 +100,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         String verifyCode = ( String ) request.getSession().getAttribute("verifyCode");
         log.info("获取验证码的值为: {}", verifyCode);
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
-            user.setOk(false);
-            user.setMessage("验证码输入错误！");
-            return ResultBody.success(user);
+            return ResultBody.error(ResultStatus.ERROR_CODE,"验证码输入错误!");
         }
 
         LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getUsername, user.getUsername());

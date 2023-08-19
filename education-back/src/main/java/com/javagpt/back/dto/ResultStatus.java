@@ -21,6 +21,11 @@ public class ResultStatus {
      */
     public static final int USER_ERROR_PASSWORD = 400002;
 
+    /**
+     * 验证码错误
+     */
+    public static final int ERROR_CODE = 400003;
+
 
 
 }
