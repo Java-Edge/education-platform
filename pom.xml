@@ -18,10 +18,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.compilerVersion>17</maven.compiler.compilerVersion>
-        <java.version>17</java.version>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <maven.compiler.compilerVersion>20</maven.compiler.compilerVersion>
+        <java.version>20</java.version>
         <skipTests>true</skipTests>
     </properties>
     <modules>
