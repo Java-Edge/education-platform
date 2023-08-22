@@ -41,6 +41,7 @@ public class ArticleController {
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
         qw.eq("delete_flag", 0);
         qw.eq(article.getType() != null, "type", article.getType());
+        qw.orderByDesc("page_view");
         qw.orderByDesc("create_time");
         articleService.page(page, qw);
         return ResultBody.success(page);
