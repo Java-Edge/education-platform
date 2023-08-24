@@ -30,7 +30,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         } else {
             try {
                 JwtParser parser = Jwts.parser();
-                parser.setSigningKey("ycj123456"); //解析token的SigningKey必须和生成token时设置密码一致
+                parser.setSigningKey("JavaGPT"); //解析token的SigningKey必须和生成token时设置密码一致
                 //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
                 return true;//true就是验证通过，放行
