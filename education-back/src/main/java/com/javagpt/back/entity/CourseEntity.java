@@ -9,13 +9,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
-/**
- * 
- * @TableName source_course
- */
 @TableName(value ="source_course")
 @Data
-public class SourceCourseEntity implements Serializable {
+public class CourseEntity implements Serializable {
     /**
      * 
      */
@@ -91,7 +87,7 @@ public class SourceCourseEntity implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SourceCourseEntity other = (SourceCourseEntity) that;
+        CourseEntity other = (CourseEntity) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()))

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javagpt.back.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.javagpt.back.entity.Ranking">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="des" column="des" jdbcType="VARCHAR"/>
+            <result property="orderVal" column="orderVal" jdbcType="INTEGER"/>
+            <result property="href" column="href" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,password,
+        des,orderVal,
+        href
+    </sql>
+</mapper>

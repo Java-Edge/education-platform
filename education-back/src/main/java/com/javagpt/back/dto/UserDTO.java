@@ -2,11 +2,6 @@ package com.javagpt.back.dto;
 
 import lombok.Data;
 
-/**
- * @author bubaiwantong
- * @date 2023/8/5 18:50
- * @description this is a class file created by bubaiwantong in 2023/8/5 18:50
- */
 @Data
 public class UserDTO {
 
