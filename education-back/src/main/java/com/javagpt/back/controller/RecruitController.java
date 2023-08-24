@@ -21,10 +21,7 @@ public class RecruitController {
 
     @GetMapping("/getByPage")
     public ResultBody getByPage(Integer current, Integer size) {
-        Page<Recruit> page = new Page<>(current, size);
-        QueryWrapper<Recruit> qw = new QueryWrapper<>();
-        qw.orderByDesc("create_time");
-        recruitService.page(page, qw);
+        Page<Recruit> page = recruitService.selectPage(current, size);
         return ResultBody.success(page);
     }
 

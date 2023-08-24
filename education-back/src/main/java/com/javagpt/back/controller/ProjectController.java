@@ -31,11 +31,7 @@ public class ProjectController {
 
     @GetMapping("/getByPage")
     public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
-        Page<Project> page = new Page<>(current, size);
-        QueryWrapper<Project> qw = new QueryWrapper<>();
-        qw.eq("delete_flag", 0);
-        qw.orderByDesc("create_time");
-        projectService.page(page, qw);
+        Page<Project> page = projectService.selectPage(current,size, article);
         return ResultBody.success(page);
     }
 

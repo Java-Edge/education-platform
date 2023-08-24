@@ -1,5 +1,6 @@
 package com.javagpt.back.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.entity.Recruit;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RecruitService extends IService<Recruit> {
 
+    Page<Recruit> selectPage(Integer current, Integer size);
 }
