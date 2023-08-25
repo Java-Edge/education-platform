@@ -20,9 +20,6 @@ public class InterviewController {
     @Autowired
     private InterviewService articleService;
 
-    @Autowired
-    private CareerService careerService;
-
 
     @PostMapping("/selectByCondition")
     public ResultBody selectByCondition(@RequestBody PageQueryParam<ArticleDTO> pageQueryParam){
@@ -32,7 +29,6 @@ public class InterviewController {
 
     @GetMapping("/getById/{id}")
     public ResultBody getById(@PathVariable String id) {
-
         InterviewEntity article = articleService.articleOf(id);
         return ResultBody.success(article);
     }
