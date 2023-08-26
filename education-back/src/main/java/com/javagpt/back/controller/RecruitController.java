@@ -3,13 +3,17 @@ package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.back.dto.RecruitDTO;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.Recruit;
 import com.javagpt.back.service.RecruitService;
+import com.javagpt.back.vo.RecruitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,15 +29,15 @@ public class RecruitController {
         return ResultBody.success(page);
     }
 
-    @GetMapping("/list")
-    public ResultBody list() {
-        List<Recruit> list = recruitService.list();
-        return ResultBody.success(list);
+    @PostMapping("/selectByCondition")
+    public ResultBody list(@RequestBody PageQueryParam<RecruitDTO> pageQueryParam) {
+        Page<RecruitVO> recruitVOPage = recruitService.selectByCondition(pageQueryParam);
+        return ResultBody.success(recruitVOPage);
     }
 
     @PostMapping("/save")
     public ResultBody save(@RequestBody Recruit recruit) {
-        recruit.setCreateTime(LocalDateTime.now());
+        recruit.setCreateTime(new Date());
         recruitService.save(recruit);
         return ResultBody.success("保存成功");
     }

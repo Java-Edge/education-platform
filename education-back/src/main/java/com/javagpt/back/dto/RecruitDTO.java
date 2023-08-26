@@ -1,9 +1,10 @@
-package com.javagpt.back.entity;
+package com.javagpt.back.dto;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,13 +14,12 @@ import java.util.Date;
  * 招聘-职位
  * @TableName recruit
  */
-@TableName(value ="recruit")
+@ApiModel
 @Data
-public class Recruit implements Serializable {
+public class RecruitDTO implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -151,7 +151,4 @@ public class Recruit implements Serializable {
      * 项目编号
      */
     private Integer projectId;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }
