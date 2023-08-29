@@ -1,6 +1,7 @@
 package com.javagpt.back.service;
 
-import com.javagpt.back.entity.SourceCourseEntity;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.javagpt.back.entity.CourseEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -10,13 +11,13 @@ import java.util.List;
 * @description 针对表【source_course】的数据库操作Service
 * @createDate 2023-07-09 13:40:08
 */
-public interface SourceCourseService extends IService<SourceCourseEntity> {
+public interface CourseService extends IService<CourseEntity> {
 
     /**
      * 获取最近的5个课程信息作为轮播图
      * @return
      */
-    List<SourceCourseEntity> getFiveCourse();
+    List<CourseEntity> getFiveCourse();
 
 
     /**
@@ -24,8 +25,12 @@ public interface SourceCourseService extends IService<SourceCourseEntity> {
      *
      * @return
      */
-    List<SourceCourseEntity> getRecommendCourses();
+    List<CourseEntity> getRecommendCourses();
 
-
-
+    /**
+     * 查询
+     *
+     * @return
+     */
+    List<CourseEntity> selectList();
 }

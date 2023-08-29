@@ -1,7 +1,13 @@
 package com.javagpt.back.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.back.dto.RecruitDTO;
 import com.javagpt.back.entity.Recruit;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.javagpt.back.vo.RecruitVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +18,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-07-23
  */
 public interface RecruitService extends IService<Recruit> {
+
+    Page<Recruit> selectPage(Integer current, Integer size);
+
+
+    /**
+     * 分页条件查询
+     *
+     * @param pageQueryParam
+     * @return
+     */
+    Page<RecruitVO> selectByCondition( PageQueryParam<RecruitDTO> pageQueryParam);
+
 
 }

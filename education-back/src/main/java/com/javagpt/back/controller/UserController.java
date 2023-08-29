@@ -37,10 +37,7 @@ public class UserController {
 
     @GetMapping("/checkUsername")
     public ResultBody checkUsername(@RequestParam String username) {
-        if (userService.chkUsername(username)){
-            return ResultBody.success("1");
-        }
-        return ResultBody.success("0");
+        return ResultBody.success(userService.chkUsername(username));
     }
 
     /**

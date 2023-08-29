@@ -20,7 +20,7 @@ public interface UserService extends IService<UserEntity> {
      * @param username
      * @return
      */
-    boolean chkUsername(String username);
+    int chkUsername(String username);
 
     /**
      * 新增用户

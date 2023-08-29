@@ -1,6 +1,6 @@
 package com.javagpt.back.mapper;
 
-import com.javagpt.back.entity.SourceCourseEntity;
+import com.javagpt.back.entity.CourseEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.javagpt.back.entity.SourceCourseEntity
 */
 @Mapper
-public interface SourceCourseMapper extends BaseMapper<SourceCourseEntity> {
+public interface CourseMapper extends BaseMapper<CourseEntity> {
 
 }
 

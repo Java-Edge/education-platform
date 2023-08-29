@@ -24,11 +24,7 @@ public class DictionaryController {
 
     @GetMapping("list")
     public ResultBody list(String typeKey){
-        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("type_key", typeKey);
-        queryWrapper.eq("status", 1);
-        queryWrapper.orderByAsc("sort");
-        List<Dictionary> list = dictionaryService.list(queryWrapper);
+        List<Dictionary> list = dictionaryService.selectList(typeKey);
         return ResultBody.success(list);
     }
 

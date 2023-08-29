@@ -1,14 +1,17 @@
 package com.javagpt.back.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.mapper.DictionaryMapper;
 import com.javagpt.back.service.DictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author zqy
@@ -17,4 +20,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictionaryService {
 
+    @Override
+    public List<Dictionary> selectList(String typeKey) {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("type_key", typeKey);
+        queryWrapper.eq("status", 1);
+        queryWrapper.orderByAsc("sort");
+        List<Dictionary> dictionaries = this.getBaseMapper().selectList(queryWrapper);
+        return dictionaries;
+    }
 }

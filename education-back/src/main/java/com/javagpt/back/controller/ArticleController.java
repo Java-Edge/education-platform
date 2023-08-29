@@ -23,27 +23,19 @@ public class ArticleController {
 
     @PostMapping("/save")
     public ResultBody save(@RequestBody ArticleEntity articleEntity) {
-        articleEntity.setCreateTime(LocalDateTime.now());
-        // todo 插入用户，以及封面未加上
-        articleService.save(articleEntity);
+        articleService.insert(articleEntity);
         return ResultBody.success("保存文章成功");
     }
 
     @GetMapping("/getById/{id}")
     public ResultBody getById(@PathVariable Integer id) {
-        ArticleEntity article = articleService.getById(id);
+        ArticleEntity article = articleService.selectById(id);
         return ResultBody.success(article);
     }
 
     @GetMapping("/getByPage")
     public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
-        Page<ArticleEntity> page = new Page<>(current, size);
-        QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
-        qw.eq("delete_flag", 0);
-        qw.eq(article.getType() != null, "type", article.getType());
-        qw.orderByDesc("page_view");
-        qw.orderByDesc("create_time");
-        articleService.page(page, qw);
+        Page<ArticleEntity> page = articleService.getByPage(current,size,article);
         return ResultBody.success(page);
     }
 
@@ -55,14 +47,7 @@ public class ArticleController {
 
     @PostMapping("/uploadImg")
     public ResultBody upload(MultipartFile file) {
-        File targetFile = new File("D:/myImg/" + file.getOriginalFilename());
-
-        try {
-            file.transferTo(targetFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(file);
+        articleService.uploadImg(file);
         return ResultBody.success("1");
     }
 }

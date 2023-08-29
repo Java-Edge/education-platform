@@ -1,6 +1,5 @@
 package com.javagpt.back.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -10,13 +9,9 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-/**
- * 
- * @TableName interview_experience_article
- */
 @TableName(value ="interview_experience_article")
 @Data
-public class InterviewExperienceArticleEntity implements Serializable {
+public class InterviewEntity implements Serializable {
     /**
      * 主键
      */
