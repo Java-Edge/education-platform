@@ -125,13 +125,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         HashMap<String, Object> map = new HashMap<>();
         map.put("key1", "value1");
         map.put("key2", "value2");
-
-        String token = builder.setSubject(userEntity.getUsername())                     //载荷部分，主题，就是token中携带的数据，这里把用户名放进去
-                .setIssuedAt(new Date())                            //设置token的生成时间
-                .setId(userEntity.getId())               //设置用户id为token  id      ''是因为用户id是int类型，需要转换为字符串类型
-                .setClaims(map)                                     //map中可以存放用户的角色权限信息
-                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000)) //设置token过期时间，当前时间加一天就是时效为一天过期
-                .signWith(SignatureAlgorithm.HS256, "JavaGPT")     //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
+        //载荷部分，主题，就是token中携带的数据，这里把用户名放进去
+        String token = builder.setSubject(userEntity.getUsername())
+                //设置token的生成时间
+                .setIssuedAt(new Date())
+                //设置用户id为token  id ''是因为用户id是int类型，需要转换为字符串类型
+                .setId(userEntity.getId())
+                //map中可以存放用户的角色权限信息
+                .setClaims(map)
+                //设置token过期时间，当前时间加一天就是时效为一天过期
+                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+                //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
+                .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
         user.setToken(token);
 
@@ -148,9 +153,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
             String randomText = VerifyCodeUtil.drawRandomText(width, height, verifyImg);
             request.getSession().setAttribute("verifyCode", randomText);
             request.getSession().setAttribute("startTime", new Date());
-            response.setContentType("image/png");//必须设置响应内容类型为图片，否则前台不识别
-            OutputStream os = response.getOutputStream(); //获取文件输出流
-            ImageIO.write(verifyImg, "png", os);//输出图片流
+            //必须设置响应内容类型为图片，否则前台不识别
+            response.setContentType("image/png");
+            //获取文件输出流
+            OutputStream os = response.getOutputStream();
+            //输出图片流
+            ImageIO.write(verifyImg, "png", os);
             os.flush();
             os.close();//关闭流
         } catch (IOException e) {

@@ -22,7 +22,6 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         if ("OPTIONS".equalsIgnoreCase(method)) {
             return true;
         }
-//        String token = request.getParameter("token");放入params才能用这个，放hearder用getHearder
         String token = request.getHeader("token");
         if (token == null) {
             ResultBody resultVO = new ResultBody(ResultStatus.LOGIN_FAIL_NOT, "请先登录！", null);
@@ -30,10 +29,12 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         } else {
             try {
                 JwtParser parser = Jwts.parser();
-                parser.setSigningKey("JavaGPT"); //解析token的SigningKey必须和生成token时设置密码一致
+                // 解析token的SigningKey必须和生成token时设置密码一致
+                parser.setSigningKey("JavaGPT");
                 //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
-                return true;//true就是验证通过，放行
+                //true就是验证通过，放行
+                return true;
             } catch (ExpiredJwtException e) {
                 ResultBody resultVO = new ResultBody(ResultStatus.LOGIN_FAIL_OVERDUE, "登录过期，请重新登录！", null);
                 doResponse(response, resultVO);
@@ -48,7 +49,13 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         return false;
     }
 
-    //没带token或者检验失败响应给前端
+    /**
+     * 没带token或者检验失败响应给前端
+     *
+     * @param response
+     * @param resultVO
+     * @throws IOException
+     */
     private void doResponse(HttpServletResponse response, ResultBody resultVO) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");

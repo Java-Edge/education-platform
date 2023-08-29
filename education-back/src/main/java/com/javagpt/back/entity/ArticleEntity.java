@@ -32,7 +32,7 @@ public class ArticleEntity implements Serializable {
 
     private Integer deleteFlag;
 
-    private Integer img;
+    private String img;
 
     private Integer userId;
 
@@ -40,5 +40,9 @@ public class ArticleEntity implements Serializable {
 
     @TableField(exist = false)
     private Integer ranking;
+
+    private String href;
+
+    private String des;
 
 }
