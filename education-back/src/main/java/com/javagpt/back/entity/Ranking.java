@@ -28,4 +28,6 @@ public class Ranking implements Serializable {
 
     private String href;
 
+    private String img;
+
 }
