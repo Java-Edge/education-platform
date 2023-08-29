@@ -32,19 +32,19 @@
         <result property="salaryMonth" column="salary_month" jdbcType="INTEGER"/>
         <result property="workYearType" column="work_year_type" jdbcType="INTEGER"/>
         <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+        <result property="eduLevel" column="edu_level" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id
-        ,title,content,
-        create_time,type,des,
+        id,title,content,
+        create_time,`type`,des,
         phone,company_id,recruit_type,
         job_name,ext,job_city,
         job_address,career_job_id,career_job_name,
         graduation_year,deliver_begin,deliver_end,
         refesh_time,feed_back_days,duration_days,
         salary_type,salary_min,salary_max,
-        salary_month,work_year_type,project_id
+        salary_month,work_year_type,project_id,edu_level
     </sql>
 
 
@@ -72,13 +72,52 @@
         <result property="salaryMax" column="salary_max" jdbcType="INTEGER"/>
         <result property="salaryMonth" column="salary_month" jdbcType="INTEGER"/>
         <result property="workYearType" column="work_year_type" jdbcType="INTEGER"/>
+        <result property="eduLevel" column="edu_level" jdbcType="INTEGER"/>
+        <result property="picUrl" column="pic_url" jdbcType="VARCHAR"/>
+        <result property="companyName" column="company_name" jdbcType="VARCHAR"/>
+        <result property="scaleTagName" column="scale_tag_name" jdbcType="VARCHAR"/>
+        <result property="personScales" column="person_scales" jdbcType="VARCHAR"/>
+        <result property="companyShortName" column="company_short_name" jdbcType="VARCHAR"/>
     </resultMap>
 
 
     <select id="queryPage" parameterType="com.javagpt.back.dto.ArticleDTO" resultMap="RecruitVOMap">
         select
-        <include refid="Base_Column_List"/>
+        r.id,
+        r.title,
+        r.content,
+        r.create_time,
+        r.`type`,
+        r.des,
+        r.phone,
+        r.company_id,
+        r.recruit_type,
+        r.job_name,
+        r.ext,
+        r.job_city,
+        r.job_address,
+        r.career_job_id,
+        r.career_job_name,
+        r.graduation_year,
+        r.deliver_begin,
+        r.deliver_end,
+        r.refesh_time,
+        r.feed_back_days,
+        r.duration_days,
+        r.salary_type,
+        r.salary_min,
+        r.salary_max,
+        r.salary_month,
+        r.work_year_type,
+        r.project_id,
+        r.edu_level,
+        c.pic_url,
+        c.company_name,
+        c.scale_tag_name,
+        c.person_scales,
+        c.company_short_name
         from recruit r
+        left join company c on r.company_id = c.id
         <where>
             <if test="dto.companyId != null and dto.companyId != ''">
                 and r.company_id = #{dto.companyId,jdbcType=INTEGER}

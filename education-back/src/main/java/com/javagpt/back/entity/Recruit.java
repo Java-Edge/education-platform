@@ -152,6 +152,13 @@ public class Recruit implements Serializable {
      */
     private Integer projectId;
 
+
+    /**
+     * 学历层次
+     */
+    private Integer eduLevel;
+
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

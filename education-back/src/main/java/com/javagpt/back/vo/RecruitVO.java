@@ -147,6 +147,43 @@ public class RecruitVO {
      */
     private Integer projectId;
 
+
+    /**
+     * 学历层次
+     */
+    private Integer eduLevel;
+
+
+    /**
+     * 公司图片
+     */
+    private String picUrl;
+
+    /**
+     * 公司名称
+     */
+    private String companyName;
+
+    /**
+     * 规模标签
+     */
+    private String scaleTagName;
+
+    /**
+     * 人员范围
+     */
+    private String personScales;
+
+    /**
+     * 公司简称
+     */
+    private String companyShortName;
+    /**
+     * 公司地址
+     */
+    private String address;
+
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
