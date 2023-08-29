@@ -43,4 +43,6 @@ public class ArticleEntity implements Serializable {
 
     private String href;
 
+    private String des;
+
 }
