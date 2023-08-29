@@ -36,7 +36,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
                 .orderByDesc(CourseEntity::getCreatTime)
-                .last("limit 6");
+                .last("limit 8");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
     }

@@ -62,4 +62,7 @@ public class Project implements Serializable {
 
     private Integer deleteFlag;
 
+    private String href;
+
+    private String img;
 }

@@ -26,6 +26,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         QueryWrapper<Project> qw = new QueryWrapper<>();
         qw.eq("delete_flag", 0);
         qw.orderByDesc("create_time");
+        qw.select("id", "title", "left(des, 50)", "create_time");
         Page<Project> projectPage = this.getBaseMapper().selectPage(page, null);
         return projectPage;
     }
