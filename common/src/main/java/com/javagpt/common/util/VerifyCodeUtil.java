@@ -14,7 +14,6 @@ public class VerifyCodeUtil {
 
     private static String baseNumLetter = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
     private static String font = "微软雅黑";
-//    private static String font = null;
 
     /**
      * description: 绘制验证码图片,返回验证码文本内容
@@ -25,18 +24,21 @@ public class VerifyCodeUtil {
     public static  String drawRandomText(int width, int height, BufferedImage verifyImg) {
 
         Graphics2D graphics = (Graphics2D) verifyImg.getGraphics();
-        graphics.setColor(Color.WHITE);//设置画笔颜色-验证码背景色
-        graphics.fillRect(0, 0, width, height);//填充背景
+        //设置画笔颜色-验证码背景色
+        graphics.setColor(Color.WHITE);
+        //填充背景
+        graphics.fillRect(0, 0, width, height);
         graphics.setFont(new Font(font, Font.BOLD, 30));
 
         StringBuffer sBuffer = new StringBuffer();
-        int x = 10;  //旋转原点的 x 坐标
+        //旋转原点的 x 坐标
+        int x = 10;
         String ch = "";
         Random random = new Random();
         for(int i = 0;i < 4;i++){
             graphics.setColor(getRandomColor());
-            //设置字体旋转角度
-            int degree = random.nextInt() % 10;  //角度小于10度
+            //设置字体旋转角度,角度小于10度
+            int degree = random.nextInt() % 10;
             int dot = random.nextInt(baseNumLetter.length());
             ch = baseNumLetter.charAt(dot) + "";
             sBuffer.append(ch);
