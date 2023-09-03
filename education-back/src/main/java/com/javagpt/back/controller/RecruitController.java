@@ -44,8 +44,8 @@ public class RecruitController {
 
     @GetMapping("/getById/{id}")
     public ResultBody getById(@PathVariable Integer id) {
-        Recruit byId = recruitService.getById(id);
-        return ResultBody.success(byId);
+        RecruitVO recruitVO = recruitService.queryById(id);
+        return ResultBody.success(recruitVO);
     }
 
 }

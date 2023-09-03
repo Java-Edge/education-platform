@@ -49,4 +49,10 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
 
         return recruitVOPage;
     }
+
+    @Override
+    public RecruitVO queryById(Integer id) {
+        RecruitVO recruitVO = recruitMapper.queryById(id);
+        return recruitVO;
+    }
 }
