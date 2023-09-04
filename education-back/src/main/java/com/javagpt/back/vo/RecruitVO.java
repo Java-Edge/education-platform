@@ -183,6 +183,11 @@ public class RecruitVO {
      */
     private String address;
 
+    /**
+     * 原始招聘链接
+     */
+    private String sourceUrl;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

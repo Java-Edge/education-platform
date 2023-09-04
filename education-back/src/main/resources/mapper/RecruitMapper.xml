@@ -78,6 +78,7 @@
         <result property="scaleTagName" column="scale_tag_name" jdbcType="VARCHAR"/>
         <result property="personScales" column="person_scales" jdbcType="VARCHAR"/>
         <result property="companyShortName" column="company_short_name" jdbcType="VARCHAR"/>
+        <result property="sourceUrl" column="source_url" jdbcType="VARBINARY"/>
     </resultMap>
 
 
@@ -111,6 +112,7 @@
         r.work_year_type,
         r.project_id,
         r.edu_level,
+        r.source_url,
         c.pic_url,
         c.company_name,
         c.scale_tag_name,
@@ -158,6 +160,7 @@
         r.work_year_type,
         r.project_id,
         r.edu_level,
+        r.source_url,
         c.pic_url,
         c.company_name,
         c.scale_tag_name,
