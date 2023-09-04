@@ -29,4 +29,13 @@ public interface RecruitMapper extends BaseMapper<Recruit> {
      */
     Page<RecruitVO> queryPage(@Param("page") Page<Recruit> page, @Param("dto") RecruitDTO dto);
 
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    RecruitVO queryById(Integer id);
+
 }

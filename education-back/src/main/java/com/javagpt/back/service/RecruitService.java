@@ -31,4 +31,12 @@ public interface RecruitService extends IService<Recruit> {
     Page<RecruitVO> selectByCondition( PageQueryParam<RecruitDTO> pageQueryParam);
 
 
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    RecruitVO queryById(Integer id);
+
 }

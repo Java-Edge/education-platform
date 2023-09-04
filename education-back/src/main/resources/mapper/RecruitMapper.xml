@@ -127,4 +127,45 @@
             </if>
         </where>
     </select>
+
+    <select id="queryById" resultMap="RecruitVOMap">
+        select
+        r.id,
+        r.title,
+        r.content,
+        r.create_time,
+        r.`type`,
+        r.des,
+        r.phone,
+        r.company_id,
+        r.recruit_type,
+        r.job_name,
+        r.ext,
+        r.job_city,
+        r.job_address,
+        r.career_job_id,
+        r.career_job_name,
+        r.graduation_year,
+        r.deliver_begin,
+        r.deliver_end,
+        r.refesh_time,
+        r.feed_back_days,
+        r.duration_days,
+        r.salary_type,
+        r.salary_min,
+        r.salary_max,
+        r.salary_month,
+        r.work_year_type,
+        r.project_id,
+        r.edu_level,
+        c.pic_url,
+        c.company_name,
+        c.scale_tag_name,
+        c.person_scales,
+        c.company_short_name
+        from recruit r
+        left join company c on r.company_id = c.id
+        where r.id = #{id,jdbcType=INTEGER}
+    </select>
+
 </mapper>
