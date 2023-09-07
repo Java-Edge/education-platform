@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service;
+package com.javagpt.interviewspider.entity.service;
 
 import java.util.List;
 

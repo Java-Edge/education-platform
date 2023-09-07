@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service;
+package com.javagpt.interviewspider.entity.service;
 
 /**
  * @author bubaiwantong
@@ -7,6 +7,9 @@ package com.javagpt.interviewspider.service;
  */
 public interface SpiderService {
 
+    /**
+     * 获取牛客网面经
+     */
     void obtainInterviewExperience();
 
 

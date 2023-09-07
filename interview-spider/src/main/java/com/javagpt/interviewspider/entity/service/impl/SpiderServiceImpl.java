@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service.impl;
+package com.javagpt.interviewspider.entity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -7,13 +7,13 @@ import com.javagpt.interviewspider.data.nowcoder.ImageMoment;
 import com.javagpt.interviewspider.data.nowcoder.InterviewData;
 import com.javagpt.interviewspider.data.nowcoder.MomentData;
 import com.javagpt.interviewspider.entity.ArticleEntity;
+import com.javagpt.interviewspider.entity.service.ArticleService;
 import com.javagpt.interviewspider.param.ExperienceParam;
 import com.javagpt.interviewspider.dto.nowcoder.Page;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
-import com.javagpt.interviewspider.service.CareerService;
-import com.javagpt.interviewspider.service.ArticleService;
-import com.javagpt.interviewspider.service.SpiderService;
+import com.javagpt.interviewspider.entity.service.CareerService;
+import com.javagpt.interviewspider.entity.service.SpiderService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -50,6 +50,7 @@ public class SpiderServiceImpl implements SpiderService {
 
     @Override
     public void obtainInterviewExperience() {
+        // 从数据库中查询每个职位，并且到牛客网上遍历面经信息
         LambdaQueryWrapper<CareerEntity> queryWrapper = new LambdaQueryWrapper<CareerEntity>().eq(CareerEntity::getIsGrab, 1);
         List<CareerEntity> list = careerService.list(queryWrapper);
 
@@ -175,7 +176,7 @@ public class SpiderServiceImpl implements SpiderService {
         }
 
         // 存储到数据库中
-        articleService.saveBatch(articleEntities);
+        articleService.saveOrUpdateBatch(articleEntities);
 
     }
 

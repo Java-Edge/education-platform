@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service;
+package com.javagpt.interviewspider.entity.service;
 
 /**
  *
@@ -15,5 +15,15 @@ public interface NowCoderRecruitService {
      * 爬取岗位信息
      */
     void grabRecruits();
+
+    /**
+     * 获取所有岗位信息
+     */
+    void grabAllInfo();
+
+    /**
+     * 获取最新的岗位信息，用于定时器
+     */
+    void grabLastInfo();
 
 }

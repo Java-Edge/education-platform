@@ -1,10 +1,10 @@
-package com.javagpt.interviewspider.service.impl;
+package com.javagpt.interviewspider.entity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.nowcoder.JobData;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
-import com.javagpt.interviewspider.service.NowCoderCityService;
+import com.javagpt.interviewspider.entity.service.NowCoderCityService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

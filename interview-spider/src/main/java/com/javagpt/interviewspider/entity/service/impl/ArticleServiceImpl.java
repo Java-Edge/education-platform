@@ -1,8 +1,8 @@
-package com.javagpt.interviewspider.service.impl;
+package com.javagpt.interviewspider.entity.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.interviewspider.entity.ArticleEntity;
-import com.javagpt.interviewspider.service.ArticleService;
+import com.javagpt.interviewspider.entity.service.ArticleService;
 import com.javagpt.interviewspider.mapper.ArticleMapper;
 import org.springframework.stereotype.Service;
 

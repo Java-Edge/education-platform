@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service;
+package com.javagpt.interviewspider.entity.service;
 
 import com.javagpt.interviewspider.dto.nowcoder.CareerDTO;
 import com.javagpt.interviewspider.entity.CareerEntity;

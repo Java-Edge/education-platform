@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.service.impl;
+package com.javagpt.interviewspider.entity.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.nowcoder.RecommendInternCompany;
@@ -8,9 +8,9 @@ import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CompanyEntity;
 import com.javagpt.interviewspider.entity.RecruitEntity;
 import com.javagpt.interviewspider.param.RecruitParam;
-import com.javagpt.interviewspider.service.CompanyService;
-import com.javagpt.interviewspider.service.NowCoderRecruitService;
-import com.javagpt.interviewspider.service.RecruitService;
+import com.javagpt.interviewspider.entity.service.CompanyService;
+import com.javagpt.interviewspider.entity.service.NowCoderRecruitService;
+import com.javagpt.interviewspider.entity.service.RecruitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +45,34 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
 
     @Override
     public void grabRecruits() {
-        List<RecruitData> list = getResponse();
+        List<RecruitData> list = getResponse(1);
         handleResult(list);
     }
+
+    @Override
+    public void grabAllInfo() {
+        int endPage = 20;
+        for (int i = 1; i < endPage; i++) {
+            List<RecruitData> list = getResponse(i);
+            handleResult(list);
+        }
+    }
+
+    @Override
+    public void grabLastInfo() {
+        List<RecruitData> list = getResponse(1);
+        handleResult(list);
+    }
+
 
     /**
      * 获取数据
      *
      * @return
      */
-    private List<RecruitData> getResponse() {
+    private List<RecruitData> getResponse(int currentPage) {
 
+        // 牛客招聘信息接口
         String url = "https://www.nowcoder.com/np-api/u/job/search";
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded"));
@@ -78,17 +95,22 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
         RecruitParam recruitParam = new RecruitParam();
         recruitParam.setRequestForm(1);
-        recruitParam.setPage(10);
+        recruitParam.setPage(currentPage);
         recruitParam.setPageSize(20);
         recruitParam.setRecruitType(2);
         recruitParam.setPageSource(5001);
         recruitParam.setVisitorId("ebb5a2ba-7dcb-4e8d-8ae1-6f33ed7dcf95");
 
         params.add("requestFrom", recruitParam.getRequestForm());
+        // 当前页
         params.add("page", recruitParam.getPage());
+        // 页面大小
         params.add("pageSize", recruitParam.getPageSize());
+        // 招聘类型
         params.add("recruitType", recruitParam.getRecruitType());
-        params.add("pageSize", recruitParam.getPageSource());
+        //
+        params.add("pageSource", recruitParam.getPageSource());
+        // 访问者主键
         params.add("visitorId", recruitParam.getVisitorId());
         HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(params, httpHeaders);
 

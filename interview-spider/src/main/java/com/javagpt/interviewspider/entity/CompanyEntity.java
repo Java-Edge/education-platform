@@ -50,21 +50,6 @@ public class CompanyEntity implements Serializable {
      */
     private String address;
 
-    /**
-     *
-     */
-    private String followCount;
-
-    /**
-     *
-     */
-    private Integer projectId;
-
-    /**
-     *
-     */
-    private Integer searchSource;
-
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

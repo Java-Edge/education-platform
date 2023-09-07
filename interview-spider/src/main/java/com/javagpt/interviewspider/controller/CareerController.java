@@ -2,7 +2,7 @@ package com.javagpt.interviewspider.controller;
 
 import com.javagpt.interviewspider.dto.nowcoder.CareerDTO;
 import com.javagpt.interviewspider.entity.CareerEntity;
-import com.javagpt.interviewspider.service.CareerService;
+import com.javagpt.interviewspider.entity.service.CareerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
