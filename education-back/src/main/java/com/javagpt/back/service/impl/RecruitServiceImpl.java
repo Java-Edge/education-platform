@@ -43,7 +43,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     public Page<RecruitVO> selectByCondition(PageQueryParam<RecruitDTO> pageQueryParam) {
         Page<Recruit> page = new Page<>();
         page.setCurrent(pageQueryParam.getPageNo());
-        page.setPages(pageQueryParam.getPageSize());
+        page.setSize(pageQueryParam.getPageSize());
 
         Page<RecruitVO> recruitVOPage = recruitMapper.queryPage(page, pageQueryParam.getParam());
 
