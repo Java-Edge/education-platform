@@ -133,6 +133,7 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
             BeanUtils.copyProperties(recruitData,recruitEntity);
             recruitEntity.setTitle(recruitData.getJobName());
             recruitEntity.setContent(recruitData.getExt());
+            recruitEntity.setCompanyId(recruitData.getCompanyId());
             recruitEntities.add(recruitEntity);
 
             RecommendInternCompany recommendInternCompany = recruitData.getRecommendInternCompany();

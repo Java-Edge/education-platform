@@ -1,13 +1,10 @@
 package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.javagpt.interviewspider.data.boss.PositionPage;
 import com.javagpt.interviewspider.dto.CountryCareer.CompanyInfo;
 import com.javagpt.interviewspider.dto.CountryCareer.CountryCareerDTO;
 import com.javagpt.interviewspider.dto.CountryCareer.CountryCareerPage;
 import com.javagpt.interviewspider.dto.CountryCareer.CountryCareerResultBody;
-import com.javagpt.interviewspider.dto.boss.BossResult;
-import com.javagpt.interviewspider.dto.boss.BossResultBody;
 import com.javagpt.interviewspider.entity.CompanyEntity;
 import com.javagpt.interviewspider.entity.RecruitEntity;
 import com.javagpt.interviewspider.param.CountryCareerParam;
@@ -16,21 +13,17 @@ import com.javagpt.interviewspider.service.CountryCareerService;
 import com.javagpt.interviewspider.service.RecruitService;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service

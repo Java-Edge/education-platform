@@ -25,7 +25,7 @@ public class RecruitData {
     private Long careerJobId;
     private Object careerJobName;
     private Object companyFinancing;
-    private Long companyId;
+    private String companyId;
     private Boolean companyTopJob;
     private Long conversationId;
     private Date createTime;
