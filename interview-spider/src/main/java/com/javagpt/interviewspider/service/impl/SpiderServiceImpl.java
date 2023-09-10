@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -7,13 +7,13 @@ import com.javagpt.interviewspider.data.nowcoder.ImageMoment;
 import com.javagpt.interviewspider.data.nowcoder.InterviewData;
 import com.javagpt.interviewspider.data.nowcoder.MomentData;
 import com.javagpt.interviewspider.entity.ArticleEntity;
-import com.javagpt.interviewspider.entity.service.ArticleService;
+import com.javagpt.interviewspider.service.ArticleService;
 import com.javagpt.interviewspider.param.ExperienceParam;
 import com.javagpt.interviewspider.dto.nowcoder.Page;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
-import com.javagpt.interviewspider.entity.service.CareerService;
-import com.javagpt.interviewspider.entity.service.SpiderService;
+import com.javagpt.interviewspider.service.CareerService;
+import com.javagpt.interviewspider.service.SpiderService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

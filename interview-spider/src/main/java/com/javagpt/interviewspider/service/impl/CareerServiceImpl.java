@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -7,7 +7,7 @@ import com.javagpt.interviewspider.dto.nowcoder.CareerJobSelector;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CareerEntity;
-import com.javagpt.interviewspider.entity.service.CareerService;
+import com.javagpt.interviewspider.service.CareerService;
 import com.javagpt.interviewspider.mapper.CareerMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package com.javagpt.interviewspider.controller;
 
-import com.javagpt.interviewspider.entity.service.BossCityService;
-import com.javagpt.interviewspider.entity.service.BossQuestionService;
-import com.javagpt.interviewspider.entity.service.BossRecruitService;
-import com.javagpt.interviewspider.entity.service.BossService;
+import com.javagpt.interviewspider.service.BossCityService;
+import com.javagpt.interviewspider.service.BossQuestionService;
+import com.javagpt.interviewspider.service.BossRecruitService;
+import com.javagpt.interviewspider.service.BossService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

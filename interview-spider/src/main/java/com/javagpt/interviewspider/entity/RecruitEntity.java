@@ -54,7 +54,7 @@ public class RecruitEntity implements Serializable {
     /**
      * 公司编号
      */
-    private Long companyId;
+    private String companyId;
 
     /**
      * 招聘类型 校招、实习、社招
@@ -150,6 +150,16 @@ public class RecruitEntity implements Serializable {
      * 项目编号
      */
     private Integer projectId;
+
+    /**
+     * 学历
+     */
+    private Integer eduLevel;
+
+    /**
+     * 原始网站招聘链接
+     */
+    private String sourceUrl;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

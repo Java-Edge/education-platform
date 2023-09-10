@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.boss.BossContentInfo;
@@ -6,9 +6,8 @@ import com.javagpt.interviewspider.dto.boss.BossResult;
 import com.javagpt.interviewspider.dto.boss.BossResultBody;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.entity.ArticleEntity;
-import com.javagpt.interviewspider.entity.service.ArticleService;
-import com.javagpt.interviewspider.entity.service.BossQuestionService;
-import jakarta.annotation.Resource;
+import com.javagpt.interviewspider.service.ArticleService;
+import com.javagpt.interviewspider.service.BossService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -18,18 +17,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author bubaiwantong
- * @date 2023/7/30 14:48
- * @description this is a class file created by bubaiwantong in 2023/7/30 14:48
+ * @date 2023/7/29 23:24
+ * @description this is a class file created by bubaiwantong in 2023/7/29 23:24
  */
 @Service
 @Slf4j
-public class BossQuestionServiceImpl implements BossQuestionService {
+public class BossServiceImpl implements BossService {
+
 
     @Resource
     private RestTemplate restTemplate;
@@ -37,8 +38,9 @@ public class BossQuestionServiceImpl implements BossQuestionService {
     @Autowired
     private ArticleService articleService;
 
+
     @Override
-    public List<Object> grabQuestions() {
+    public List<BossContentInfo> grabInterviewExperience() {
         int startPage = 1;
         int endPage  = 2;
         for (int currentPage = startPage; currentPage < endPage; currentPage++) {
@@ -48,9 +50,6 @@ public class BossQuestionServiceImpl implements BossQuestionService {
         return null;
     }
 
-
-
-
     /**
      * 根据页码获取当前页面的面试经验信息
      *
@@ -59,7 +58,7 @@ public class BossQuestionServiceImpl implements BossQuestionService {
      */
     public List<BossContentInfo> getResponse(int currentPage) {
         try {
-            String url = "https://youle.zhipin.com/wapi/moment/pc/question/wait2Answer/tab?noFilterPosition=0&pageSize=10&positionsLevelTwo=100100&isBossQuestion=0&isStudentQuestion=0&encryptTagId=8f00b204e9800998&listType=0&page=1&isNew=0";
+            String url = "https://youle.zhipin.com/wapi/moment/pc/discover/feedList?page=1";
 
             // 创建一个请求头对象
             HttpHeaders httpHeaders = new HttpHeaders();
@@ -67,8 +66,8 @@ public class BossQuestionServiceImpl implements BossQuestionService {
             httpHeaders.set("authority", "youle.zhipin.com");
             httpHeaders.set("accept", "application/json, text/plain, */*");
             httpHeaders.set("accept-language", "zh-CN,zh;q=0.9");
-            httpHeaders.set("cookie", "lastCity=101280600; wt2=DZekMCV8PHZ0oRpZKq_cgYkoiO1FphevdUG8o35bw0c5vE6lP5LMQwCnjrGJm4JLPVJbWfeVzpSAuPf3bSERXVw~~; wbg=0; warlockjssdkcross=%7B%22distinct_id%22%3A%22115483158%22%2C%22first_id%22%3A%22189a0ab846ab4d-08c945c7ce7753-26021151-1327104-189a0ab846bbbc%22%2C%22props%22%3A%7B%7D%2C%22device_id%22%3A%22189a0ab846ab4d-08c945c7ce7753-26021151-1327104-189a0ab846bbbc%22%7D; wd_guid=352ecf69-9c03-4662-a025-e05338529328; historyState=state; __g=-; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1690617500,1690640740,1690684436; Hm_lpvt_194df3105ad7148dcf2b98a91b5e727a=1690684436; __zp_stoken__=2ddeeMWoAGnwQSWltUSl%2FLgt%2FV346HHl6Ym8teSwSNGJNSXtCbB9GV206Fm1aKlBLLX9WKVxuBhh0bHkmIldhIkxnDwISYixwQR5eaRR7Ij4XGDxrCA4EDBdHEyVMWQQub0ZkVi1ndm82fnw%3D; Hm_lvt_f97992073bffedfa462561a24c99eb83=1690617741,1690640744,1690684440; __zp_seo_uuid__=fefe726d-b2e5-4a0d-9a52-139e3bae6b0d; __l=r=https%3A%2F%2Fyoule.zhipin.com%2F&l=%2Fyoule.zhipin.com%2Farticles%2F&s=1&s=3&friend_source=0; Hm_lpvt_f97992073bffedfa462561a24c99eb83=1690699091; __c=1690684434; __a=52115536.1648184705.1690640738.1690684434.355.18.73.165");
-            httpHeaders.set("referer", "https://youle.zhipin.com/questions/c_100100/");
+            httpHeaders.set("cookie", "lastCity=101280600; wt2=DZekMCV8PHZ0oRpZKq_cgYkoiO1FphevdUG8o35bw0c5vE6lP5LMQwCnjrGJm4JLPVJbWfeVzpSAuPf3bSERXVw~~; wbg=0; wljssdk_cross_new_user=1; warlockjssdkcross=%7B%22distinct_id%22%3A%22115483158%22%2C%22first_id%22%3A%22189a0ab846ab4d-08c945c7ce7753-26021151-1327104-189a0ab846bbbc%22%2C%22props%22%3A%7B%7D%2C%22device_id%22%3A%22189a0ab846ab4d-08c945c7ce7753-26021151-1327104-189a0ab846bbbc%22%7D; __g=-; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1690617500,1690640740; Hm_lpvt_194df3105ad7148dcf2b98a91b5e727a=1690640740; __zp_stoken__=09f2eOD1HZ1lbO24SJkADLW57LEElAGdvbSEiPkA0XjUjSA9cTksDSW8kHiNSTAR8D3sSIE5uGEk3byZnOzUMBQAKUDQUTWcJKkZYKAFDY0A7HFMZJBMaIwBMKjANMSsyTUIgXz9nZ0BgIXQ%3D; Hm_lvt_f97992073bffedfa462561a24c99eb83=1690617741,1690640744; __zp_seo_uuid__=691a525f-1f60-42fe-ab46-9bba492111c2; wd_guid=352ecf69-9c03-4662-a025-e05338529328; historyState=state; Hm_lpvt_f97992073bffedfa462561a24c99eb83=1690640811; __c=1690640738; __l=r=https%3A%2F%2Fyoule.zhipin.com%2Fquestions%2F&l=%2Fyoule.zhipin.com%2Frecommend%2Fselected%2F&s=3&friend_source=0&s=3&friend_source=0; __a=52115536.1648184705.1690617499.1690640738.214.17.8.24");
+            httpHeaders.set("referer", "https://youle.zhipin.com/recommend/selected/");
             httpHeaders.set("sec-ch-ua", "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\", \"Google Chrome\";v=\"108\"");
             httpHeaders.set("sec-ch-ua-mobile", "?0");
             httpHeaders.set("sec-ch-ua-platform", "\"Windows\"");
@@ -77,6 +76,7 @@ public class BossQuestionServiceImpl implements BossQuestionService {
             httpHeaders.set("sec-fetch-site", "same-origin");
             httpHeaders.set("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36");
             httpHeaders.set("x-requested-with", "XMLHttpRequest");
+            httpHeaders.set("zp_token", "V1QNsiFez-21tiVtRvxh0eLSqz6TjUwSU~");
 
             // 创建一个响应体对象
             HttpEntity<String> httpEntity = new HttpEntity(httpHeaders);
@@ -103,7 +103,6 @@ public class BossQuestionServiceImpl implements BossQuestionService {
     }
 
 
-
     /**
      * 处理Boss直聘上爬取的信息，整合成Entity
      *
@@ -124,9 +123,5 @@ public class BossQuestionServiceImpl implements BossQuestionService {
 
         log.debug(articleEntities.toString());
     }
-
-
-
-
 
 }

@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service;
+package com.javagpt.interviewspider.service;
 
 import com.javagpt.interviewspider.entity.ArticleEntity;
 import com.baomidou.mybatisplus.extension.service.IService;

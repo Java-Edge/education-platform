@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,7 +8,7 @@ import com.javagpt.interviewspider.dto.boss.BossResult;
 import com.javagpt.interviewspider.dto.boss.BossResultBody;
 import com.javagpt.interviewspider.dto.nowcoder.Result;
 import com.javagpt.interviewspider.entity.CityEntity;
-import com.javagpt.interviewspider.entity.service.BossCityService;
+import com.javagpt.interviewspider.service.BossCityService;
 import com.javagpt.interviewspider.mapper.CityMapper;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;

@@ -1,10 +1,10 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.boss.PositionPage;
 import com.javagpt.interviewspider.dto.boss.BossResult;
 import com.javagpt.interviewspider.dto.boss.BossResultBody;
-import com.javagpt.interviewspider.entity.service.BossRecruitService;
+import com.javagpt.interviewspider.service.BossRecruitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

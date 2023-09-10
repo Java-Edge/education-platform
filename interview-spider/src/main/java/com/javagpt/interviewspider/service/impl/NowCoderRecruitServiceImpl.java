@@ -1,4 +1,4 @@
-package com.javagpt.interviewspider.entity.service.impl;
+package com.javagpt.interviewspider.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.nowcoder.RecommendInternCompany;
@@ -8,9 +8,9 @@ import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CompanyEntity;
 import com.javagpt.interviewspider.entity.RecruitEntity;
 import com.javagpt.interviewspider.param.RecruitParam;
-import com.javagpt.interviewspider.entity.service.CompanyService;
-import com.javagpt.interviewspider.entity.service.NowCoderRecruitService;
-import com.javagpt.interviewspider.entity.service.RecruitService;
+import com.javagpt.interviewspider.service.CompanyService;
+import com.javagpt.interviewspider.service.NowCoderRecruitService;
+import com.javagpt.interviewspider.service.RecruitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

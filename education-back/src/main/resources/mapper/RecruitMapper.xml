@@ -12,7 +12,7 @@
         <result property="type" column="type" jdbcType="INTEGER"/>
         <result property="des" column="des" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="companyId" column="company_id" jdbcType="INTEGER"/>
+        <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
         <result property="recruitType" column="recruit_type" jdbcType="INTEGER"/>
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
         <result property="ext" column="ext" jdbcType="VARCHAR"/>
@@ -53,7 +53,7 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="companyId" column="company_id" jdbcType="INTEGER"/>
+        <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
         <result property="recruitType" column="recruit_type" jdbcType="INTEGER"/>
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
         <result property="ext" column="ext" jdbcType="VARCHAR"/>

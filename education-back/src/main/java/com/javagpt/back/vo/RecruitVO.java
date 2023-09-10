@@ -50,7 +50,7 @@ public class RecruitVO {
     /**
      * 公司编号
      */
-    private Integer companyId;
+    private String companyId;
 
     /**
      * 招聘类型 校招、实习、社招
