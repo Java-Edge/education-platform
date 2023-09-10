@@ -20,7 +20,7 @@ public class NowCoderJob {
     /**
      * 定时获取牛客网的招聘信息
      */
-//    @Scheduled(cron = "0 */20 * * * ?")
+    @Scheduled(cron = "0 */20 * * * ?")
     public void recruitsJob() {
         nowCoderRecruitService.grabAllInfo();
     }
