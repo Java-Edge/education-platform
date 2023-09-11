@@ -45,7 +45,7 @@ public class RecruitData {
     private Boolean hasSigned;
     private Boolean hot;
     private Boolean hotJob;
-    private Long id;
+    private String id;
     private String industryName;
     private Object jobAddress;
     private JobBoostScore jobBoostScore;

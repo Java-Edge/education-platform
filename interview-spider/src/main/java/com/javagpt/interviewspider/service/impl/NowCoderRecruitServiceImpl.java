@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.nowcoder.RecommendInternCompany;
 import com.javagpt.interviewspider.data.nowcoder.RecruitData;
 import com.javagpt.interviewspider.dto.nowcoder.NowCoderPage;
+import com.javagpt.interviewspider.dto.nowcoder.RecruitDetailDTO;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CompanyEntity;
 import com.javagpt.interviewspider.entity.RecruitEntity;
@@ -21,6 +22,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,21 +126,23 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
     }
 
 
-    private List<Object> handleResult(List<RecruitData> list){
+    private List<Object> handleResult(List<RecruitData> list) {
 
         List<RecruitEntity> recruitEntities = new ArrayList<>();
-        List<CompanyEntity> companyEntities  = new ArrayList<>();
+        List<CompanyEntity> companyEntities = new ArrayList<>();
         for (RecruitData recruitData : list) {
             RecruitEntity recruitEntity = new RecruitEntity();
-            BeanUtils.copyProperties(recruitData,recruitEntity);
             recruitEntity.setTitle(recruitData.getJobName());
-            recruitEntity.setContent(recruitData.getExt());
+            BeanUtils.copyProperties(recruitData, recruitEntity);
+            RecruitDetailDTO recruitDetailDTO = JSON.parseObject(recruitData.getExt(), RecruitDetailDTO.class);
+            recruitEntity.setContent(recruitDetailDTO.getInfos());
+            recruitEntity.setRequirements(recruitDetailDTO.getRequirements());
+
             recruitEntity.setCompanyId(recruitData.getCompanyId());
             recruitEntities.add(recruitEntity);
-
             RecommendInternCompany recommendInternCompany = recruitData.getRecommendInternCompany();
             CompanyEntity companyEntity = new CompanyEntity();
-            BeanUtils.copyProperties(recommendInternCompany,companyEntity);
+            BeanUtils.copyProperties(recommendInternCompany, companyEntity);
             companyEntity.setId(recommendInternCompany.getCompanyId());
             companyEntities.add(companyEntity);
             log.debug(recruitData.toString());

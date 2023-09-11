@@ -101,37 +101,58 @@ public class CountryCareerServiceImpl implements CountryCareerService {
         ArrayList<CompanyEntity> companyEntities = new ArrayList<>();
         for (CountryCareerDTO countryCareerDTO : list) {
             RecruitEntity recruitEntity = new RecruitEntity();
-//            recruitEntity.setId(Long.valueOf(countryCareerDTO.getJobId()));
+            recruitEntity.setId(countryCareerDTO.getJobId());
             recruitEntity.setTitle(countryCareerDTO.getJobName());
             recruitEntity.setContent(countryCareerDTO.getContents());
+//            recruitEntity.setRequirements();
 //            recruitEntity.setType();
-//            recruitEntity.setDes();
 //            recruitEntity.setPhone();
-//            recruitEntity.setRecruitType();
             recruitEntity.setCompanyId(countryCareerDTO.getCompanyId());
             recruitEntity.setJobName(countryCareerDTO.getJobName());
 //            recruitEntity.setExt();
             List<String> cities = countryCareerDTO.getDistrictList().stream().map(item -> item.getAreaCn()).collect(Collectors.toList());
             recruitEntity.setJobCity(StringUtils.join(cities,","));
-//            recruitEntity.setJobAddress(countryCareerDTO.get);
 
+            recruitEntity.setCategory(countryCareerDTO.getCategoryCn());
+            recruitEntity.setMajor(StringUtils.join(countryCareerDTO.getMajorCn(),","));
+
+            // 岗位创建时间
             recruitEntity.setCreateTime(countryCareerDTO.getCreateTime());
-            recruitEntity.setGraduationYear(countryCareerDTO.getEducation());
+
+            // 毕业年份
+            recruitEntity.setGraduationYear(countryCareerDTO.getExperienceCn());
+/*            if ("114Mh7Wi".equals(countryCareerDTO.getExperience())){
+            }*/
 //            recruitEntity.setCareerJobId(countryCareerDTO.getJobId());
+            // 岗位名称
             recruitEntity.setCareerJobName(countryCareerDTO.getJobName());
 //            recruitEntity.setGraduationYear();
+            // 开始时间
             recruitEntity.setDeliverBegin(countryCareerDTO.getStartTime());
+            // 结束时间
             recruitEntity.setDeliverEnd(countryCareerDTO.getEndTime());
+            // 刷新时间
             recruitEntity.setRefeshTime(countryCareerDTO.getRefreshTime());
+            // 招聘类型 1 校招 2实习 3 社招
+            if ("1161T1j6".equals(countryCareerDTO.getRecruitmentType())){
+                recruitEntity.setRecruitType(1);
+            }else if ("1161T1j".equals(countryCareerDTO.getRecruitmentType())){ // 待定
+                recruitEntity.setRecruitType(2);
+            }else if ("1161Tew1j".equals(countryCareerDTO.getRecruitmentType())){ // 待定
+                recruitEntity.setRecruitType(2);
+            }
 //            recruitEntity.setFeedBackDays(countryCareerDTO);
 //            recruitEntity.setDurationDays(countryCareerDTO.getD);
 //            recruitEntity.setSalaryType(countryCareerDTO.getWageUnit());
+
+            // 薪资范围
             if ("11jNfoC".equals(countryCareerDTO.getWageUnit())) {
                 recruitEntity.setSalaryType(2);
                 recruitEntity.setSalaryMin(Math.toIntExact(countryCareerDTO.getMinWage()) / 1000);
                 recruitEntity.setSalaryMax(Math.toIntExact(countryCareerDTO.getMaxWage()) / 1000);
             }
 
+            // 学历要求
             if ("116VSUN1".equals(countryCareerDTO.getEducation())) {
                 recruitEntity.setEduLevel(6000);
             } else if ("116yhC4D".equals(countryCareerDTO.getEducation())) {
@@ -139,7 +160,7 @@ public class CountryCareerServiceImpl implements CountryCareerService {
             }
             recruitEntities.add(recruitEntity);
 
-
+            // 公司相关信息
             CompanyEntity companyEntity = new CompanyEntity();
             CompanyInfo companyInfo = countryCareerDTO.getCompanyInfo();
             companyEntity.setCompanyName(companyInfo.getName());
