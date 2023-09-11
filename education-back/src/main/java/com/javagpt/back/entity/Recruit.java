@@ -20,7 +20,7 @@ public class Recruit implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private String id;
 
     /**
      * 标题
@@ -28,7 +28,7 @@ public class Recruit implements Serializable {
     private String title;
 
     /**
-     * 内容
+     * 岗位信息
      */
     private String content;
 
@@ -43,9 +43,9 @@ public class Recruit implements Serializable {
     private Integer type;
 
     /**
-     * 岗位描述
+     * 岗位要求
      */
-    private String des;
+    private String requirements;
 
     /**
      * 联系电话
@@ -85,7 +85,7 @@ public class Recruit implements Serializable {
     /**
      * 职位号
      */
-    private Integer careerJobId;
+    private Long careerJobId;
 
     /**
      * 职位名称
@@ -113,12 +113,12 @@ public class Recruit implements Serializable {
     private Date refeshTime;
 
     /**
-     * 
+     *
      */
     private Integer feedBackDays;
 
     /**
-     * 
+     *
      */
     private Integer durationDays;
 
@@ -138,12 +138,12 @@ public class Recruit implements Serializable {
     private Integer salaryMax;
 
     /**
-     * 
+     *
      */
     private Integer salaryMonth;
 
     /**
-     * 
+     *
      */
     private Integer workYearType;
 
@@ -152,11 +152,25 @@ public class Recruit implements Serializable {
      */
     private Integer projectId;
 
-
     /**
-     * 学历层次
+     * 学历
      */
     private Integer eduLevel;
+
+    /**
+     * 原始网站招聘链接
+     */
+    private String sourceUrl;
+
+    /**
+     * 类别信息
+     */
+    private String category;
+
+    /**
+     * 专业信息
+     */
+    private String major;
 
 
     @TableField(exist = false)

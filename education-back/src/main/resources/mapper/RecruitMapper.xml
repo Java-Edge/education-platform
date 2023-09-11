@@ -52,6 +52,7 @@
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="requirements" column="requirements" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
         <result property="recruitType" column="recruit_type" jdbcType="INTEGER"/>
@@ -87,9 +88,9 @@
         r.id,
         r.title,
         r.content,
+        r.requirements,
         r.create_time,
         r.`type`,
-        r.des,
         r.phone,
         r.company_id,
         r.recruit_type,
@@ -135,9 +136,9 @@
         r.id,
         r.title,
         r.content,
+        r.requirements,
         r.create_time,
         r.`type`,
-        r.des,
         r.phone,
         r.company_id,
         r.recruit_type,
