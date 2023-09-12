@@ -45,7 +45,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
         qw.eq("delete_flag", 0);
         qw.eq(article.getType() != null, "type", article.getType());
-        qw.orderByDesc("page_view");
+//        qw.orderByDesc("page_view");
         qw.orderByDesc("create_time");
         qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view");
         Page<ArticleEntity> articleEntityPage = this.getBaseMapper().selectPage(page, qw);
