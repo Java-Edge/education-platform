@@ -57,7 +57,7 @@ public class ServiceLogAspect {
         logger.info(String.format("用户[%s],在[%s],访问了[%s].", ip, now, target));
     }
 
-    private static final RateLimiter rateLimiter = RateLimiter.create(100);
+    private static final RateLimiter rateLimiter = RateLimiter.create(500);
 
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
     @Around("rateLimitPointCut()")
