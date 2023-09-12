@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.javagpt.interviewspider.data.nowcoder.RecommendInternCompany;
 import com.javagpt.interviewspider.data.nowcoder.RecruitData;
 import com.javagpt.interviewspider.dto.nowcoder.NowCoderPage;
+import com.javagpt.interviewspider.dto.nowcoder.RecruitDetailDTO;
 import com.javagpt.interviewspider.dto.nowcoder.ResultBody;
 import com.javagpt.interviewspider.entity.CompanyEntity;
 import com.javagpt.interviewspider.entity.RecruitEntity;
@@ -21,6 +22,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +47,34 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
 
     @Override
     public void grabRecruits() {
-        List<RecruitData> list = getResponse();
+        List<RecruitData> list = getResponse(1);
         handleResult(list);
     }
+
+    @Override
+    public void grabAllInfo() {
+        int endPage = 20;
+        for (int i = 1; i < endPage; i++) {
+            List<RecruitData> list = getResponse(i);
+            handleResult(list);
+        }
+    }
+
+    @Override
+    public void grabLastInfo() {
+        List<RecruitData> list = getResponse(1);
+        handleResult(list);
+    }
+
 
     /**
      * 获取数据
      *
      * @return
      */
-    private List<RecruitData> getResponse() {
+    private List<RecruitData> getResponse(int currentPage) {
 
+        // 牛客招聘信息接口
         String url = "https://www.nowcoder.com/np-api/u/job/search";
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded"));
@@ -78,17 +97,22 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
         MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
         RecruitParam recruitParam = new RecruitParam();
         recruitParam.setRequestForm(1);
-        recruitParam.setPage(10);
+        recruitParam.setPage(currentPage);
         recruitParam.setPageSize(20);
         recruitParam.setRecruitType(2);
         recruitParam.setPageSource(5001);
         recruitParam.setVisitorId("ebb5a2ba-7dcb-4e8d-8ae1-6f33ed7dcf95");
 
         params.add("requestFrom", recruitParam.getRequestForm());
+        // 当前页
         params.add("page", recruitParam.getPage());
+        // 页面大小
         params.add("pageSize", recruitParam.getPageSize());
+        // 招聘类型
         params.add("recruitType", recruitParam.getRecruitType());
-        params.add("pageSize", recruitParam.getPageSource());
+        //
+        params.add("pageSource", recruitParam.getPageSource());
+        // 访问者主键
         params.add("visitorId", recruitParam.getVisitorId());
         HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(params, httpHeaders);
 
@@ -102,20 +126,23 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
     }
 
 
-    private List<Object> handleResult(List<RecruitData> list){
+    private List<Object> handleResult(List<RecruitData> list) {
 
         List<RecruitEntity> recruitEntities = new ArrayList<>();
-        List<CompanyEntity> companyEntities  = new ArrayList<>();
+        List<CompanyEntity> companyEntities = new ArrayList<>();
         for (RecruitData recruitData : list) {
             RecruitEntity recruitEntity = new RecruitEntity();
-            BeanUtils.copyProperties(recruitData,recruitEntity);
             recruitEntity.setTitle(recruitData.getJobName());
-            recruitEntity.setContent(recruitData.getExt());
-            recruitEntities.add(recruitEntity);
+            BeanUtils.copyProperties(recruitData, recruitEntity);
+            RecruitDetailDTO recruitDetailDTO = JSON.parseObject(recruitData.getExt(), RecruitDetailDTO.class);
+            recruitEntity.setContent(recruitDetailDTO.getInfos());
+            recruitEntity.setRequirements(recruitDetailDTO.getRequirements());
 
+            recruitEntity.setCompanyId(recruitData.getCompanyId());
+            recruitEntities.add(recruitEntity);
             RecommendInternCompany recommendInternCompany = recruitData.getRecommendInternCompany();
             CompanyEntity companyEntity = new CompanyEntity();
-            BeanUtils.copyProperties(recommendInternCompany,companyEntity);
+            BeanUtils.copyProperties(recommendInternCompany, companyEntity);
             companyEntity.setId(recommendInternCompany.getCompanyId());
             companyEntities.add(companyEntity);
             log.debug(recruitData.toString());

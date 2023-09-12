@@ -1,6 +1,5 @@
 package com.javagpt.interviewspider.controller;
 
-import com.javagpt.interviewspider.service.NowCoderPostService;
 import com.javagpt.interviewspider.service.NowCoderRecruitService;
 import com.javagpt.interviewspider.service.SpiderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author JavaGPT
  * @date 2023/7/23 0:01
- * @description this is a class file created by JavaGPT in 2023/7/23 0:01
+ * @description 牛客网爬虫接口写在此文件中
  */
 @RestController
 @RequestMapping("/nowcoder")
@@ -21,8 +20,6 @@ public class NowCoderController {
     @Autowired
     private SpiderService spiderService;
 
-    @Autowired
-    private NowCoderPostService nowCoderPostService;
 
     @Autowired
     private NowCoderRecruitService nowCoderRecruitService;
@@ -32,11 +29,6 @@ public class NowCoderController {
         spiderService.obtainInterviewExperience();
     }
 
-
-    @GetMapping("/grabPositions")
-    private void grabPositions(){
-        nowCoderPostService.grabPositions();
-    }
 
     @GetMapping("/grabRecruits")
     private void grabRecruits(){

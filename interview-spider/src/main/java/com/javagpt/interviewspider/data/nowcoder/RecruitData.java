@@ -25,7 +25,7 @@ public class RecruitData {
     private Long careerJobId;
     private Object careerJobName;
     private Object companyFinancing;
-    private Long companyId;
+    private String companyId;
     private Boolean companyTopJob;
     private Long conversationId;
     private Date createTime;
@@ -45,7 +45,7 @@ public class RecruitData {
     private Boolean hasSigned;
     private Boolean hot;
     private Boolean hotJob;
-    private Long id;
+    private String id;
     private String industryName;
     private Object jobAddress;
     private JobBoostScore jobBoostScore;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author JavaGPT
  * @date 2023/7/29 22:24
- * @description this is a class file created by JavaGPT in 2023/7/29 22:24
+ * @description BOSS直聘抓取数据的方法
  */
 @RestController
 @RequestMapping("/boss")

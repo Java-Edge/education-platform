@@ -130,7 +130,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
                 //设置token的生成时间
                 .setIssuedAt(new Date())
                 //设置用户id为token  id ''是因为用户id是int类型，需要转换为字符串类型
-                .setId(userEntity.getId())
+                .setId(userEntity.getId().toString())
                 //map中可以存放用户的角色权限信息
                 .setClaims(map)
                 //设置token过期时间，当前时间加一天就是时效为一天过期

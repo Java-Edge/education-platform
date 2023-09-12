@@ -7,6 +7,9 @@ package com.javagpt.interviewspider.service;
  */
 public interface SpiderService {
 
+    /**
+     * 获取牛客网面经
+     */
     void obtainInterviewExperience();
 
 

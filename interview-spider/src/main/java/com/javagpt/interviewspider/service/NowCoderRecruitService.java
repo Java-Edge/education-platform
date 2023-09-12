@@ -16,4 +16,14 @@ public interface NowCoderRecruitService {
      */
     void grabRecruits();
 
+    /**
+     * 获取所有岗位信息
+     */
+    void grabAllInfo();
+
+    /**
+     * 获取最新的岗位信息，用于定时器
+     */
+    void grabLastInfo();
+
 }

@@ -25,7 +25,7 @@ import java.util.List;
 */
 @Service
 public class CareerServiceImpl extends ServiceImpl<CareerMapper, CareerEntity>
-    implements CareerService{
+    implements CareerService {
 
     @Autowired
     private RestTemplate restTemplate;

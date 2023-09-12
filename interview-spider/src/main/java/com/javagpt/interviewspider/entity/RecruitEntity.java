@@ -19,7 +19,7 @@ public class RecruitEntity implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private String id;
 
     /**
      * 标题
@@ -27,7 +27,7 @@ public class RecruitEntity implements Serializable {
     private String title;
 
     /**
-     * 内容
+     * 岗位信息
      */
     private String content;
 
@@ -42,9 +42,9 @@ public class RecruitEntity implements Serializable {
     private Integer type;
 
     /**
-     * 岗位描述
+     * 岗位要求
      */
-    private String des;
+    private String requirements;
 
     /**
      * 联系电话
@@ -54,7 +54,7 @@ public class RecruitEntity implements Serializable {
     /**
      * 公司编号
      */
-    private Long companyId;
+    private String companyId;
 
     /**
      * 招聘类型 校招、实习、社招
@@ -150,6 +150,26 @@ public class RecruitEntity implements Serializable {
      * 项目编号
      */
     private Integer projectId;
+
+    /**
+     * 学历
+     */
+    private Integer eduLevel;
+
+    /**
+     * 原始网站招聘链接
+     */
+    private String sourceUrl;
+
+    /**
+     * 类别信息
+     */
+    private String category;
+
+    /**
+     * 专业信息
+     */
+    private String major;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
