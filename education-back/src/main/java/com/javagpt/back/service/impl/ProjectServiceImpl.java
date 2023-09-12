@@ -27,7 +27,7 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         qw.eq("delete_flag", 0);
         qw.orderByDesc("create_time");
         qw.select("id", "title", "left(des, 50)", "create_time");
-        Page<Project> projectPage = this.getBaseMapper().selectPage(page, null);
+        Page<Project> projectPage = this.getBaseMapper().selectPage(page, qw);
         return projectPage;
     }
 }
