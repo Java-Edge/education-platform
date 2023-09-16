@@ -96,7 +96,7 @@
         r.recruit_type,
         r.job_name,
         r.ext,
-        r.job_city,
+        SUBSTRING_INDEX(r.job_city,',',1) job_city,
         r.job_address,
         r.career_job_id,
         r.career_job_name,
