@@ -36,6 +36,6 @@ public interface RecruitMapper extends BaseMapper<Recruit> {
      * @param id
      * @return
      */
-    RecruitVO queryById(Integer id);
+    RecruitVO queryById(String id);
 
 }

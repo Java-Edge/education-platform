@@ -37,6 +37,6 @@ public interface RecruitService extends IService<Recruit> {
      * @param id
      * @return
      */
-    RecruitVO queryById(Integer id);
+    RecruitVO queryById(String id);
 
 }

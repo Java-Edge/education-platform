@@ -87,8 +87,6 @@
         select
         r.id,
         r.title,
-        r.content,
-        r.requirements,
         r.create_time,
         r.`type`,
         r.phone,
@@ -122,6 +120,7 @@
         from recruit r
         left join company c on r.company_id = c.id
         <where>
+            c.pic_url is not null
             <if test="dto.companyId != null and dto.companyId != ''">
                 and r.company_id = #{dto.companyId,jdbcType=INTEGER}
             </if>
@@ -129,6 +128,7 @@
                 and r.career_job_id = #{dto.careerJobId,jdbcType=INTEGER}
             </if>
         </where>
+        order by  r.create_time desc
     </select>
 
     <select id="queryById" resultMap="RecruitVOMap">
