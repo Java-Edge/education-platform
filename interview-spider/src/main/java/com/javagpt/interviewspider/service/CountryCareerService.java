@@ -8,4 +8,9 @@ public interface CountryCareerService {
      */
     void grabCareer();
 
+    /**
+     * 抓取所有职位信息
+     */
+    void grabAllCareer();
+
 }

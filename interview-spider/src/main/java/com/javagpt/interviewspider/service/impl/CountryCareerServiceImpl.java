@@ -12,6 +12,7 @@ import com.javagpt.interviewspider.service.CompanyService;
 import com.javagpt.interviewspider.service.CountryCareerService;
 import com.javagpt.interviewspider.service.RecruitService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class CountryCareerServiceImpl implements CountryCareerService {
 
 
@@ -45,12 +47,21 @@ public class CountryCareerServiceImpl implements CountryCareerService {
 
     @Override
     public void grabCareer() {
-        List<CountryCareerDTO> countryCareers = getResponse(1, 2);
+        List<CountryCareerDTO> countryCareers = getResponse(1);
         handleResult(countryCareers);
     }
 
 
-    public List<CountryCareerDTO> getResponse(int startPage, int endPage) {
+    @Override
+    public void grabAllCareer() {
+        for (int i = 1; i <= 20; i++) {
+            List<CountryCareerDTO> countryCareers = getResponse(i);
+            handleResult(countryCareers);
+        }
+    }
+
+
+    public List<CountryCareerDTO> getResponse(int startPage) {
 
         // 创建一个请求头对象
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -111,10 +122,10 @@ public class CountryCareerServiceImpl implements CountryCareerService {
             recruitEntity.setJobName(countryCareerDTO.getJobName());
 //            recruitEntity.setExt();
             List<String> cities = countryCareerDTO.getDistrictList().stream().map(item -> item.getAreaCn()).collect(Collectors.toList());
-            recruitEntity.setJobCity(StringUtils.join(cities,","));
+            recruitEntity.setJobCity(StringUtils.join(cities, ","));
 
             recruitEntity.setCategory(countryCareerDTO.getCategoryCn());
-            recruitEntity.setMajor(StringUtils.join(countryCareerDTO.getMajorCn(),","));
+            recruitEntity.setMajor(StringUtils.join(countryCareerDTO.getMajorCn(), ","));
 
             // 岗位创建时间
             recruitEntity.setCreateTime(countryCareerDTO.getCreateTime());
@@ -134,11 +145,11 @@ public class CountryCareerServiceImpl implements CountryCareerService {
             // 刷新时间
             recruitEntity.setRefeshTime(countryCareerDTO.getRefreshTime());
             // 招聘类型 1 校招 2实习 3 社招
-            if ("1161T1j6".equals(countryCareerDTO.getRecruitmentType())){
+            if ("1161T1j6".equals(countryCareerDTO.getRecruitmentType())) {
                 recruitEntity.setRecruitType(1);
-            }else if ("1161T1j".equals(countryCareerDTO.getRecruitmentType())){ // 待定
+            } else if ("1161T1j".equals(countryCareerDTO.getRecruitmentType())) { // 待定
                 recruitEntity.setRecruitType(2);
-            }else if ("1161Tew1j".equals(countryCareerDTO.getRecruitmentType())){ // 待定
+            } else if ("1161Tew1j".equals(countryCareerDTO.getRecruitmentType())) { // 待定
                 recruitEntity.setRecruitType(2);
             }
 //            recruitEntity.setFeedBackDays(countryCareerDTO);
