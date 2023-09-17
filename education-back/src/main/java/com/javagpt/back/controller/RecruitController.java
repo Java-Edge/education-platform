@@ -43,7 +43,7 @@ public class RecruitController {
     }
 
     @GetMapping("/getById/{id}")
-    public ResultBody getById(@PathVariable Integer id) {
+    public ResultBody getById(@PathVariable String id) {
         RecruitVO recruitVO = recruitService.queryById(id);
         return ResultBody.success(recruitVO);
     }

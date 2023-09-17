@@ -6,7 +6,7 @@ mybatis-plus:
     use-generated-keys: true
 
 server:
-  port: 8848
+  port: 8089
 
 # DataSource Config
 spring:

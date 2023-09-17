@@ -51,7 +51,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     }
 
     @Override
-    public RecruitVO queryById(Integer id) {
+    public RecruitVO queryById(String id) {
         RecruitVO recruitVO = recruitMapper.queryById(id);
         return recruitVO;
     }

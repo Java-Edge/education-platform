@@ -144,6 +144,12 @@ public class NowCoderRecruitServiceImpl implements NowCoderRecruitService {
             CompanyEntity companyEntity = new CompanyEntity();
             BeanUtils.copyProperties(recommendInternCompany, companyEntity);
             companyEntity.setId(recommendInternCompany.getCompanyId());
+            companyEntity.setCompanyShortName(recommendInternCompany.getCompanyShortName()
+                    .replace("有限", "")
+                    .replace("股份", "")
+                    .replace("服务", "")
+                    .replace("公司", "")
+                    .replace("运营", ""));
             companyEntities.add(companyEntity);
             log.debug(recruitData.toString());
         }

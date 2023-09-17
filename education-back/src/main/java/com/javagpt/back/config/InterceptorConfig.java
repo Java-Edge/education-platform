@@ -15,7 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(checkTokenInterceptor)
-//                .addPathPatterns("/sourceCourse/course/**")
+                .addPathPatterns("/recruit/getById/**")
                 .addPathPatterns("/interview-experience/getById/**");
     }
 }

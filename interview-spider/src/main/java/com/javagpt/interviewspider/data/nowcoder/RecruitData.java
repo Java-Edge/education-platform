@@ -37,7 +37,7 @@ public class RecruitData {
     private Object dockSourceProjectName;
     private Integer durationDays;
     private Integer durationMonths;
-    private Long eduLevel;
+    private Integer eduLevel;
     private String ext;
     private Integer feedbackDays;
     private String graduationYear;
