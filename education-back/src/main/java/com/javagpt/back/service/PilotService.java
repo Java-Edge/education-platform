@@ -4,6 +4,7 @@ import com.javagpt.back.entity.Pilot;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -15,5 +16,5 @@ import java.util.List;
  */
 public interface PilotService extends IService<Pilot> {
 
-    List<Pilot> getList();
+    Map<String, List<Pilot>> getList();
 }

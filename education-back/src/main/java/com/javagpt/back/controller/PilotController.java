@@ -1,6 +1,7 @@
 package com.javagpt.back.controller;
 
 
+import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.service.PilotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,8 +29,8 @@ public class PilotController {
     private PilotService pilotService;
 
     @GetMapping("getList")
-    public List<Pilot> getList() {
-        return pilotService.getList();
+    public ResultBody getList() {
+        return ResultBody.success(pilotService.getList());
     }
 
 
