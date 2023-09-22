@@ -27,4 +27,11 @@ public class ArticleDTO {
      * 公司筛选条件
      */
     private List<String> company;
+
+    /**
+     * 文章类型
+     * 1 面经
+     * 2 内推
+     */
+    private Integer articleType;
 }
