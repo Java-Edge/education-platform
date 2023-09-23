@@ -16,6 +16,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(checkTokenInterceptor)
                 .addPathPatterns("/recruit/getById/**")
+                .addPathPatterns("/sideline/getByPage")
                 .addPathPatterns("/interview-experience/getById/**");
     }
 }
