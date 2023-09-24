@@ -53,6 +53,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
+            cd /develop/work/education-back-server
             sh start.sh
           host: ${{secrets.SERVER_HOST}}
           user: ${{secrets.SERVER_USERNAME}}
