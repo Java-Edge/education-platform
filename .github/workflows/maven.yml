@@ -46,7 +46,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_HUB_USERNAME}}/imageName:latest
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/back:latest
   
       #push后，用ssh连接服务器执行脚本
       - name: SSH
