@@ -57,6 +57,6 @@ jobs:
             sh start.sh
           host: ${{secrets.SERVER_HOST}}
           user: ${{secrets.SERVER_USERNAME}}
-#          key: ${{secrets.PRIVATE_KEY}}
-          password: ${{secrets.SERVER_PASSWORD}}
+          key: ${{secrets.SERVER_PRIVATE_KEY}}
+#          password: ${{secrets.SERVER_PASSWORD}}
 
