@@ -1,5 +1,5 @@
 #基础镜像
-FROM openjdk:21-jdk-alpine
+FROM openjdk:20-jdk-alpine
 
 #安装字体
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && apk add --update ttf-dejavu fontconfig && rm -rf /var/cache/apk/* && mkfontscale && mkfontdir && fc-cache
