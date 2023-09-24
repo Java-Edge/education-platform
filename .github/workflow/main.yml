@@ -1,57 +1,60 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Java CI with Maven
+name: Deploy with docker
 
 on:
   push:
-    branches: [ "master" ]
+    #分支
+    branches: [ master ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ master ]
 
-jobs:
-  build:
-
+  jobs:
+  compile:
     runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v2
+    - name: Setup JDK 21
+      uses: actions/setup-java@v2
+      with:
+        java-version: '21'
+        distribution: 'adopt'
+    #maven缓存，不加的话每次都会去重新拉取，会影响速度
+    - name: Dependies Cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{runner.os}}-maven-${{hashFiles('**/pom.xml')}}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    #编译打包
+    - name: Build with Maven
+      run: mvn package -Dmaven.test.skip=true
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Build docker image
-        run: |                                 # run：该步骤要执行的命令，| 代表可以有多条命令
-          docker build -t back:01 .  # 构建docker镜像，命令最后的点代表Dockerfile所在目录
-          docker save -o back.tar back:01 # 保存压缩后的docker镜像，这一步是为了方便后面我们将该镜像上传至指定的服务器
-
-      # 删除旧的docker镜像
-      # 使用sshpass以非交互式的用户名密码方式登录远程服务器
-      # 停止运行中的docker容器、删除该容器、删除镜像
-      # docker命令后面的两条竖线 || 代表当前面的docker命令执行失败时，命令可以继续往下执行，这样做的原因是在第一次构建项目的时候肯定不会存在这些容器和镜像，此时删除或停止这些容器就会失败
-      - name: delete old docker image
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker stop back || true && docker rm back || true && docker rmi back:0.1 || true"
-
-      # 删除旧的docker镜像压缩包
-      - name: delete old docker tar
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "cd ${{secrets.REMOTE_PROJECT_CATALOGUE}} && rm -f back.tar"
-      # 上传新的docker镜像
-      - name: upload new docker image and start-up script
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} scp -r -o StrictHostKeyChecking=no ./back.tar root@${{secrets.REMOTE_SERVER01_IP}}:${{secrets.REMOTE_PROJECT_CATALOGUE}}
-
-      # 加载tar文件，加载docker镜像
-      - name: load new docker image
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker load -i ${{secrets.REMOTE_PROJECT_CATALOGUE}}/back.tar"
-        # docker run 运行，启动容器
-      - name: run project
-        run: sshpass -p ${{secrets.REMOTE_SERVER01_PWD}} ssh -o StrictHostKeyChecking=no root@${{secrets.REMOTE_SERVER01_IP}} "docker run -d -p 8088:8088 --name back back:01"
+    #登录DockerHub
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+#        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Setup Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+    #build镜像并push到中央仓库中
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: ./
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/imageName:latest
+    #push后，用ssh连接服务器执行脚本
+    - name: SSH
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          sh start.sh
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+#        key: ${{secrets.PRIVATE_KEY}}
