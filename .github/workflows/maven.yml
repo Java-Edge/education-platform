@@ -50,18 +50,18 @@ jobs:
   
       #push后，用ssh连接服务器执行脚本
       - name: SSH
-        uses: fifsky/ssh-action@master
-#        uses: appleboy/ssh-action@master
+#        uses: fifsky/ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
-          command: |
-            cd /develop/work/education-back-server
-            sh start.sh
+#          command: |
+#            cd /develop/work/education-back-server
+#            sh start.sh
           host: ${{secrets.SERVER_HOST}}
           username: ${{secrets.SERVER_USERNAME}}
           port: ${{secrets.SERVER_PORT }}
-#          key: ${{secrets.SERVER_PRIVATE_KEY}}
-          password: ${{secrets.SERVER_PASSWORD}}
-#          script:
-#            cd /develop/work/education-back-server
+          key: ${{secrets.SERVER_PRIVATE_KEY}}
+#          password: ${{secrets.SERVER_PASSWORD}}
+          script:
+            sh /develop/work/education-back-server/start.sh
 #            sh start.sh
 
