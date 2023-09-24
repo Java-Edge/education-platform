@@ -21,7 +21,7 @@ public class Company implements Serializable {
     /**
      * 公司编号
      */
-      private Integer id;
+      private String id;
 
     /**
      * 公司图片

@@ -10,7 +10,7 @@
 
 ## 环境要求
 
-- JDK17
+- JDK20
 - Maven 版本 X.X.X
 - SpringBoot 3.0
 

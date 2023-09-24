@@ -1,5 +1,6 @@
 package com.javagpt.interviewspider.controller;
 
+import com.javagpt.interviewspider.service.NowCodeInnerRecommendService;
 import com.javagpt.interviewspider.service.NowCoderRecruitService;
 import com.javagpt.interviewspider.service.SpiderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class NowCoderController {
     @Autowired
     private NowCoderRecruitService nowCoderRecruitService;
 
+    @Autowired
+    private NowCodeInnerRecommendService innerRecommendService;
+
     @GetMapping("/obtainInterviewExperience")
     public void obtainInterviewExperience(){
         spiderService.obtainInterviewExperience();
@@ -31,8 +35,14 @@ public class NowCoderController {
 
 
     @GetMapping("/grabRecruits")
-    private void grabRecruits(){
+    public void grabRecruits(){
         nowCoderRecruitService.grabRecruits();
     }
+
+    @GetMapping("/grabInnerRecommend")
+    public void grabInnerRecommend(){
+        innerRecommendService.grabInnerRecommend();
+    }
+
 
 }

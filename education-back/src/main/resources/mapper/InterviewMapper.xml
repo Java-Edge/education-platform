@@ -80,6 +80,9 @@
                 </trim>
                 )
             </if>
+            <if test="dto.articleType != null and dto.articleType !=''">
+                and article.article_type = #{dto.articleType,jdbcType=INTEGER}
+            </if>
         </where>
     </select>
 </mapper>

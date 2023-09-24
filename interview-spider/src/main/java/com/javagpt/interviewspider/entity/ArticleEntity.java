@@ -22,42 +22,42 @@ public class ArticleEntity implements Serializable {
     private String id;
 
     /**
-     *
+     * 用户编号
      */
     private Long userId;
 
     /**
-     *
+     * 标题
      */
     private String title;
 
     /**
-     *
+     * 新标题
      */
     private String newTitle;
 
     /**
-     *
+     * 内容
      */
     private String content;
 
     /**
-     *
+     * 新内容
      */
     private String newContent;
 
     /**
-     *
+     * 类型
      */
     private String type;
 
     /**
-     *
+     * 装填
      */
     private String status;
 
     /**
-     *
+     * 是否编辑
      */
     private String hasEdit;
 
@@ -90,6 +90,15 @@ public class ArticleEntity implements Serializable {
      *牛客网的文章主键
      */
     private Long sourceId;
+
+
+    /**
+     * 文章类型
+     * 1： 面经
+     * 2： 内推
+     */
+    private Integer articleType;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
