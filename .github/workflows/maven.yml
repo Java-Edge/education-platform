@@ -30,29 +30,32 @@ jobs:
         run: |
           mvn package -Dmaven.test.skip=true
       # 登录Docker Hub
-      - name: Build the Docker image
-        run: |
-          docker version
-          # 登录阿里云镜像仓库
-          docker login --username=${{ secrets.DOCKER_HUB_USERNAME }} --password=${{ secrets.DOCKER_HUB_TOKEN }} registry.cn-hangzhou.aliyuncs.com
-          cd app/chat-front
-          mkdir docker
-          cp ./Dockerfile ./docker
-          cp ./target/*.jar ./docker
-          cd docker
-          # 使用Dockerfile构建镜像
-          docker build . --file Dockerfile --tag ${{ vars.hubAddr }}/${{ vars.USER_NAME }}/${{ vars.IMAGE_NAME }}:${{ vars.tag }}
-          # 推送镜像到镜像仓库
-          docker push ${{ vars.hubAddr }}/${{ vars.USER_NAME }}/${{ vars.IMAGE_NAME }}:${{ vars.tag }}
-      # push后，用ssh连接服务器执行脚本
-      - name: 登录服务器, 执行脚本
-        uses: appleboy/ssh-action@master
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          # 执行脚本
-          script: |
-            # 部署脚本 后面的vars是传递给脚本的参数
-            sh /root/script/deploy.sh ${{ vars.USER_NAME }} ${{ vars.IMAGE_NAME }} ${{ vars.PORT }} ${{ vars.CONTAINS_PORT }} ${{ vars.hubAddr }} ${{ vars.tag }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      #build镜像并push到中央仓库中
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/imageName:latest
+  
+      #push后，用ssh连接服务器执行脚本
+      - name: SSH
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            sh start.sh
+          host: ${{secrets.SERVER_HOST}}
+          user: ${{secrets.SERVER_USERNAME}}
+#          key: ${{secrets.PRIVATE_KEY}}
+          password: ${{secrets.SERVER_PASSWORD}}
+
