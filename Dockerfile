@@ -6,7 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk add --update ttf-dejavu fontconfig && rm -rf /var/cache/apk/*
 
 #添加文件
-ADD back-0.0.1-SNAPSHOT.jar /usr/local
+ADD education-back/target/back-0.0.1-SNAPSHOT.jar /usr/local
 RUN chmod u+x /usr/local/back-0.0.1-SNAPSHOT.jar
 
 #设置时区
