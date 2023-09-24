@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 21
+      - name: Set up JDK 20
         uses: actions/setup-java@v2
         with:
-          java-version: '21'
+          java-version: '20'
           distribution: 'adopt'
       # maven缓存，不加的话每次都会去重新拉取，会影响速度
       - name: Dependies Cache
