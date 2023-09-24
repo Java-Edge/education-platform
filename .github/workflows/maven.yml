@@ -3,9 +3,9 @@ name: Deploy with docker
 on:
   push:
     # 分支
-    branches: [ "feature/jdk20" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "feature/jdk20" ]
+    branches: [ "master" ]
 
 jobs:
   compile:
