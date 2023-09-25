@@ -123,7 +123,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         JwtBuilder builder = Jwts.builder();
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("key1", "value1");
+        map.put("userId", userEntity.getId());
         map.put("key2", "value2");
         //载荷部分，主题，就是token中携带的数据，这里把用户名放进去
         String token = builder.setSubject(userEntity.getUsername())

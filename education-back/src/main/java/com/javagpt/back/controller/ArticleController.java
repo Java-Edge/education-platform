@@ -6,6 +6,7 @@ import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +35,7 @@ public class ArticleController {
     }
 
     @GetMapping("/getByPage")
+    @PreAuthorize("@ss.hasAuthority('zqy2')")
     public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
         Page<ArticleEntity> page = articleService.getByPage(current,size,article);
         return ResultBody.success(page);

@@ -6,6 +6,8 @@ import com.javagpt.back.dto.ResultBody;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -33,6 +35,12 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
                 parser.setSigningKey("JavaGPT");
                 //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
+                Integer userId = (Integer) claimsJws.getBody().get("userId");
+                if (userId != null) {
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(userId,null,null);
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
                 //true就是验证通过，放行
                 return true;
             } catch (ExpiredJwtException e) {
