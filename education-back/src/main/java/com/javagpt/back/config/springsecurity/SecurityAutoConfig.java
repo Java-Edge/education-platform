@@ -50,6 +50,9 @@ public class SecurityAutoConfig {
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    SecurityAccessDeniedHandler securityAccessDeniedHandler;
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
@@ -58,70 +61,17 @@ public class SecurityAutoConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/user/login").anonymous()
-//                .anyRequest()
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
+                .and().exceptionHandling(exception -> {
+                    exception.accessDeniedHandler(securityAccessDeniedHandler);
+                })
                 ;
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class); //把token校验过滤器添加到过滤器链中)
-//        http
-//                .csrf()//关闭session
-//                .disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-////                .authenticationManager()
-////                .authorizeHttpRequests()
-////                .requestMatchers("/**")//  放行/**下的所有请求
-////                .permitAll()
-////                .anyRequest()
-////                .authenticated()//  剩下的请求都需要拦截
-////                .and()
-////                .authorizeRequests()
-//                // 对于登录接口 允许匿名访问
-////                .requestMatchers("/user/login").anonymous()
-////                .and()
-//                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class) //把token校验过滤器添加到过滤器链中
-//        ;
-
         return http.build();
     }
-
-
-
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//        authProvider.setUserDetailsService(null);
-//        return authProvider;
-//    }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-//    @Bean
-//    AuthorizationManager<RequestAuthorizationContext> requestMatcherAuthorizationManager(HandlerMappingIntrospector introspector) {
-//        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-//        RequestMatcher permitAll =
-//                new AndRequestMatcher(
-//                        mvcMatcherBuilder.pattern("/resources/**"),
-//                        mvcMatcherBuilder.pattern("/signup"),
-//                        mvcMatcherBuilder.pattern("/about"));
-//        RequestMatcher admin = mvcMatcherBuilder.pattern("/admin/**");
-//        RequestMatcher db = mvcMatcherBuilder.pattern("/db/**");
-//        RequestMatcher any = AnyRequestMatcher.INSTANCE;
-//        AuthorizationManager<HttpServletRequest> manager = RequestMatcherDelegatingAuthorizationManager.builder()
-//                .add(permitAll, (context) -> new AuthorizationDecision(true))
-//                .add(admin, AuthorityAuthorizationManager.hasRole("ADMIN"))
-//                .add(db, AuthorityAuthorizationManager.hasRole("DBA"))
-//                .add(any, new AuthenticatedAuthorizationManager())
-//                .build();
-//        return (context) -> manager.check(context.getRequest());
-//    }
 }

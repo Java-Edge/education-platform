@@ -1,9 +1,7 @@
 package com.javagpt.back.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,11 +12,11 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author zqy
- * @since 2023-09-12
+ * @since 2023-09-25
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Pilot implements Serializable {
+public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,23 +24,14 @@ public class Pilot implements Serializable {
     private Integer id;
 
     /**
-     * 导航名称
+     * 用户id
      */
-    private String name;
+    private Integer userId;
 
     /**
-     * 导航链接
+     * 角色id
      */
-    private String link;
+    private Integer roleId;
 
-    /**
-     * 导航图标
-     */
-    private String img;
-
-    private Integer pilotType;
-
-    @TableField(exist = false)
-    private String pilotTypeName;
 
 }

@@ -35,7 +35,6 @@ public class ArticleController {
     }
 
     @GetMapping("/getByPage")
-    @PreAuthorize("@ss.hasAuthority('zqy2')")
     public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
         Page<ArticleEntity> page = articleService.getByPage(current,size,article);
         return ResultBody.success(page);

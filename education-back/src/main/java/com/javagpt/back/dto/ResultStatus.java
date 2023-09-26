@@ -9,6 +9,7 @@ public class ResultStatus {
     public static final int LOGIN_FAIL_NOT = 401; //用户未登录
     public static final int LOGIN_FAIL_OVERDUE = 402; //用户登录失效
 
+    public static final int AUTHORIZE_FAIL = 403; //用户登录失效
 
     /**
      * 用户不存在
