@@ -9,10 +9,13 @@ import com.javagpt.back.service.UserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.swagger.models.auth.In;
 import jakarta.annotation.Resource;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -36,11 +39,11 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         QueryWrapper<UserRole> qw = new QueryWrapper<>();
         qw.eq("user_id", userId);
         List<UserRole> userRoles = userRoleMapper.selectList(qw);
-        List<String> roleNames = new ArrayList<>();
+        // 提前设置大小，避免扩容
+        List<Integer> roleIds = new ArrayList<>(userRoles.size());
         for (UserRole ur : userRoles) {
-            Role role = roleMapper.selectById(ur.getRoleId());
-            roleNames.add(role.getName());
+            roleIds.add(ur.getRoleId());
         }
-        return roleNames;
+        return roleMapper.selectBatchIds(roleIds).stream().map(Role::getName).collect(Collectors.toList());
     }
 }
