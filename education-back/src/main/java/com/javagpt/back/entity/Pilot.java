@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author zqy
@@ -39,6 +39,11 @@ public class Pilot implements Serializable {
      * 导航图标
      */
     private String img;
+
+    /**
+     * 创建时间
+     */
+/*    private LocalDateTime createTime;*/
 
     private Integer pilotType;
 
