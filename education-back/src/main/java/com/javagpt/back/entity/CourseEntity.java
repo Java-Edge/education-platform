@@ -124,7 +124,7 @@ public class CourseEntity implements Serializable {
         result = prime * result + ((getUpdater() == null) ? 0 : getUpdater().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
-        result = prime * result + ((getStep() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getStep() == null) ? 0 : getStep().hashCode());
         result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getCourseCatId() == null) ? 0 : getCourseCatId().hashCode());
         result = prime * result + ((getSourceUrl() == null) ? 0 : getSourceUrl().hashCode());
