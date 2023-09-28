@@ -21,7 +21,7 @@ public class RoadmapController {
 
     @GetMapping("/route")
     public ResultBody getRoadmap(@RequestParam Integer categoryId, Integer current, Integer size) {
-        Page<CourseRoadmapVO> page = roadmapService.getRoadmap(categoryId, categoryId, size);
+        Page<CourseRoadmapVO> page = roadmapService.getRoadmap(categoryId, current, size);
         return ResultBody.success(page);
     }
 

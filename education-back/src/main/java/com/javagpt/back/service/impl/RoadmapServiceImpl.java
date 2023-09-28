@@ -1,6 +1,5 @@
 package com.javagpt.back.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,11 +9,9 @@ import com.javagpt.back.service.RoadmapService;
 import com.javagpt.back.util.BeanHelper;
 import com.javagpt.back.vo.course.CourseRoadmapVO;
 import com.javagpt.back.vo.course.CourseVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, CourseEntity> implements RoadmapService {
