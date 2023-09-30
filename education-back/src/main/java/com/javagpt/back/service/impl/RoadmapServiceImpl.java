@@ -22,7 +22,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, CourseEntity>
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
         qw.eq("course_cat_id", categoryId);
         qw.eq("type",1);
-        qw.select("id", "name","image", "left(description, 50)", "price", "parent_id");
+        qw.select("id", "name","image", "left(description, 50) description", "price", "parent_id", "collect", "course", "step");
         Page<CourseEntity> courseEntityPage = this.getBaseMapper().selectPage(page, qw);
         List<CourseRoadmapVO> list = courseEntityPage.getRecords().stream()
                 .map(courseEntity -> {
@@ -33,6 +33,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, CourseEntity>
         return new Page<CourseRoadmapVO>()
                 .setRecords(list)
                 .setCurrent(current)
+                .setTotal(courseEntityPage.getTotal())
                 .setSize(size);
     }
 
@@ -41,7 +42,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, CourseEntity>
         Page<CourseEntity> page = new Page<>(current, size);
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
         qw.eq("parent_id", parentId);
-        qw.select("id", "name","image", "left(description, 50)", "creator", "updater","remark","source_url","price","step");
+        qw.select("id", "name","image", "left(description, 50) description", "creator", "updater","remark","source_url","price","step", "collect", "course");
         Page<CourseEntity> courseEntityPage = this.getBaseMapper().selectPage(page, qw);
         List<CourseVO> list = courseEntityPage.getRecords().stream()
                 .map(courseEntity -> {

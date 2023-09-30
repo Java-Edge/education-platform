@@ -15,12 +15,12 @@ public class CourseCategoryServiceImpl extends ServiceImpl<CourseCategoryMapper,
     @Override
     public List<CourseCategoryVO> mianCategoryList() {
         QueryWrapper<CourseCategory> qw = new QueryWrapper<>();
-        qw.eq("parent_id", -1);
+//        qw.eq("parent_id", -1);
         qw.eq("status",1);
-        qw.select("id","name");
+        qw.select("id","name", "category");
         List<CourseCategory> courseCategories = this.getBaseMapper().selectList(qw);
         return courseCategories.stream()
-                .map(category -> CourseCategoryVO.builder().id(category.getId()).name(category.getName()).build())
+                .map(category -> CourseCategoryVO.builder().id(category.getId()).name(category.getName()).category(category.getCategory()).build())
                 .toList();
     }
 }
