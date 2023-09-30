@@ -1,0 +1,32 @@
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  type-aliases-package: com.javagpt.back.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+server:
+  port: 8088
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.99.69.109:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: Zxcvbnm1234567890
+  application:
+    name: back-server
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mpp:
+  entityBasePath: com.javagpt.back.entity
+
+logging:
+  level:
+    root: debug
