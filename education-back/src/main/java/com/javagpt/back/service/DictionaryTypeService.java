@@ -16,4 +16,6 @@ import java.util.List;
 public interface DictionaryTypeService extends IService<DictionaryType> {
 
     DictionaryType selectList(String typeKey);
+
+    List<DictionaryType> selectListByMultiTypeKey(List<String> typeKeys);
 }

@@ -23,4 +23,5 @@ public class CourseCategory {
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
+    private Integer category;
 }
