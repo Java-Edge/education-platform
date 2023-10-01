@@ -38,4 +38,17 @@ public class DictionaryTypeServiceImpl extends ServiceImpl<DictionaryTypeMapper,
         dictionaryType.setList(dictionaries);
         return dictionaryType;
     }
+
+    @Override
+    public List<DictionaryType> selectListByMultiTypeKey(List<String> typeKeys) {
+        QueryWrapper<DictionaryType> qw = new QueryWrapper<>();
+        qw.in("type_key", typeKeys);
+        List<DictionaryType> dictionaryTypes = dictionaryTypeMapper.selectList(qw);
+        for (DictionaryType dt : dictionaryTypes) {
+            String typeKey = dt.getTypeKey();
+            List<Dictionary> dictionaries = dictionaryService.selectList(typeKey);
+            dt.setList(dictionaries);
+        }
+        return dictionaryTypes;
+    }
 }

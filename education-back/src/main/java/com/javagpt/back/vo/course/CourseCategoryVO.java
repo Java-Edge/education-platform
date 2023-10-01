@@ -9,5 +9,5 @@ public class CourseCategoryVO {
 
     private Integer id;
     private String name;
-
+    private Integer category;
 }
