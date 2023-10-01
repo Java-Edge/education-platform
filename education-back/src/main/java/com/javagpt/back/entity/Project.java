@@ -65,4 +65,5 @@ public class Project implements Serializable {
     private String href;
 
     private String img;
+    private Integer pageView;
 }

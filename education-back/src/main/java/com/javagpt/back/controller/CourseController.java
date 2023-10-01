@@ -37,7 +37,7 @@ public class CourseController {
     }
 
     @GetMapping("/course/{id}")
-    public ResultBody courseDetail(@PathVariable("id")Integer id){
+    public ResultBody getById(@PathVariable("id")Integer id){
         CourseEntity entity = courseService.getById(id);
         return ResultBody.success(entity);
     }

@@ -42,6 +42,7 @@ public class Career implements Serializable {
      * 是否抓取
      */
     private Integer isGrab;
+    private Integer pageView;
 
 
 }

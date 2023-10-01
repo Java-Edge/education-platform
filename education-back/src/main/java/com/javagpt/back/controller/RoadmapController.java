@@ -26,7 +26,7 @@ public class RoadmapController {
     }
 
     @GetMapping("/route/items")
-    public ResultBody getRouteItems(@RequestParam Integer parentId, Integer current, Integer size){
+    public ResultBody getById(@RequestParam Integer parentId, Integer current, Integer size){
         Page<CourseVO> page = roadmapService.getRouteItems(parentId, current, size);
         return ResultBody.success(page);
     }

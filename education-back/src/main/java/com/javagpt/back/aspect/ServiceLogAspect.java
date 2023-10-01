@@ -1,10 +1,8 @@
 package com.javagpt.back.aspect;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.util.concurrent.RateLimiter;
 import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.mapper.ArticleMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,10 +15,13 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,7 +32,7 @@ public class ServiceLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(com.javagpt.back.aspect.ServiceLogAspect.class);
 
     @Resource
-    private ArticleMapper articleMapper;
+    private ApplicationContext applicationContext;
 
     @Pointcut("execution(* com.javagpt.back.service.*.*(..))")
     public void pointCut(){
@@ -74,17 +75,47 @@ public class ServiceLogAspect {
     }
 
     // 计算文章的浏览量
-    @Before("execution(* com.javagpt.back.controller.ArticleController.getById(..))")
+    @Before("execution(* com.javagpt.back.controller.*.getById(..))")
     public void calPageView(JoinPoint joinPoint) {
+        // Log the method and target class information
+        logger.info("Method called: " + joinPoint.getSignature().toShortString());
+        logger.info("Target class: " + joinPoint.getTarget().getClass().getName());
+
+        // Extract arguments
         Object[] args = joinPoint.getArgs();
-        Integer articleId = (Integer) args[0];
-        QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
-        qw.eq("article_id", articleId);
-        ArticleEntity articleEntity = articleMapper.selectById(articleId);
-        articleEntity.setPageView(articleEntity.getPageView()+1);
-        articleMapper.updateById(articleEntity);
-        logger.info(String.format("[%s]文章被访问了[%s]次.", articleId, articleEntity.getPageView()));
+        if (args.length == 0 || !(args[0] instanceof Integer)) {
+            logger.error("Invalid arguments. Expected at least one argument of type Integer.");
+            return;
+        }
+
+        // Extract entityId and mapper information
+        Integer entityId = (Integer) args[0];
+        String controllerClassName = joinPoint.getTarget().getClass().getSimpleName();
+        String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
+
+        try {
+            Class<?> entityMapperClass = Class.forName(entityMapperName);
+            BaseMapper<Object> entityMapper = (BaseMapper<Object>) applicationContext.getBean(entityMapperClass);
+
+            // Retrieve the entity from the database
+            Object entityFromDB = entityMapper.selectById(entityId);
+
+            // Update the pageView
+            Method getPageViewMethod = entityFromDB.getClass().getMethod("getPageView");
+            Method setPageViewMethod = entityFromDB.getClass().getMethod("setPageView", Integer.class);
+
+            Integer pageView = (Integer) getPageViewMethod.invoke(entityFromDB);
+            setPageViewMethod.invoke(entityFromDB, pageView + 1);
+
+            // Update the entity
+            entityMapper.updateById(entityFromDB);
+
+            logger.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            logger.error("Error in calPageView: " + e.getMessage(), e);
+        }
     }
+
 
 }
 
