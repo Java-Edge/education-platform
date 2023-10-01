@@ -47,8 +47,8 @@ public class SecurityAutoConfig {
     }
 
     // 这个自定义的过滤器
-    @Autowired
-    JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+//    @Autowired
+//    JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Autowired
     SecurityAccessDeniedHandler securityAccessDeniedHandler;
@@ -66,7 +66,7 @@ public class SecurityAutoConfig {
                     exception.accessDeniedHandler(securityAccessDeniedHandler);
                 })
                 ;
-        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class); //把token校验过滤器添加到过滤器链中)
+//        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class); //把token校验过滤器添加到过滤器链中)
         return http.build();
     }
 

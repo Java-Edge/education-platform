@@ -15,8 +15,6 @@ public class CourseCategoryServiceImpl extends ServiceImpl<CourseCategoryMapper,
     @Override
     public List<CourseCategoryVO> mianCategoryList() {
         QueryWrapper<CourseCategory> qw = new QueryWrapper<>();
-//        qw.eq("parent_id", -1);
-        qw.eq("status",1);
         qw.select("id","name", "category");
         List<CourseCategory> courseCategories = this.getBaseMapper().selectList(qw);
         return courseCategories.stream()

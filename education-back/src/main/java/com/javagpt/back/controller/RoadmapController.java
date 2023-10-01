@@ -2,6 +2,7 @@ package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.ResultBody;
+import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.service.RoadmapService;
 import com.javagpt.back.vo.course.CourseRoadmapVO;
 import com.javagpt.back.vo.course.CourseVO;
@@ -21,13 +22,9 @@ public class RoadmapController {
 
     @GetMapping("/route")
     public ResultBody getRoadmap(@RequestParam Integer categoryId, Integer current, Integer size) {
-        Page<CourseRoadmapVO> page = roadmapService.getRoadmap(categoryId, current, size);
-        return ResultBody.success(page);
+        Page<RoadMap> roadmap = roadmapService.getRoadmap(categoryId, current, size);
+        return ResultBody.success(roadmap);
     }
 
-    @GetMapping("/route/items")
-    public ResultBody getById(@RequestParam Integer parentId, Integer current, Integer size){
-        Page<CourseVO> page = roadmapService.getRouteItems(parentId, current, size);
-        return ResultBody.success(page);
-    }
+
 }

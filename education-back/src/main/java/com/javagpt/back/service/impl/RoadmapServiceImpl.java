@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.entity.CourseEntity;
+import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.mapper.RoadmapMapper;
 import com.javagpt.back.service.RoadmapService;
 import com.javagpt.back.util.BeanHelper;
@@ -14,45 +15,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, CourseEntity> implements RoadmapService {
+public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> implements RoadmapService {
 
     @Override
-    public Page<CourseRoadmapVO> getRoadmap(Integer categoryId, Integer current, Integer size) {
-        Page<CourseEntity> page = new Page<>(current, size);
-        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
-        qw.eq("course_cat_id", categoryId);
-        qw.eq("type",1);
-        qw.select("id", "name","image", "left(description, 50) description", "price", "parent_id", "collect", "course", "step");
-        Page<CourseEntity> courseEntityPage = this.getBaseMapper().selectPage(page, qw);
-        List<CourseRoadmapVO> list = courseEntityPage.getRecords().stream()
-                .map(courseEntity -> {
-                    CourseRoadmapVO courseRoadmapVO = new CourseRoadmapVO();
-                    BeanHelper.CopySourceIntoDestination(courseEntity, courseRoadmapVO);
-                    return courseRoadmapVO;
-                }).toList();
-        return new Page<CourseRoadmapVO>()
-                .setRecords(list)
-                .setCurrent(current)
-                .setTotal(courseEntityPage.getTotal())
-                .setSize(size);
+    public Page<RoadMap> getRoadmap(Integer categoryId, Integer current, Integer size) {
+        Page<RoadMap> page = new Page<>(current, size);
+        QueryWrapper<RoadMap> qw = new QueryWrapper<>();
+        qw.eq("category_id", categoryId);
+        qw.select("id", "title","img", "left(description, 50) description", "collect", "course", "step", "category_id");
+        this.getBaseMapper().selectPage(page, qw);
+        return page;
     }
 
-    @Override
-    public Page<CourseVO> getRouteItems(Integer parentId, Integer current, Integer size) {
-        Page<CourseEntity> page = new Page<>(current, size);
-        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
-        qw.eq("parent_id", parentId);
-        qw.select("id", "name","image", "left(description, 50) description", "creator", "updater","remark","source_url","price","step", "collect", "course");
-        Page<CourseEntity> courseEntityPage = this.getBaseMapper().selectPage(page, qw);
-        List<CourseVO> list = courseEntityPage.getRecords().stream()
-                .map(courseEntity -> {
-                    CourseVO courseVO = new CourseVO();
-                    BeanHelper.CopySourceIntoDestination(courseEntity, courseVO);
-                    return courseVO;
-                }).toList();
-        return new Page<CourseVO>()
-                .setRecords(list)
-                .setCurrent(current)
-                .setSize(size);
-    }
+
 }

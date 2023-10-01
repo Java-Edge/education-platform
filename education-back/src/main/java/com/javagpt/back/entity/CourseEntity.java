@@ -81,9 +81,7 @@ public class CourseEntity implements Serializable {
      */
     private Integer type;
 
-    private Integer collect;
 
-    private Integer course;
 
     @Override
     public boolean equals(Object that) {

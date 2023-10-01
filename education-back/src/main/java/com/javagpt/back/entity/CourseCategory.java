@@ -15,13 +15,5 @@ public class CourseCategory {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String name;
-    private Integer parentId;
-    private Integer status;
-    private String url;
-    private String detailName;
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-    @TableField(fill = FieldFill.UPDATE)
-    private LocalDateTime updateTime;
     private Integer category;
 }

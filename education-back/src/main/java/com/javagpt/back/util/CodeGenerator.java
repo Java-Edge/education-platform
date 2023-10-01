@@ -29,7 +29,7 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://106.52.239.29:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull");
+        dsc.setUrl("jdbc:mysql://47.99.69.109:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("Zxcvbnm1234567890");
@@ -48,7 +48,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 
-        strategy.setInclude("role");//表名
+        strategy.setInclude("road_map");//表名
 
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
 
