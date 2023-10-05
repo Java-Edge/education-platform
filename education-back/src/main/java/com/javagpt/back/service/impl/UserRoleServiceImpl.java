@@ -44,6 +44,12 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         for (UserRole ur : userRoles) {
             roleIds.add(ur.getRoleId());
         }
+        /**
+         * 用户可能没有对应角色，如果为空进行批量查询会报错
+         */
+        if (roleIds.size() <= 0) {
+            return new ArrayList<>();
+        }
         return roleMapper.selectBatchIds(roleIds).stream().map(Role::getName).collect(Collectors.toList());
     }
 }

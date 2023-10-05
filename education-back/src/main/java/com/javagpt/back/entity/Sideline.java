@@ -50,4 +50,6 @@ public class Sideline implements Serializable {
     private Integer deleteFlag;
 
     private String href;
+
+    private String permission;
 }
