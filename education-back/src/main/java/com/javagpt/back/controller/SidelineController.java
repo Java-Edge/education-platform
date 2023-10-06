@@ -36,9 +36,12 @@ public class SidelineController {
         return ResultBody.success(page);
     }
 
-    @GetMapping("/getById/{id}")
-    public ResultBody getById(@PathVariable Integer id) {
-        Sideline sideline = sidelineService.getById(id);
-        return ResultBody.success(sideline);
-    }
+    /**
+     * 先注释掉接口，防止被查询隐私数据
+     */
+//    @GetMapping("/getById/{id}")
+//    public ResultBody getById(@PathVariable Integer id) {
+//        Sideline sideline = sidelineService.getById(id);
+//        return ResultBody.success(sideline);
+//    }
 }

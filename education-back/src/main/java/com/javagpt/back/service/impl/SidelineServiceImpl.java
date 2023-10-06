@@ -71,7 +71,7 @@ public class SidelineServiceImpl extends ServiceImpl<SidelineMapper, Sideline> i
                 sl.setTitle("权限不足，无法查看");
                 sl.setDes("权限不足，无法查看");
                 // 这里不能设置 href 为空，否则前端判断会不展示
-                sl.setHref("权限不足，无法查看");
+                sl.setHref("");
                 sl.setImg("");
             }
         }
