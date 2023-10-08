@@ -17,25 +17,6 @@ import java.util.Date;
 @ApiModel
 @Data
 public class RecruitDTO implements Serializable {
-    /**
-     * id
-     */
-    private Integer id;
-
-    /**
-     * 标题
-     */
-    private String title;
-
-    /**
-     * 内容
-     */
-    private String content;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
     /**
      * 招聘所属类型
@@ -123,6 +104,11 @@ public class RecruitDTO implements Serializable {
     private Integer durationDays;
 
     /**
+     * 薪资范围
+     */
+    private Integer salaryRange;
+
+    /**
      * 薪水类型
      */
     private Integer salaryType;
@@ -151,4 +137,19 @@ public class RecruitDTO implements Serializable {
      * 项目编号
      */
     private Integer projectId;
+
+    /**
+     * 学历要求
+     */
+    private Integer eduLevel;
+
+    /**
+     * 公司规模
+     */
+    private Integer personScale;
+
+    /**
+     * 融资规模
+     */
+    private Integer scaleTag;
 }

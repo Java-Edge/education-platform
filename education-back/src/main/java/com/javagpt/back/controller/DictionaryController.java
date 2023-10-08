@@ -22,13 +22,13 @@ public class DictionaryController {
     @Autowired
     private DictionaryTypeService dictionaryTypeService;
 
-    @GetMapping("list")
-    public ResultBody list(String typeKey){
+    @GetMapping("/list")
+    public ResultBody list(@RequestParam(name = "typeKey")String typeKey){
         DictionaryType dictionaryType = dictionaryTypeService.selectList(typeKey);
         return ResultBody.success(dictionaryType);
     }
 
-    @GetMapping("listByMultiTypeKey")
+    @GetMapping("/listByMultiTypeKey")
     public ResultBody listByMultiTypeKey(@RequestParam(name = "typeKeys") List<String> typeKeys){
         List<DictionaryType> dictionaryTypes = dictionaryTypeService.selectListByMultiTypeKey(typeKeys);
         return ResultBody.success(dictionaryTypes);

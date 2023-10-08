@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javagpt.back.mapper.CompanyNatureMapper">
 
+
+    <resultMap id="BaseResultMap" type="com.javagpt.back.entity.CompanyNature">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="shortName" column="short_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,short_name,
+        create_time
+    </sql>
+
+    <resultMap id="CompanyNatureVOMap" type="com.javagpt.back.vo.CompanyNatureVO">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="shortName" column="short_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getList" resultMap="CompanyNatureVOMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company_nature
+    </select>
 </mapper>

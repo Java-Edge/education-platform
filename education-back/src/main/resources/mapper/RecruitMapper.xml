@@ -83,7 +83,7 @@
     </resultMap>
 
 
-    <select id="queryPage" parameterType="com.javagpt.back.dto.ArticleDTO" resultMap="RecruitVOMap">
+    <select id="queryPage" parameterType="com.javagpt.back.dto.RecruitDTO" resultMap="RecruitVOMap">
         select
         r.id,
         r.title,
@@ -120,12 +120,32 @@
         from recruit r
         left join company c on r.company_id = c.id
         <where>
-            c.pic_url is not null
             <if test="dto.companyId != null and dto.companyId != ''">
                 and r.company_id = #{dto.companyId,jdbcType=INTEGER}
             </if>
             <if test="dto.careerJobId != null and dto.careerJobId != ''">
                 and r.career_job_id = #{dto.careerJobId,jdbcType=INTEGER}
+            </if>
+            <if test="dto.eduLevel != null and dto.eduLevel != ''">
+                and r.edu_level = #{dto.eduLevel,jdbcType=INTEGER}
+            </if>
+            <if test="dto.graduationYear != null and dto.graduationYear != ''">
+                and r.graduation_year = #{dto.graduationYear,jdbcType=INTEGER}
+            </if>
+            <if test="dto.salaryMin != null and dto.salaryMin != ''">
+                and r.salary_min  <![CDATA[ <= ]]>  #{dto.salaryMin,jdbcType=INTEGER}
+            </if>
+            <if test="dto.salaryMax != null and dto.salaryMax != ''">
+                and r.salary_max >=  #{dto.salaryMax,jdbcType=INTEGER}
+            </if>
+            <if test="dto.scaleTag != null and dto.scaleTag != ''">
+                and c.scale_tag = #{dto.scaleTag,jdbcType=INTEGER}
+            </if>
+            <if test="dto.personScale != null and dto.personScale != ''">
+                and c.person_scale = #{dto.personScale,jdbcType=INTEGER}
+            </if>
+            <if test="dto.recruitType != null and dto.recruitType != ''">
+                and r.recruit_type = #{dto.recruitType,jdbcType=INTEGER}
             </if>
         </where>
         order by  r.create_time desc
