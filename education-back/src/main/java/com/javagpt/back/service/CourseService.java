@@ -5,6 +5,7 @@ import com.javagpt.back.entity.CourseEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author MSIK
@@ -33,4 +34,6 @@ public interface CourseService extends IService<CourseEntity> {
      * @return
      */
     List<CourseEntity> selectList();
+
+    Map<Integer, CourseEntity> getCoursesMapById(List<Integer> courseIds);
 }

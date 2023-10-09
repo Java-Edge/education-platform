@@ -26,6 +26,12 @@ public class RoadmapController {
         return ResultBody.success(roadmap);
     }
 
+    @GetMapping("/getById/{roadMapId}")
+    public ResultBody getById(@PathVariable Integer roadMapId) {
+        RoadMap byId = roadmapService.getById(roadMapId);
+        return ResultBody.success(byId);
+    }
+
     @GetMapping("/getRoadMapDetail/{roadMapId}")
     public ResultBody getRoadMapDetail(@PathVariable Integer roadMapId) {
         List<RoadMapDetail> results = roadmapService.getRoadMapDetail(roadMapId);

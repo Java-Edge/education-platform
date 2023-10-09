@@ -10,6 +10,7 @@ import com.javagpt.back.entity.RoadMapTag;
 import com.javagpt.back.mapper.RoadMapDetailMapper;
 import com.javagpt.back.mapper.RoadMapTagMapper;
 import com.javagpt.back.mapper.RoadmapMapper;
+import com.javagpt.back.service.CourseService;
 import com.javagpt.back.service.RoadmapService;
 import com.javagpt.back.util.BeanHelper;
 import com.javagpt.back.vo.course.CourseRoadmapVO;
@@ -17,7 +18,9 @@ import com.javagpt.back.vo.course.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +31,9 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
 
     @Autowired
     private RoadMapTagMapper roadMapTagMapper;
+
+    @Autowired
+    private CourseService courseService;
 
     @Override
     public Page<RoadMap> getRoadmap(Integer categoryId, Integer current, Integer size) {
@@ -45,13 +51,17 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
         qw.orderByAsc("map_order");
         qw.eq("road_map_id", roadMapId);
         List<RoadMapDetail> roadMapDetails = roadMapDetailMapper.selectList(qw);
+        List<Integer> courseIds = roadMapDetails.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+        Map<Integer, CourseEntity> coursesMap = courseService.getCoursesMapById(courseIds);
         for (RoadMapDetail roadMapDetail : roadMapDetails) {
             String[] tagIds = roadMapDetail.getTag().split(",");
             QueryWrapper<RoadMapTag> tqw = new QueryWrapper<>();
             tqw.in("id", tagIds);
             List<String> roadMapTags = roadMapTagMapper.selectList(tqw).stream().map(tag -> tag.getName()).collect(Collectors.toList());
             roadMapDetail.setTags(roadMapTags);
+            roadMapDetail.setCourse(coursesMap.get(roadMapDetail.getCourseId()));
         }
+
         return roadMapDetails;
     }
 
