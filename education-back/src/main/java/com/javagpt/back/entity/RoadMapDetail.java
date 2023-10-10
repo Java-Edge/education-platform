@@ -52,11 +52,6 @@ public class RoadMapDetail implements Serializable {
     private String tag;
 
     /**
-     * 外链跳转
-     */
-    private String href;
-
-    /**
      * 类型：0 根据外链跳转 ，1 根据课程id跳转
      */
     private Integer type;
