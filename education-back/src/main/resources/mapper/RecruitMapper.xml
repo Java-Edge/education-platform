@@ -129,8 +129,8 @@
             <if test="dto.eduLevel != null and dto.eduLevel != ''">
                 and r.edu_level = #{dto.eduLevel,jdbcType=INTEGER}
             </if>
-            <if test="dto.graduationYear != null and dto.graduationYear != ''">
-                and r.graduation_year = #{dto.graduationYear,jdbcType=INTEGER}
+            <if test="dto.graduateYear != null and dto.graduateYear != ''">
+                and r.graduation_year = #{dto.graduateYear,jdbcType=INTEGER}
             </if>
             <if test="dto.salaryMin != null and dto.salaryMin != ''">
                 and r.salary_min  <![CDATA[ <= ]]>  #{dto.salaryMin,jdbcType=INTEGER}
