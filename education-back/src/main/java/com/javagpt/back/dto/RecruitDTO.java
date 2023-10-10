@@ -76,7 +76,8 @@ public class RecruitDTO implements Serializable {
     /**
      * 毕业年份
      */
-    private String graduationYear;
+    private String graduateYear;
+
 
     /**
      * 招聘开始时间
