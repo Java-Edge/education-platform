@@ -26,8 +26,8 @@ public class RoadmapController {
         return ResultBody.success(roadmap);
     }
 
-    @GetMapping("/getById/{roadMapId}")
-    public ResultBody getById(@PathVariable Integer roadMapId) {
+    @GetMapping("/getRoadMapById/{roadMapId}")
+    public ResultBody getRoadMapById(@PathVariable Integer roadMapId) {
         RoadMap byId = roadmapService.getById(roadMapId);
         return ResultBody.success(byId);
     }
@@ -36,6 +36,12 @@ public class RoadmapController {
     public ResultBody getRoadMapDetail(@PathVariable Integer roadMapId) {
         List<RoadMapDetail> results = roadmapService.getRoadMapDetail(roadMapId);
         return ResultBody.success(results);
+    }
+
+    @GetMapping("/getRecommentRoad")
+    public ResultBody getRecommentRoad() {
+        List<RoadMap> res = roadmapService.getRecommentRoad();
+        return ResultBody.success(res);
     }
 
 
