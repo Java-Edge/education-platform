@@ -39,9 +39,34 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
     public Page<RoadMap> getRoadmap(Integer categoryId, Integer current, Integer size) {
         Page<RoadMap> page = new Page<>(current, size);
         QueryWrapper<RoadMap> qw = new QueryWrapper<>();
+
+        /**
+         * 如果是要查询热门数据，根据收藏数进行排序即可
+         */
+        if (categoryId == 0) {
+            qw.select("id", "title","img", "left(description, 50) description", "collect", "course", "step", "category_id");
+            qw.orderByDesc("collect");
+            this.getBaseMapper().selectPage(page, qw);
+            return page;
+        }
+
         qw.eq("category_id", categoryId);
         qw.select("id", "title","img", "left(description, 50) description", "collect", "course", "step", "category_id");
         this.getBaseMapper().selectPage(page, qw);
+        QueryWrapper<RoadMapDetail> qwd = new QueryWrapper<>();
+        for (RoadMap roadMap : page.getRecords()) {
+            qwd.clear();
+            qwd.eq("road_map_id", roadMap.getId());
+            Integer courseCount = roadMapDetailMapper.selectCount(qwd).intValue();
+            /**
+             * 查询的时候，实时维护一下路线的对应课程数和步骤
+             */
+            if (!roadMap.getStep().equals(courseCount)) {
+                roadMap.setStep(courseCount);
+                roadMap.setCourse(courseCount);
+                this.getBaseMapper().updateById(roadMap);
+            }
+        }
         return page;
     }
 
