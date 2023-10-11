@@ -15,4 +15,6 @@ public interface RoadmapService extends IService<RoadMap> {
     Page<RoadMap> getRoadmap(Integer categoryId, Integer current, Integer size);
 
     List<RoadMapDetail> getRoadMapDetail(Integer roadMapId);
+
+    List<RoadMap> getRecommentRoad();
 }

@@ -52,17 +52,33 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
         qw.eq("road_map_id", roadMapId);
         List<RoadMapDetail> roadMapDetails = roadMapDetailMapper.selectList(qw);
         List<Integer> courseIds = roadMapDetails.stream().map(item -> item.getCourseId()).collect(Collectors.toList());
+        /**
+         * 如果路线没有对应的课程
+         */
+        if (courseIds == null || courseIds.size() <= 0) {
+            return new ArrayList<>();
+        }
         Map<Integer, CourseEntity> coursesMap = courseService.getCoursesMapById(courseIds);
         for (RoadMapDetail roadMapDetail : roadMapDetails) {
             String[] tagIds = roadMapDetail.getTag().split(",");
             QueryWrapper<RoadMapTag> tqw = new QueryWrapper<>();
-            tqw.in("id", tagIds);
+            if (tagIds.length > 0) {
+                tqw.in("id", tagIds);
+            }
             List<String> roadMapTags = roadMapTagMapper.selectList(tqw).stream().map(tag -> tag.getName()).collect(Collectors.toList());
             roadMapDetail.setTags(roadMapTags);
             roadMapDetail.setCourse(coursesMap.get(roadMapDetail.getCourseId()));
         }
 
         return roadMapDetails;
+    }
+
+    @Override
+    public List<RoadMap> getRecommentRoad() {
+        QueryWrapper<RoadMap> qw = new QueryWrapper<>();
+        qw.orderByDesc("collect");
+        qw.last("limit 2");
+        return this.getBaseMapper().selectList(qw);
     }
 
 
