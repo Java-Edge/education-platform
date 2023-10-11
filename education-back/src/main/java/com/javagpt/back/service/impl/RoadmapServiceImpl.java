@@ -55,7 +55,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
         /**
          * 如果路线没有对应的课程
          */
-        if (courseIds == null || courseIds.size() <= 0) {
+        if (courseIds == null || courseIds.size() == 0) {
             return new ArrayList<>();
         }
         Map<Integer, CourseEntity> coursesMap = courseService.getCoursesMapById(courseIds);
