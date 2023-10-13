@@ -12,9 +12,6 @@ import com.javagpt.back.mapper.RoadMapTagMapper;
 import com.javagpt.back.mapper.RoadmapMapper;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.service.RoadmapService;
-import com.javagpt.back.util.BeanHelper;
-import com.javagpt.back.vo.course.CourseRoadmapVO;
-import com.javagpt.back.vo.course.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
