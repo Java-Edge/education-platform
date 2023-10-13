@@ -30,4 +30,6 @@ public class Ranking implements Serializable {
 
     private String img;
 
+    private Integer pageView;
+
 }

@@ -14,14 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author MSIK
- * @description 针对表【source_course】的数据库操作Service实现
- * @createDate 2023-07-09 13:40:08
- */
 @Service
-public class RankingServiceImpl extends ServiceImpl<RankingMapper, Ranking>
-        implements RankingService {
+public class RankingServiceImpl extends ServiceImpl<RankingMapper, Ranking> implements RankingService {
 
     @Autowired
     private RankingMapper rankingMapper;
@@ -35,8 +29,8 @@ public class RankingServiceImpl extends ServiceImpl<RankingMapper, Ranking>
         if (rankings == null) {
             return null;
         }
-        for (int i = 0; i < rankings.size(); i ++) {
-            rankings.get(i).setOrderVal(i+1);
+        for (int i = 0; i < rankings.size(); i++) {
+            rankings.get(i).setOrderVal(i + 1);
         }
         return rankings;
     }

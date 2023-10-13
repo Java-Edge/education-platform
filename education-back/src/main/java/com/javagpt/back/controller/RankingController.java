@@ -1,9 +1,7 @@
 package com.javagpt.back.controller;
 
 import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.entity.Ranking;
-import com.javagpt.back.service.ArticleService;
 import com.javagpt.back.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

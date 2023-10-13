@@ -3,6 +3,7 @@ package com.javagpt.back.interceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javagpt.back.dto.ResultStatus;
 import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.constant.Constants;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -66,7 +67,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
      */
     private void doResponse(HttpServletResponse response, ResultBody resultVO) throws IOException {
         response.setContentType("application/json");
-        response.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding(Constants.UTF_8);
         PrintWriter out = response.getWriter();
         String s = new ObjectMapper().writeValueAsString(resultVO);
         out.print(s);
