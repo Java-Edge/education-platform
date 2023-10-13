@@ -82,6 +82,12 @@
             <if test="dto.articleType != null and dto.articleType !=''">
                 and article.article_type = #{dto.articleType,jdbcType=INTEGER}
             </if>
+            <if test="dto.keyword != null and dto.keyword !=''">
+                and (article.title like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                         or
+                     article.content  like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                    )
+            </if>
         </where>
     </select>
 </mapper>

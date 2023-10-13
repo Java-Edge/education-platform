@@ -19,9 +19,9 @@ public class ArticleDTO {
     private String content;
 
     /**
-     * 标题
+     * 搜索内容
      */
-    private String title;
+    private String keyword;
 
     /**
      * 公司筛选条件
