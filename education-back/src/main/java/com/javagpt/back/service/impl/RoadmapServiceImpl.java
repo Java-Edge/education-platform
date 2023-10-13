@@ -44,14 +44,14 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> impl
          * 如果是要查询热门数据，根据收藏数进行排序即可
          */
         if (categoryId == 0) {
-            qw.select("id", "title","img", "left(description, 50) description", "collect", "course", "step", "category_id");
+            qw.select("id", "title","img", "img2", "left(description, 50) description", "collect", "course", "step", "category_id");
             qw.orderByDesc("collect");
             this.getBaseMapper().selectPage(page, qw);
             return page;
         }
 
         qw.eq("category_id", categoryId);
-        qw.select("id", "title","img", "left(description, 50) description", "collect", "course", "step", "category_id");
+        qw.select("id", "title","img", "img2", "left(description, 50) description", "collect", "course", "step", "category_id");
         this.getBaseMapper().selectPage(page, qw);
         QueryWrapper<RoadMapDetail> qwd = new QueryWrapper<>();
         for (RoadMap roadMap : page.getRecords()) {

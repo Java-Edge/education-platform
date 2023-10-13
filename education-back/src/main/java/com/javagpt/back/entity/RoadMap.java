@@ -58,5 +58,6 @@ public class RoadMap implements Serializable {
      */
     private String img;
 
+    private String img2;
 
 }
