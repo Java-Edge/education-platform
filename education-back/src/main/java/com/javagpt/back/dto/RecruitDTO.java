@@ -24,6 +24,11 @@ public class RecruitDTO implements Serializable {
     private Integer type;
 
     /**
+     * 公司编号
+     */
+    private Integer companyId;
+
+    /**
      * 招聘类型 校招、实习、社招
      */
     private Integer recruitType;
@@ -52,6 +57,21 @@ public class RecruitDTO implements Serializable {
      * 毕业年份
      */
     private String graduateYear;
+
+    /**
+     * 招聘开始时间
+     */
+    private Date deliverBegin;
+
+    /**
+     * 招聘结束时间
+     */
+    private Date deliverEnd;
+
+    /**
+     * 刷新时间
+     */
+    private Date refeshTime;
 
     /**
      * 薪资范围
