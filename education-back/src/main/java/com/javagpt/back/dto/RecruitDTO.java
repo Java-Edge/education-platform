@@ -53,6 +53,25 @@ public class RecruitDTO implements Serializable {
      */
     private String graduateYear;
 
+    /**
+     * 薪资范围
+     */
+    private Integer salaryRange;
+
+    /**
+     * 薪水类型
+     */
+    private Integer salaryType;
+
+    /**
+     * 薪资最小值
+     */
+    private Integer salaryMin;
+
+    /**
+     * 薪资最大值
+     */
+    private Integer salaryMax;
 
     /**
      * 
