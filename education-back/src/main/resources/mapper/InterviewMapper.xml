@@ -43,6 +43,9 @@
         <result property="jobId" column="job_id" jdbcType="INTEGER"/>
         <result property="contentType" column="content_type" jdbcType="INTEGER"/>
         <result property="careerName" column="career_name" jdbcType="VARCHAR"/>
+        <result property="recommendCode" column="recommend_code" jdbcType="VARCHAR"/>
+        <result property="recommendEmail" column="recommend_email" jdbcType="VARCHAR"/>
+        <result property="recommendUrl" column="recommend_url" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectByCondition" parameterType="com.javagpt.back.dto.ArticleDTO" resultMap="ArticleVOMap">
@@ -59,7 +62,10 @@
                article.edit_time         edit_time,
                article.job_id            job_id,
                article.content_type      content_type,
-               career.name               career_name
+               career.name               career_name,
+               article.recommend_code recommend_code,
+               article.recommend_email recommend_email,
+               article.recommend_url recommend_url
         from interview_experience_article article
                  left join career career on article.job_id = career.id
         <where>

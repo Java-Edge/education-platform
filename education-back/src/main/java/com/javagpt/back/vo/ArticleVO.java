@@ -98,6 +98,23 @@ public class ArticleVO {
     private List<String> images;
 
 
+    /**
+     * 内推码
+     */
+    private String recommendCode;
+
+    /**
+     * 内推邮箱
+     */
+    private String recommendEmail;
+
+    /**
+     * 内推链接
+     */
+    private String recommendUrl;
+
+
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
