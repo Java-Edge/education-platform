@@ -77,7 +77,7 @@ public class RecruitDTO implements Serializable {
     /**
      * 薪资范围
      */
-    private Integer salaryRange;
+    private List<Integer> salaryRange;
 
     /**
      * 薪水类型

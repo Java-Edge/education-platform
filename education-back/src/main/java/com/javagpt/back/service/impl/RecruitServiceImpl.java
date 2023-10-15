@@ -15,6 +15,7 @@ import com.javagpt.back.vo.RecruitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,15 +54,22 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
         RecruitDTO recruitDTO = pageQueryParam.getParam();
 
         // 1. 查询筛选框的薪资范围
-        Dictionary salaryRange = dictionaryMapper.selectOne(new LambdaQueryWrapper<Dictionary>()
-                .eq(Dictionary::getTypeKey, "salary_range")
-                .eq(Dictionary::getValue, recruitDTO.getSalaryRange()));
+        if (recruitDTO.getSalaryRange() != null && !recruitDTO.getSalaryRange().isEmpty()) {
+            List<Dictionary> salaryRangeList = dictionaryMapper.selectList(new LambdaQueryWrapper<Dictionary>()
+                    .eq(Dictionary::getTypeKey, "salary_range")
+                    .in(Dictionary::getValue, recruitDTO.getSalaryRange()));
 
-        if (salaryRange != null) {
-            String[] salaries = salaryRange.getLabel().split("-");
-            if (salaries.length > 1) {
-                recruitDTO.setSalaryMin(Integer.valueOf(salaries[0]));
-                recruitDTO.setSalaryMax(Integer.valueOf(salaries[1].replace("K", "")));
+            if (salaryRangeList != null && !salaryRangeList.isEmpty()) {
+                List<Integer> salaryList = new ArrayList<>();
+                for (Dictionary salaryRange : salaryRangeList) {
+                    String[] salaries = salaryRange.getLabel().split("-");
+                    if (salaries.length > 1) {
+                        salaryList.add(Integer.valueOf(salaries[0]));
+                        salaryList.add(Integer.valueOf(salaries[1].replace("K", "")));
+                    }
+                }
+                recruitDTO.setSalaryMin(salaryList.stream().min((a, b) -> a - b).get());
+                recruitDTO.setSalaryMax(salaryList.stream().max((a, b) -> a - b).get());
             }
         }
 
