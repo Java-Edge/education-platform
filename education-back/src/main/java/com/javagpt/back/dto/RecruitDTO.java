@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 招聘-职位
@@ -31,7 +32,7 @@ public class RecruitDTO implements Serializable {
     /**
      * 招聘类型 校招、实习、社招
      */
-    private Integer recruitType;
+    private List<Integer> recruitType;
 
     /**
      * 工作城市
@@ -56,7 +57,7 @@ public class RecruitDTO implements Serializable {
     /**
      * 毕业年份
      */
-    private String graduateYear;
+    private List<Integer> graduateYear;
 
     /**
      * 招聘开始时间
@@ -99,22 +100,22 @@ public class RecruitDTO implements Serializable {
     private Integer salaryMonth;
 
     /**
-     * 
+     * 工作年限
      */
     private Integer workYearType;
 
     /**
      * 学历要求
      */
-    private Integer eduLevel;
+    private List<Integer> eduLevel;
 
     /**
      * 公司规模
      */
-    private Integer personScale;
+    private List<Integer> personScale;
 
     /**
      * 融资规模
      */
-    private Integer scaleTag;
+    private List<Integer> scaleTag;
 }
