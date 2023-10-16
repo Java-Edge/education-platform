@@ -134,7 +134,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
                 //map中可以存放用户的角色权限信息
                 .setClaims(map)
                 //设置token过期时间，当前时间加一天就是时效为一天过期
-                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000))
                 //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
                 .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
