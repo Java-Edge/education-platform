@@ -1,19 +1,12 @@
 package com.javagpt.back.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/article")
@@ -36,7 +29,7 @@ public class ArticleController {
 
     @GetMapping("/getByPage")
     public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
-        Page<ArticleEntity> page = articleService.getByPage(current,size,article);
+        Page<ArticleEntity> page = articleService.getByPage(current, size, article);
         return ResultBody.success(page);
     }
 

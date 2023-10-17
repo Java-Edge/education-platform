@@ -36,7 +36,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,title,content,
+        id
+        ,title,content,
         create_time,`type`,des,
         phone,company_id,recruit_type,
         job_name,ext,job_city,
@@ -85,38 +86,38 @@
 
     <select id="queryPage" parameterType="com.javagpt.back.dto.RecruitDTO" resultMap="RecruitVOMap">
         select
-        r.id,
-        r.title,
-        r.create_time,
-        r.`type`,
-        r.phone,
-        r.company_id,
-        r.recruit_type,
-        r.job_name,
-        r.ext,
-        SUBSTRING_INDEX(r.job_city,',',1) job_city,
-        r.job_address,
-        r.career_job_id,
-        r.career_job_name,
-        r.graduation_year,
-        r.deliver_begin,
-        r.deliver_end,
-        r.refesh_time,
-        r.feed_back_days,
-        r.duration_days,
-        r.salary_type,
-        r.salary_min,
-        r.salary_max,
-        r.salary_month,
-        r.work_year_type,
-        r.project_id,
-        r.edu_level,
-        r.source_url,
-        c.pic_url,
-        c.company_name,
-        c.scale_tag_name,
-        c.person_scales,
-        c.company_short_name
+            r.id,
+            r.title,
+            r.create_time,
+            r.`type`,
+            r.phone,
+            r.company_id,
+            r.recruit_type,
+            r.job_name,
+            r.ext,
+            SUBSTRING_INDEX(r.job_city,',',1) job_city,
+            r.job_address,
+            r.career_job_id,
+            r.career_job_name,
+            r.graduation_year,
+            r.deliver_begin,
+            r.deliver_end,
+            r.refesh_time,
+            r.feed_back_days,
+            r.duration_days,
+            r.salary_type,
+            r.salary_min,
+            r.salary_max,
+            r.salary_month,
+            r.work_year_type,
+            r.project_id,
+            r.edu_level,
+            r.source_url,
+            c.pic_url,
+            c.company_name,
+            c.scale_tag_name,
+            c.person_scales,
+            c.company_short_name
         from recruit r
         left join company c on r.company_id = c.id
         <where>
@@ -126,69 +127,83 @@
             <if test="dto.careerJobId != null and dto.careerJobId != ''">
                 and r.career_job_id = #{dto.careerJobId,jdbcType=INTEGER}
             </if>
-            <if test="dto.eduLevel != null and dto.eduLevel != ''">
-                and r.edu_level = #{dto.eduLevel,jdbcType=INTEGER}
+            <if test="dto.eduLevel != null and dto.eduLevel.size() > 0">
+                and r.edu_level in
+                <foreach collection="dto.eduLevel" item="item" open="(" close=")" separator=",">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
-            <if test="dto.graduationYear != null and dto.graduationYear != ''">
-                and r.graduation_year = #{dto.graduationYear,jdbcType=INTEGER}
+            <if test="dto.graduateYear != null and dto.graduateYear.size() > 0">
+                and r.graduation_year in
+                <foreach collection="dto.graduateYear" item="item" open="(" close=")" separator=",">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
             <if test="dto.salaryMin != null and dto.salaryMin != ''">
                 and r.salary_min  <![CDATA[ <= ]]>  #{dto.salaryMin,jdbcType=INTEGER}
             </if>
             <if test="dto.salaryMax != null and dto.salaryMax != ''">
-                and r.salary_max >=  #{dto.salaryMax,jdbcType=INTEGER}
+                and r.salary_max >= #{dto.salaryMax,jdbcType=INTEGER}
             </if>
-            <if test="dto.scaleTag != null and dto.scaleTag != ''">
-                and c.scale_tag = #{dto.scaleTag,jdbcType=INTEGER}
+            <if test="dto.scaleTag != null and dto.scaleTag.size() > 0">
+                and c.scale_tag in
+                <foreach collection="dto.scaleTag" item="item" open="(" close=")" separator=",">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
-            <if test="dto.personScale != null and dto.personScale != ''">
-                and c.person_scale = #{dto.personScale,jdbcType=INTEGER}
+            <if test="dto.personScale != null and dto.personScale.size() > 0">
+                and c.person_scale in
+                <foreach collection="dto.personScale" item="item" open="(" close=")" separator=",">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
-            <if test="dto.recruitType != null and dto.recruitType != ''">
-                and r.recruit_type = #{dto.recruitType,jdbcType=INTEGER}
+            <if test="dto.recruitType != null and dto.recruitType.size() > 0">
+                and r.recruit_type in
+                <foreach collection="dto.recruitType" item="item" open="(" close=")" separator=",">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
         </where>
-        order by  r.create_time desc
+        order by r.create_time desc
     </select>
 
     <select id="queryById" resultMap="RecruitVOMap">
-        select
-        r.id,
-        r.title,
-        r.content,
-        r.requirements,
-        r.create_time,
-        r.`type`,
-        r.phone,
-        r.company_id,
-        r.recruit_type,
-        r.job_name,
-        r.ext,
-        r.job_city,
-        r.job_address,
-        r.career_job_id,
-        r.career_job_name,
-        r.graduation_year,
-        r.deliver_begin,
-        r.deliver_end,
-        r.refesh_time,
-        r.feed_back_days,
-        r.duration_days,
-        r.salary_type,
-        r.salary_min,
-        r.salary_max,
-        r.salary_month,
-        r.work_year_type,
-        r.project_id,
-        r.edu_level,
-        r.source_url,
-        c.pic_url,
-        c.company_name,
-        c.scale_tag_name,
-        c.person_scales,
-        c.company_short_name
+        select r.id,
+               r.title,
+               r.content,
+               r.requirements,
+               r.create_time,
+               r.`type`,
+               r.phone,
+               r.company_id,
+               r.recruit_type,
+               r.job_name,
+               r.ext,
+               r.job_city,
+               r.job_address,
+               r.career_job_id,
+               r.career_job_name,
+               r.graduation_year,
+               r.deliver_begin,
+               r.deliver_end,
+               r.refesh_time,
+               r.feed_back_days,
+               r.duration_days,
+               r.salary_type,
+               r.salary_min,
+               r.salary_max,
+               r.salary_month,
+               r.work_year_type,
+               r.project_id,
+               r.edu_level,
+               r.source_url,
+               c.pic_url,
+               c.company_name,
+               c.scale_tag_name,
+               c.person_scales,
+               c.company_short_name
         from recruit r
-        left join company c on r.company_id = c.id
+                 left join company c on r.company_id = c.id
         where r.id = #{id,jdbcType=INTEGER}
     </select>
 

@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 招聘-职位
@@ -24,16 +25,6 @@ public class RecruitDTO implements Serializable {
     private Integer type;
 
     /**
-     * 岗位描述
-     */
-    private String des;
-
-    /**
-     * 联系电话
-     */
-    private String phone;
-
-    /**
      * 公司编号
      */
     private Integer companyId;
@@ -41,17 +32,7 @@ public class RecruitDTO implements Serializable {
     /**
      * 招聘类型 校招、实习、社招
      */
-    private Integer recruitType;
-
-    /**
-     * 招聘名称
-     */
-    private String jobName;
-
-    /**
-     * 额外信息
-     */
-    private String ext;
+    private List<Integer> recruitType;
 
     /**
      * 工作城市
@@ -76,7 +57,7 @@ public class RecruitDTO implements Serializable {
     /**
      * 毕业年份
      */
-    private String graduationYear;
+    private List<Integer> graduateYear;
 
     /**
      * 招聘开始时间
@@ -94,19 +75,9 @@ public class RecruitDTO implements Serializable {
     private Date refeshTime;
 
     /**
-     * 
-     */
-    private Integer feedBackDays;
-
-    /**
-     * 
-     */
-    private Integer durationDays;
-
-    /**
      * 薪资范围
      */
-    private Integer salaryRange;
+    private List<Integer> salaryRange;
 
     /**
      * 薪水类型
@@ -129,27 +100,22 @@ public class RecruitDTO implements Serializable {
     private Integer salaryMonth;
 
     /**
-     * 
+     * 工作年限
      */
     private Integer workYearType;
 
     /**
-     * 项目编号
-     */
-    private Integer projectId;
-
-    /**
      * 学历要求
      */
-    private Integer eduLevel;
+    private List<Integer> eduLevel;
 
     /**
      * 公司规模
      */
-    private Integer personScale;
+    private List<Integer> personScale;
 
     /**
      * 融资规模
      */
-    private Integer scaleTag;
+    private List<Integer> scaleTag;
 }

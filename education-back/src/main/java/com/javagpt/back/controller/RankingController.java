@@ -1,9 +1,8 @@
 package com.javagpt.back.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.entity.Ranking;
-import com.javagpt.back.service.ArticleService;
 import com.javagpt.back.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 
 /**
  * @author 千祎来了
@@ -24,9 +24,9 @@ public class RankingController {
     private RankingService rankingService;
 
     @GetMapping("/getRanking")
-    public ResultBody getRanking() {
-        List<Ranking> rankings = rankingService.getRanking();
-        return ResultBody.success(rankings);
+    public ResultBody getRanking(Integer current, Integer size) {
+        Page<Ranking> page = rankingService.getRanking(current, size);
+        return ResultBody.success(page);
     }
 
 }

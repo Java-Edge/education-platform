@@ -1,7 +1,11 @@
 package com.javagpt.back.entity;
 
 import com.javagpt.back.service.BaseInfoInterface;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
+@AllArgsConstructor
 public enum CommonEnum implements BaseInfoInterface {
  
     //数据操作错误定义
@@ -11,25 +15,8 @@ public enum CommonEnum implements BaseInfoInterface {
     NOT_FOUND(404, "未找到该资源!"),
     INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
     SERVER_BUSY(503, "服务器正忙，请稍后再试!");
- 
-    //响应码
+
     private int resultCode;
- 
-    //响应描述
+
     private String resultMsg;
- 
-    CommonEnum(int resultCode,String resultMsg){
-        this.resultCode = resultCode;
-        this.resultMsg = resultMsg;
-    }
- 
-    @Override
-    public int getResultCode() {
-        return resultCode;
-    }
- 
-    @Override
-    public String getResultMsg() {
-        return resultMsg;
-    }
 }

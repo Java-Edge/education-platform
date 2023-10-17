@@ -6,14 +6,6 @@ import com.javagpt.back.vo.CompanyNatureVO;
 
 import java.util.List;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author zqy
- * @since 2023-08-10
- */
 public interface CompanyNatureService extends IService<CompanyNature> {
 
     List<CompanyNatureVO> getList();

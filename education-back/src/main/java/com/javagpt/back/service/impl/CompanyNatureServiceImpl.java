@@ -10,14 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author zqy
- * @since 2023-08-10
- */
 @Service
 public class CompanyNatureServiceImpl extends ServiceImpl<CompanyNatureMapper, CompanyNature> implements CompanyNatureService {
 

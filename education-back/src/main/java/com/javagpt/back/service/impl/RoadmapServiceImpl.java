@@ -9,12 +9,9 @@ import com.javagpt.back.entity.RoadMapDetail;
 import com.javagpt.back.entity.RoadMapTag;
 import com.javagpt.back.mapper.RoadMapDetailMapper;
 import com.javagpt.back.mapper.RoadMapTagMapper;
-import com.javagpt.back.mapper.RoadmapMapper;
+import com.javagpt.back.mapper.RoadMapMapper;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.service.RoadmapService;
-import com.javagpt.back.util.BeanHelper;
-import com.javagpt.back.vo.course.CourseRoadmapVO;
-import com.javagpt.back.vo.course.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class RoadmapServiceImpl extends ServiceImpl<RoadmapMapper, RoadMap> implements RoadmapService {
+public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> implements RoadmapService {
 
     @Autowired
     private RoadMapDetailMapper roadMapDetailMapper;

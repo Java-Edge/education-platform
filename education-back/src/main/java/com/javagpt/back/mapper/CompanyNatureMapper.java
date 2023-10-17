@@ -7,14 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author zqy
- * @since 2023-08-10
- */
 @Mapper
 public interface CompanyNatureMapper extends BaseMapper<CompanyNature> {
 

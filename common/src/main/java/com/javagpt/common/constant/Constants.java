@@ -7,4 +7,6 @@ package com.javagpt.common.constant;
 public interface Constants {
 
     String UTF_8 = "utf-8";
+
+    String DELETE_FLAG = "delete_flag";
 }
