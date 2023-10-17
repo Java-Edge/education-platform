@@ -1,19 +1,20 @@
 package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.back.dto.CourseDTO;
+import com.javagpt.back.dto.PageQueryParam;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.service.CourseService;
+import com.javagpt.back.vo.course.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/sourceCourse")
+@RequestMapping("/course")
 public class CourseController {
 
     @Autowired
@@ -34,6 +35,12 @@ public class CourseController {
         qw.eq("type", 1);
         List<CourseEntity> list = courseService.list(qw);
         return ResultBody.success(list);
+    }
+
+    @PostMapping("search")
+    public ResultBody search(@RequestBody PageQueryParam<CourseDTO> pageQueryParam){
+        Page<CourseVO> page = courseService.search(pageQueryParam);
+        return ResultBody.success(page);
     }
 
     @GetMapping("/course/{id}")

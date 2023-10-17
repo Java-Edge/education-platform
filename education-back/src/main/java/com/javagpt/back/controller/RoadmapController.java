@@ -5,8 +5,6 @@ import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.entity.RoadMapDetail;
 import com.javagpt.back.service.RoadmapService;
-import com.javagpt.back.vo.course.CourseRoadmapVO;
-import com.javagpt.back.vo.course.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +38,7 @@ public class RoadmapController {
 
     @GetMapping("/getRecommentRoad")
     public ResultBody getRecommentRoad() {
-        List<RoadMap> res = roadmapService.getRecommentRoad();
+        List<RoadMap> res = roadmapService.getRecommendRoad();
         return ResultBody.success(res);
     }
 

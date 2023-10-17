@@ -2,11 +2,15 @@ package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.dto.CourseDTO;
+import com.javagpt.back.dto.PageQueryParam;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.mapper.CourseMapper;
 import com.javagpt.back.service.CourseService;
+import com.javagpt.back.vo.course.CourseVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -22,12 +26,15 @@ import java.util.Map;
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
         implements CourseService {
 
+    @Autowired
+    private CourseMapper courseMapper;
+
     @Override
     public List<CourseEntity> getFiveCourse() {
 
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
-                .orderByDesc(CourseEntity::getCreatTime)
+                .orderByDesc(CourseEntity::getCreateTime)
                 .last("limit 5");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
@@ -37,7 +44,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     public List<CourseEntity> getRecommendCourses() {
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
-                .orderByDesc(CourseEntity::getCreatTime)
+                .orderByDesc(CourseEntity::getCreateTime)
                 .last("limit 8");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
@@ -59,6 +66,14 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
             result.put(course.getId(), course);
         }
         return result;
+    }
+
+    @Override
+    public Page<CourseVO> search(PageQueryParam<CourseDTO> pageQueryParam) {
+
+        Page<CourseVO> page = new Page<>(pageQueryParam.getPageNo(), pageQueryParam.getPageSize());
+        Page<CourseVO> courseVOPage = courseMapper.selectByPage(page, pageQueryParam.getParam());
+        return courseVOPage;
     }
 }
 

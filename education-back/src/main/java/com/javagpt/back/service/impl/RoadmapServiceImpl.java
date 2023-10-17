@@ -96,7 +96,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
     }
 
     @Override
-    public List<RoadMap> getRecommentRoad() {
+    public List<RoadMap> getRecommendRoad() {
         QueryWrapper<RoadMap> qw = new QueryWrapper<>();
         qw.orderByDesc("collect");
         qw.last("limit 2");

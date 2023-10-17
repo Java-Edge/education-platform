@@ -42,7 +42,7 @@ public class CourseEntity implements Serializable {
     /**
      * 
      */
-    private Date creatTime;
+    private Date createTime;
 
     /**
      * 

@@ -25,4 +25,6 @@ public class CourseVO implements Serializable {
     private String sourceUrl;
     private BigDecimal price;
     private Integer step;
+    private Integer parentId;
+    private Integer pageView;
 }
