@@ -27,7 +27,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
 
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
-                .orderByDesc(CourseEntity::getCreatTime)
+                .orderByDesc(CourseEntity::getCreateTime)
                 .last("limit 5");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
@@ -37,7 +37,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     public List<CourseEntity> getRecommendCourses() {
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
-                .orderByDesc(CourseEntity::getCreatTime)
+                .orderByDesc(CourseEntity::getCreateTime)
                 .last("limit 8");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;

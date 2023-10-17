@@ -3,6 +3,7 @@ package com.javagpt.back.interceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javagpt.back.dto.ResultStatus;
 import com.javagpt.back.dto.ResultBody;
+import com.javagpt.back.util.U;
 import com.javagpt.common.constant.Constants;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,6 +38,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
                 //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
                 Integer userId = (Integer) claimsJws.getBody().get("userId");
+                U.currentUserId = userId;
                 if (userId != null) {
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(userId,null,null);
