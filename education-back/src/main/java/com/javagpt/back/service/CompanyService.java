@@ -3,6 +3,8 @@ package com.javagpt.back.service;
 import com.javagpt.back.entity.Company;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 公司主体 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CompanyService extends IService<Company> {
 
+    List<String> getCompanyNames();
 }
