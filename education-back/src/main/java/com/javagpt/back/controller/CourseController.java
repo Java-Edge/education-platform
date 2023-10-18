@@ -20,19 +20,21 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @GetMapping("/list")
-    public ResultBody list(){
+    @GetMapping("/courseList")
+    public ResultBody courseList(){
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
         qw.eq("type", 0);
+        qw.last("limit 12");
         List<CourseEntity> list = courseService.list(qw);
         return ResultBody.success(list);
     }
 
-    @GetMapping("listSpecialList")
-    public ResultBody listSpecialList() {
+    @GetMapping("specialList")
+    public ResultBody specialList() {
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
         // 获取专栏内容
         qw.eq("type", 1);
+        qw.last("limit 15");
         List<CourseEntity> list = courseService.list(qw);
         return ResultBody.success(list);
     }
