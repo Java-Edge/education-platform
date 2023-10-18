@@ -28,8 +28,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         QueryWrapper<PermissionConfig> qw = new QueryWrapper<>();
         qw.eq("type", 1);
-        List<String> pathes = permissionConfigService.list(qw).stream().map(PermissionConfig::getPath).collect(Collectors.toList());
+        List<String> paths = permissionConfigService.list(qw).stream().map(PermissionConfig::getPath).collect(Collectors.toList());
         registry.addInterceptor(checkTokenInterceptor)
-                .addPathPatterns(pathes);
+                .addPathPatterns(paths);
     }
 }

@@ -3,8 +3,10 @@ package com.javagpt.back.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,7 +45,7 @@ public class Pilot implements Serializable {
     /**
      * 创建时间
      */
-/*    private LocalDateTime createTime;*/
+    /*    private LocalDateTime createTime;*/
 
     private Integer pilotType;
 

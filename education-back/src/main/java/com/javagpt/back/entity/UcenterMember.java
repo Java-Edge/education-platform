@@ -22,7 +22,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="UcenterMember对象", description="会员表")
+@ApiModel(value = "UcenterMember对象", description = "会员表")
 public class UcenterMember implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 package com.javagpt.back.entity;
 
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,7 +22,7 @@ public class Company implements Serializable {
     /**
      * 公司编号
      */
-      private String id;
+    private String id;
 
     /**
      * 公司图片

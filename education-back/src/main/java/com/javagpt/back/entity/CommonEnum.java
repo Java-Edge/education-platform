@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CommonEnum implements BaseInfoInterface {
- 
+
     //数据操作错误定义
     SUCCESS(200, "成功!"),
     BODY_NOT_MATCH(400, "请求的数据格式不符!"),

@@ -11,9 +11,10 @@ import java.util.Date;
 
 /**
  * 招聘-职位
+ *
  * @TableName recruit
  */
-@TableName(value ="recruit")
+@TableName(value = "recruit")
 @Data
 public class Recruit implements Serializable {
     /**
