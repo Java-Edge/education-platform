@@ -163,6 +163,9 @@
                     #{item,jdbcType=INTEGER}
                 </foreach>
             </if>
+            <if test="dto.keyword != null and dto.keyword != ''">
+                and r.title like concat('%',#{dto.keyword,jdbcType=VARCHAR},'%')
+            </if>
         </where>
         order by r.create_time desc
     </select>

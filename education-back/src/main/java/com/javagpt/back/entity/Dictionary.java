@@ -42,6 +42,16 @@ public class Dictionary implements Serializable {
     private String value;
 
     /**
+     * 最小值
+     */
+    private Integer minValue;
+
+    /**
+     * 最大值
+     */
+    private Integer maxValue;
+
+    /**
      * 0:删除，1：正常，2：不可用
      */
     private Integer status;

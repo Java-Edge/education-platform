@@ -12,11 +12,14 @@ import com.javagpt.back.mapper.RecruitMapper;
 import com.javagpt.back.service.RecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.vo.RecruitVO;
+import com.javagpt.common.enums.SalaryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -55,21 +58,22 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
 
         // 1. 查询筛选框的薪资范围
         if (recruitDTO.getSalaryRange() != null && !recruitDTO.getSalaryRange().isEmpty()) {
+            SalaryType salaryType = SalaryType.getByCode(recruitDTO.getSalaryType());
             List<Dictionary> salaryRangeList = dictionaryMapper.selectList(new LambdaQueryWrapper<Dictionary>()
-                    .eq(Dictionary::getTypeKey, "salary_range")
+//                    .select(Dictionary::getMinValue, Dictionary::getMaxValue)
+                    .eq(Dictionary::getTypeKey, salaryType.getValue())
                     .in(Dictionary::getValue, recruitDTO.getSalaryRange()));
 
             if (salaryRangeList != null && !salaryRangeList.isEmpty()) {
-                List<Integer> salaryList = new ArrayList<>();
-                for (Dictionary salaryRange : salaryRangeList) {
-                    String[] salaries = salaryRange.getLabel().split("-");
-                    if (salaries.length > 1) {
-                        salaryList.add(Integer.valueOf(salaries[0]));
-                        salaryList.add(Integer.valueOf(salaries[1].replace("K", "")));
-                    }
-                }
-                recruitDTO.setSalaryMin(salaryList.stream().min((a, b) -> a - b).get());
-                recruitDTO.setSalaryMax(salaryList.stream().max((a, b) -> a - b).get());
+
+                Integer salaryMin = salaryRangeList.stream().map(Dictionary::getMinValue).toList()
+                        .stream().min(Comparator.comparing(x -> x)).orElse(null);
+
+                Integer salaryMax = salaryRangeList.stream().map(Dictionary::getMaxValue).toList()
+                        .stream().max(Comparator.comparing(x -> x)).orElse(null);
+
+                recruitDTO.setSalaryMin(salaryMin);
+                recruitDTO.setSalaryMax(salaryMax);
             }
         }
 
