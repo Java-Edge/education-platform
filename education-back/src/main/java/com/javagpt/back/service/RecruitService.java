@@ -39,4 +39,11 @@ public interface RecruitService extends IService<Recruit> {
      */
     RecruitVO queryById(String id);
 
+    /**
+     * 获取热门职位
+     * @return
+     */
+    List<Recruit> getHotRecruits();
+
+
 }

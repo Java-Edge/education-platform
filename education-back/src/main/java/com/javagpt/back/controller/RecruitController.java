@@ -48,5 +48,12 @@ public class RecruitController {
         return ResultBody.success(recruitVO);
     }
 
+
+    @GetMapping("/hotRecruits/")
+    public ResultBody hotRecruits() {
+        List<Recruit> hotRecruits = recruitService.getHotRecruits();
+        return ResultBody.success(hotRecruits);
+    }
+
 }
 

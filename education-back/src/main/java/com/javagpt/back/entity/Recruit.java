@@ -173,6 +173,11 @@ public class Recruit implements Serializable {
      */
     private String major;
 
+    /**
+     * 浏览量
+     */
+    private Integer pageView;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -89,4 +89,12 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
         RecruitVO recruitVO = recruitMapper.queryById(id);
         return recruitVO;
     }
+
+    @Override
+    public List<Recruit> getHotRecruits() {
+        List<Recruit> recruits = recruitMapper.selectList(new LambdaQueryWrapper<Recruit>()
+                .orderByDesc(Recruit::getPageView)
+                .last("limit 6"));
+        return recruits;
+    }
 }
