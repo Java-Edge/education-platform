@@ -20,6 +20,10 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // TODO 调试代码
+        if (1 == 1) {
+            return true;
+        }
         //关于浏览器的请求预检.在跨域的情况下，非简单请求会先发起一次空body的OPTIONS请求，称为"预检"请求，用于向服务器请求权限信息，等预检请求被成功响应后，才发起真正的http请求。
         String method = request.getMethod();
         if ("OPTIONS".equalsIgnoreCase(method)) {

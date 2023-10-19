@@ -2,6 +2,7 @@ package com.javagpt.back.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.Pilot;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,16 @@ public class CaffeineConfig {
      */
     @Bean
     public Cache<Integer, List<Pilot>> pilotRefreshCache() {
+        return Caffeine.newBuilder()
+                .maximumSize(1)
+                .build();
+    }
+
+    /**
+     * 字典表的缓存
+     */
+    @Bean
+    public Cache<Integer, List<Dictionary>> dictRefreshCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
                 .build();

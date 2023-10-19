@@ -13,4 +13,6 @@ public interface Constants {
     String DELETE_FLAG = "delete_flag";
 
     int cache_max_pilot_refresh_counts = 3;
+
+    int cache_max_dict_refresh_counts = 3;
 }
