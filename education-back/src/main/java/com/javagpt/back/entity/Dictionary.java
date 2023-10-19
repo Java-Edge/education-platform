@@ -3,6 +3,7 @@ package com.javagpt.back.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author zqy
@@ -39,6 +40,16 @@ public class Dictionary implements Serializable {
      * 字典值
      */
     private String value;
+
+    /**
+     * 最小值
+     */
+    private Integer minValue;
+
+    /**
+     * 最大值
+     */
+    private Integer maxValue;
 
     /**
      * 0:删除，1：正常，2：不可用

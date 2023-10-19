@@ -1,6 +1,6 @@
 package com.javagpt.back.util;
 
-import com.javagpt.back.exception.BeanCopyNotSuccessException;
+import com.javagpt.common.exception.BeanCopyNotSuccessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

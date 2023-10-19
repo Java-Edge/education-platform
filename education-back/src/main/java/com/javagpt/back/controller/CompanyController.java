@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.Company;
 import com.javagpt.back.service.CompanyService;
@@ -12,14 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- * 公司主体 前端控制器
- * </p>
- *
- * @author zqy
- * @since 2023-08-10
- */
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
@@ -28,8 +19,8 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping("getList")
-    public ResultBody getList() {
-        List<Company> list = companyService.list();
+    public ResultBody getCompanyNames() {
+        List<String> list = companyService.getCompanyNames();
         return ResultBody.success(list);
     }
 

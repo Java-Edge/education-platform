@@ -12,15 +12,16 @@ import java.util.Date;
 
 /**
  * 用户表
+ *
  * @TableName user
  */
-@TableName(value ="user")
+@TableName(value = "user")
 @Data
 public class UserEntity implements Serializable {
     /**
      * 主键
      */
-    @TableId(type = IdType.AUTO,value = "ID")
+    @TableId(type = IdType.AUTO, value = "ID")
     private Integer id;
 
     /**
@@ -34,7 +35,7 @@ public class UserEntity implements Serializable {
     private String password;
 
     /**
-     * 
+     *
      */
     private Integer status;
 

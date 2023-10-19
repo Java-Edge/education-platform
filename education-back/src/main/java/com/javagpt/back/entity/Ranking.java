@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author 千祎来了
  * @date 2023/8/8 15:14
  */
-@TableName(value ="ranking")
+@TableName(value = "ranking")
 @Data
 public class Ranking implements Serializable {
 

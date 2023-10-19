@@ -2,6 +2,7 @@ package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.dto.LoginRespVO;
 import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.dto.ResultStatus;
 import com.javagpt.back.dto.UserDTO;
@@ -121,6 +122,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
 
         // 3. 登录成功，生成token
         JwtBuilder builder = Jwts.builder();
+        LoginRespVO loginRespVO = new LoginRespVO();
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("userId", userEntity.getId());
@@ -138,9 +140,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
                 //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
                 .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
-        user.setToken(token);
+        loginRespVO.setId(userEntity.getId());
+        loginRespVO.setUsername(userEntity.getUsername());
+        loginRespVO.setToken(token);
 
-        return ResultBody.success(user);
+        return ResultBody.success(loginRespVO);
     }
 
     @Override

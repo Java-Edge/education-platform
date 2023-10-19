@@ -1,4 +1,4 @@
-package com.javagpt.back.exception;
+package com.javagpt.common.exception;
 
 public class BeanCopyNotSuccessException extends RuntimeException {
     public BeanCopyNotSuccessException(Exception ex) {

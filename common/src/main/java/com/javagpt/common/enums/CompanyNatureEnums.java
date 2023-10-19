@@ -11,13 +11,14 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum CompanyNature {
+public enum CompanyNatureEnums {
 
-    SUCCESS(4712, "私企"),
-    BODY_NOT_MATCH(2830, "国企"),
-    SIGNATURE_NOT_MATCH(2834, "外企"),
-    NOT_FOUND(4713, "事业单位"),
-    INTERNAL_SERVER_ERROR(500, "公务员"),
+    PRIVATE(4712, "私企"),
+    COUNTRY(2830, "国企"),
+    FOREIGNER(2834, "外企"),
+    // 实际是私企
+    ENTERPRIZE(4713, "事业单位"),
+    INTERNAL(500, "公务员"),
     ;
 
     private int code;

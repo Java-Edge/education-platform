@@ -10,7 +10,7 @@
             <result property="image" column="image" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>
-            <result property="creatTime" column="creat_time" jdbcType="TIMESTAMP"/>
+            <result property="creatTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="creator" column="creator" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="updater" column="updater" jdbcType="VARCHAR"/>
@@ -20,8 +20,48 @@
 
     <sql id="Base_Column_List">
         id,name,image,
-        description,price,creat_time,
+        description,price,create_time,
         creator,update_time,updater,
         remark,source_url
     </sql>
+
+
+    <resultMap id="CourseVOMap" type="com.javagpt.back.vo.course.CourseVO">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DECIMAL"/>
+        <result property="sourceUrl" column="source_url" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="pageView" column="page_view" jdbcType="INTEGER"/>
+        <result property="creator" column="creator" jdbcType="VARCHAR"/>
+        <result property="updater" column="updater" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByPage" resultType="com.javagpt.back.vo.course.CourseVO" parameterType="com.javagpt.back.dto.CourseDTO">
+        select
+            sc.id as id,
+            sc.name as name,
+            sc.image as image,
+            sc.description as description,
+            sc.price as price,
+            sc.source_url as source_url,
+            sc.parent_id as parent_id,
+            sc.page_view as page_view,
+            sc.creator as creator,
+            sc.updater as updater,
+            sc.remark as remark
+        from source_course sc
+        <where>
+            <if test="dto.type != null">
+                and sc.type = #{dto.type,jdbcType=INTEGER}
+            </if>
+            <if test="dto.name != null and dto.name !=''">
+                and sc.name like concat('%',#{dto.name,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by sc.create_time desc
+    </select>
 </mapper>

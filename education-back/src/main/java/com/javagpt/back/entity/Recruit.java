@@ -11,9 +11,10 @@ import java.util.Date;
 
 /**
  * 招聘-职位
+ *
  * @TableName recruit
  */
-@TableName(value ="recruit")
+@TableName(value = "recruit")
 @Data
 public class Recruit implements Serializable {
     /**
@@ -171,6 +172,11 @@ public class Recruit implements Serializable {
      * 专业信息
      */
     private String major;
+
+    /**
+     * 浏览量
+     */
+    private Integer pageView;
 
 
     @TableField(exist = false)

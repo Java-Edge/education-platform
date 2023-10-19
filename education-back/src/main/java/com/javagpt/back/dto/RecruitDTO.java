@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * 招聘-职位
+ *
  * @TableName recruit
  */
 @ApiModel
@@ -95,7 +96,7 @@ public class RecruitDTO implements Serializable {
     private Integer salaryMax;
 
     /**
-     * 
+     *
      */
     private Integer salaryMonth;
 
@@ -118,4 +119,9 @@ public class RecruitDTO implements Serializable {
      * 融资规模
      */
     private List<Integer> scaleTag;
+
+    /**
+     * 关键词
+     */
+    private String keyword;
 }
