@@ -51,4 +51,7 @@ public class Comment implements Serializable {
 
     private Integer feId;
 
+    @TableField(exist = false)
+    private UserEntity user;
+
 }

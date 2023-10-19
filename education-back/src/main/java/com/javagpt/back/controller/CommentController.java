@@ -1,19 +1,21 @@
 package com.javagpt.back.controller;
 
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.dto.ResultStatus;
 import com.javagpt.back.entity.Comment;
-import com.javagpt.back.mapper.CommentMapper;
 import com.javagpt.back.service.CommentService;
 import com.javagpt.back.util.U;
-import org.apache.catalina.security.SecurityUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.swagger.models.auth.In;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -37,15 +39,9 @@ public class CommentController {
     }
 
     @PostMapping("postComment")
-    public ResultBody postComment(@RequestBody Comment comment) {
+    public ResultBody postComment(@RequestBody Comment comment, HttpServletRequest request) {
         try {
-            Integer userId = U.currentUserId;
-            if (userId == null) {
-//                ResultBody result = new ResultBody(ResultStatus.LOGIN_FAIL_NOT, "请先登录！", null);
-                return ResultBody.error("请登录之后再评论！");
-            }
-            comment.setUserId(userId);
-            commentService.save(comment);
+            commentService.saveComment(comment, request);
             return ResultBody.success();
         } catch (Exception e) {
 //            ResultBody result = new ResultBody(ResultStatus.LOGIN_FAIL_NOT, "请先登录！", null);

@@ -9,6 +9,7 @@ import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.Recruit;
 import com.javagpt.back.service.RecruitService;
 import com.javagpt.back.vo.RecruitVO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +25,14 @@ public class RecruitController {
     private RecruitService recruitService;
 
     @GetMapping("/getByPage")
-    public ResultBody getByPage(Integer current, Integer size) {
-        Page<Recruit> page = recruitService.selectPage(current, size);
+    public ResultBody getByPage(Integer current, Integer size, HttpServletRequest request) {
+        Page<Recruit> page = recruitService.selectPage(current, size, request);
         return ResultBody.success(page);
     }
 
     @PostMapping("/selectByCondition")
-    public ResultBody list(@RequestBody PageQueryParam<RecruitDTO> pageQueryParam) {
-        Page<RecruitVO> recruitVOPage = recruitService.selectByCondition(pageQueryParam);
+    public ResultBody list(@RequestBody PageQueryParam<RecruitDTO> pageQueryParam, HttpServletRequest request) {
+        Page<RecruitVO> recruitVOPage = recruitService.selectByCondition(pageQueryParam, request);
         return ResultBody.success(recruitVOPage);
     }
 
