@@ -6,6 +6,7 @@ import com.javagpt.back.dto.RecruitDTO;
 import com.javagpt.back.entity.Recruit;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.vo.RecruitVO;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public interface RecruitService extends IService<Recruit> {
 
-    Page<Recruit> selectPage(Integer current, Integer size);
+    Page<Recruit> selectPage(Integer current, Integer size, HttpServletRequest request);
 
 
     /**
@@ -28,7 +29,7 @@ public interface RecruitService extends IService<Recruit> {
      * @param pageQueryParam
      * @return
      */
-    Page<RecruitVO> selectByCondition( PageQueryParam<RecruitDTO> pageQueryParam);
+    Page<RecruitVO> selectByCondition( PageQueryParam<RecruitDTO> pageQueryParam, HttpServletRequest request);
 
 
     /**

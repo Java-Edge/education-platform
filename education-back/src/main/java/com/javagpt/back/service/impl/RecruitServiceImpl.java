@@ -11,8 +11,10 @@ import com.javagpt.back.mapper.DictionaryMapper;
 import com.javagpt.back.mapper.RecruitMapper;
 import com.javagpt.back.service.RecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.util.U;
 import com.javagpt.back.vo.RecruitVO;
 import com.javagpt.common.enums.SalaryType;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +42,13 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     private DictionaryMapper dictionaryMapper;
 
     @Override
-    public Page<Recruit> selectPage(Integer current, Integer size) {
+    public Page<Recruit> selectPage(Integer current, Integer size, HttpServletRequest request) {
+        Integer userId = U.getCurrentUserId(request);
         Page<Recruit> page = new Page<>(current, size);
+        // 如果用户未登录，直接返回空数据
+        if (userId == null) {
+            return page;
+        }
         QueryWrapper<Recruit> qw = new QueryWrapper<>();
         qw.orderByDesc("create_time");
         Page<Recruit> recruitPage = this.baseMapper.selectPage(page, qw);
@@ -49,10 +56,16 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     }
 
     @Override
-    public Page<RecruitVO> selectByCondition(PageQueryParam<RecruitDTO> pageQueryParam) {
+    public Page<RecruitVO> selectByCondition(PageQueryParam<RecruitDTO> pageQueryParam, HttpServletRequest request) {
         Page<Recruit> page = new Page<>();
         page.setCurrent(pageQueryParam.getPageNo());
         page.setSize(pageQueryParam.getPageSize());
+
+        Integer userId = U.getCurrentUserId(request);
+        // 如果用户未登录，直接返回空数据
+        if (userId == null) {
+            return new Page<RecruitVO>();
+        }
 
         RecruitDTO recruitDTO = pageQueryParam.getParam();
 
