@@ -6,15 +6,12 @@ import com.javagpt.back.entity.PermissionConfigTypeEnum;
 import com.javagpt.back.interceptor.CheckTokenInterceptor;
 import com.javagpt.back.service.PermissionConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.javagpt.common.util.ApplicationUtils.getApplicationContext;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
