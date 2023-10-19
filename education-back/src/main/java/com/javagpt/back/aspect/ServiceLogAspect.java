@@ -3,7 +3,6 @@ package com.javagpt.back.aspect;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.util.concurrent.RateLimiter;
 import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.mapper.ArticleMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
@@ -24,7 +23,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 @Component
 @Aspect
@@ -63,8 +61,7 @@ public class ServiceLogAspect {
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
     @Around("rateLimitPointCut()")
     public Object rateLimit(ProceedingJoinPoint joinPoint) {
-        double rate = rateLimiter.getRate();
-        System.out.println(rate);
+        logger.info("当前限流器速率：" + rateLimiter.getRate());
         if (rateLimiter.tryAcquire()) {
             return joinPoint.proceed();
         } else {
@@ -115,7 +112,6 @@ public class ServiceLogAspect {
             logger.error("Error in calPageView: " + e.getMessage(), e);
         }
     }
-
 
 }
 
