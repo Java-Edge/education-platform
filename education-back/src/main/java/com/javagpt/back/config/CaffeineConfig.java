@@ -30,7 +30,7 @@ public class CaffeineConfig {
      * 设置导航页面工具列表的缓存
      */
     @Bean
-    public Cache<Integer, List<Pilot>> pilotRefreshCache() {
+    public Cache<String, List<Pilot>> pilotCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
                 .expireAfterWrite(5, TimeUnit.MINUTES)
@@ -41,7 +41,7 @@ public class CaffeineConfig {
      * 字典表的缓存
      */
     @Bean
-    public Cache<Integer, List<Dictionary>> dictRefreshCache() {
+    public Cache<String, List<Dictionary>> dictCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
                 .expireAfterWrite(20, TimeUnit.MINUTES)
@@ -52,7 +52,7 @@ public class CaffeineConfig {
      * 字典种类表的缓存
      */
     @Bean
-    public Cache<Integer, List<DictionaryType>> dictTypeRefreshCache() {
+    public Cache<String, List<DictionaryType>> dictTypeCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
                 .expireAfterWrite(20, TimeUnit.MINUTES)

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.javagpt.common.constant.Constants.cache_max_dict_refresh_counts;
+import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
 
 @Service
 public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictionaryType> implements DictionaryTypeService {
@@ -25,10 +25,7 @@ public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, Dicti
     private DictService dictService;
 
     @Resource
-    private Cache<Integer, List<Dictionary>> dictRefreshCache;
-
-    @Resource
-    private Cache<Integer, List<DictionaryType>> dictTypeRefreshCache;
+    private Cache<String, List<DictionaryType>> dictTypeRefreshCache;
 
     @Override
     public DictionaryType selectList(String typeKey) {
@@ -42,7 +39,7 @@ public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, Dicti
 
     @Override
     public List<DictionaryType> listByTypeKeys(List<String> typeKeys) {
-        List<DictionaryType> dictTypes = dictTypeRefreshCache.get(cache_max_dict_refresh_counts, s -> {
+        List<DictionaryType> dictTypes = dictTypeRefreshCache.get(cache_max_dict_local_cache, s -> {
             QueryWrapper<DictionaryType> dictTypeQW = new QueryWrapper<>();
             dictTypeQW.in("type_key", typeKeys);
             return dictTypeMapper.selectList(dictTypeQW);

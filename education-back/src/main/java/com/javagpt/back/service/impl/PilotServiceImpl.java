@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.javagpt.common.constant.Constants.cache_max_dict_refresh_counts;
-import static com.javagpt.common.constant.Constants.cache_max_pilot_refresh_counts;
+import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
+import static com.javagpt.common.constant.Constants.cache_max_pilot_local_cache;
 
 @Service
 @Slf4j
@@ -28,19 +28,19 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
     private PilotMapper pilotMapper;
 
     @Resource
-    private DictService dictionaryService;
+    private DictService dictService;
 
     @Resource
-    private Cache<Integer, List<Pilot>> pilotRefreshCountsCache;
+    private Cache<String, List<Pilot>> pilotCache;
 
     @Resource
-    private Cache<Integer, List<Dictionary>> dictRefreshCache;
+    private Cache<String, List<Dictionary>> dictCache;
 
     @Override
     public Map<String, List<Pilot>> getList() {
-        List<Dictionary> pilotTypesCache = dictRefreshCache.get(cache_max_dict_refresh_counts, s -> {
+        List<Dictionary> pilotTypesCache = dictCache.get(cache_max_dict_local_cache, s -> {
             log.info("缓存过期，从 MySQL 查询");
-            return dictionaryService.selectList("pilot_type");
+            return dictService.selectList("pilot_type");
         });
 
         Map<String , List<Pilot>> ret = new HashMap<>();
@@ -49,7 +49,7 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
             map.put(d.getValue(), d.getLabel());
         }
 
-        List<Pilot> pilotsCache = pilotRefreshCountsCache.get(cache_max_pilot_refresh_counts, s -> {
+        List<Pilot> pilotsCache = pilotCache.get(cache_max_pilot_local_cache, s -> {
             QueryWrapper<Pilot> qw = new QueryWrapper<>();
             return pilotMapper.selectList(qw);
         });
@@ -58,5 +58,12 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
             ret.computeIfAbsent(pilot.getPilotTypeName(), key -> new ArrayList<>()).add(pilot);
         }
         return ret;
+    }
+
+    @Override
+    public void refresh() {
+        QueryWrapper<Pilot> qw = new QueryWrapper<>();
+        List<Pilot> pilots = pilotMapper.selectList(qw);
+        pilotCache.put(cache_max_pilot_local_cache, pilots);
     }
 }

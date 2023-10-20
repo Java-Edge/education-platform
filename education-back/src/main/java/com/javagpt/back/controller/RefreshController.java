@@ -1,28 +1,27 @@
 package com.javagpt.back.controller;
 
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.back.service.ArticleService;
 import com.javagpt.back.service.PilotService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 导航工具
+ * 强制刷新指定表数据到本地缓存
  */
 @RestController
-@RequestMapping("/pilot")
-@Slf4j
-public class PilotController {
+@RequestMapping("/refresh")
+public class RefreshController {
 
     @Autowired
     private PilotService pilotService;
 
-    @GetMapping("getList")
-    public ResultBody getList() {
-        return ResultBody.success(pilotService.getList());
+    /**
+     * 刷新导航表
+     */
+    @PostMapping("/pilot")
+    public void save() {
+        pilotService.refresh();
     }
-
 }
-
