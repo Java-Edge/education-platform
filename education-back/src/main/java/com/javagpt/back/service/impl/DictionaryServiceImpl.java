@@ -7,7 +7,9 @@ import com.javagpt.back.mapper.DictionaryMapper;
 import com.javagpt.back.mapper.DictionaryTypeMapper;
 import com.javagpt.back.service.DictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.vo.MenuVO;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +27,10 @@ import java.util.Map;
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictionaryService {
 
 
+    @Autowired
+    private DictionaryMapper dictionaryMapper;
+
+
     @Override
     public List<Dictionary> selectList(String typeKey) {
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
@@ -34,4 +40,17 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         List<Dictionary> dictionaries = this.getBaseMapper().selectList(queryWrapper);
         return dictionaries;
     }
+
+    @Override
+    public List<MenuVO> selectMenuList(String typeKey) {
+        return dictionaryMapper.selectMenuList(typeKey);
+
+    }
+
+    @Override
+    public List<MenuVO> selectChildMenuList(String typeKey, Integer parentId) {
+        return dictionaryMapper.selectChildMenuList(typeKey,parentId);
+    }
+
+
 }

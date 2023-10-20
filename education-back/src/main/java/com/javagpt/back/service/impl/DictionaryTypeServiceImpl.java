@@ -7,6 +7,7 @@ import com.javagpt.back.mapper.DictionaryTypeMapper;
 import com.javagpt.back.service.DictionaryService;
 import com.javagpt.back.service.DictionaryTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.vo.MenuVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -51,4 +52,6 @@ public class DictionaryTypeServiceImpl extends ServiceImpl<DictionaryTypeMapper,
         }
         return dictionaryTypes;
     }
+
+
 }

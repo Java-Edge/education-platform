@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.javagpt.back.mapper.DictionaryMapper">
+
+    <resultMap id="BaseResultMap" type="com.javagpt.back.entity.Dictionary">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="typeKey" column="type_key" jdbcType="VARCHAR"/>
+            <result property="label" column="label" jdbcType="VARCHAR"/>
+            <result property="value" column="value" jdbcType="VARCHAR"/>
+            <result property="minValue" column="min_value" jdbcType="INTEGER"/>
+            <result property="maxValue" column="max_value" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,type_key,label,
+        value,min_value,max_value,
+        status,create_time,sort,
+        parent_id
+    </sql>
+
+
+    <resultMap id="MenuVOMap" type="com.javagpt.back.vo.MenuVO">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
+        <collection property="children" column="{typeKey=type_key,parentId=id}" javaType="java.util.List" ofType="com.javagpt.back.vo.MenuVO" select="selectChildMenuList"/>
+    </resultMap>
+
+    <select id="selectMenuList" resultMap="MenuVOMap">
+        select d.value as id,
+               d.label as name,
+               d.sort  as sort,
+               case when (#{typeKey} IS NULL) then NULL else #{typeKey} end as type_key /*构建虚拟列*/
+        from dictionary d
+        where d.type_key = #{typeKey,jdbcType=VARCHAR}
+          and d.parent_id = 0
+          and d.status = 1
+    </select>
+
+    <select id="selectChildMenuList" parameterType="java.util.Map" resultType="com.javagpt.back.vo.MenuVO">
+        select d.value as id,
+               d.label as name,
+               d.sort  as sort
+        from dictionary d
+        where d.type_key = #{typeKey,jdbcType=VARCHAR}
+          and d.parent_id = #{parentId,jdbcType=INTEGER}
+          and d.status = 1
+    </select>
 
 </mapper>
