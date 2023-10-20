@@ -44,7 +44,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     public List<CourseEntity> getRecommendCourses() {
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
                 .eq(CourseEntity::getType, 0)
-                .orderByDesc(CourseEntity::getCreateTime)
+                .orderByDesc(CourseEntity::getPageView)
                 .last("limit 8");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
         return list;
@@ -74,6 +74,13 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
         Page<CourseVO> page = new Page<>(pageQueryParam.getPageNo(), pageQueryParam.getPageSize());
         Page<CourseVO> courseVOPage = courseMapper.selectByPage(page, pageQueryParam.getParam());
         return courseVOPage;
+    }
+
+    @Override
+    public List<CourseEntity> getList() {
+        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
+        qw.eq("type", 1);
+        return courseMapper.selectList(qw);
     }
 }
 
