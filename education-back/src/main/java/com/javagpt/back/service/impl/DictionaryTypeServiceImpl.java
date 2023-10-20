@@ -1,10 +1,11 @@
 package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.benmanes.caffeine.cache.Cache;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.DictionaryType;
-import com.javagpt.back.mapper.DictionaryTypeMapper;
-import com.javagpt.back.service.DictionaryService;
+import com.javagpt.back.mapper.DictTypeMapper;
+import com.javagpt.back.service.DictService;
 import com.javagpt.back.service.DictionaryTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
@@ -12,43 +13,46 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author zqy
- * @since 2023-07-28
- */
+import static com.javagpt.common.constant.Constants.cache_max_dict_refresh_counts;
+
 @Service
-public class DictionaryTypeServiceImpl extends ServiceImpl<DictionaryTypeMapper, DictionaryType> implements DictionaryTypeService {
+public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictionaryType> implements DictionaryTypeService {
 
     @Resource
-    private DictionaryTypeMapper dictionaryTypeMapper;
+    private DictTypeMapper dictTypeMapper;
 
     @Resource
-    private DictionaryService dictionaryService;
+    private DictService dictService;
+
+    @Resource
+    private Cache<Integer, List<Dictionary>> dictRefreshCache;
+
+    @Resource
+    private Cache<Integer, List<DictionaryType>> dictTypeRefreshCache;
 
     @Override
     public DictionaryType selectList(String typeKey) {
         QueryWrapper<DictionaryType> qw = new QueryWrapper<>();
         qw.eq("type_key", typeKey);
-        DictionaryType dictionaryType = dictionaryTypeMapper.selectOne(qw);
-        List<Dictionary> dictionaries = dictionaryService.selectList(typeKey);
+        DictionaryType dictionaryType = dictTypeMapper.selectOne(qw);
+        List<Dictionary> dictionaries = dictService.selectList(typeKey);
         dictionaryType.setList(dictionaries);
         return dictionaryType;
     }
 
     @Override
-    public List<DictionaryType> selectListByMultiTypeKey(List<String> typeKeys) {
-        QueryWrapper<DictionaryType> qw = new QueryWrapper<>();
-        qw.in("type_key", typeKeys);
-        List<DictionaryType> dictionaryTypes = dictionaryTypeMapper.selectList(qw);
-        for (DictionaryType dt : dictionaryTypes) {
-            String typeKey = dt.getTypeKey();
-            List<Dictionary> dictionaries = dictionaryService.selectList(typeKey);
-            dt.setList(dictionaries);
+    public List<DictionaryType> listByTypeKeys(List<String> typeKeys) {
+        List<DictionaryType> dictTypes = dictTypeRefreshCache.get(cache_max_dict_refresh_counts, s -> {
+            QueryWrapper<DictionaryType> dictTypeQW = new QueryWrapper<>();
+            dictTypeQW.in("type_key", typeKeys);
+            return dictTypeMapper.selectList(dictTypeQW);
+        });
+
+        for (DictionaryType dictType : dictTypes) {
+            String typeKey = dictType.getTypeKey();
+            List<Dictionary> dictList4TypeKey = dictService.selectList(typeKey);
+            dictType.setList(dictList4TypeKey);
         }
-        return dictionaryTypes;
+        return dictTypes;
     }
 }

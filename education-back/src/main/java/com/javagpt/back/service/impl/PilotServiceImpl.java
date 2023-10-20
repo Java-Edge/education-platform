@@ -6,7 +6,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.mapper.PilotMapper;
-import com.javagpt.back.service.DictionaryService;
+import com.javagpt.back.service.DictService;
 import com.javagpt.back.service.PilotService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
     private PilotMapper pilotMapper;
 
     @Resource
-    private DictionaryService dictionaryService;
+    private DictService dictionaryService;
 
     @Resource
     private Cache<Integer, List<Pilot>> pilotRefreshCountsCache;

@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author zqy
  * @since 2023-07-28
  */
-public interface DictionaryTypeMapper extends BaseMapper<DictionaryType> {
+public interface DictTypeMapper extends BaseMapper<DictionaryType> {
 
 }
