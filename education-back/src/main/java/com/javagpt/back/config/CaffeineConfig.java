@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class CaffeineConfig {
@@ -32,6 +33,7 @@ public class CaffeineConfig {
     public Cache<Integer, List<Pilot>> pilotRefreshCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
+                .expireAfterWrite(5, TimeUnit.MINUTES)
                 .build();
     }
 
@@ -42,6 +44,7 @@ public class CaffeineConfig {
     public Cache<Integer, List<Dictionary>> dictRefreshCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
+                .expireAfterWrite(20, TimeUnit.MINUTES)
                 .build();
     }
 
@@ -52,6 +55,7 @@ public class CaffeineConfig {
     public Cache<Integer, List<DictionaryType>> dictTypeRefreshCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
+                .expireAfterWrite(20, TimeUnit.MINUTES)
                 .build();
     }
 }
