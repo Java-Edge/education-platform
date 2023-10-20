@@ -6,20 +6,9 @@ import com.javagpt.back.vo.MenuVO;
 
 import java.util.List;
 
-/**
- * <p>
- *  服务类
- * </p>
- *
- * @author zqy
- * @since 2023-07-28
- */
 public interface DictionaryTypeService extends IService<DictionaryType> {
 
     DictionaryType selectList(String typeKey);
 
-    List<DictionaryType> selectListByMultiTypeKey(List<String> typeKeys);
-
-
-
+    List<DictionaryType> listByTypeKeys(List<String> typeKeys);
 }

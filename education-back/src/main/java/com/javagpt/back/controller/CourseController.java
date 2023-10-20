@@ -29,13 +29,14 @@ public class CourseController {
         return ResultBody.success(list);
     }
 
+    /**
+     * 获取专栏列表
+     * @return 全部专栏
+     */
     @GetMapping("specialList")
     public ResultBody specialList() {
-        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
-        // 获取专栏内容
-        qw.eq("type", 1);
-        qw.last("limit 15");
-        List<CourseEntity> list = courseService.list(qw);
+
+        List<CourseEntity> list = courseService.getList();
         return ResultBody.success(list);
     }
 

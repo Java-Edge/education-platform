@@ -28,7 +28,7 @@ public interface CourseService extends IService<CourseEntity> {
     /**
      * 获取推荐课程
      *
-     * @return
+     * @return PV最高的
      */
     List<CourseEntity> getRecommendCourses();
 
@@ -49,4 +49,5 @@ public interface CourseService extends IService<CourseEntity> {
      */
     Page<CourseVO> search(PageQueryParam<CourseDTO> pageQueryParam);
 
+    List<CourseEntity> getList();
 }

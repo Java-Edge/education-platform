@@ -9,4 +9,6 @@ import java.util.Map;
 public interface PilotService extends IService<Pilot> {
 
     Map<String, List<Pilot>> getList();
+
+    void refresh();
 }

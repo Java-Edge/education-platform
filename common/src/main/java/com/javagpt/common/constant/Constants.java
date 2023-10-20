@@ -12,7 +12,7 @@ public interface Constants {
 
     String DELETE_FLAG = "delete_flag";
 
-    int cache_max_pilot_refresh_counts = 3;
+    String cache_max_pilot_local_cache = "cache_max_pilot_local_cache";
 
-    int cache_max_dict_refresh_counts = 3;
+    String cache_max_dict_local_cache = "cache_max_dict_local_cache";
 }

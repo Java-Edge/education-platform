@@ -2,10 +2,8 @@ package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javagpt.back.entity.Dictionary;
-import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.mapper.DictionaryMapper;
-import com.javagpt.back.mapper.DictionaryTypeMapper;
-import com.javagpt.back.service.DictionaryService;
+import com.javagpt.back.service.DictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.vo.MenuVO;
 import jakarta.annotation.Resource;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -24,7 +21,7 @@ import java.util.Map;
  * @since 2023-07-28
  */
 @Service
-public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictionaryService {
+public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictService {
 
 
     @Autowired
