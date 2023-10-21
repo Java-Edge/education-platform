@@ -10,7 +10,7 @@
             <result property="image" column="image" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>
-            <result property="creatTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="creator" column="creator" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="updater" column="updater" jdbcType="VARCHAR"/>
@@ -60,6 +60,37 @@
             </if>
             <if test="dto.name != null and dto.name !=''">
                 and sc.name like concat('%',#{dto.name,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by sc.create_time desc
+    </select>
+
+    <select id="queryPage" resultMap="CourseVOMap">
+        select
+        sc.id as id,
+        sc.name as name,
+        sc.image as image,
+        sc.description as description,
+        sc.price as price,
+        sc.source_url as source_url,
+        sc.parent_id as parent_id,
+        sc.page_view as page_view,
+        sc.creator as creator,
+        sc.updater as updater,
+        sc.remark as remark
+        from source_course sc
+        <where>
+            <if test="params.type != null">
+                and sc.type = #{params.type,jdbcType=INTEGER}
+            </if>
+            <if test="params.name != null and params.name !=''">
+                and sc.name like concat('%',#{params.name,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="params.categories != null and params.categories.size > 0">
+                and sc.category in
+                <foreach collection="params.categories" separator="," open="(" close=")" item="item">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
             </if>
         </where>
         order by sc.create_time desc

@@ -1,9 +1,9 @@
 package com.javagpt.back.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.common.req.PageQueryParam;
+import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.vo.course.CourseVO;
@@ -49,5 +49,11 @@ public interface CourseService extends IService<CourseEntity> {
      */
     Page<CourseVO> search(PageQueryParam<CourseDTO> pageQueryParam);
 
-    List<CourseEntity> getList();
+    /**
+     * 专栏列表
+     *
+     * @param pageQueryParam
+     * @return
+     */
+    Page<CourseVO> getSpecialList(PageQueryParam<SpecialQueryDTO> pageQueryParam);
 }

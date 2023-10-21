@@ -3,8 +3,9 @@ package com.javagpt.back.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.dto.PageQueryParam;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.req.PageQueryParam;
+import com.javagpt.common.resp.ResultBody;
+import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.vo.course.CourseVO;
@@ -33,14 +34,13 @@ public class CourseController {
      * 获取专栏列表
      * @return 全部专栏
      */
-    @GetMapping("specialList")
-    public ResultBody specialList() {
-
-        List<CourseEntity> list = courseService.getList();
+    @PostMapping("/special/search")
+    public ResultBody specialList(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+        Page<CourseVO> list = courseService.getSpecialList(pageQueryParam);
         return ResultBody.success(list);
     }
 
-    @PostMapping("search")
+    @PostMapping("/search")
     public ResultBody search(@RequestBody PageQueryParam<CourseDTO> pageQueryParam){
         Page<CourseVO> page = courseService.search(pageQueryParam);
         return ResultBody.success(page);

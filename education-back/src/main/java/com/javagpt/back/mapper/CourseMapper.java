@@ -1,12 +1,16 @@
 package com.javagpt.back.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
+import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.javagpt.back.vo.course.CourseVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 /**
  * @author MSIK
@@ -25,7 +29,18 @@ public interface CourseMapper extends BaseMapper<CourseEntity> {
      * @param dto
      * @return
      */
-    Page<CourseVO> selectByPage(@Param("Page") Page<CourseVO> page, @Param("dto") CourseDTO dto);
+    Page<CourseVO> selectByPage(@Param("page") Page<CourseVO> page, @Param("dto") CourseDTO dto);
+
+
+    /***
+     * 分页查询课程表
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    Page<CourseVO> queryPage(@Param("page") Page<CourseVO> page, @Param("params") SpecialQueryDTO params);
+
 }
 
 
