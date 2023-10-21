@@ -35,5 +35,6 @@ public class PermissionConfig implements Serializable {
      */
     private Integer type;
 
+    private String des;
 
 }

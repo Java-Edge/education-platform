@@ -3,11 +3,11 @@ package com.javagpt.back.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.dto.PageQueryParam;
-import com.javagpt.back.dto.ResultBody;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.vo.course.CourseVO;
+import com.javagpt.common.req.PageQueryParam;
+import com.javagpt.common.resp.ResultBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

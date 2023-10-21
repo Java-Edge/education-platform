@@ -2,9 +2,9 @@ package com.javagpt.back.config;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javagpt.back.entity.PermissionConfig;
-import com.javagpt.back.entity.PermissionConfigTypeEnum;
 import com.javagpt.back.interceptor.CheckTokenInterceptor;
 import com.javagpt.back.service.PermissionConfigService;
+import com.javagpt.common.enums.PermissionConfigTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
