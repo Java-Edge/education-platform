@@ -1,7 +1,7 @@
 package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.entity.RoadMapDetail;
 import com.javagpt.back.service.RoadmapService;

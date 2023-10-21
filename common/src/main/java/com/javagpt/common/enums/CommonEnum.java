@@ -1,6 +1,6 @@
-package com.javagpt.back.entity;
+package com.javagpt.common.enums;
 
-import com.javagpt.back.service.BaseInfoInterface;
+import com.javagpt.common.bos.BaseInfoInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

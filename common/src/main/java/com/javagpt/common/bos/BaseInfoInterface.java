@@ -1,4 +1,4 @@
-package com.javagpt.back.service;
+package com.javagpt.common.bos;
 
 public interface BaseInfoInterface {
  

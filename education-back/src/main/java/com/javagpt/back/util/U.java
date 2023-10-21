@@ -1,7 +1,6 @@
 package com.javagpt.back.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.javagpt.back.dto.ResultBody;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;

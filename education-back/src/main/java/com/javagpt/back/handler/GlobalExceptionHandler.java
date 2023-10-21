@@ -1,6 +1,6 @@
 package com.javagpt.back.handler;
 
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.constant.SystemConstant;
 import com.javagpt.common.exception.BizException;
 import jakarta.servlet.http.HttpServletRequest;

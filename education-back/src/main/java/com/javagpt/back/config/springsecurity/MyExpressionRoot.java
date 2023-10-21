@@ -1,13 +1,8 @@
 package com.javagpt.back.config.springsecurity;
 
-import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.dto.ResultStatus;
-import com.javagpt.back.entity.Role;
 import com.javagpt.back.entity.UserEntity;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserRoleService;
-import com.javagpt.back.service.impl.UserServiceImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

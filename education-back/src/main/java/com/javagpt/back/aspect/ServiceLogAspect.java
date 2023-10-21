@@ -2,7 +2,7 @@ package com.javagpt.back.aspect;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.util.concurrent.RateLimiter;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;

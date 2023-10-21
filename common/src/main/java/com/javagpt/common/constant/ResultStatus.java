@@ -1,4 +1,4 @@
-package com.javagpt.back.dto;
+package com.javagpt.common.constant;
 
 public class ResultStatus {
 

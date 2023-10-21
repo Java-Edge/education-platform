@@ -1,8 +1,8 @@
 package com.javagpt.back.config.springsecurity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javagpt.back.dto.ResultBody;
-import com.javagpt.back.dto.ResultStatus;
+import com.javagpt.common.resp.ResultBody;
+import com.javagpt.common.constant.ResultStatus;
 import com.javagpt.common.constant.Constants;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

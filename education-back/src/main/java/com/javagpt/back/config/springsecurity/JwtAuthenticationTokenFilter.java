@@ -3,8 +3,8 @@
 //import cn.hutool.jwt.JWTUtil;
 //import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.javagpt.back.dto.ResultBody;
-//import com.javagpt.back.dto.ResultStatus;
+//import com.javagpt.common.resp.ResultBody;
+//import com.javagpt.common.constant.ResultStatus;
 //import io.jsonwebtoken.*;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.context.SecurityContextHolder;

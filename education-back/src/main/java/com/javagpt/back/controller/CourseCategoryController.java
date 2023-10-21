@@ -1,6 +1,6 @@
 package com.javagpt.back.controller;
 
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.service.CourseCategoryService;
 import com.javagpt.back.vo.course.CourseCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,10 @@
 package com.javagpt.back.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.back.dto.RecruitDTO;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Recruit;
 import com.javagpt.back.service.RecruitService;
 import com.javagpt.back.vo.RecruitVO;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 

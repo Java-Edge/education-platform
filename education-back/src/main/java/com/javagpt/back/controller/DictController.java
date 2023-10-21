@@ -1,6 +1,6 @@
 package com.javagpt.back.controller;
 
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.service.DictService;
 import com.javagpt.back.service.DictionaryTypeService;

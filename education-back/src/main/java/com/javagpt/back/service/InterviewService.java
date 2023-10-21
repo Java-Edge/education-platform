@@ -1,9 +1,8 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.ArticleDTO;
-import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.back.entity.InterviewEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.vo.ArticleVO;

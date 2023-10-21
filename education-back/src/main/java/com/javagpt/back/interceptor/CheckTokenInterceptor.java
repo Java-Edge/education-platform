@@ -1,8 +1,8 @@
 package com.javagpt.back.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javagpt.back.dto.ResultStatus;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.constant.ResultStatus;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.constant.Constants;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;

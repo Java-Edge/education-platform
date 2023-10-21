@@ -1,7 +1,7 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.PageQueryParam;
+import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.back.dto.RecruitDTO;
 import com.javagpt.back.entity.Recruit;
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -2,7 +2,7 @@ package com.javagpt.back.controller;
 
 
 import com.alibaba.fastjson.JSONArray;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.service.CareerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
 package com.javagpt.back.controller;
 
 
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.dto.UserDTO;
 import com.javagpt.back.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;

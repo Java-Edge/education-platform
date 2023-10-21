@@ -1,9 +1,8 @@
 package com.javagpt.back.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.entity.Project;
 import com.javagpt.back.service.ProjectService;

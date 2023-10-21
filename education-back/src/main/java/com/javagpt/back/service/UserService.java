@@ -1,7 +1,7 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.javagpt.back.dto.ResultBody;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.dto.UserDTO;
 import com.javagpt.back.entity.UserEntity;
 import jakarta.servlet.http.HttpServletRequest;
