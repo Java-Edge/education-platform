@@ -1,18 +1,21 @@
-package com.javagpt.back.entity;
+package com.javagpt.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @author 千祎来了
- * @date 2023/10/19 22:35
+ * @date 2023/10/21 23:30
  */
 @Getter
 @AllArgsConstructor
-public enum PermissionConfigTypeEnum {
-    NEED_LOGIN(1, "需要登陆");
+public enum CourseEnum {
+
+    VIDEO(0, "视频"),
+    SPECIAL(1, "专栏");
 
     private int resultCode;
 
     private String resultMsg;
+
 }

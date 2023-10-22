@@ -13,6 +13,8 @@ import com.javagpt.back.mapper.CourseMapper;
 import com.javagpt.back.mapper.DictionaryMapper;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.vo.course.CourseVO;
+import com.javagpt.common.enums.CourseEnum;
+import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +44,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     public List<CourseEntity> getFiveCourse() {
 
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
-                .eq(CourseEntity::getType, 0)
+                .eq(CourseEntity::getType, CourseEnum.VIDEO.getResultCode())
                 .orderByDesc(CourseEntity::getCreateTime)
                 .last("limit 5");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
@@ -52,7 +54,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     @Override
     public List<CourseEntity> getRecommendCourses() {
         LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
-                .eq(CourseEntity::getType, 0)
+                .eq(CourseEntity::getType, CourseEnum.VIDEO.getResultCode())
                 .orderByDesc(CourseEntity::getPageView)
                 .last("limit 8");
         List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
@@ -62,7 +64,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     @Override
     public List<CourseEntity> selectList() {
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
-        qw.eq("type", 0);
+        qw.eq("type", CourseEnum.VIDEO.getResultCode());
         List<CourseEntity> courseEntities = this.getBaseMapper().selectList(qw);
         return courseEntities;
     }
