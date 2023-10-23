@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * 编辑文章
+ * 动态页面展示文章信息
+ */
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
@@ -28,8 +32,8 @@ public class ArticleController {
     }
 
     @GetMapping("/getByPage")
-    public ResultBody getByPage(Integer current, Integer size, ArticleEntity article) {
-        Page<ArticleEntity> page = articleService.getByPage(current, size, article);
+    public ResultBody getByPage(Integer current, Integer size) {
+        Page<ArticleEntity> page = articleService.getByPage(current, size);
         return ResultBody.success(page);
     }
 

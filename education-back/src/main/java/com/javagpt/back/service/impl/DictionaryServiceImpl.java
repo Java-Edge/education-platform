@@ -1,16 +1,15 @@
 package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.mapper.DictTypeMapper;
 import com.javagpt.back.mapper.DictionaryMapper;
 import com.javagpt.back.service.DictService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.vo.MenuVO;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

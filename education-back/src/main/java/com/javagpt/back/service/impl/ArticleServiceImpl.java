@@ -7,6 +7,7 @@ import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.mapper.ArticleMapper;
 import com.javagpt.back.service.ArticleService;
 import com.javagpt.common.constant.Constants;
+import com.javagpt.common.enums.ArticleTypeEnums;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,12 +32,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
     }
 
     @Override
-    public Page<ArticleEntity> getByPage(Integer current, Integer size, ArticleEntity article) {
+    public Page<ArticleEntity> getByPage(Integer current, Integer size) {
 
         Page<ArticleEntity> page = new Page<>(current, size);
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
         qw.eq(Constants.DELETE_FLAG, 0);
-        qw.eq(article.getType() != null, "type", article.getType());
+        qw.eq("type", ArticleTypeEnums.NEWS.getCode());
         qw.orderByDesc("create_time");
         qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view");
         return this.getBaseMapper().selectPage(page, qw);

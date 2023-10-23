@@ -37,7 +37,7 @@ public interface ArticleService extends IService<ArticleEntity> {
      * @param size
      * @param article
      */
-    Page<ArticleEntity> getByPage(Integer current, Integer size, ArticleEntity article);
+    Page<ArticleEntity> getByPage(Integer current, Integer size);
 
     /**
      * 上传图片

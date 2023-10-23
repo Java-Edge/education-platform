@@ -7,6 +7,7 @@ import com.javagpt.common.constant.Constants;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,12 +19,15 @@ import java.io.PrintWriter;
 @Component
 public class CheckTokenInterceptor implements HandlerInterceptor {
 
+    @Value("${spring.profiles.active}")
+    private String env;
+    
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        // TODO 调试代码
-//        if (1 == 1) {
-//            return true;
-//        }
+        if (env.equals("dev")) {
+            return true;
+        }
         //关于浏览器的请求预检.在跨域的情况下，非简单请求会先发起一次空body的OPTIONS请求，称为"预检"请求，用于向服务器请求权限信息，等预检请求被成功响应后，才发起真正的http请求。
         String method = request.getMethod();
         if ("OPTIONS".equalsIgnoreCase(method)) {
