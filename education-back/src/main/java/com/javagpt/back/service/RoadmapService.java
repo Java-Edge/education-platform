@@ -6,6 +6,7 @@ import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.entity.RoadMapDetail;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface RoadmapService extends IService<RoadMap> {
@@ -14,4 +15,6 @@ public interface RoadmapService extends IService<RoadMap> {
     List<RoadMapDetail> getRoadMapDetail(Integer roadMapId);
 
     List<RoadMap> getRecommendRoad();
+
+    Map<Integer, List<RoadMap>> getAll();
 }

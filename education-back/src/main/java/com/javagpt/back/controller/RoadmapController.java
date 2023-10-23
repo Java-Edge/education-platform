@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -21,6 +22,12 @@ public class RoadmapController {
     @GetMapping("/route")
     public ResultBody getRoadmap(@RequestParam Integer categoryId, Integer current, Integer size) {
         Page<RoadMap> roadmap = roadmapService.getRoadmap(categoryId, current, size);
+        return ResultBody.success(roadmap);
+    }
+
+    @GetMapping("/getAll")
+    public ResultBody getAll() {
+        Map<Integer, List<RoadMap>> roadmap = roadmapService.getAll();
         return ResultBody.success(roadmap);
     }
 

@@ -12,10 +12,12 @@ import com.javagpt.back.mapper.RoadMapTagMapper;
 import com.javagpt.back.mapper.RoadMapMapper;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.service.RoadmapService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,14 +42,14 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
         /**
          * 如果是要查询热门数据，根据收藏数进行排序即可
          */
-        if (categoryId == 0) {
+        if (categoryId != null && categoryId == 0) {
             qw.select("id", "title","img", "img2", "left(description, 50) description", "collect", "course", "step", "category_id");
             qw.orderByDesc("collect");
             this.getBaseMapper().selectPage(page, qw);
             return page;
         }
 
-        qw.eq("category_id", categoryId);
+        qw.eq(categoryId != null, "category_id", categoryId);
         qw.select("id", "title","img", "img2", "left(description, 50) description", "collect", "course", "step", "category_id");
         this.getBaseMapper().selectPage(page, qw);
         QueryWrapper<RoadMapDetail> qwd = new QueryWrapper<>();
@@ -101,6 +103,27 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
         qw.orderByDesc("collect");
         qw.last("limit 2");
         return this.getBaseMapper().selectList(qw);
+    }
+
+    @Override
+    public Map<Integer, List<RoadMap>> getAll() {
+        QueryWrapper<RoadMap> qw = new QueryWrapper<>();
+        List<RoadMap> roadMaps = this.getBaseMapper().selectList(qw);
+        Map<Integer, List<RoadMap>> result = new HashMap<>();
+        for (RoadMap roadMap : roadMaps) {
+            List<RoadMap> rms = result.getOrDefault(roadMap.getCategoryId(), new ArrayList<>());
+            rms.add(roadMap);
+            result.put(roadMap.getCategoryId(), rms);
+        }
+
+        // 查出推荐学习路线
+        QueryWrapper<RoadMap> qw2 = new QueryWrapper<>();
+        qw2.select("id", "title","img", "img2", "left(description, 50) description", "collect", "course", "step", "category_id");
+        qw2.orderByDesc("collect");
+        qw2.last("limit 3");
+        List<RoadMap> recommend = this.getBaseMapper().selectList(qw2);
+        result.put(0, recommend);
+        return result;
     }
 
 
