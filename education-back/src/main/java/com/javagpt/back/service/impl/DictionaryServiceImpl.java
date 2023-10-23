@@ -17,14 +17,6 @@ import java.util.List;
 
 import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
 
-/**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author zqy
- * @since 2023-07-28
- */
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictService {
 
