@@ -35,6 +35,7 @@ public class InterviewController {
         }
         IPage<InterviewVO> interviewVOIPage = new Page<>();
         interviewVOIPage.setRecords(interviewVOS);
+        interviewVOIPage.setTotal(interviewEntityIPage.getTotal());
         return ResultBody.success(interviewVOIPage);
     }
 

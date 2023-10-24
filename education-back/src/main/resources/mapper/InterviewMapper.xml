@@ -56,7 +56,7 @@
         interview.edit_time         edit_time,
         interview.job_id            job_id,
         interview.content_type      content_type,
-               career.name               career_name,
+               career.name               career_name
         from interview_experience_article interview
                  left join career career on interview.job_id = career.id
         <where>
