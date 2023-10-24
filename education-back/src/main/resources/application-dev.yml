@@ -2,7 +2,7 @@
 #  mapper-locations: classpath*:/mapper/**Mapper.xml
 #  type-aliases-package: com.javagpt.back.entity
 #  configuration:
-#    map-underscore-to-camel-case: true
+#    map-underscore-toVO-camel-case: true
 #    use-generated-keys: true
 #
 #server:

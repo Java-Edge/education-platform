@@ -23,13 +23,14 @@
         <maven.compiler.compilerVersion>21</maven.compiler.compilerVersion>
         <java.version>21</java.version>
         <skipTests>true</skipTests>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <lombok.version>1.18.30</lombok.version>
     </properties>
     <modules>
         <module>education-back</module>
         <module>common</module>
     </modules>
 
-    <!-- 统一管理依赖的版本号 -->
     <dependencyManagement>
         <dependencies>
 
@@ -183,7 +184,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.30</version>
+                <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -197,6 +198,12 @@
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
                 <version>3.1.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
             </dependency>
         </dependencies>
 

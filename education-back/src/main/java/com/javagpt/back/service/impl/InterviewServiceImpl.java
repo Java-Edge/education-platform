@@ -3,15 +3,14 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.back.dto.ArticleDTO;
-import com.javagpt.common.constant.Constants;
-import com.javagpt.common.req.PageQueryParam;
+import com.javagpt.back.dto.InterviewDTO;
 import com.javagpt.back.entity.Career;
 import com.javagpt.back.entity.InterviewEntity;
 import com.javagpt.back.mapper.CareerMapper;
-import com.javagpt.back.service.InterviewService;
 import com.javagpt.back.mapper.InterviewMapper;
-import com.javagpt.back.vo.ArticleVO;
+import com.javagpt.back.service.InterviewService;
+import com.javagpt.common.constant.Constants;
+import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,26 +21,26 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
     implements InterviewService {
 
     @Autowired
-    private InterviewMapper articleMapper;
+    private InterviewMapper interviewMapper;
 
     @Autowired
     private CareerMapper careerMapper;
 
     @Override
-    public IPage<ArticleVO> selectByCondition(PageQueryParam<ArticleDTO> pageQueryParam) {
+    public IPage<InterviewEntity> selectByCondition(PageQueryParam<InterviewDTO> pageQueryParam) {
         if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
                 // jobId=-1：查询全部岗位
                 && pageQueryParam.getParam().getJobId() == Constants.select_all) {
             pageQueryParam.getParam().setJobId(null);
         }
 
-        Page<ArticleVO> articleVOPage = new Page<>();
-        articleVOPage.setSize(pageQueryParam.getPageSize());
-        articleVOPage.setCurrent(pageQueryParam.getPageNo());
+        Page<InterviewEntity> interviewEntityPage = new Page<>();
+        interviewEntityPage.setSize(pageQueryParam.getPageSize());
+        interviewEntityPage.setCurrent(pageQueryParam.getPageNo());
         if (pageQueryParam.getParam() == null){
-            pageQueryParam.setParam(new ArticleDTO());
+            pageQueryParam.setParam(new InterviewDTO());
         }
-        return articleMapper.selectByCondition(pageQueryParam.getParam(), articleVOPage);
+        return interviewMapper.selectByCondition(pageQueryParam.getParam(), interviewEntityPage);
     }
 
     @Override

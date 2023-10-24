@@ -1,11 +1,10 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.javagpt.back.dto.ArticleDTO;
-import com.javagpt.common.req.PageQueryParam;
-import com.javagpt.back.entity.InterviewEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.javagpt.back.vo.ArticleVO;
+import com.javagpt.back.dto.InterviewDTO;
+import com.javagpt.back.entity.InterviewEntity;
+import com.javagpt.common.req.PageQueryParam;
 
 public interface InterviewService extends IService<InterviewEntity> {
 
@@ -16,7 +15,7 @@ public interface InterviewService extends IService<InterviewEntity> {
      * @param pageQueryParam
      * @return
      */
-    IPage<ArticleVO> selectByCondition(PageQueryParam<ArticleDTO> pageQueryParam);
+    IPage<InterviewEntity> selectByCondition(PageQueryParam<InterviewDTO> pageQueryParam);
 
     /**
      * 获取文章

@@ -16,7 +16,6 @@
         <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
         <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
         <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
-        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -27,7 +26,7 @@
     </sql>
 
 
-    <resultMap id="ArticleVOMap" type="com.javagpt.back.vo.ArticleVO">
+    <resultMap id="InterviewEntityMap" type="com.javagpt.back.entity.InterviewEntity">
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
@@ -39,16 +38,11 @@
         <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
         <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
         <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
-        <result property="editTime" column="edit_time" jdbcType="TIMESTAMP"/>
         <result property="jobId" column="job_id" jdbcType="INTEGER"/>
-        <result property="contentType" column="content_type" jdbcType="INTEGER"/>
         <result property="careerName" column="career_name" jdbcType="VARCHAR"/>
-        <result property="recommendCode" column="recommend_code" jdbcType="VARCHAR"/>
-        <result property="recommendEmail" column="recommend_email" jdbcType="VARCHAR"/>
-        <result property="recommendUrl" column="recommend_url" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectByCondition" parameterType="com.javagpt.back.dto.ArticleDTO" resultMap="ArticleVOMap">
+    <select id="selectByCondition" parameterType="com.javagpt.back.dto.ArticleDTO" resultMap="InterviewEntityMap">
 
         select article.id                id,
                article.user_id           user_id,
