@@ -13,9 +13,6 @@ public interface InterviewMapper extends BaseMapper<InterviewEntity> {
 
     /**
      * 分页查询
-     *
-     * @param dto
-     * @param page
      */
     IPage<InterviewEntity> selectByCondition(@Param("dto") InterviewDTO dto, @Param("page") Page<InterviewEntity> page);
 }

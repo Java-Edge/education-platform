@@ -11,9 +11,6 @@ public interface InterviewService extends IService<InterviewEntity> {
 
     /**
      * 条件查询
-     *
-     * @param pageQueryParam
-     * @return
      */
     IPage<InterviewEntity> selectByCondition(PageQueryParam<InterviewDTO> pageQueryParam);
 

@@ -47,7 +47,7 @@
         select article.id                id,
                article.user_id           user_id,
                article.title             title,
-               LEFT(article.content,100)   content,
+               LEFT(article.content,20)   content,
                article.type              type,
                article.status            status,
                article.has_edit          has_edit,
