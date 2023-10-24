@@ -11,8 +11,6 @@ import com.javagpt.common.enums.ArticleTypeEnums;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity> implements DownloadService {
 

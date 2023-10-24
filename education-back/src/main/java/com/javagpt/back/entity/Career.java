@@ -5,14 +5,6 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author zqy
- * @since 2023-07-28
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Career implements Serializable {

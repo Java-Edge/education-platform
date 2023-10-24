@@ -15,4 +15,6 @@ public interface Constants {
     String cache_max_pilot_local_cache = "cache_max_pilot_local_cache";
 
     String cache_max_dict_local_cache = "cache_max_dict_local_cache";
+
+    int select_all = -1;
 }

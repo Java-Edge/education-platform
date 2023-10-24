@@ -7,11 +7,6 @@ import com.javagpt.back.entity.InterviewEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.vo.ArticleVO;
 
-/**
-* @author MSIK
-* @description 针对表【interview_experience_article】的数据库操作Service
-* @createDate 2023-07-24 23:36:50
-*/
 public interface InterviewService extends IService<InterviewEntity> {
 
 

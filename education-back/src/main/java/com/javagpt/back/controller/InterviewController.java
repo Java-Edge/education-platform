@@ -10,6 +10,9 @@ import com.javagpt.back.vo.ArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 面经页面入口
+ */
 @RestController
 @RequestMapping("/interview")
 public class InterviewController {
@@ -19,7 +22,7 @@ public class InterviewController {
 
 
     @PostMapping("/selectByCondition")
-    public ResultBody selectByCondition(@RequestBody PageQueryParam<ArticleDTO> pageQueryParam){
+    public ResultBody selectByCondition(@RequestBody PageQueryParam<ArticleDTO> pageQueryParam) {
         IPage<ArticleVO> articleVOIPage = articleService.selectByCondition(pageQueryParam);
         return ResultBody.success(articleVOIPage);
     }
@@ -29,6 +32,4 @@ public class InterviewController {
         InterviewEntity article = articleService.articleOf(id);
         return ResultBody.success(article);
     }
-
-
 }

@@ -9,12 +9,6 @@ import com.javagpt.back.vo.ArticleVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-/**
-* @author MSIK
-* @description 针对表【interview_experience_article】的数据库操作Mapper
-* @createDate 2023-07-24 23:36:50
-* @Entity com.javagpt.back.entity.InterviewExperienceArticleEntity
-*/
 @Mapper
 public interface InterviewMapper extends BaseMapper<InterviewEntity> {
 

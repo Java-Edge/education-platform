@@ -1,12 +1,9 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.javagpt.back.dto.ArticleDTO;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.dto.InnerRecommendQueryDTO;
 import com.javagpt.back.entity.InnerRecommend;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.javagpt.back.entity.InterviewEntity;
-import com.javagpt.back.vo.ArticleVO;
 import com.javagpt.back.vo.InnerRecommendVO;
 import com.javagpt.common.req.PageQueryParam;
 
