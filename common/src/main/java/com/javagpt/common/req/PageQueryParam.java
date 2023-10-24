@@ -19,6 +19,4 @@ public class PageQueryParam<T> {
      * 查询参数
      */
     private T param;
-
-
 }

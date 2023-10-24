@@ -29,8 +29,6 @@ public class InnerRecommendQueryDTO {
 
     /**
      * 文章类型
-     * 1 面经
-     * 2 内推
      */
     private Integer articleType;
 }

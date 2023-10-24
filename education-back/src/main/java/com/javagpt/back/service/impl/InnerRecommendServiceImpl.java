@@ -9,20 +9,16 @@ import com.javagpt.back.entity.InnerRecommend;
 import com.javagpt.back.mapper.CareerMapper;
 import com.javagpt.back.mapper.InnerRecommendMapper;
 import com.javagpt.back.service.InnerRecommendService;
-import com.javagpt.back.vo.InnerRecommendVO;
+import com.javagpt.common.constant.Constants;
 import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author 26314
- * @description 针对表【inner_recommend】的数据库操作Service实现
- * @createDate 2023-10-22 23:10:25
- */
+import java.util.Objects;
+
 @Service
 public class InnerRecommendServiceImpl extends ServiceImpl<InnerRecommendMapper, InnerRecommend>
         implements InnerRecommendService {
-
 
     @Autowired
     private InnerRecommendMapper innerRecommendMapper;
@@ -31,20 +27,20 @@ public class InnerRecommendServiceImpl extends ServiceImpl<InnerRecommendMapper,
     private CareerMapper careerMapper;
 
     @Override
-    public IPage<InnerRecommendVO> selectByCondition(PageQueryParam<InnerRecommendQueryDTO> pageQueryParam) {
-        // 如果传入的 jobId 是 -1 表示查询全部岗位
-        if (pageQueryParam.getParam() != null && pageQueryParam.getParam().getJobId() != null && pageQueryParam.getParam().getJobId() == -1) {
+    public IPage<InnerRecommend> selectByCondition(PageQueryParam<InnerRecommendQueryDTO> pageQueryParam) {
+        if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
+                // jobId=-1：查询全部岗位
+                && pageQueryParam.getParam().getJobId() == Constants.select_all) {
             pageQueryParam.getParam().setJobId(null);
         }
 
-        Page<InnerRecommendVO> page = new Page<>();
+        Page<InnerRecommend> page = new Page<>();
         page.setSize(pageQueryParam.getPageSize());
         page.setCurrent(pageQueryParam.getPageNo());
         if (pageQueryParam.getParam() == null) {
             pageQueryParam.setParam(new InnerRecommendQueryDTO());
         }
-        IPage<InnerRecommendVO> articleVOS = innerRecommendMapper.selectByCondition(page, pageQueryParam.getParam());
-        return articleVOS;
+        return innerRecommendMapper.selectByCondition(page, pageQueryParam.getParam());
     }
 
     @Override

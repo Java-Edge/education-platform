@@ -20,7 +20,6 @@
             <result property="jobId" column="job_id" jdbcType="INTEGER"/>
             <result property="contentType" column="content_type" jdbcType="INTEGER"/>
             <result property="pageView" column="page_view" jdbcType="INTEGER"/>
-            <result property="articleType" column="article_type" jdbcType="INTEGER"/>
             <result property="recommendCode" column="recommend_code" jdbcType="VARCHAR"/>
             <result property="recommendEmail" column="recommend_email" jdbcType="VARCHAR"/>
             <result property="recommendUrl" column="recommend_url" jdbcType="VARCHAR"/>
@@ -31,13 +30,12 @@
         new_title,content,new_content,
         type,status,has_edit,
         is_anonymous_flag,create_at,edit_time,
-        job_id,content_type,page_view,
-        article_type,recommend_code,recommend_email,
+        job_id,content_type,page_view,recommend_code,recommend_email,
         recommend_url
     </sql>
 
 
-    <resultMap id="innerRecommendVOMap" type="com.javagpt.back.vo.InnerRecommendVO">
+    <resultMap id="innerRecommendMap" type="com.javagpt.back.entity.InnerRecommend">
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
@@ -58,54 +56,51 @@
         <result property="recommendUrl" column="recommend_url" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectByCondition" parameterType="com.javagpt.back.dto.InnerRecommendQueryDTO" resultMap="innerRecommendVOMap">
+    <select id="selectByCondition" parameterType="com.javagpt.back.dto.InnerRecommendQueryDTO" resultMap="innerRecommendMap">
 
-        select article.id                id,
-        article.user_id           user_id,
-        article.title             title,
-        LEFT(article.content,100)   content,
-        article.type              type,
-        article.status            status,
-        article.has_edit          has_edit,
-        article.is_anonymous_flag is_anonymous_flag,
-        article.create_at         create_at,
-        article.edit_time         edit_time,
-        article.job_id            job_id,
-        article.content_type      content_type,
+        select innner.id                id,
+        innner.user_id           user_id,
+        innner.title             title,
+        LEFT(innner.content,100)   content,
+        innner.type              type,
+        innner.status            status,
+        innner.has_edit          has_edit,
+        innner.is_anonymous_flag is_anonymous_flag,
+        innner.create_at         create_at,
+        innner.edit_time         edit_time,
+        innner.job_id            job_id,
+        innner.content_type      content_type,
         career.name               career_name,
-        article.recommend_code recommend_code,
-        article.recommend_email recommend_email,
-        article.recommend_url recommend_url
-        from inner_recommend article
-        left join career career on article.job_id = career.id
+        innner.recommend_code recommend_code,
+        innner.recommend_email recommend_email,
+        innner.recommend_url recommend_url
+        from inner_recommend innner
+        left join career career on innner.job_id = career.id
         <where>
             <if test="dto.jobId != null and dto.jobId != ''">
-                and article.job_id = #{dto.jobId,jdbcType=INTEGER}
+                and innner.job_id = #{dto.jobId,jdbcType=INTEGER}
             </if>
             <if test="dto.content != null and dto.content != ''">
-                and (article.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
-                or article.title like concat('%',#{dto.content,jdbcType=VARCHAR},'%'))
+                and (innner.content like concat('%',#{dto.content,jdbcType=VARCHAR},'%')
+                or innner.title like concat('%',#{dto.content,jdbcType=VARCHAR},'%'))
             </if>
             <if test="dto.company != null and dto.company.size > 0">
                 and (
                 <trim prefixOverrides="or">
                     <foreach collection="dto.company" item="company">
-                        or article.content like concat('%',#{company,jdbcType=VARCHAR},'%')
+                        or innner.content like concat('%',#{company,jdbcType=VARCHAR},'%')
                     </foreach>
                 </trim>
                 )
             </if>
-            <if test="dto.articleType != null and dto.articleType !=''">
-                and article.article_type = #{dto.articleType,jdbcType=INTEGER}
-            </if>
             <if test="dto.keyword != null and dto.keyword !=''">
-                and (article.title like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                and (innner.title like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
                 or
-                article.content  like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                innner.content  like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
                 )
             </if>
         </where>
-        order by article.create_at desc
+        order by innner.create_at desc
     </select>
 
 </mapper>
