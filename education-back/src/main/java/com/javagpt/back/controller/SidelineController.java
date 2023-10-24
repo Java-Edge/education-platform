@@ -6,6 +6,7 @@ import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Sideline;
 import com.javagpt.back.service.SidelineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class SidelineController {
     private SidelineService sidelineService;
 
     @GetMapping("/getByPage")
+    @PreAuthorize("@ss.hasRole('admin')")
     public ResultBody getByPage(Integer current, Integer size) {
         Page<Sideline> page = sidelineService.selectPage(current,size);
         return ResultBody.success(page);

@@ -50,6 +50,6 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         if (roleIds.size() <= 0) {
             return new ArrayList<>();
         }
-        return roleMapper.selectBatchIds(roleIds).stream().map(Role::getName).collect(Collectors.toList());
+        return roleMapper.selectBatchIds(roleIds).stream().map(Role::getPermission).collect(Collectors.toList());
     }
 }

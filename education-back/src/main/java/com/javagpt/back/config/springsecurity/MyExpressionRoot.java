@@ -28,7 +28,7 @@ public class MyExpressionRoot {
     @Autowired
     UserRoleService userRoleService;
 
-    public boolean hasRole(String authority){
+    public boolean hasRole(List<String> needRoles){
         //获取当前用户的权限
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         try {
@@ -52,10 +52,20 @@ public class MyExpressionRoot {
             if (userEntity == null) {
                 return false;
             }
-            List<String> roleNames = userRoleService.getByUserId(userEntity.getId());
-            logger.info("当前用户角色：{}", roleNames.toString());
-            logger.info("所需用户角色：{}", authority);
-            return roleNames.contains(authority);
+            List<String> rolePermissions = userRoleService.getByUserId(userEntity.getId());
+            logger.info("当前用户角色：{}", rolePermissions.toString());
+            logger.info("所需用户角色：{}", needRoles.toString());
+            boolean permit = false;
+            /**
+             * 遍历用户当前角色，只要有一个角色在所需用户角色中，即可通过授权
+             */
+            for (String rolePermission : rolePermissions) {
+                if (needRoles.contains(rolePermission)) {
+                    permit = true;
+                    break;
+                }
+            }
+            return permit;
         } catch (Exception e){
             return false;
         }
