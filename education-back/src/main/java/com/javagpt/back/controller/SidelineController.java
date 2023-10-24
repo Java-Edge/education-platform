@@ -27,7 +27,7 @@ public class SidelineController {
     private SidelineService sidelineService;
 
     @GetMapping("/getByPage")
-    @PreAuthorize("@ss.hasRole('admin')")
+    @PreAuthorize("@ss.hasRole('admin,vip')")
     public ResultBody getByPage(Integer current, Integer size) {
         Page<Sideline> page = sidelineService.selectPage(current,size);
         return ResultBody.success(page);

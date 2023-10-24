@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +29,8 @@ public class MyExpressionRoot {
     @Autowired
     UserRoleService userRoleService;
 
-    public boolean hasRole(List<String> needRoles){
+    public boolean hasRole(String roles){
+        List<String> needRoles = Arrays.asList(roles.split(","));
         //获取当前用户的权限
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         try {
