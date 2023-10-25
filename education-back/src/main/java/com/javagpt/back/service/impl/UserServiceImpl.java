@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -146,12 +147,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         loginRespVO.setId(userEntity.getId());
         loginRespVO.setUsername(userEntity.getUsername());
         loginRespVO.setToken(token);
-        Cookie cookie = null;
-        try {
-            cookie = new Cookie("token", URLEncoder.encode(token, "utf-8"));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        Cookie cookie = new Cookie("token", URLEncoder.encode(token, StandardCharsets.UTF_8));
         cookie.setMaxAge(7 * 24 * 60 * 60);
         cookie.setPath("/");
         response.addCookie(cookie);
@@ -184,10 +180,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
 
     @Override
     public ResultBody logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie token = new Cookie("token", "");
-        token.setMaxAge(0);
-        token.setPath("/");
-        response.addCookie(token);
+        Cookie cookie = new Cookie("token", "");
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return ResultBody.success();
     }
 }
