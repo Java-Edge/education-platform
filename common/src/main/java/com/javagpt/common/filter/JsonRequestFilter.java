@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author hmy
+ * @author JavaEdge
  * 处理json请求的过滤器
  */
 public class JsonRequestFilter implements Filter {

@@ -1,12 +1,22 @@
 package com.javagpt.back.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
+import com.javagpt.back.converter.ArticleConverter;
+import com.javagpt.back.converter.InnerConverter;
+import com.javagpt.back.entity.InnerRecommend;
+import com.javagpt.back.vo.ArticleVO;
+import com.javagpt.back.vo.InnerRecommendVO;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.service.ArticleService;
+import com.javagpt.common.util.IpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 编辑文章
@@ -33,8 +43,16 @@ public class TimeLineController {
 
     @GetMapping("/getByPage")
     public ResultBody getByPage(Integer current, Integer size) {
-        Page<ArticleEntity> page = articleService.getByPage(current, size);
-        return ResultBody.success(page);
+        Page<ArticleEntity> articleEntityPage = articleService.getByPage(current, size);
+
+        List<ArticleVO> articleVOS = Lists.newArrayList();
+        for (ArticleEntity innerRecommend: articleEntityPage.getRecords()) {
+            articleVOS.add(ArticleConverter.INSTANCE.toVO(innerRecommend));
+        }
+        IPage<ArticleVO> articleVOPage = new Page<>();
+        articleVOPage.setRecords(articleVOS);
+        articleVOPage.setTotal(articleEntityPage.getTotal());
+        return ResultBody.success(articleVOPage);
     }
 
     @PutMapping("/updateById")

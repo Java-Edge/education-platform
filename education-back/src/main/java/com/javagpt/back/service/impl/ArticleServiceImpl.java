@@ -39,7 +39,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         qw.eq(Constants.DELETE_FLAG, 0);
         qw.eq("type", ArticleTypeEnums.NEWS.getCode());
         qw.orderByDesc("create_time");
-        qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view");
+        qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view", "create_time");
         return this.getBaseMapper().selectPage(page, qw);
     }
 
