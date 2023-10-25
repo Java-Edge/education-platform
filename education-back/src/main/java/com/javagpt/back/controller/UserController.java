@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ResultBody login(HttpServletRequest request, @RequestBody UserDTO user) {
-        return userService.doLogin(request,user);
+    public ResultBody login(HttpServletRequest request,HttpServletResponse response, @RequestBody UserDTO user) {
+        return userService.doLogin(request,response, user);
     }
 
     @GetMapping("/checkUsername")
@@ -48,7 +48,12 @@ public class UserController {
      **/
     @GetMapping("/getCheckCode")
     public void getCheckCode(HttpServletResponse response, HttpServletRequest request) {
-        userService.getCheckCode(request,response);
+        userService.getCheckCode(request, response);
+    }
+
+    @GetMapping("/logout")
+    public ResultBody logout(HttpServletResponse response, HttpServletRequest request) {
+        return userService.logout(request, response);
     }
 
 }

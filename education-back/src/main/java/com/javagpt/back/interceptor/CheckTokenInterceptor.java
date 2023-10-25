@@ -21,8 +21,8 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
 
     @Value("${spring.profiles.active}")
     private String env;
-    
-    
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (env.equals("dev")) {
@@ -81,6 +81,10 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         out.print(s);
         out.flush();
         out.close();
+    }
+
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response){
+
     }
 
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class InnerRecommendQueryDTO {
+public class InterviewDTO {
 
     /**
      * 职业主键
@@ -27,8 +27,5 @@ public class InnerRecommendQueryDTO {
      */
     private List<String> company;
 
-    /**
-     * 文章类型
-     */
     private Integer articleType;
 }

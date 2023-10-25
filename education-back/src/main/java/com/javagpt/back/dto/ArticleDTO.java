@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class ArticleDTO {
 
-
     /**
      * 职业主键
      */
@@ -28,10 +27,5 @@ public class ArticleDTO {
      */
     private List<String> company;
 
-    /**
-     * 文章类型
-     * 1 面经
-     * 2 内推
-     */
     private Integer articleType;
 }

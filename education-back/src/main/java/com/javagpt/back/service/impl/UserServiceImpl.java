@@ -14,6 +14,7 @@ import com.javagpt.common.util.VerifyCodeUtil;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -98,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
     }
 
     @Override
-    public ResultBody doLogin(HttpServletRequest request, UserDTO user) {
+    public ResultBody doLogin(HttpServletRequest request, HttpServletResponse response, UserDTO user) {
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
         log.info("获取验证码的值为: {}", verifyCode);
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
@@ -143,6 +147,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         loginRespVO.setId(userEntity.getId());
         loginRespVO.setUsername(userEntity.getUsername());
         loginRespVO.setToken(token);
+        Cookie cookie = new Cookie("token", URLEncoder.encode(token, StandardCharsets.UTF_8));
+        cookie.setMaxAge(7 * 24 * 60 * 60);
+        cookie.setPath("/");
+        response.addCookie(cookie);
 
         return ResultBody.success(loginRespVO);
     }
@@ -168,6 +176,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         } catch (IOException e) {
             log.error("获取验证码图片失败!", e);
         }
+    }
+
+    @Override
+    public ResultBody logout(HttpServletRequest request, HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", "");
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return ResultBody.success();
     }
 }
 

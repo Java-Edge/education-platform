@@ -9,7 +9,7 @@ import org.springframework.util.StreamUtils;
 import java.io.*;
 
 /**
- * @author hmy
+ * @author JavaEdge
  */
 public class JsonRequestWrapper extends HttpServletRequestWrapper {
 

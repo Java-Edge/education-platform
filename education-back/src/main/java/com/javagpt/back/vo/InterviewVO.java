@@ -1,12 +1,14 @@
 package com.javagpt.back.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-public class InnerRecommendVO {
+@Getter
+@Setter
+public class InterviewVO {
     /**
      * 主键
      */
@@ -34,22 +36,12 @@ public class InnerRecommendVO {
     private Date createAt;
 
     /**
+     * 职业主键
+     */
+    private Integer jobId;
+
+    /**
      * 职业名称
      */
     private String careerName;
-
-    /**
-     * 内推码
-     */
-    private String recommendCode;
-
-    /**
-     * 内推邮箱
-     */
-    private String recommendEmail;
-
-    /**
-     * 内推链接
-     */
-    private String recommendUrl;
 }

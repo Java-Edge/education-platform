@@ -1,17 +1,12 @@
 package com.javagpt.back.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
-/**
- * 
- * @TableName inner_recommend
- */
+import java.io.Serializable;
+import java.util.Date;
+
 @TableName(value ="inner_recommend")
 @Data
 public class InnerRecommend implements Serializable {
@@ -95,8 +90,7 @@ public class InnerRecommend implements Serializable {
     private String careerName;
 
     /**
-     * 文章类型 1： 面经 2：内推
-     */
+     * 文章类型
     private Integer articleType;
 
     /**
