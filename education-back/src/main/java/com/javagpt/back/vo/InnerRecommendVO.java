@@ -34,11 +34,6 @@ public class InnerRecommendVO {
     private Date createAt;
 
     /**
-     * 职业名称
-     */
-    private String careerName;
-
-    /**
      * 内推码
      */
     private String recommendCode;

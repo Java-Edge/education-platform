@@ -36,7 +36,7 @@ public class InnerRecommendController {
         IPage<InnerRecommendVO> interviewVOIPage = new Page<>();
         interviewVOIPage.setRecords(interviewVOS);
         interviewVOIPage.setTotal(innerRecommendIPage.getTotal());
-        return ResultBody.success(innerRecommendIPage);
+        return ResultBody.success(interviewVOIPage);
     }
 
     @GetMapping("/getById/{id}")
