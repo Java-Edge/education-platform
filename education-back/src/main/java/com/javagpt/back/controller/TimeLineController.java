@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping("/article")
-public class ArticleController {
+public class TimeLineController {
 
     @Autowired
     private ArticleService articleService;
