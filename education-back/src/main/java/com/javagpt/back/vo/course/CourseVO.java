@@ -14,17 +14,29 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CourseVO implements Serializable {
+public class CourseVO {
+
     private Integer id;
+
     private String name;
+
     private String image;
+
     private String description;
+
     private String creator;
+
     private String updater;
+
     private String remark;
+
     private String sourceUrl;
+
     private BigDecimal price;
+
     private Integer step;
+
     private Integer parentId;
+
     private Integer pageView;
 }

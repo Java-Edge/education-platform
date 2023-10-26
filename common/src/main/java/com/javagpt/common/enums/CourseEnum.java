@@ -14,8 +14,8 @@ public enum CourseEnum {
     VIDEO(0, "视频"),
     SPECIAL(1, "专栏");
 
-    private int resultCode;
+    private final int resultCode;
 
-    private String resultMsg;
+    private final String resultMsg;
 
 }

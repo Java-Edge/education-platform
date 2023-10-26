@@ -3,12 +3,11 @@ package com.javagpt.back.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.common.req.PageQueryParam;
-import com.javagpt.common.resp.ResultBody;
-import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.vo.course.CourseVO;
+import com.javagpt.common.req.PageQueryParam;
+import com.javagpt.common.resp.ResultBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,16 +26,6 @@ public class CourseController {
         qw.eq("type", 0);
         qw.last("limit 12");
         List<CourseEntity> list = courseService.list(qw);
-        return ResultBody.success(list);
-    }
-
-    /**
-     * 获取专栏列表
-     * @return 全部专栏
-     */
-    @PostMapping("/special/search")
-    public ResultBody specialList(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
-        Page<CourseVO> list = courseService.getSpecialList(pageQueryParam);
         return ResultBody.success(list);
     }
 

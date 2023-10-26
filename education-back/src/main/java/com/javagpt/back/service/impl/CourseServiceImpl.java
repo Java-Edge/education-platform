@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.entity.Dictionary;
@@ -18,18 +17,12 @@ import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * @author MSIK
- * @description 针对表【source_course】的数据库操作Service实现
- * @createDate 2023-07-09 13:40:08
- */
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
         implements CourseService {
