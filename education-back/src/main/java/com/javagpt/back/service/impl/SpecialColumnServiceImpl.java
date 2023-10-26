@@ -8,7 +8,7 @@ import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.mapper.CourseMapper;
-import com.javagpt.back.mapper.DictionaryMapper;
+import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.SpecialColumnService;
 import com.javagpt.back.vo.course.CourseVO;
 import com.javagpt.common.enums.CourseEnum;
@@ -30,7 +30,7 @@ public class SpecialColumnServiceImpl extends ServiceImpl<CourseMapper, CourseEn
     private CourseMapper courseMapper;
 
     @Resource
-    private DictionaryMapper dictionaryMapper;
+    private DictMapper dictMapper;
 
     @Override
     public List<CourseEntity> selectList() {
@@ -50,12 +50,12 @@ public class SpecialColumnServiceImpl extends ServiceImpl<CourseMapper, CourseEn
         SpecialQueryDTO specialQueryDTO = pageQueryParam.getParam();
         if (Objects.nonNull(specialQueryDTO.getCategory()) && specialQueryDTO.getCategory() != 0) {
             List<Integer> categories = Stream.of(specialQueryDTO.getCategory()).collect(Collectors.toList());
-            LambdaQueryWrapper<Dictionary> wrapper = new LambdaQueryWrapper<Dictionary>()
+            LambdaQueryWrapper<Dictionary> dictQW = new LambdaQueryWrapper<Dictionary>()
                     .eq(Dictionary::getTypeKey, DictTypeEnums.special_category.getCode())
                     .eq(specialQueryDTO.getCategory() != null, Dictionary::getParentId,
                             specialQueryDTO.getCategory());
 
-            List<Dictionary> dicts = dictionaryMapper.selectList(wrapper);
+            List<Dictionary> dicts = dictMapper.selectList(dictQW);
             if (CollectionUtils.isNotEmpty(dicts)) {
                 List<Integer> childCategories = dicts.stream().map(item -> Integer.parseInt(item.getValue())).toList();
                 categories.addAll(childCategories);

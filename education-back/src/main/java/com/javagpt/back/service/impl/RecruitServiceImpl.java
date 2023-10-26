@@ -7,7 +7,7 @@ import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.back.dto.RecruitDTO;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.Recruit;
-import com.javagpt.back.mapper.DictionaryMapper;
+import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.mapper.RecruitMapper;
 import com.javagpt.back.service.RecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -37,7 +37,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     private RecruitMapper recruitMapper;
 
     @Autowired
-    private DictionaryMapper dictionaryMapper;
+    private DictMapper dictionaryMapper;
 
     @Override
     public Page<Recruit> selectPage(Integer current, Integer size, HttpServletRequest request) {

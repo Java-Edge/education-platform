@@ -6,7 +6,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.mapper.DictTypeMapper;
-import com.javagpt.back.mapper.DictionaryMapper;
+import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.DictService;
 import com.javagpt.back.vo.MenuVO;
 import jakarta.annotation.Resource;
@@ -17,14 +17,14 @@ import java.util.List;
 import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
 
 @Service
-public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictService {
+public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> implements DictService {
 
 
     @Resource
     private DictTypeMapper dictTypeMapper;
 
     @Resource
-    private DictionaryMapper dictionaryMapper;
+    private DictMapper dictionaryMapper;
 
     @Resource
     private Cache<String, List<DictionaryType>> dictTypeRefreshCache;

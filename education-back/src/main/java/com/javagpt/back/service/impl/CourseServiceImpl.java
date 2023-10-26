@@ -9,7 +9,7 @@ import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.mapper.CourseMapper;
-import com.javagpt.back.mapper.DictionaryMapper;
+import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.CourseService;
 import com.javagpt.back.vo.course.CourseVO;
 import com.javagpt.common.enums.CourseEnum;
@@ -31,7 +31,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
     private CourseMapper courseMapper;
 
     @Autowired
-    private DictionaryMapper dictionaryMapper;
+    private DictMapper dictionaryMapper;
 
     @Override
     public List<CourseEntity> getFiveCourse() {
