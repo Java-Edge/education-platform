@@ -2,8 +2,6 @@ package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.javagpt.back.entity.ArticleEntity;
-import com.javagpt.back.entity.Project;
 import com.javagpt.back.entity.Sideline;
 
 /**

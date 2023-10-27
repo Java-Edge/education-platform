@@ -30,6 +30,8 @@ public class ServiceLogAspect {
     @Resource
     private ApplicationContext applicationContext;
 
+    private static final RateLimiter rateLimiter = RateLimiter.create(500);
+
     @Pointcut("execution(* com.javagpt.back.service.*.*(..))")
     public void pointCut(){
 
@@ -48,27 +50,23 @@ public class ServiceLogAspect {
             return;
         }
         HttpServletRequest request =attributes.getRequest();
-        String ip = request.getRemoteHost();
-        String ip2 = IpUtils.getIpAddress(request);
+        String ip = IpUtils.getIpAddress(request);
         String target = joinPoint.getSignature().getDeclaringTypeName() + "." +joinPoint.getSignature().getName();
-        log.info(String.format("用户[%s] 访问了[%s]. ip2:%s", ip, target, ip2));
+        log.info(String.format("用户ip=[%s] 访问了=[%s]", ip, target));
     }
-
-    private static final RateLimiter rateLimiter = RateLimiter.create(500);
 
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
     @Around("rateLimitPointCut()")
     public Object rateLimit(ProceedingJoinPoint joinPoint) {
-        log.info("当前限流器速率：" + rateLimiter.getRate());
         if (rateLimiter.tryAcquire()) {
             return joinPoint.proceed();
         } else {
-            // 如果超出限流次数
+            // 超出限流次数
             return ResultBody.error("访问太过频繁");
         }
     }
 
-    // 计算文章的浏览量
+    // 计算pv
     @Before("execution(* com.javagpt.back.controller.*.getById(..))")
     public void calPageView(JoinPoint joinPoint) {
 

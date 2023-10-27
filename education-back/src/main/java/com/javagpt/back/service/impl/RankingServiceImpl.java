@@ -3,7 +3,6 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.back.entity.Project;
 import com.javagpt.back.entity.Ranking;
 import com.javagpt.back.mapper.RankingMapper;
 import com.javagpt.back.service.RankingService;
