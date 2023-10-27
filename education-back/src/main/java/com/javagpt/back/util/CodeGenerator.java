@@ -20,7 +20,7 @@ public class CodeGenerator {
         // 2、全局配置
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D:\\Project\\IDEA\\education-microservice\\education-back"+"/src/main/java");//项目的绝对路径
+        gc.setOutputDir("D:\\ProjectEntity\\IDEA\\education-microservice\\education-back"+"/src/main/java");//项目的绝对路径
 
         gc.setServiceName("%sService");    //去掉Service接口的首字母I
         gc.setAuthor("zqy");

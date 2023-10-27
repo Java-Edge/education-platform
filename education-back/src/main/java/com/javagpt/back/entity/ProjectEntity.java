@@ -6,21 +6,15 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author zqy
- * @since 2023-08-22
- */
+@TableName(value = "project")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Project implements Serializable {
+public class ProjectEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -66,5 +60,6 @@ public class Project implements Serializable {
     private String href;
 
     private String img;
+
     private Integer pageView;
 }
