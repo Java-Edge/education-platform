@@ -21,8 +21,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Slf4j
 @Component
@@ -52,9 +50,8 @@ public class ServiceLogAspect {
         HttpServletRequest request =attributes.getRequest();
         String ip = request.getRemoteHost();
         String ip2 = IpUtils.getIpAddress(request);
-        String now = new SimpleDateFormat("yyy-MM-dd HH:mm:ss").format(new Date());
         String target = joinPoint.getSignature().getDeclaringTypeName() + "." +joinPoint.getSignature().getName();
-        log.info(String.format("用户[%s] ,在[%s],访问了[%s]. ip2:%s", ip, now, target, ip2));
+        log.info(String.format("用户[%s] 访问了[%s]. ip2:%s", ip, target, ip2));
     }
 
     private static final RateLimiter rateLimiter = RateLimiter.create(500);
@@ -67,8 +64,7 @@ public class ServiceLogAspect {
             return joinPoint.proceed();
         } else {
             // 如果超出限流次数
-            ResultBody resultBody = ResultBody.error("访问太过频繁");
-            return resultBody;
+            return ResultBody.error("访问太过频繁");
         }
     }
 
