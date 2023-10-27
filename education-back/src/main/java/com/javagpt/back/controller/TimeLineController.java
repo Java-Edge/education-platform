@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * 编辑文章
- * 动态页面展示文章信息
+ * 动态页面入口
  */
 @RestController
 @RequestMapping("/article")
