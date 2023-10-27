@@ -22,8 +22,6 @@ public class ProjectVO {
      */
     private String des;
 
-    private String href;
-
     private String img;
 
     private Integer pageView;
