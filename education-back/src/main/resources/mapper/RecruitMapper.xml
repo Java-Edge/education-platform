@@ -17,7 +17,6 @@
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
         <result property="ext" column="ext" jdbcType="VARCHAR"/>
         <result property="jobCity" column="job_city" jdbcType="VARCHAR"/>
-        <result property="jobAddress" column="job_address" jdbcType="VARCHAR"/>
         <result property="careerJobId" column="career_job_id" jdbcType="INTEGER"/>
         <result property="careerJobName" column="career_job_name" jdbcType="VARCHAR"/>
         <result property="graduationYear" column="graduation_year" jdbcType="VARCHAR"/>
@@ -40,8 +39,7 @@
         ,title,content,
         create_time,`type`,des,
         phone,company_id,recruit_type,
-        job_name,ext,job_city,
-        job_address,career_job_id,career_job_name,
+        job_name,ext,job_city,career_job_id,career_job_name,
         graduation_year,deliver_begin,deliver_end,
         refesh_time,feed_back_days,duration_days,
         salary_type,salary_min,salary_max,
@@ -60,7 +58,6 @@
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
         <result property="ext" column="ext" jdbcType="VARCHAR"/>
         <result property="jobCity" column="job_city" jdbcType="VARCHAR"/>
-        <result property="jobAddress" column="job_address" jdbcType="VARCHAR"/>
         <result property="careerJobId" column="career_job_id" jdbcType="INTEGER"/>
         <result property="careerJobName" column="career_job_name" jdbcType="VARCHAR"/>
         <result property="graduationYear" column="graduation_year" jdbcType="VARCHAR"/>
@@ -96,7 +93,6 @@
             r.job_name,
             r.ext,
             SUBSTRING_INDEX(r.job_city,',',1) job_city,
-            r.job_address,
             r.career_job_id,
             r.career_job_name,
             r.graduation_year,
@@ -183,7 +179,6 @@
                r.job_name,
                r.ext,
                r.job_city,
-               r.job_address,
                r.career_job_id,
                r.career_job_name,
                r.graduation_year,

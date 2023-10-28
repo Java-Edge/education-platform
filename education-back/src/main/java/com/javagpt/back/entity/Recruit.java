@@ -79,11 +79,6 @@ public class Recruit implements Serializable {
     private String jobCity;
 
     /**
-     * 工作地点
-     */
-    private String jobAddress;
-
-    /**
      * 职位号
      */
     private Long careerJobId;
