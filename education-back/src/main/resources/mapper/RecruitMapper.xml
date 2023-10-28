@@ -9,7 +9,6 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="type" column="type" jdbcType="INTEGER"/>
         <result property="des" column="des" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
@@ -37,7 +36,7 @@
     <sql id="Base_Column_List">
         id
         ,title,content,
-        create_time,`type`,des,
+        create_time,des,
         phone,company_id,recruit_type,
         job_name,ext,job_city,career_job_id,career_job_name,
         graduation_year,deliver_begin,deliver_end,
@@ -47,7 +46,7 @@
     </sql>
 
 
-    <resultMap id="RecruitVOMap" type="com.javagpt.back.vo.RecruitVO">
+    <resultMap id="RecruitEntityMap" type="com.javagpt.back.vo.RecruitEntity">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
@@ -81,12 +80,11 @@
     </resultMap>
 
 
-    <select id="queryPage" parameterType="com.javagpt.back.dto.RecruitDTO" resultMap="RecruitVOMap">
+    <select id="queryPage" parameterType="com.javagpt.back.dto.Recruit" resultMap="RecruitEntityMap">
         select
             r.id,
             r.title,
             r.create_time,
-            r.`type`,
             r.phone,
             r.company_id,
             r.recruit_type,
@@ -166,13 +164,12 @@
         order by r.create_time desc
     </select>
 
-    <select id="queryById" resultMap="RecruitVOMap">
+    <select id="queryById" resultMap="RecruitEntityMap">
         select r.id,
                r.title,
                r.content,
                r.requirements,
                r.create_time,
-               r.`type`,
                r.phone,
                r.company_id,
                r.recruit_type,

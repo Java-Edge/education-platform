@@ -1,9 +1,5 @@
 package com.javagpt.back.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -12,13 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 招聘-职位
- *
  * @TableName recruit
  */
 @ApiModel
 @Data
-public class RecruitDTO implements Serializable {
+public class Recruit implements Serializable {
 
     /**
      * 招聘所属类型

@@ -1,11 +1,9 @@
 package com.javagpt.back.mapper;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.RecruitDTO;
-import com.javagpt.back.entity.Recruit;
+import com.javagpt.back.dto.Recruit;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.javagpt.back.vo.RecruitVO;
+import com.javagpt.back.vo.RecruitEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +16,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2023-07-23
  */
 @Mapper
-public interface RecruitMapper extends BaseMapper<Recruit> {
+public interface RecruitMapper extends BaseMapper<com.javagpt.back.entity.Recruit> {
 
     /**
      * 分页查询
@@ -27,7 +25,7 @@ public interface RecruitMapper extends BaseMapper<Recruit> {
      * @param dto
      * @return
      */
-    Page<RecruitVO> queryPage(@Param("page") Page<Recruit> page, @Param("dto") RecruitDTO dto);
+    Page<RecruitEntity> queryPage(@Param("page") Page<com.javagpt.back.entity.Recruit> page, @Param("dto") Recruit dto);
 
 
     /**
@@ -36,6 +34,6 @@ public interface RecruitMapper extends BaseMapper<Recruit> {
      * @param id
      * @return
      */
-    RecruitVO queryById(String id);
+    RecruitEntity queryById(String id);
 
 }

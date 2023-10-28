@@ -1,12 +1,16 @@
 package com.javagpt.back.vo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class RecruitVO {
+public class RecruitEntity {
 
+    @TableId(type = IdType.AUTO)
     private String id;
 
     /**
@@ -15,9 +19,24 @@ public class RecruitVO {
     private String title;
 
     /**
+     * 岗位信息
+     */
+    private String content;
+
+    /**
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 岗位要求
+     */
+    private String requirements;
+
+    /**
+     * 联系电话
+     */
+    private String phone;
 
     /**
      * 公司编号
@@ -50,6 +69,11 @@ public class RecruitVO {
     private Long careerJobId;
 
     /**
+     * 职位名称
+     */
+    private String careerJobName;
+
+    /**
      * 毕业年份
      */
     private String graduationYear;
@@ -63,6 +87,16 @@ public class RecruitVO {
      * 招聘结束时间
      */
     private Date deliverEnd;
+
+    /**
+     * 刷新时间
+     */
+    private Date refeshTime;
+
+    /**
+     *
+     */
+    private Integer feedBackDays;
 
     /**
      *
@@ -95,6 +129,12 @@ public class RecruitVO {
     private Integer workYearType;
 
     /**
+     * 项目编号
+     */
+    private Integer projectId;
+
+
+    /**
      * 学历
      */
     private Integer eduLevel;
@@ -124,11 +164,29 @@ public class RecruitVO {
      * 公司简称
      */
     private String companyShortName;
+    /**
+     * 公司地址
+     */
+    private String address;
 
     /**
      * 原始招聘链接
      */
     private String sourceUrl;
 
+    /**
+     * 类别信息
+     */
+    private String category;
+
+    /**
+     * 专业信息
+     */
+    private String major;
+
     private Integer pageView;
+
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }
