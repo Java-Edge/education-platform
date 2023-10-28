@@ -3,8 +3,9 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.back.entity.RecruitPO;
 import com.javagpt.common.req.PageQueryParam;
-import com.javagpt.back.dto.Recruit;
+import com.javagpt.back.dto.RecruitQO;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.mapper.RecruitMapper;
@@ -21,7 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, com.javagpt.back.entity.Recruit> implements RecruitService {
+public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, RecruitPO> implements RecruitService {
 
 
     @Autowired
@@ -31,32 +32,32 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, com.javagpt.b
     private DictMapper dictionaryMapper;
 
     @Override
-    public Page<com.javagpt.back.entity.Recruit> selectPage(Integer current, Integer size, HttpServletRequest request) {
+    public Page<RecruitPO> selectPage(Integer current, Integer size, HttpServletRequest request) {
         Integer userId = U.getCurrentUserId(request);
-        Page<com.javagpt.back.entity.Recruit> page = new Page<>(current, size);
+        Page<RecruitPO> page = new Page<>(current, size);
         // 如果用户未登录，直接返回空数据
         if (userId == null) {
             return page;
         }
-        QueryWrapper<com.javagpt.back.entity.Recruit> qw = new QueryWrapper<>();
+        QueryWrapper<RecruitPO> qw = new QueryWrapper<>();
         qw.orderByDesc("create_time");
-        Page<com.javagpt.back.entity.Recruit> recruitPage = this.baseMapper.selectPage(page, qw);
+        Page<RecruitPO> recruitPage = this.baseMapper.selectPage(page, qw);
         return recruitPage;
     }
 
     @Override
-    public Page<RecruitEntity> selectByCondition(PageQueryParam<Recruit> pageQueryParam, HttpServletRequest request) {
-        Page<com.javagpt.back.entity.Recruit> page = new Page<>();
+    public Page<RecruitEntity> selectByCondition(PageQueryParam<RecruitQO> pageQueryParam, HttpServletRequest request) {
+        Page<RecruitPO> page = new Page<>();
         page.setCurrent(pageQueryParam.getPageNo());
         page.setSize(pageQueryParam.getPageSize());
 
         Integer userId = U.getCurrentUserId(request);
         // 如果用户未登录，直接返回空数据
         if (userId == null) {
-            return new Page<RecruitEntity>();
+            return new Page<>();
         }
 
-        Recruit recruitQO = pageQueryParam.getParam();
+        RecruitQO recruitQO = pageQueryParam.getParam();
 
         // 1. 查询筛选框的薪资范围
         if (recruitQO.getSalaryRange() != null && !recruitQO.getSalaryRange().isEmpty()) {
@@ -93,9 +94,9 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, com.javagpt.b
     }
 
     @Override
-    public List<com.javagpt.back.entity.Recruit> getHotRecruits() {
-        List<com.javagpt.back.entity.Recruit> recruits = recruitMapper.selectList(new LambdaQueryWrapper<com.javagpt.back.entity.Recruit>()
-                .orderByDesc(com.javagpt.back.entity.Recruit::getPageView)
+    public List<RecruitPO> getHotRecruits() {
+        List<RecruitPO> recruits = recruitMapper.selectList(new LambdaQueryWrapper<RecruitPO>()
+                .orderByDesc(RecruitPO::getPageView)
                 .last("limit 6"));
         return recruits;
     }

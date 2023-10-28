@@ -1,18 +1,13 @@
 package com.javagpt.back.dto;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @TableName recruit
- */
-@ApiModel
 @Data
-public class Recruit implements Serializable {
+public class RecruitQO implements Serializable {
 
     /**
      * 招聘所属类型
