@@ -1,5 +1,6 @@
 package com.javagpt.back.controller;
 
+import com.javagpt.back.vo.SuperMenuVO;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.service.DictService;
@@ -42,6 +43,11 @@ public class DictController {
         return ResultBody.success(menuVOList);
     }
 
+    @GetMapping("/superMenuList")
+    public ResultBody superMenuList(@RequestParam(name = "typeKey") String typeKey) {
+        List<SuperMenuVO> menuVOList = dictService.selectSuperMenuList(typeKey);
+        return ResultBody.success(menuVOList);
+    }
 
     @GetMapping("/listByMultiTypeKey")
     public ResultBody listByTypeKeys(@RequestParam(name = "typeKeys") List<String> typeKeys) {

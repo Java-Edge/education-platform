@@ -4,6 +4,7 @@ import com.javagpt.back.entity.Dictionary;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.entity.DictionaryType;
 import com.javagpt.back.vo.MenuVO;
+import com.javagpt.back.vo.SuperMenuVO;
 
 import java.util.List;
 
@@ -31,4 +32,11 @@ public interface DictService extends IService<Dictionary> {
 
     List<DictionaryType> listByTypeKeys(List<String> typeKeys);
 
+    /**
+     * 三级菜单查询
+     *
+     * @param typeKey
+     * @return
+     */
+    List<SuperMenuVO> selectSuperMenuList(String typeKey);
 }

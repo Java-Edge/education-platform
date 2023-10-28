@@ -9,10 +9,15 @@ import com.javagpt.back.mapper.DictTypeMapper;
 import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.DictService;
 import com.javagpt.back.vo.MenuVO;
+import com.javagpt.back.vo.SuperMenuVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
 
@@ -48,7 +53,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
 
     @Override
     public List<MenuVO> selectChildMenuList(String typeKey, Integer parentId) {
-        return dictionaryMapper.selectChildMenuList(typeKey,parentId);
+        return dictionaryMapper.selectChildMenuList(typeKey, parentId);
     }
 
     @Override
@@ -65,6 +70,35 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
             dictType.setList(dictList4TypeKey);
         }
         return dictTypes;
+    }
+
+    /**
+     * 采用循环方式替代递归方式，提高查询效率
+     * <p>
+     * 1. 抽出当前等级的菜单
+     * 2. 抽出上一级别的菜单
+     * 3. 将当前别菜单组装到当上一级别菜单
+     * 4. 是否执行到最后底部菜单，是结束循环，否则继续第一步
+     *
+     * @param typeKey 菜单编号
+     * @return 三级及以上菜单列表
+     */
+    @Override
+    public List<SuperMenuVO> selectSuperMenuList(String typeKey) {
+        List<SuperMenuVO> menuVOList = dictionaryMapper.selectSuperMenuList(typeKey);
+        final Integer deLevel = menuVOList.stream().max(Comparator.comparing(SuperMenuVO::getLevel)).orElse(null).getLevel();
+        List<SuperMenuVO> currentMenuList;
+        List<SuperMenuVO> parentMenuList = menuVOList.stream().filter(item -> Objects.equals(item.getLevel(), deLevel)).collect(Collectors.toList());
+        for (int i = deLevel - 1; i > 0; i--) {
+            int level = i;
+            currentMenuList = parentMenuList;
+            parentMenuList = menuVOList.stream().filter(item -> item.getLevel() == level).collect(Collectors.toList());
+            for (SuperMenuVO parentMenu : parentMenuList) {
+                List<SuperMenuVO> menuList = currentMenuList.stream().filter(item -> item.getParentId().equals(parentMenu.getId())).collect(Collectors.toList());
+                parentMenu.setChildren(menuList);
+            }
+        }
+        return parentMenuList;
     }
 
 }
