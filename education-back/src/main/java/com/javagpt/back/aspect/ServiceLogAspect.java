@@ -1,15 +1,20 @@
 package com.javagpt.back.aspect;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.util.concurrent.RateLimiter;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.IpUtils;
 import jakarta.annotation.Resource;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -18,6 +23,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -50,9 +56,32 @@ public class ServiceLogAspect {
             return;
         }
         HttpServletRequest request =attributes.getRequest();
-        String ip = IpUtils.getIpAddress(request);
-        String target = joinPoint.getSignature().getDeclaringTypeName() + "." +joinPoint.getSignature().getName();
-        log.info(String.format("用户ip=[%s] 访问了=[%s]", ip, target));
+        Signature signature = joinPoint.getSignature();
+        String name = signature.getName();
+
+        log.info("------------- 开始 -------------");
+        log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
+        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
+        log.info("远程地址: {}", request.getRemoteAddr());
+        log.info("IP地址: {}", IpUtils.getIpAddress(request));
+
+
+        Object[] args = joinPoint.getArgs();
+        Object[] arguments  = new Object[args.length];
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] instanceof ServletRequest
+                    || args[i] instanceof ServletResponse
+                    || args[i] instanceof MultipartFile) {
+                continue;
+            }
+            arguments[i] = args[i];
+        }
+
+        String[] excludeProperties = {"password", "file"};
+        PropertyPreFilters filters = new PropertyPreFilters();
+        PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
+        excludeFilter.addExcludes(excludeProperties);
+        log.info("请求参数: {}", JSONObject.toJSONString(arguments, excludeFilter));
     }
 
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
@@ -106,6 +135,20 @@ public class ServiceLogAspect {
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             log.error("Error in calPageView: " + e.getMessage(), e);
         }
+    }
+
+    @Around("pointCut()")
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        Object result = proceedingJoinPoint.proceed();
+
+        String[] excludeProperties = {"password", "file"};
+        PropertyPreFilters filters = new PropertyPreFilters();
+        PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
+        excludeFilter.addExcludes(excludeProperties);
+        log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
+        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+        return result;
     }
 
 }
