@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Sideline;
@@ -11,14 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author zqy
- * @since 2023-08-22
- */
 @RestController
 @RequestMapping("/sideline")
 public class SidelineController {
@@ -27,7 +18,7 @@ public class SidelineController {
     private SidelineService sidelineService;
 
     @GetMapping("/getByPage")
-    @PreAuthorize("@ss.hasRole('admin,vip')")
+//    @PreAuthorize("@ss.hasRole('admin,vip')")
     public ResultBody getByPage(Integer current, Integer size) {
         Page<Sideline> page = sidelineService.selectPage(current,size);
         return ResultBody.success(page);

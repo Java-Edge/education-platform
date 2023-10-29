@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
+ * 排行榜页面入口
+ *
  * @author 千祎来了
  * @date 2023/8/8 15:11
  */
