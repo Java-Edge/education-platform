@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity> implements DownloadService {
 
     @Resource
-    private ArticleMapper downloadMapper;
+    private ArticleMapper articleMapper;
 
     @Override
     public Page<ArticleEntity> listByPage(Integer current, Integer size) {
@@ -26,6 +26,11 @@ public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntit
         qw.orderByDesc("create_time");
         qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view");
         return this.getBaseMapper().selectPage(page, qw);
+    }
+
+    @Override
+    public ArticleEntity selectById(Integer id) {
+        return this.getBaseMapper().selectById(id);
     }
 }
 
