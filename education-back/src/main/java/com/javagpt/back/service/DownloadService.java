@@ -7,4 +7,6 @@ import com.javagpt.back.entity.ArticleEntity;
 public interface DownloadService extends IService<ArticleEntity> {
 
     Page<ArticleEntity> listByPage(Integer current, Integer size);
+
+    ArticleEntity selectById(Integer id);
 }
