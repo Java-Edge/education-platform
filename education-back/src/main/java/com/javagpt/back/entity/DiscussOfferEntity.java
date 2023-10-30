@@ -2,6 +2,8 @@ package com.javagpt.back.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,9 +15,10 @@ import lombok.EqualsAndHashCode;
  * @author mkingg
  * @since 2023-10-29
  */
+@TableName(value = "discuss_offer")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class DiscussOffer implements Serializable {
+public class DiscussOfferEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

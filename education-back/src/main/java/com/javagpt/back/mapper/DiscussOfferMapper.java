@@ -1,7 +1,8 @@
 package com.javagpt.back.mapper;
 
-import com.javagpt.back.entity.DiscussOffer;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.javagpt.back.entity.DiscussOfferEntity;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author mkingg
  * @since 2023-10-29
  */
-public interface DiscussOfferMapper extends BaseMapper<DiscussOffer> {
+@Mapper
+public interface DiscussOfferMapper extends BaseMapper<DiscussOfferEntity> {
 
 }

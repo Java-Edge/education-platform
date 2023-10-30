@@ -2,10 +2,10 @@ package com.javagpt.back.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.entity.DiscussOffer;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.entity.DiscussOfferEntity;
 import com.javagpt.back.mapper.DiscussOfferMapper;
 import com.javagpt.back.service.DiscussOfferService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
  * @since 2023-10-29
  */
 @Service
-public class DiscussOfferServiceImpl extends ServiceImpl<DiscussOfferMapper, DiscussOffer> implements DiscussOfferService {
+public class DiscussOfferServiceImpl extends ServiceImpl<DiscussOfferMapper, DiscussOfferEntity> implements DiscussOfferService {
 
 		@Override
-		public Page<DiscussOffer> selectPage(Integer current, Integer size) {
-				Page<DiscussOffer> page = new Page<>(current, size);
-				QueryWrapper<DiscussOffer> queryWrapper = new QueryWrapper<>();
+		public Page<DiscussOfferEntity> selectPage(Integer current, Integer size) {
+				Page<DiscussOfferEntity> page = new Page<>(current, size);
+				QueryWrapper<DiscussOfferEntity> queryWrapper = new QueryWrapper<>();
 				queryWrapper.orderByDesc("create_time");
 				return this.getBaseMapper().selectPage(page, queryWrapper);
 		}
