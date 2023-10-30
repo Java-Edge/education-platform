@@ -9,14 +9,6 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author zqy
- * @since 2023-08-22
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Sideline implements Serializable {
@@ -52,4 +44,6 @@ public class Sideline implements Serializable {
     private String href;
 
     private String permission;
+
+    private Integer pageView;
 }
