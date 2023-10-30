@@ -1,8 +1,8 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.entity.DiscussOffer;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.javagpt.back.entity.DiscussOfferEntity;
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author mkingg
  * @since 2023-10-29
  */
-public interface DiscussOfferService extends IService<DiscussOffer> {
+public interface DiscussOfferService extends IService<DiscussOfferEntity> {
 
 		/**
 		 * 分页查询
@@ -20,5 +20,5 @@ public interface DiscussOfferService extends IService<DiscussOffer> {
 		 * @param size 每页显示条数，默认 10
 		 * @return
 		 */
-		Page<DiscussOffer> selectPage(Integer current, Integer size);
+		Page<DiscussOfferEntity> selectPage(Integer current, Integer size);
 }
