@@ -3,23 +3,23 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.LoginRespVO;
-import com.javagpt.common.resp.ResultBody;
-import com.javagpt.common.constant.ResultStatus;
 import com.javagpt.back.dto.UserDTO;
 import com.javagpt.back.entity.UserEntity;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
+import com.javagpt.common.constant.ResultStatus;
+import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -27,34 +27,25 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- * @author MSIK
- * @description 针对表【user(用户表)】的数据库操作Service实现
- * @createDate 2023-08-05 18:49:02
- */
 @Service
 @Slf4j
-@Scope("singleton")//singleton单例模式,全局有且仅有一个实例
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
-        implements UserService {
+@Scope("singleton")
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
-
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
-    public int chkUsername(String username) {
+    public int checkUsername(String username) {
         UserEntity userEntity = this.getBaseMapper()
                 .selectOne(new LambdaQueryWrapper<UserEntity>()
                         .eq(UserEntity::getUsername, username));
-        int value = userEntity != null ? 1 : 0;
-        return value;
+        return userEntity != null ? 1 : 0;
     }
 
     @Override
@@ -90,7 +81,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
             user.setMessage("验证码输入错误！");
             return ResultBody.success(user);
         }
-        user.setId(String.valueOf(new Date().getTime()));
+        if (checkUsername(user.getUsername()) == 1) {
+            user.setOk(false);
+            user.setMessage("用户名已存在！");
+            return ResultBody.success(user);
+        }
         user.setPassword(Md5Util.getMD5(user.getPassword()));
         int num = insertUser(user);
         if (num <= 0) {
