@@ -17,4 +17,10 @@ public class ArticleVO {
     private String content;
 
     private Integer pageView;
+
+    /**
+     * 封面图
+     */
+    private String img;
+
 }

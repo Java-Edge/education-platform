@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ArticleTypeEnums {
 
-    NEWS(0, "动态"),
+    TIME_LINE(0, "动态"),
 
     DOWNLOAD(1, "下载");
 
