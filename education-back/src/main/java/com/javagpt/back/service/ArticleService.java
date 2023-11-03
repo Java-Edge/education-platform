@@ -18,9 +18,6 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     /**
      * 根据id查询
-     *
-     * @param id
-     * @return
      */
     ArticleEntity selectById(Integer id);
 

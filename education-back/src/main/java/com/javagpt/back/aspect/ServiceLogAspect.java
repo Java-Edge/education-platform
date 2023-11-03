@@ -3,6 +3,7 @@ package com.javagpt.back.aspect;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.RateLimiter;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.IpUtils;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -37,6 +39,11 @@ public class ServiceLogAspect {
     private ApplicationContext applicationContext;
 
     private static final RateLimiter rateLimiter = RateLimiter.create(500);
+
+
+    private static final List<String> articles = Lists.newArrayList(
+            "TimeLineController",
+            "DownloadController");
 
     @Pointcut("execution(* com.javagpt.back.service.*.*(..))")
     public void pointCut(){
@@ -98,37 +105,36 @@ public class ServiceLogAspect {
     // 计算pv
     @Before("execution(* com.javagpt.back.controller.*.getById(..))")
     public void calPageView(JoinPoint joinPoint) {
-
         log.info("Method called: " + joinPoint.getSignature().toShortString());
-        log.info("Target class: " + joinPoint.getTarget().getClass().getName());
 
-        // Extract arguments
         Object[] args = joinPoint.getArgs();
         if (args.length == 0 || !(args[0] instanceof Integer)) {
             log.error("Invalid arguments. Expected at least one argument of type Integer.");
             return;
         }
 
-        // Extract entityId and mapper information
+        // 提取 entityId 和 mapper 信息
         Integer entityId = (Integer) args[0];
         String controllerClassName = joinPoint.getTarget().getClass().getSimpleName();
         String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
-
+        if (articles.contains(controllerClassName)) {
+            entityMapperName = "com.javagpt.back.mapper.ArticleMapper";
+        }
         try {
             Class<?> entityMapperClass = Class.forName(entityMapperName);
             BaseMapper<Object> entityMapper = (BaseMapper<Object>) applicationContext.getBean(entityMapperClass);
 
-            // Retrieve the entity from the database
+            // 获取 entity
             Object entityFromDB = entityMapper.selectById(entityId);
 
-            // Update the pageView
+            // 更新pageView
             Method getPageViewMethod = entityFromDB.getClass().getMethod("getPageView");
             Method setPageViewMethod = entityFromDB.getClass().getMethod("setPageView", Integer.class);
 
             Integer pageView = (Integer) getPageViewMethod.invoke(entityFromDB);
             setPageViewMethod.invoke(entityFromDB, pageView + 1);
 
-            // Update the entity
+            // 更新entity
             entityMapper.updateById(entityFromDB);
 
             log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
