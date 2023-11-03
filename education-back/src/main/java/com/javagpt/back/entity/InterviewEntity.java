@@ -32,37 +32,8 @@ public class InterviewEntity implements Serializable {
     /**
      *
      */
-    private String newTitle;
-
-    /**
-     *
-     */
     private String content;
 
-    /**
-     *
-     */
-    private String newContent;
-
-    /**
-     *
-     */
-    private String type;
-
-    /**
-     *
-     */
-    private String status;
-
-    /**
-     *
-     */
-    private String hasEdit;
-
-    /**
-     *
-     */
-    private Integer isAnonymousFlag;
 
     private Integer jobId;
 
@@ -75,12 +46,6 @@ public class InterviewEntity implements Serializable {
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createAt;
-
-    /**
-     *
-     */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date editTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

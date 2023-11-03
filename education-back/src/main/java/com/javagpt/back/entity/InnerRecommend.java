@@ -25,10 +25,6 @@ public class InnerRecommend implements Serializable {
      */
     private String title;
 
-    /**
-     * 
-     */
-    private String newTitle;
 
     /**
      * 
@@ -38,37 +34,7 @@ public class InnerRecommend implements Serializable {
     /**
      * 
      */
-    private String newContent;
-
-    /**
-     * 
-     */
-    private String type;
-
-    /**
-     * 
-     */
-    private String status;
-
-    /**
-     * 
-     */
-    private String hasEdit;
-
-    /**
-     * 
-     */
-    private Integer isAnonymousFlag;
-
-    /**
-     * 
-     */
     private Date createAt;
-
-    /**
-     * 
-     */
-    private Date editTime;
 
     /**
      * 职位id

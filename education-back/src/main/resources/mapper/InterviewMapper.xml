@@ -8,7 +8,6 @@
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
-        <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
@@ -20,9 +19,9 @@
 
     <sql id="Base_Column_List">
         id,user_id,title,
-        new_title,content,new_content,
+        content,
         type,status,has_edit,
-        is_anonymous_flag,create_at,edit_time
+        is_anonymous_flag,create_at
     </sql>
 
 
@@ -30,9 +29,7 @@
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
-        <result property="newTitle" column="new_title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
@@ -48,12 +45,9 @@
         interview.user_id           user_id,
         interview.title             title,
                LEFT(interview.content,20)   content,
-        interview.type              type,
-        interview.status            status,
         interview.has_edit          has_edit,
         interview.is_anonymous_flag is_anonymous_flag,
         interview.create_at         create_at,
-        interview.edit_time         edit_time,
         interview.job_id            job_id,
         interview.content_type      content_type,
                career.name               career_name
