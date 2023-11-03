@@ -144,9 +144,9 @@ public class ServiceLogAspect {
     }
 
     @Around("pointCut()")
-    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object doAround(ProceedingJoinPoint point) throws Throwable {
         long startTime = System.currentTimeMillis();
-        Object result = proceedingJoinPoint.proceed();
+        Object result = point.proceed();
 
         String[] excludeProperties = {"password", "file"};
         PropertyPreFilters filters = new PropertyPreFilters();
