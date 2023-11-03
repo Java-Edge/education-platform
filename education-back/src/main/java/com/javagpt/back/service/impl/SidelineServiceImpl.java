@@ -34,34 +34,34 @@ public class SidelineServiceImpl extends ServiceImpl<SidelineMapper, Sideline> i
         /**
          * 访问副业时，需要登陆，登陆时会向 SecurityContext 中存储用户 id，因此这里一定可以取到
          */
-        Integer userId = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<String> userPermission = userRoleService.getByUserId(userId);
-        for (Sideline sl : sidelinePage.getRecords()) {
-
-            String permission = sl.getPermission();
-
-            /**
-             * 如果所需权限为空，则不需要判断
-             */
-            if (StringUtils.isBlank(permission)) {
-                continue;
-            }
-             JSONArray permissions = JSON.parseArray(permission);
-            boolean permit = false;
-            for (String up : userPermission) {
-                if (permissions.contains(up)) {
-                    permit = true;
-                    break;
-                }
-            }
-            if (!permit) {
-                sl.setTitle("权限不足，无法查看");
-                sl.setDes("权限不足，无法查看");
-                // 这里不能设置 href 为空，否则前端判断会不展示
-                sl.setHref("");
-                sl.setImg("");
-            }
-        }
+//        Integer userId = (Integer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        List<String> userPermission = userRoleService.getByUserId(userId);
+//        for (Sideline sl : sidelinePage.getRecords()) {
+//
+//            String permission = sl.getPermission();
+//
+//            /**
+//             * 如果所需权限为空，则不需要判断
+//             */
+//            if (StringUtils.isBlank(permission)) {
+//                continue;
+//            }
+//             JSONArray permissions = JSON.parseArray(permission);
+//            boolean permit = false;
+//            for (String up : userPermission) {
+//                if (permissions.contains(up)) {
+//                    permit = true;
+//                    break;
+//                }
+//            }
+//            if (!permit) {
+//                sl.setTitle("权限不足，无法查看");
+//                sl.setDes("权限不足，无法查看");
+//                // 这里不能设置 href 为空，否则前端判断会不展示
+//                sl.setHref("");
+//                sl.setImg("");
+//            }
+//        }
         return sidelinePage;
     }
 }
