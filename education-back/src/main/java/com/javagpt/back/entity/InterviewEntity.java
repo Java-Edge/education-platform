@@ -22,11 +22,6 @@ public class InterviewEntity implements Serializable {
     /**
      *
      */
-    private Long userId;
-
-    /**
-     *
-     */
     private String title;
 
     /**

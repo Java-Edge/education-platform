@@ -15,11 +15,6 @@ public class InterviewVO {
     private String id;
 
     /**
-     * 用户主键
-     */
-    private Long userId;
-
-    /**
      * 标题
      */
     private String title;

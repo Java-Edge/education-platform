@@ -15,10 +15,6 @@ public class InnerRecommend implements Serializable {
      */
     private Long id;
 
-    /**
-     * 
-     */
-    private Long userId;
 
     /**
      * 
