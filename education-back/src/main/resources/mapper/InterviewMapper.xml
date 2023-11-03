@@ -6,34 +6,21 @@
 
     <resultMap id="BaseResultMap" type="com.javagpt.back.entity.InterviewEntity">
         <id property="id" column="id" jdbcType="INTEGER"/>
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="newContent" column="new_content" jdbcType="VARCHAR"/>
-        <result property="type" column="type" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
-        <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
-        <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
+       <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,title,
-        content,
-        type,status,has_edit,
-        is_anonymous_flag,create_at
+        id,title,
+        content,create_at
     </sql>
 
 
     <resultMap id="InterviewEntityMap" type="com.javagpt.back.entity.InterviewEntity">
         <id property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="type" column="type" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="hasEdit" column="has_edit" jdbcType="VARCHAR"/>
-        <result property="isAnonymousFlag" column="is_anonymous_flag" jdbcType="TINYINT"/>
         <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
         <result property="jobId" column="job_id" jdbcType="INTEGER"/>
         <result property="careerName" column="career_name" jdbcType="VARCHAR"/>
@@ -42,11 +29,8 @@
     <select id="selectByCondition" parameterType="com.javagpt.back.dto.InterviewDTO" resultMap="InterviewEntityMap">
 
         select interview.id                id,
-        interview.user_id           user_id,
         interview.title             title,
                LEFT(interview.content,20)   content,
-        interview.has_edit          has_edit,
-        interview.is_anonymous_flag is_anonymous_flag,
         interview.create_at         create_at,
         interview.job_id            job_id,
         interview.content_type      content_type,

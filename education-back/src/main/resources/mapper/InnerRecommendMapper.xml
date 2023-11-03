@@ -6,7 +6,6 @@
 
     <resultMap id="BaseResultMap" type="com.javagpt.back.entity.InnerRecommend">
             <result property="id" column="id" jdbcType="BIGINT"/>
-            <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
             <result property="content" column="content" jdbcType="VARCHAR"/>
             <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
@@ -19,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,title,
+        id,title,
         content,create_at,
         job_id,content_type,page_view,recommend_code,recommend_email,
         recommend_url
@@ -28,7 +27,6 @@
 
     <resultMap id="innerRecommendMap" type="com.javagpt.back.entity.InnerRecommend">
         <id property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createAt" column="create_at" jdbcType="TIMESTAMP"/>
@@ -43,7 +41,6 @@
     <select id="selectByCondition" parameterType="com.javagpt.back.dto.InnerRecommendQueryDTO" resultMap="innerRecommendMap">
 
         select innner.id                id,
-        innner.user_id           user_id,
         innner.title             title,
         LEFT(innner.content,100)   content,
         innner.create_at         create_at,
