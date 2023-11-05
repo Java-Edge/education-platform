@@ -20,9 +20,9 @@ public class CodeGenerator {
         // 2、全局配置
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-       // gc.setOutputDir("D:\\ProjectEntity\\IDEA\\education-microservice\\education-back"+"/src/main/java");//项目的绝对路径
-        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setOutputDir("D:\\Project\\IDEA\\education-microservice\\education-back\\src\\main\\java");//项目的绝对路径
+//        String projectPath = System.getProperty("user.dir");
+//        gc.setOutputDir(projectPath + "/src/main/java");
         gc.setServiceName("%sService");    //去掉Service接口的首字母I
         gc.setAuthor("mkingg");
         gc.setOpen(false);
@@ -49,7 +49,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 
-        strategy.setInclude("discuss_offer");//表名
+        strategy.setInclude("sign_record");//表名
 
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
 
