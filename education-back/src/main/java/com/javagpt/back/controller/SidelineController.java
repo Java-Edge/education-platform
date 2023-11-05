@@ -1,13 +1,19 @@
 package com.javagpt.back.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.collect.Lists;
+import com.javagpt.back.converter.SidelineConverter;
 import com.javagpt.back.entity.Sideline;
 import com.javagpt.back.service.SidelineService;
+import com.javagpt.back.vo.SidelineVO;
 import com.javagpt.common.resp.ResultBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/sideline")
@@ -17,10 +23,17 @@ public class SidelineController {
     private SidelineService sidelineService;
 
     @GetMapping("/getByPage")
-//    @PreAuthorize("@ss.hasRole('admin,vip')")
     public ResultBody getByPage(Integer current, Integer size) {
-        Page<Sideline> page = sidelineService.selectPage(current,size);
-        return ResultBody.success(page);
+        Page<Sideline> sidelinePage = sidelineService.selectPage(current,size);
+
+        List<SidelineVO> sidelineVOS = Lists.newArrayList();
+        for (Sideline sidelineVO: sidelinePage.getRecords()) {
+            sidelineVOS.add(SidelineConverter.INSTANCE.toVO(sidelineVO));
+        }
+        IPage<SidelineVO> sidelineVOPage = new Page<>();
+        sidelineVOPage.setRecords(sidelineVOS);
+        sidelineVOPage.setTotal(sidelinePage.getTotal());
+        return ResultBody.success(sidelineVOPage);
     }
 
     /**
