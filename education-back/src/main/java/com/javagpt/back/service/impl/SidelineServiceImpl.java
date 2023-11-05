@@ -1,9 +1,6 @@
 package com.javagpt.back.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.entity.Sideline;
@@ -11,10 +8,7 @@ import com.javagpt.back.mapper.SidelineMapper;
 import com.javagpt.back.service.SidelineService;
 import com.javagpt.back.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SidelineServiceImpl extends ServiceImpl<SidelineMapper, Sideline> implements SidelineService {
