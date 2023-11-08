@@ -10,14 +10,12 @@
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="des" column="des" jdbcType="VARCHAR"/>
-        <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
         <result property="recruitType" column="recruit_type" jdbcType="INTEGER"/>
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
         <result property="ext" column="ext" jdbcType="VARCHAR"/>
         <result property="jobCity" column="job_city" jdbcType="VARCHAR"/>
         <result property="careerJobId" column="career_job_id" jdbcType="INTEGER"/>
-        <result property="careerJobName" column="career_job_name" jdbcType="VARCHAR"/>
         <result property="graduationYear" column="graduation_year" jdbcType="VARCHAR"/>
         <result property="deliverBegin" column="deliver_begin" jdbcType="TIMESTAMP"/>
         <result property="deliverEnd" column="deliver_end" jdbcType="TIMESTAMP"/>
@@ -29,7 +27,6 @@
         <result property="salaryMax" column="salary_max" jdbcType="INTEGER"/>
         <result property="salaryMonth" column="salary_month" jdbcType="INTEGER"/>
         <result property="workYearType" column="work_year_type" jdbcType="INTEGER"/>
-        <result property="projectId" column="project_id" jdbcType="INTEGER"/>
         <result property="eduLevel" column="edu_level" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -37,12 +34,12 @@
         id
         ,title,content,
         create_time,des,
-        phone,company_id,recruit_type,
-        job_name,ext,job_city,career_job_id,career_job_name,
+        company_id,recruit_type,
+        job_name,ext,job_city,career_job_id,
         graduation_year,deliver_begin,deliver_end,
-        refesh_time,feed_back_days,duration_days,
+        duration_days,
         salary_type,salary_min,salary_max,
-        salary_month,work_year_type,project_id,edu_level
+        salary_month,work_year_type,edu_level
     </sql>
 
 
@@ -58,12 +55,9 @@
         <result property="ext" column="ext" jdbcType="VARCHAR"/>
         <result property="jobCity" column="job_city" jdbcType="VARCHAR"/>
         <result property="careerJobId" column="career_job_id" jdbcType="INTEGER"/>
-        <result property="careerJobName" column="career_job_name" jdbcType="VARCHAR"/>
         <result property="graduationYear" column="graduation_year" jdbcType="VARCHAR"/>
         <result property="deliverBegin" column="deliver_begin" jdbcType="TIMESTAMP"/>
         <result property="deliverEnd" column="deliver_end" jdbcType="TIMESTAMP"/>
-        <result property="refeshTime" column="refesh_time" jdbcType="TIMESTAMP"/>
-        <result property="feedBackDays" column="feed_back_days" jdbcType="INTEGER"/>
         <result property="durationDays" column="duration_days" jdbcType="INTEGER"/>
         <result property="salaryType" column="salary_type" jdbcType="INTEGER"/>
         <result property="salaryMin" column="salary_min" jdbcType="INTEGER"/>
@@ -85,26 +79,21 @@
             r.id,
             r.title,
             r.create_time,
-            r.phone,
             r.company_id,
             r.recruit_type,
             r.job_name,
             r.ext,
             SUBSTRING_INDEX(r.job_city,',',1) job_city,
             r.career_job_id,
-            r.career_job_name,
             r.graduation_year,
             r.deliver_begin,
             r.deliver_end,
-            r.refesh_time,
-            r.feed_back_days,
             r.duration_days,
             r.salary_type,
             r.salary_min,
             r.salary_max,
             r.salary_month,
             r.work_year_type,
-            r.project_id,
             r.edu_level,
             r.source_url,
             c.pic_url,
@@ -170,26 +159,21 @@
                r.content,
                r.requirements,
                r.create_time,
-               r.phone,
                r.company_id,
                r.recruit_type,
                r.job_name,
                r.ext,
                r.job_city,
                r.career_job_id,
-               r.career_job_name,
                r.graduation_year,
                r.deliver_begin,
                r.deliver_end,
-               r.refesh_time,
-               r.feed_back_days,
                r.duration_days,
                r.salary_type,
                r.salary_min,
                r.salary_max,
                r.salary_month,
                r.work_year_type,
-               r.project_id,
                r.edu_level,
                r.source_url,
                c.pic_url,

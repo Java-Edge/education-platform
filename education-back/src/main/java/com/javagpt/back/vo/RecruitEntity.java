@@ -34,11 +34,6 @@ public class RecruitEntity {
     private String requirements;
 
     /**
-     * 联系电话
-     */
-    private String phone;
-
-    /**
      * 公司编号
      */
     private String companyId;
@@ -67,11 +62,6 @@ public class RecruitEntity {
      * 职位号
      */
     private Long careerJobId;
-
-    /**
-     * 职位名称
-     */
-    private String careerJobName;
 
     /**
      * 毕业年份
