@@ -9,10 +9,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface InnerRecommendMapper extends BaseMapper<InnerRecommend> {
 
-    /**
-     * 分页查询
-     */
-    IPage<InnerRecommend> selectByCondition(@Param("page") Page<InnerRecommend> page, @Param("dto") InnerRecommendQueryDTO dto);
+    IPage<InnerRecommend> selectByCondition(@Param("page") Page<InnerRecommend> page,
+                                            @Param("dto") InnerRecommendQueryDTO dto);
 }
 
 

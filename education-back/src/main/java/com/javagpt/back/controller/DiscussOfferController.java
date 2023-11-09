@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.javagpt.back.converter.DiscussOfferConverter;
@@ -16,14 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author mkingg
- * @since 2023-10-29
- */
 @RestController
 @RequestMapping("/discuss/offer")
 public class DiscussOfferController {

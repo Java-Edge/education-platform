@@ -20,11 +20,14 @@ public class CodeGenerator {
         // 2、全局配置
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D:\\Project\\IDEA\\education-microservice\\education-back\\src\\main\\java");//项目的绝对路径
+        // 项目的绝对路径
+        // gc.setOutputDir("D:\\Project\\IDEA\\education-microservice\\education-back\\src\\main\\java");
+        gc.setOutputDir("/Users/javaedge/Downloads/IDEAProjects/education-microservice/education-back/src/main/java");
+
 //        String projectPath = System.getProperty("user.dir");
 //        gc.setOutputDir(projectPath + "/src/main/java");
         gc.setServiceName("%sService");    //去掉Service接口的首字母I
-        gc.setAuthor("mkingg");
+        gc.setAuthor("robot");
         gc.setOpen(false);
         mpg.setGlobalConfig(gc);
 
@@ -49,15 +52,21 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
 
-        strategy.setInclude("sign_record");//表名
+        // 表名
+        strategy.setInclude("company_discussion");
 
-        strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
+        //数据库表映射到实体的命名策略
+        strategy.setNaming(NamingStrategy.underline_to_camel);
 
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
-        strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作
+        //数据库表字段映射到实体的命名策略
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        // lombok 模型 @Accessors(chain = true) setter链式操作
+        strategy.setEntityLombokModel(true);
 
-        strategy.setRestControllerStyle(true); //restful api风格控制器
-        strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符
+        //restful api风格控制器
+        strategy.setRestControllerStyle(true);
+        //url中驼峰转连字符
+        strategy.setControllerMappingHyphenStyle(true);
 
         mpg.setStrategy(strategy);
 
