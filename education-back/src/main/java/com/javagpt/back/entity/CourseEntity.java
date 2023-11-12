@@ -35,30 +35,12 @@ public class CourseEntity implements Serializable {
      */
     private String description;
 
-    /**
-     *
-     */
-    private BigDecimal price;
 
     /**
      *
      */
     private Date createTime;
 
-    /**
-     *
-     */
-    private String creator;
-
-    /**
-     *
-     */
-    private Date updateTime;
-
-    /**
-     *
-     */
-    private String updater;
 
     /**
      *

@@ -46,4 +46,13 @@ public class SpecialColumnController {
         specialColumnVOPage.setTotal(courseVOPage.getTotal());
         return ResultBody.success(specialColumnVOPage);
     }
+
+    /**
+     * 统计 pv 的接口
+     */
+    @PostMapping("/special/pv")
+    public ResultBody pv(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+        specialColumnService.pv(pageQueryParam.getParam().getItemId());
+        return ResultBody.success();
+    }
 }

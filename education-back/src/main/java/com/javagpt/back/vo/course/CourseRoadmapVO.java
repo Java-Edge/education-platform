@@ -19,7 +19,6 @@ public class CourseRoadmapVO implements Serializable {
     private String name;
     private String image;
     private String description;
-    private BigDecimal price;
     private Integer parentId;
     private Integer collect;
     private Integer course;

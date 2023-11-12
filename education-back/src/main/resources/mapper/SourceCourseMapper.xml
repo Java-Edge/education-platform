@@ -9,7 +9,6 @@
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="image" column="image" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
-            <result property="price" column="price" jdbcType="DECIMAL"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="creator" column="creator" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
@@ -19,10 +18,13 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,image,
-        description,price,create_time,
-        creator,update_time,updater,
-        remark,source_url
+        id,
+        name,
+        image,
+        description,
+        create_time,
+        remark,
+        source_url
     </sql>
 
 
@@ -31,7 +33,6 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="image" column="image" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
-        <result property="price" column="price" jdbcType="DECIMAL"/>
         <result property="sourceUrl" column="source_url" jdbcType="VARCHAR"/>
         <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
         <result property="pageView" column="page_view" jdbcType="INTEGER"/>
@@ -46,12 +47,9 @@
             sc.name as name,
             sc.image as image,
             sc.description as description,
-            sc.price as price,
             sc.source_url as source_url,
             sc.parent_id as parent_id,
             sc.page_view as page_view,
-            sc.creator as creator,
-            sc.updater as updater,
             sc.remark as remark
         from source_course sc
         <where>
@@ -71,12 +69,9 @@
         sc.name as name,
         sc.image as image,
         sc.description as description,
-        sc.price as price,
         sc.source_url as source_url,
         sc.parent_id as parent_id,
         sc.page_view as page_view,
-        sc.creator as creator,
-        sc.updater as updater,
         sc.remark as remark
         from source_course sc
         <where>

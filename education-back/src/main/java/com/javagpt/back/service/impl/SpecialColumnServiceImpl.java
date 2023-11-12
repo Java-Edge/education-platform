@@ -65,6 +65,15 @@ public class SpecialColumnServiceImpl extends ServiceImpl<CourseMapper, CourseEn
 
         return courseMapper.queryPage(courseVOPage, specialQueryDTO);
     }
+
+    @Override
+    public void pv( Integer itemId) {
+        // 根据课程 id 查询该记录，并让其 page_view 字段加一并落库
+        CourseEntity courseEntity = courseMapper.selectById(itemId);
+        courseEntity.setId(itemId);
+        courseEntity.setPageView(courseEntity.getPageView() + 1);
+        courseMapper.updateById(courseEntity);
+    }
 }
 
 

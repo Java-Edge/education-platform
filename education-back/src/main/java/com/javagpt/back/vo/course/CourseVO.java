@@ -32,8 +32,6 @@ public class CourseVO {
 
     private String sourceUrl;
 
-    private BigDecimal price;
-
     private Integer step;
 
     private Integer parentId;

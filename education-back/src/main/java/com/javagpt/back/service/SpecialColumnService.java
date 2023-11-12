@@ -18,4 +18,6 @@ public interface SpecialColumnService extends IService<CourseEntity> {
      * 专栏列表
      */
     Page<CourseVO> pageListSpecial(PageQueryParam<SpecialQueryDTO> pageQueryParam);
+
+    void pv( Integer itemId);
 }

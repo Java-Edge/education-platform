@@ -31,4 +31,6 @@ public class SpecialQueryDTO {
      */
     private List<Integer> categories;
 
+    private Integer itemId;
+
 }
