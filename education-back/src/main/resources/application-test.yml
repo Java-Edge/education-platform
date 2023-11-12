@@ -29,4 +29,4 @@ mpp:
 
 logging:
   level:
-    root: debug
+    root: info
