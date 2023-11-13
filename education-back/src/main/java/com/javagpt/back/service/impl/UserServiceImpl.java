@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.LoginRespVO;
 import com.javagpt.back.dto.UserDTO;
+import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.entity.UserEntity;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
@@ -146,7 +147,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         cookie.setMaxAge(7 * 24 * 60 * 60);
         cookie.setPath("/");
         response.addCookie(cookie);
-
+        // 更新最近一次登录时间，以记录不活跃用户，以后刺激活跃
+        userEntity.setUpdateTime(new Date());
+        userMapper.updateById(userEntity);
         return ResultBody.success(loginRespVO);
     }
 
