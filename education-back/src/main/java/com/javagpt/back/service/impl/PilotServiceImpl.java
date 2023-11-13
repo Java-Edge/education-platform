@@ -3,6 +3,7 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.benmanes.caffeine.cache.Cache;
+import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.mapper.PilotMapper;
@@ -65,5 +66,13 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
         QueryWrapper<Pilot> qw = new QueryWrapper<>();
         List<Pilot> pilots = pilotMapper.selectList(qw);
         pilotCache.put(cache_max_pilot_local_cache, pilots);
+    }
+
+    @Override
+    public void pv( Integer itemId) {
+        Pilot pilot = pilotMapper.selectById(itemId);
+        pilot.setId(itemId);
+        pilot.setPageView(pilot.getPageView() + 1);
+        pilotMapper.updateById(pilot);
     }
 }

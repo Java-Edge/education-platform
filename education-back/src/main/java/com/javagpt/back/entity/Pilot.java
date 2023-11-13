@@ -3,26 +3,12 @@ package com.javagpt.back.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.time.LocalDateTime;
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author zqy
- * @since 2023-09-12
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Pilot implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Pilot  {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -42,12 +28,9 @@ public class Pilot implements Serializable {
      */
     private String img;
 
-    /**
-     * 创建时间
-     */
-    /*    private LocalDateTime createTime;*/
-
     private Integer pilotType;
+
+    private Integer pageView;
 
     @TableField(exist = false)
     private String pilotTypeName;
