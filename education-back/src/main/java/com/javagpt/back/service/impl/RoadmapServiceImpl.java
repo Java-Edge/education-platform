@@ -10,9 +10,8 @@ import com.javagpt.back.entity.RoadMapTag;
 import com.javagpt.back.mapper.RoadMapDetailMapper;
 import com.javagpt.back.mapper.RoadMapTagMapper;
 import com.javagpt.back.mapper.RoadMapMapper;
-import com.javagpt.back.service.CourseService;
+import com.javagpt.back.service.VideoService;
 import com.javagpt.back.service.RoadmapService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
     private RoadMapTagMapper roadMapTagMapper;
 
     @Autowired
-    private CourseService courseService;
+    private VideoService videoService;
 
     @Override
     public Page<RoadMap> getRoadmap(Integer categoryId, Integer current, Integer size) {
@@ -82,7 +81,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
         if (courseIds == null || courseIds.size() == 0) {
             return new ArrayList<>();
         }
-        Map<Integer, CourseEntity> coursesMap = courseService.getCoursesMapById(courseIds);
+        Map<Integer, CourseEntity> coursesMap = videoService.getCoursesMapById(courseIds);
         for (RoadMapDetail roadMapDetail : roadMapDetails) {
             String[] tagIds = roadMapDetail.getTag().split(",");
             QueryWrapper<RoadMapTag> tqw = new QueryWrapper<>();

@@ -3,7 +3,6 @@ package com.javagpt.back.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.vo.course.CourseVO;
 import com.javagpt.common.req.PageQueryParam;
@@ -11,7 +10,7 @@ import com.javagpt.common.req.PageQueryParam;
 import java.util.List;
 import java.util.Map;
 
-public interface CourseService extends IService<CourseEntity> {
+public interface VideoService extends IService<CourseEntity> {
 
     /**
      * 获取最近的5个课程信息作为轮播图
@@ -36,9 +35,4 @@ public interface CourseService extends IService<CourseEntity> {
      * 分页查询课程
      */
     Page<CourseVO> search(PageQueryParam<CourseDTO> pageQueryParam);
-
-    /**
-     * 专栏列表
-     */
-    Page<CourseVO> getSpecialList(PageQueryParam<SpecialQueryDTO> pageQueryParam);
 }

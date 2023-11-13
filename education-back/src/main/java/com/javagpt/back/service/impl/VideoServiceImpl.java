@@ -5,12 +5,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.CourseEntity;
-import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.mapper.CourseMapper;
 import com.javagpt.back.mapper.DictMapper;
-import com.javagpt.back.service.CourseService;
+import com.javagpt.back.service.VideoService;
 import com.javagpt.back.vo.course.CourseVO;
 import com.javagpt.common.enums.CourseEnum;
 import com.javagpt.common.req.PageQueryParam;
@@ -20,18 +18,15 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
-public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
-        implements CourseService {
+public class VideoServiceImpl extends ServiceImpl<CourseMapper, CourseEntity> implements VideoService {
 
     @Autowired
     private CourseMapper courseMapper;
 
     @Autowired
-    private DictMapper dictionaryMapper;
+    private DictMapper dictMapper;
 
     @Override
     public List<CourseEntity> getFiveCourse() {
@@ -78,38 +73,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, CourseEntity>
         Page<CourseVO> page = new Page<>(pageQueryParam.getPageNo(), pageQueryParam.getPageSize());
         Page<CourseVO> courseVOPage = courseMapper.selectByPage(page, pageQueryParam.getParam());
         return courseVOPage;
-    }
-
-    @Override
-    public Page<CourseVO> getSpecialList(PageQueryParam<SpecialQueryDTO> pageQueryParam) {
-        // 1. 定义数据库查询参数
-        Map<String, Object> params = new HashMap<>();
-
-        // 2. 构建分页查询参数
-        Page<CourseVO> queryPage = new Page<>();
-        queryPage.setSize(pageQueryParam.getPageSize());
-        queryPage.setCurrent(pageQueryParam.getPageNo());
-
-
-        // 3. 如果传入专栏类别为父类别，则查询出所有子类别的数据做条件查询
-        SpecialQueryDTO dto = pageQueryParam.getParam();
-        if (dto.getCategory() != null && dto.getCategory() != 0) {
-            List<Integer> categories = Stream.of(dto.getCategory()).collect(Collectors.toList());
-            LambdaQueryWrapper<Dictionary> wrapper = new LambdaQueryWrapper<Dictionary>()
-//                    .select(Dictionary::getValue)
-                    .eq(Dictionary::getTypeKey, "special_category")
-                    .eq(dto.getCategory() != null, Dictionary::getParentId, dto.getCategory());
-            List<Dictionary> dictionaries = dictionaryMapper.selectList(wrapper);
-            if (dictionaries != null && !dictionaries.isEmpty()) {
-                List<Integer> childCategories = dictionaries.stream().map(item -> Integer.parseInt(item.getValue())).toList();
-                categories.addAll(childCategories);
-            }
-            dto.setCategories(categories);
-        }
-
-        Page<CourseVO> page = courseMapper.queryPage(queryPage, dto);
-
-        return page;
     }
 }
 
