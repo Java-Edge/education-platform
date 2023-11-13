@@ -9,7 +9,6 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="des" column="des" jdbcType="VARCHAR"/>
         <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
         <result property="recruitType" column="recruit_type" jdbcType="INTEGER"/>
         <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
@@ -19,8 +18,6 @@
         <result property="graduationYear" column="graduation_year" jdbcType="VARCHAR"/>
         <result property="deliverBegin" column="deliver_begin" jdbcType="TIMESTAMP"/>
         <result property="deliverEnd" column="deliver_end" jdbcType="TIMESTAMP"/>
-        <result property="refeshTime" column="refesh_time" jdbcType="TIMESTAMP"/>
-        <result property="feedBackDays" column="feed_back_days" jdbcType="INTEGER"/>
         <result property="durationDays" column="duration_days" jdbcType="INTEGER"/>
         <result property="salaryType" column="salary_type" jdbcType="INTEGER"/>
         <result property="salaryMin" column="salary_min" jdbcType="INTEGER"/>
@@ -33,7 +30,7 @@
     <sql id="Base_Column_List">
         id
         ,title,content,
-        create_time,des,
+        create_time,
         company_id,recruit_type,
         job_name,ext,job_city,career_job_id,
         graduation_year,deliver_begin,deliver_end,

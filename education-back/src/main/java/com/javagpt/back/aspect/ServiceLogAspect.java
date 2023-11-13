@@ -108,13 +108,13 @@ public class ServiceLogAspect {
         log.info("Method called: " + joinPoint.getSignature().toShortString());
 
         Object[] args = joinPoint.getArgs();
-        if (args.length == 0 || !(args[0] instanceof Integer)) {
+        if (args.length == 0 || (!(args[0] instanceof Integer) && !(args[0] instanceof String))) {
             log.error("Invalid arguments. Expected at least one argument of type Integer.");
             return;
         }
 
         // 提取 entityId 和 mapper 信息
-        Integer entityId = (Integer) args[0];
+        Integer entityId = getEntityId(args[0]);
         String controllerClassName = joinPoint.getTarget().getClass().getSimpleName();
         String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
         if (articles.contains(controllerClassName)) {
@@ -155,6 +155,14 @@ public class ServiceLogAspect {
         log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
         log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
         return result;
+    }
+
+    private Integer getEntityId(Object arg) {
+        if (arg instanceof Integer) {
+            return  (Integer) arg;
+        } else {
+            return Integer.parseInt((String) arg);
+        }
     }
 
 }

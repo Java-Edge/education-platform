@@ -79,16 +79,6 @@ public class RecruitEntity {
     private Date deliverEnd;
 
     /**
-     * 刷新时间
-     */
-    private Date refeshTime;
-
-    /**
-     *
-     */
-    private Integer feedBackDays;
-
-    /**
      *
      */
     private Integer durationDays;
@@ -117,12 +107,6 @@ public class RecruitEntity {
      *
      */
     private Integer workYearType;
-
-    /**
-     * 项目编号
-     */
-    private Integer projectId;
-
 
     /**
      * 学历

@@ -55,11 +55,6 @@ public class RecruitQO implements Serializable {
     private Date deliverEnd;
 
     /**
-     * 刷新时间
-     */
-    private Date refeshTime;
-
-    /**
      * 薪资范围
      */
     private List<Integer> salaryRange;

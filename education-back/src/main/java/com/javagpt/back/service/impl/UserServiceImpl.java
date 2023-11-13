@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.LoginRespVO;
 import com.javagpt.back.dto.UserDTO;
-import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.entity.UserEntity;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;

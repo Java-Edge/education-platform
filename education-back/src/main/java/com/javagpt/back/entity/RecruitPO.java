@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 职位
+ * 职位表字段
  */
 @TableName(value = "recruit")
 @Data
@@ -35,11 +35,6 @@ public class RecruitPO implements Serializable {
      * 创建时间
      */
     private Date createTime;
-
-    /**
-     * 招聘所属类型
-     */
-    private Integer type;
 
     /**
      * 岗位要求
@@ -92,16 +87,6 @@ public class RecruitPO implements Serializable {
     private Date deliverEnd;
 
     /**
-     * 刷新时间
-     */
-    private Date refeshTime;
-
-    /**
-     *
-     */
-    private Integer feedBackDays;
-
-    /**
      *
      */
     private Integer durationDays;
@@ -130,11 +115,6 @@ public class RecruitPO implements Serializable {
      *
      */
     private Integer workYearType;
-
-    /**
-     * 项目编号
-     */
-    private Integer projectId;
 
     /**
      * 学历
