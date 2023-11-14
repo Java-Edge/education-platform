@@ -23,9 +23,7 @@ public class VideoController {
     @GetMapping("/courseList")
     public ResultBody courseList(){
         QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
-        qw.eq("type", 0);
-        qw.last("limit 12");
-        List<CourseEntity> list = videoService.list(qw);
+        List<CourseEntity> list = videoService.selectList();
         return ResultBody.success(list);
     }
 

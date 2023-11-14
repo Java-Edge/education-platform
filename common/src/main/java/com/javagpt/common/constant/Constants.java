@@ -17,4 +17,6 @@ public interface Constants {
     String cache_max_dict_local_cache = "cache_max_dict_local_cache";
 
     int select_all = -1;
+
+    String PV = "page_view";
 }

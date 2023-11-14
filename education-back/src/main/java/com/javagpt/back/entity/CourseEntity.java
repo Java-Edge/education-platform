@@ -13,7 +13,7 @@ import lombok.Data;
 
 @TableName(value = "source_course")
 @Data
-public class CourseEntity implements Serializable {
+public class CourseEntity {
     /**
      *
      */
@@ -53,10 +53,6 @@ public class CourseEntity implements Serializable {
     private String sourceUrl;
     private Integer parentId;
     private Integer pageView;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
-
     /**
      * 0: 视频  1:专栏
      */

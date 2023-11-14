@@ -67,7 +67,7 @@ public class SpecialColumnServiceImpl extends ServiceImpl<CourseMapper, CourseEn
     }
 
     @Override
-    public void pv( Integer itemId) {
+    public void pv(Integer itemId) {
         CourseEntity courseEntity = courseMapper.selectById(itemId);
         courseEntity.setId(itemId);
         courseEntity.setPageView(courseEntity.getPageView() + 1);
