@@ -1,8 +1,7 @@
 package com.javagpt.back.service;
 
-import com.javagpt.back.entity.DictionaryType;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.javagpt.back.vo.MenuVO;
+import com.javagpt.back.entity.DictionaryType;
 
 import java.util.List;
 

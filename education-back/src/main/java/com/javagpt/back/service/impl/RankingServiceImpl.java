@@ -3,6 +3,7 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.entity.Ranking;
 import com.javagpt.back.mapper.RankingMapper;
 import com.javagpt.back.service.RankingService;
@@ -31,6 +32,14 @@ public class RankingServiceImpl extends ServiceImpl<RankingMapper, Ranking> impl
             records.get(i).setOrderVal(i + 1);
         }
         return rankingPage;
+    }
+
+    @Override
+    public void pv( Integer itemId) {
+        Ranking ranking = rankingMapper.selectById(itemId);
+        ranking.setId(itemId);
+        ranking.setPageView(ranking.getPageView() + 1);
+        rankingMapper.updateById(ranking);
     }
 }
 

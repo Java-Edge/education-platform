@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.dto.CourseDTO;
 import com.javagpt.back.entity.CourseEntity;
@@ -22,7 +21,6 @@ public class VideoController {
 
     @GetMapping("/courseList")
     public ResultBody courseList(){
-        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
         List<CourseEntity> list = videoService.selectList();
         return ResultBody.success(list);
     }

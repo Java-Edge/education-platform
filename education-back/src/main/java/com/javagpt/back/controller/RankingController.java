@@ -1,13 +1,13 @@
 package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.back.dto.SpecialQueryDTO;
+import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Ranking;
 import com.javagpt.back.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 排行榜页面入口
@@ -26,6 +26,15 @@ public class RankingController {
     public ResultBody getRanking(Integer current, Integer size) {
         Page<Ranking> page = rankingService.getRanking(current, size);
         return ResultBody.success(page);
+    }
+
+    /**
+     * 统计 pv 的接口
+     */
+    @PostMapping("/pv")
+    public ResultBody pv(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+        rankingService.pv(pageQueryParam.getParam().getItemId());
+        return ResultBody.success();
     }
 
 }

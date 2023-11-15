@@ -53,7 +53,7 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
 
         // 表名
-        strategy.setInclude("company_discussion");
+        strategy.setInclude("interview_schedule");
 
         //数据库表映射到实体的命名策略
         strategy.setNaming(NamingStrategy.underline_to_camel);

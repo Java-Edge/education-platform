@@ -7,4 +7,6 @@ import com.javagpt.back.entity.Ranking;
 public interface RankingService extends IService<Ranking> {
 
     Page<Ranking> getRanking(Integer current, Integer size);
+
+    void pv(Integer itemId);
 }
