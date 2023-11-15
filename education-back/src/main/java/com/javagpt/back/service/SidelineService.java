@@ -11,4 +11,5 @@ public interface SidelineService extends IService<Sideline> {
      */
     Page<Sideline> selectPage(Integer current, Integer size);
 
+    void pv(Integer itemId);
 }

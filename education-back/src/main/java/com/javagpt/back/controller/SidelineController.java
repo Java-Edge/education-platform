@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.javagpt.back.converter.SidelineConverter;
+import com.javagpt.back.dto.SpecialQueryDTO;
 import com.javagpt.back.entity.Sideline;
 import com.javagpt.back.service.SidelineService;
 import com.javagpt.back.vo.SidelineVO;
+import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.common.resp.ResultBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,9 +39,20 @@ public class SidelineController {
     /**
      * 先注释掉接口，防止被查询隐私数据
      */
-//    @GetMapping("/getById/{id}")
-//    public ResultBody getById(@PathVariable Integer id) {
-//        Sideline sideline = sidelineService.getById(id);
-//        return ResultBody.success(sideline);
-//    }
+    @GetMapping("/getById/{id}")
+    public ResultBody getById(@PathVariable Integer id) {
+        Sideline sideline = sidelineService.getById(id);
+        return ResultBody.success(sideline);
+    }
+
+    /**
+     * 统计 pv 的接口
+     */
+    @PostMapping("/pv")
+    public ResultBody pv(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+        sidelineService.pv(pageQueryParam.getParam().getItemId());
+        return ResultBody.success();
+    }
+
+
 }
