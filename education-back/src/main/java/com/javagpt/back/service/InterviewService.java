@@ -8,17 +8,7 @@ import com.javagpt.common.req.PageQueryParam;
 
 public interface InterviewService extends IService<InterviewEntity> {
 
-
-    /**
-     * 条件查询
-     */
     IPage<InterviewEntity> selectByCondition(PageQueryParam<InterviewDTO> pageQueryParam);
 
-    /**
-     * 获取文章
-     *
-     * @param id
-     * @return
-     */
     InterviewEntity articleOf(String id);
 }
