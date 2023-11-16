@@ -43,7 +43,5 @@ public class Sideline implements Serializable {
 
     private String href;
 
-    private String permission;
-
     private Integer pageView;
 }
