@@ -19,4 +19,6 @@ public interface Constants {
     int select_all = -1;
 
     String PV = "page_view";
+
+    String type_key = "type_key";
 }

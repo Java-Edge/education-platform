@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
+import static com.javagpt.common.constant.Constants.type_key;
 
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> implements DictService {
@@ -38,7 +39,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
     @Override
     public List<Dictionary> selectList(String typeKey) {
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("type_key", typeKey);
+        queryWrapper.eq(type_key, typeKey);
         queryWrapper.eq("status", 1);
         queryWrapper.orderByAsc("sort");
         List<Dictionary> dictionaries = this.getBaseMapper().selectList(queryWrapper);
@@ -60,7 +61,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
     public List<DictionaryType> listByTypeKeys(List<String> typeKeys) {
         List<DictionaryType> dictTypes = dictTypeRefreshCache.get(cache_max_dict_local_cache, s -> {
             QueryWrapper<DictionaryType> dictTypeQW = new QueryWrapper<>();
-            dictTypeQW.in("type_key", typeKeys);
+            dictTypeQW.in(type_key, typeKeys);
             return dictTypeMapper.selectList(dictTypeQW);
         });
 
