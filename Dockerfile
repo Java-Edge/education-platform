@@ -22,4 +22,4 @@ EXPOSE 8088
 #启动时执行的命令
 CMD ["/bin/bash"]
 #启动时执行的命令
-ENTRYPOINT ["java","-jar","/usr/local/back-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=prod","-jar","/usr/local/back-0.0.1-SNAPSHOT.jar"]
