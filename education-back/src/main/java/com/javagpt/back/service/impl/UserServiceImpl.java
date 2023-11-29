@@ -8,6 +8,7 @@ import com.javagpt.back.entity.UserEntity;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
 import com.javagpt.common.constant.ResultStatus;
+import com.javagpt.common.redis.RedisCrudService;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 

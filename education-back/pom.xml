@@ -8,7 +8,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.javagpt</groupId>
     <artifactId>back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -16,6 +15,11 @@
         <dependency>
             <groupId>com.javagpt</groupId>
             <artifactId>common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.javagpt</groupId>
+            <artifactId>infra</artifactId>
         </dependency>
 
         <dependency>
@@ -148,10 +152,10 @@
             <artifactId>mapstruct</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.vavr</groupId>-->
+<!--            <artifactId>vavr</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <profiles>

@@ -30,7 +30,6 @@
         <module>common</module>
         <!-- 基础设施层的实现 -->
         <module>infra</module>
-        <module>infra</module>
     </modules>
 
     <dependencyManagement>
@@ -39,6 +38,12 @@
             <dependency>
                 <groupId>com.javagpt</groupId>
                 <artifactId>common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.javagpt</groupId>
+                <artifactId>infra</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

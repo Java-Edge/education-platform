@@ -9,17 +9,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author hmy6
+ * @author JavaEdge
  */
 public class RedisCurdTemplate {
 
-    /**
-     * 其序列化方式
-     * this.setKeySerializer(RedisSerializer.string());
-     * this.setValueSerializer(RedisSerializer.string());
-     * this.setHashKeySerializer(RedisSerializer.string());
-     * this.setHashValueSerializer(RedisSerializer.string());
-     */
     private StringRedisTemplate redisTemplate;
 
     public RedisCurdTemplate(StringRedisTemplate redisTemplate) {

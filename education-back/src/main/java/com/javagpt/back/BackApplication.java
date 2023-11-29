@@ -9,7 +9,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
-@SpringBootApplication(scanBasePackages = "com.javagpt.back")
+@SpringBootApplication(scanBasePackages = "com.javagpt")
 @EnableMPP
 public class BackApplication {
 
