@@ -8,14 +8,10 @@ import com.javagpt.back.mapper.ArticleMapper;
 import com.javagpt.back.service.DownloadService;
 import com.javagpt.common.constant.Constants;
 import com.javagpt.common.enums.ArticleTypeEnums;
-import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity> implements DownloadService {
-
-    @Resource
-    private ArticleMapper articleMapper;
 
     @Override
     public Page<ArticleEntity> listByPage(Integer current, Integer size) {
