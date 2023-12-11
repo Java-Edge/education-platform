@@ -1,7 +1,7 @@
 package com.javagpt.common.util;
 
 import com.alibaba.fastjson.JSON;
-import com.javagpt.common.resp.RespResult;
+import com.javagpt.common.resp.GenericResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
@@ -12,15 +12,15 @@ import java.io.IOException;
  */
 public class RespUtils {
 
-    public static void write(HttpServletResponse response, RespResult respResult) throws IOException {
+    public static void write(HttpServletResponse response, GenericResponse genericResponse) throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().println(JSON.toJSON(respResult));
+        response.getWriter().println(JSON.toJSON(genericResponse));
     }
 
-    public static void write(HttpServletResponse response, int status, RespResult respResult) throws IOException {
+    public static void write(HttpServletResponse response, int status, GenericResponse genericResponse) throws IOException {
         response.setStatus(status); //HttpServletResponse.SC_OK
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().println(JSON.toJSON(respResult));
+        response.getWriter().println(JSON.toJSON(genericResponse));
     }
 }

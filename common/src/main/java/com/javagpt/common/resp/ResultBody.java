@@ -7,9 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 自定义返回数据格式
+ * 通用响应体
  */
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,37 +27,7 @@ public class ResultBody {
         this.code = infoInterface.getResultCode();
         this.message = infoInterface.getResultMsg();
     }
- 
-    public int getCode() {
-        return code;
-    }
- 
-    public void setCode(int code) {
-        this.code = code;
-    }
- 
-    public String getMessage() {
-        return message;
-    }
- 
-    public void setMessage(String message) {
-        this.message = message;
-    }
- 
-    public Object getResult() {
-        return result;
-    }
- 
-    public void setResult(Object result) {
-        this.result = result;
-    }
- 
-    /**
-     * 成功
-     *
-     * @param data
-     * @return
-     */
+
     public static ResultBody success(Object data) {
         ResultBody body = new ResultBody();
         body.setCode(CommonEnum.SUCCESS.getResultCode());
@@ -67,11 +36,6 @@ public class ResultBody {
         return body;
     }
 
-    /**
-     * 成功
-     *
-     * @return
-     */
     public static ResultBody success() {
         ResultBody body = new ResultBody();
         body.setCode(CommonEnum.SUCCESS.getResultCode());
@@ -79,12 +43,6 @@ public class ResultBody {
         return body;
     }
 
-    /**
-     * 失败
-     *
-     * @param infoInterface
-     * @return
-     */
     public static ResultBody error(BaseInfoInterface infoInterface) {
         ResultBody body = new ResultBody();
         body.setCode(infoInterface.getResultCode());
@@ -92,10 +50,7 @@ public class ResultBody {
         body.setResult(null);
         return body;
     }
- 
-    /**
-     * 失败
-     */
+
     public static ResultBody error(int code, String message) {
         ResultBody rb = new ResultBody();
         rb.setCode(code);
@@ -103,12 +58,7 @@ public class ResultBody {
         rb.setResult(null);
         return rb;
     }
- 
-    /**
-     * 失败
-     * @param message
-     * @return
-     */
+
     public static ResultBody error(String message) {
         ResultBody body = new ResultBody();
         body.setCode(-1);
