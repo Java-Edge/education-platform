@@ -33,7 +33,7 @@ public class CaffeineConfig {
     public Cache<String, List<Pilot>> pilotCache() {
         return Caffeine.newBuilder()
                 .maximumSize(1)
-                .expireAfterWrite(5, TimeUnit.MINUTES)
+                .expireAfterWrite(1, TimeUnit.MINUTES)
                 .build();
     }
 

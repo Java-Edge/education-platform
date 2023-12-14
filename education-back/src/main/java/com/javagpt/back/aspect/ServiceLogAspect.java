@@ -68,9 +68,9 @@ public class ServiceLogAspect {
 
         log.info("------------- 开始 -------------");
         log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
-        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
-        log.info("远程地址: {}", request.getRemoteAddr());
-        log.info("IP地址: {}", IpUtils.getIpAddress(request));
+//        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
+//        log.info("远程地址: {}", request.getRemoteAddr());
+//        log.info("IP地址: {}", IpUtils.getIpAddress(request));
 
 
         Object[] args = joinPoint.getArgs();
