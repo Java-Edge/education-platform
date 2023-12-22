@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class GExceptionHandler {
+
     @ExceptionHandler(AccessDeniedException.class)
     public void handleRRException(AccessDeniedException e) {
         throw e;

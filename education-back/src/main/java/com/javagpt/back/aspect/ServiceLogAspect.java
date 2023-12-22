@@ -153,7 +153,12 @@ public class ServiceLogAspect {
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
         log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
-        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+//        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+        // 超时日志告警
+        long end = System.currentTimeMillis() - startTime;
+        if (end > 5000) {
+            log.warn("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+        }
         return result;
     }
 

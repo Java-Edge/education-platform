@@ -30,6 +30,8 @@
         <module>common</module>
         <!-- 基础设施层的实现 -->
         <module>infra</module>
+        <!-- 应用层的实现 -->
+        <module>application</module>
     </modules>
 
     <dependencyManagement>
@@ -44,6 +46,12 @@
             <dependency>
                 <groupId>com.javagpt</groupId>
                 <artifactId>infra</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.javagpt</groupId>
+                <artifactId>application</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
@@ -217,6 +225,13 @@
                 <groupId>org.eclipse.paho</groupId>
                 <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
                 <version>1.2.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.5.22</version>
+                <optional>true</optional>
             </dependency>
         </dependencies>
 
