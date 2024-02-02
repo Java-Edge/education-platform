@@ -174,11 +174,13 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>3.0.0</version>
             </dependency>
+
             <!--提供JWT的java类-->
             <dependency>
                 <groupId>com.auth0</groupId>
@@ -228,18 +230,24 @@
                 <version>1.2.5</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>1.5.22</version>
-                <optional>true</optional>
-            </dependency>
-
             <!-- https://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-orchestration-spring-boot-starter -->
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-orchestration-spring-boot-starter</artifactId>
                 <version>4.1.1</version>
+            </dependency>
+
+            <!-- 引入 swagger-->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>2.0.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>2.0.2</version>
             </dependency>
 
         </dependencies>
