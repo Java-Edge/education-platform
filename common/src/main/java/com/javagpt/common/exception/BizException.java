@@ -1,6 +1,5 @@
 package com.javagpt.common.exception;
 
-
 import com.javagpt.common.constant.SystemConstant;
 import lombok.Getter;
 

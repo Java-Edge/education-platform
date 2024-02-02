@@ -4,7 +4,7 @@ import org.eclipse.paho.client.mqttv3.*;
 
 public class MqttPublisherExample {
 
-    private static final String BROKER_URI = "tcp://localhost:1883";
+    private static final String BROKER_URI = "tcp://broker.emqx.io:1883";
     private static final String CLIENT_ID = "mqtt-java-client-example";
     private static final String TOPIC = "$iot/device1/user/fortest";
 
