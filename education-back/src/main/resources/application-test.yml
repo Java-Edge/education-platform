@@ -12,9 +12,12 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://140.246.54.146:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+#    url: jdbc:mysql://140.246.54.146:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+#    username: root
+#    password: Zxcvbnm1234567890
+    url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: Zxcvbnm1234567890
+    password: 123456
   application:
     name: back-server
 
