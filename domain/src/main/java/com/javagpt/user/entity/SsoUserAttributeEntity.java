@@ -1,7 +1,5 @@
 package com.javagpt.user.entity;
 
-import com.icv.monitorplatform.domain.common.entity.BaseAuditEntity;
-import com.icv.monitorplatform.domain.user.resporitory.SsoUserAttributeRepository;
 import lombok.Data;
 
 /**

@@ -1,7 +1,6 @@
 package com.javagpt.user.resporitory;
 
-import com.icv.monitorplatform.domain.common.repository.IBaseRepository;
-import com.icv.monitorplatform.domain.user.entity.SsoUserAttributeEntity;
+import com.javagpt.user.entity.SsoUserAttributeEntity;
 
 import java.util.List;
 

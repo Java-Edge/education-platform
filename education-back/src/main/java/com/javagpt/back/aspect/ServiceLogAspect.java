@@ -88,7 +88,7 @@ public class ServiceLogAspect {
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
-        log.info("请求参数: {}", JSONObject.toJSONString(arguments, excludeFilter));
+//        log.info("请求参数: {}", JSONObject.toJSONString(arguments, excludeFilter));
     }
 
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
@@ -152,7 +152,7 @@ public class ServiceLogAspect {
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
-        log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
+//        log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
 //        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
         // 超时日志告警
         long end = System.currentTimeMillis() - startTime;

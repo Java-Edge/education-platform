@@ -2,10 +2,6 @@ package com.javagpt.common.exception;
 
 /**
  * 异常枚举类
- *
- * @Author qingsf
- * @Date 2020/6/8 17:20
- * @Version 1.0
  */
 public enum CoreExceptionEnum implements IErrorCode {
 

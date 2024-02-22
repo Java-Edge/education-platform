@@ -1,7 +1,7 @@
 //package com.javagpt.back.config;
 //
 //import com.fasterxml.classmate.TypeResolver;
-//import com.javagpt.common.constant.MPConstant;
+//import com.javagpt.common.constant.Constant;
 //import com.javagpt.common.util.UrlUtils;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.web.context.WebServerInitializedEvent;
@@ -52,7 +52,7 @@
 //                .select()
 //                //这里指定Controller扫描包路径
 //                .apis(RequestHandlerSelectors.any())
-//                .paths(path -> path != null && (path.startsWith(UrlUtils.appendUri(contextPath, MPConstant.API_V1))))
+//                .paths(path -> path != null && (path.startsWith(UrlUtils.appendUri(contextPath, Constant.API_V1))))
 //                .build()
 //                .globalOperationParameters(operationParameters());
 //

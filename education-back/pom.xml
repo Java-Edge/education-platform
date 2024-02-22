@@ -203,6 +203,7 @@
         <profile>
             <id>prod</id>
             <properties>
+                <!-- 默认运行配置环境 -->
                 <profiles.active>prod</profiles.active>
             </properties>
         </profile>
