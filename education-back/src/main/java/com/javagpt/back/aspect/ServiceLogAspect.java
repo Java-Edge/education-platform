@@ -62,12 +62,12 @@ public class ServiceLogAspect {
         if (attributes == null){
             return;
         }
-        HttpServletRequest request =attributes.getRequest();
-        Signature signature = joinPoint.getSignature();
-        String name = signature.getName();
+//        HttpServletRequest request =attributes.getRequest();
+//        Signature signature = joinPoint.getSignature();
+//        String name = signature.getName();
 
 //        log.info("------------- 开始 -------------");
-        log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
+//        log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
 //        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
 //        log.info("远程地址: {}", request.getRemoteAddr());
 //        log.info("IP地址: {}", IpUtils.getIpAddress(request));
