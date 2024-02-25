@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.RateLimiter;
+import com.javagpt.back.util.U;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.IpUtils;
 import jakarta.annotation.Resource;
@@ -39,6 +40,7 @@ public class ServiceLogAspect {
     private ApplicationContext applicationContext;
 
     private static final RateLimiter rateLimiter = RateLimiter.create(500);
+    private static final List<Integer> devUserIds = Lists.newArrayList(5, 6, 21);
 
 
     private static final List<String> articles = Lists.newArrayList(
@@ -97,12 +99,10 @@ public class ServiceLogAspect {
         if (rateLimiter.tryAcquire()) {
             return joinPoint.proceed();
         } else {
-            // 超出限流次数
             return ResultBody.error("访问太过频繁");
         }
     }
 
-    // 计算pv
     @Before("execution(* com.javagpt.back.controller.*.getById(..))")
     public void calPageView(JoinPoint joinPoint) {
         log.info("Method called: " + joinPoint.getSignature().toShortString());
@@ -119,6 +119,17 @@ public class ServiceLogAspect {
         String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
         if (articles.contains(controllerClassName)) {
             entityMapperName = "com.javagpt.back.mapper.ArticleMapper";
+        }
+
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (attributes == null){
+            return;
+        }
+        HttpServletRequest request =attributes.getRequest();
+        Integer userId = U.getCurrentUserId(request);
+        if (userId != null && devUserIds.contains(userId)) {
+            // 排除开发人员的调试用户 id,不计入 pv
+            return;
         }
         try {
             Class<?> entityMapperClass = Class.forName(entityMapperName);
@@ -137,7 +148,7 @@ public class ServiceLogAspect {
             // 更新entity
             entityMapper.updateById(entityFromDB);
 
-            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
+//            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             log.error("Error in calPageView: " + e.getMessage(), e);
         }
@@ -171,7 +182,6 @@ public class ServiceLogAspect {
             return Long.parseLong((String) arg);
         }
     }
-
 }
 
 
