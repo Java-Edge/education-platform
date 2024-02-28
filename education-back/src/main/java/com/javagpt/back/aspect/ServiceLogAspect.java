@@ -105,7 +105,7 @@ public class ServiceLogAspect {
 
     @Before("execution(* com.javagpt.back.controller.*.getById(..))")
     public void calPageView(JoinPoint joinPoint) {
-        log.info("Method called: " + joinPoint.getSignature().toShortString());
+//        log.info("Method called: " + joinPoint.getSignature().toShortString());
 
         Object[] args = joinPoint.getArgs();
         if (args.length == 0 || (!(args[0] instanceof Number) && !(args[0] instanceof String))) {
