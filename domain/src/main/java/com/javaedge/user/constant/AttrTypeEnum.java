@@ -1,4 +1,4 @@
-package com.javagpt.user.constant;
+package com.javaedge.user.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

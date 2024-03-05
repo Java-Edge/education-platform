@@ -40,7 +40,7 @@ public class ServiceLogAspect {
     private ApplicationContext applicationContext;
 
     private static final RateLimiter rateLimiter = RateLimiter.create(500);
-    private static final List<Integer> devUserIds = Lists.newArrayList(5, 6, 21);
+    private static final List<Integer> devUserIds = Lists.newArrayList(5, 6, 21, 185);
 
 
     private static final List<String> articles = Lists.newArrayList(
@@ -183,17 +183,3 @@ public class ServiceLogAspect {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

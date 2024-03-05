@@ -15,5 +15,8 @@ public class BaseBean implements Serializable {
     @IgnoreQuery
     private static final long serialVersionUID = 7272078611895639472L;
 
+    /**
+     * 主键id，更新的时候必传
+     */
     private Long id;
 }

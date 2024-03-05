@@ -1,4 +1,4 @@
-package com.javagpt.user.constant;
+package com.javaedge.user.constant;
 
 import lombok.Getter;
 
@@ -10,7 +10,12 @@ import lombok.Getter;
 public enum UserStatusEnum {
 
 
-    AUDITING(1), ENABLED(2), DISABLED(3);
+    AUDITING(1),
+
+    ENABLED(2),
+
+    DISABLED(3),
+    ;
 
     UserStatusEnum(Integer status) {
         this.status = status;

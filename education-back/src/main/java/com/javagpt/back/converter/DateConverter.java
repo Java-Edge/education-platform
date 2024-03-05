@@ -1,4 +1,4 @@
-package com.javagpt.application.converter;
+package com.javagpt.back.converter;
 
 import cn.hutool.core.date.DateUtil;
 import jakarta.validation.ValidationException;
