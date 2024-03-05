@@ -10,17 +10,15 @@ import lombok.Data;
 @Data
 public class BasePageBean extends BaseBean {
 
-
     @IgnoreQuery
     private int page = 1;
 
-
     @IgnoreQuery
     private int size = 20;
+
     /**
      * 默认id倒序
      */
-
     @IgnoreQuery
     private String order = "id,desc";
 }

@@ -1,0 +1,37 @@
+package com.javagpt.infra.mysql.po.common;
+
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
+public class BasePO implements Serializable {
+
+    private static final long serialVersionUID = 7272078611895639472L;
+    /**
+     * 主键id 自增
+     */
+    @TableId(type = IdType.AUTO)
+    private Long id;
+
+    /**
+     * 逻辑删除标记，1 删除 0 未删除
+     */
+    @TableLogic
+    private Integer deleteFlag;
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    /**
+     * 最后一次更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
+}

@@ -31,5 +31,7 @@ mpp:
   entityBasePath: com.javagpt.back.entity
 
 logging:
+  file:
+    name: "logs/education-platform.log"
   level:
     root: info

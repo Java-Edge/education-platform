@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class DictionaryType extends BaseAuditEntity<DictionaryType, DictTypeRepository> {
+public class DictionaryTypeEntity extends BaseAuditEntity<DictionaryTypeEntity, DictTypeRepository> {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
