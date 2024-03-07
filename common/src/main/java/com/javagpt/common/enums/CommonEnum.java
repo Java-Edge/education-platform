@@ -1,6 +1,6 @@
 package com.javagpt.common.enums;
 
-import com.javagpt.common.bos.BaseInfoInterface;
+import com.javagpt.common.util.BaseInfoInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

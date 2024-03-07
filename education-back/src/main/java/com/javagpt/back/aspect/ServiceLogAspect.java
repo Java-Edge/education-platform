@@ -7,7 +7,6 @@ import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.RateLimiter;
 import com.javagpt.back.util.U;
 import com.javagpt.common.resp.ResultBody;
-import com.javagpt.common.util.IpUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -30,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -64,13 +64,13 @@ public class ServiceLogAspect {
         if (attributes == null){
             return;
         }
-//        HttpServletRequest request =attributes.getRequest();
-//        Signature signature = joinPoint.getSignature();
-//        String name = signature.getName();
+        HttpServletRequest request =attributes.getRequest();
+        Signature signature = joinPoint.getSignature();
+        String name = signature.getName();
 
-//        log.info("------------- 开始 -------------");
-//        log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
-//        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
+        log.info("------------- 开始 -------------");
+        log.info("请求地址: {} {}", request.getRequestURL().toString(), request.getMethod());
+        log.info("类名方法: {}.{}", signature.getDeclaringTypeName(), name);
 //        log.info("远程地址: {}", request.getRemoteAddr());
 //        log.info("IP地址: {}", IpUtils.getIpAddress(request));
 
@@ -90,7 +90,10 @@ public class ServiceLogAspect {
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
-//        log.info("请求参数: {}", JSONObject.toJSONString(arguments, excludeFilter));
+        // 不打空arguments
+        if (arguments.length != 0) {
+            log.info("请求参数: {}", JSONObject.toJSONString(arguments, excludeFilter));
+        }
     }
 
     @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
@@ -99,6 +102,7 @@ public class ServiceLogAspect {
         if (rateLimiter.tryAcquire()) {
             return joinPoint.proceed();
         } else {
+            log.error("Rate limit exceeded");
             return ResultBody.error("访问太过频繁");
         }
     }
@@ -148,7 +152,7 @@ public class ServiceLogAspect {
             // 更新entity
             entityMapper.updateById(entityFromDB);
 
-//            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
+            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             log.error("Error in calPageView: " + e.getMessage(), e);
         }
@@ -163,12 +167,12 @@ public class ServiceLogAspect {
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
-//        log.info("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
-//        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
-        // 超时日志告警
-        long end = System.currentTimeMillis() - startTime;
-        if (end > 5000) {
-            log.warn("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+        if (Objects.isNull(result)) {
+            log.warn("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
+        }
+        long cost = System.currentTimeMillis() - startTime;
+        if (cost > 1000) {
+            log.warn("------------- 结束 耗时：{} ms -------------", cost);
         }
         return result;
     }

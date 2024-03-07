@@ -28,12 +28,15 @@ public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, Dicti
     @Resource
     private Cache<String, List<DictionaryType>> dictTypeRefreshCache;
 
+    private static final String status = "status";
 
 
     @Override
     public DictionaryType selectList(String typeKey) {
         QueryWrapper<DictionaryType> qw = new QueryWrapper<>();
         qw.eq(type_key, typeKey);
+        // 查询有效的字典
+        qw.eq(status, "1");
         DictionaryType dictionaryType = dictTypeMapper.selectOne(qw);
         List<Dictionary> dictionaries = dictService.selectList(typeKey);
         dictionaryType.setList(dictionaries);

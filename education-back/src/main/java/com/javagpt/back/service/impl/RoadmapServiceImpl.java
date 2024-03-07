@@ -3,7 +3,7 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.back.entity.CourseEntity;
+import com.javagpt.back.entity.CoursePO;
 import com.javagpt.back.entity.RoadMap;
 import com.javagpt.back.entity.RoadMapDetail;
 import com.javagpt.back.entity.RoadMapTag;
@@ -81,7 +81,7 @@ public class RoadmapServiceImpl extends ServiceImpl<RoadMapMapper, RoadMap> impl
         if (courseIds == null || courseIds.size() == 0) {
             return new ArrayList<>();
         }
-        Map<Integer, CourseEntity> coursesMap = videoService.getCoursesMapById(courseIds);
+        Map<Integer, CoursePO> coursesMap = videoService.getCoursesMapById(courseIds);
         for (RoadMapDetail roadMapDetail : roadMapDetails) {
             String[] tagIds = roadMapDetail.getTag().split(",");
             QueryWrapper<RoadMapTag> tqw = new QueryWrapper<>();

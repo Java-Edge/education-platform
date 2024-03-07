@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.javagpt.back.converter.SidelineConverter;
-import com.javagpt.back.dto.SpecialQueryDTO;
+import com.javagpt.back.dto.CourseQueryDTO;
 import com.javagpt.back.entity.Sideline;
 import com.javagpt.back.service.SidelineService;
 import com.javagpt.back.vo.SidelineVO;
@@ -49,7 +49,7 @@ public class SidelineController {
      * 统计 pv 的接口
      */
     @PostMapping("/pv")
-    public ResultBody pv(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+    public ResultBody pv(@RequestBody PageQueryParam<CourseQueryDTO> pageQueryParam) {
         sidelineService.pv(pageQueryParam.getParam().getItemId());
         return ResultBody.success();
     }

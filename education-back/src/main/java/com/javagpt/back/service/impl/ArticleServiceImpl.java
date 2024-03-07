@@ -43,7 +43,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
                 "img",
                 "href",
                 "title",
-                "left(content, 50) content",
+                "left(content, 10) content",
                 "page_view",
                 "create_time");
         return this.getBaseMapper().selectPage(page, qw);

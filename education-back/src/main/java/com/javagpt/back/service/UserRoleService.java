@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserRoleService extends IService<UserRole> {
 
-    List<String> getByUserId(Integer id);
+    List<String> getByUserId(long id);
 }

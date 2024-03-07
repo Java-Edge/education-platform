@@ -1,6 +1,6 @@
 package com.javagpt.common.resp;
 
-import com.javagpt.common.bos.BaseInfoInterface;
+import com.javagpt.common.util.BaseInfoInterface;
 import com.javagpt.common.enums.CommonEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +13,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResultBody {
- 
-    //响应代码
+
     private int code;
- 
-    //响应消息
+
     private String message;
- 
-    //响应结果
+
     private Object result;
  
     public ResultBody(BaseInfoInterface infoInterface) {

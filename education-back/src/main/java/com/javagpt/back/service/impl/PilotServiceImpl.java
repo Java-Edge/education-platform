@@ -3,7 +3,6 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.javagpt.back.entity.CourseEntity;
 import com.javagpt.back.entity.Dictionary;
 import com.javagpt.back.entity.Pilot;
 import com.javagpt.back.mapper.PilotMapper;
@@ -45,9 +44,9 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
         });
 
         Map<String , List<Pilot>> ret = new HashMap<>();
-        Map<String, String> map = new HashMap<>();
-        for (Dictionary d : pilotTypesCache) {
-            map.put(d.getValue(), d.getLabel());
+        Map<String, String> dictMap = new HashMap<>();
+        for (Dictionary dictionary : pilotTypesCache) {
+            dictMap.put(dictionary.getValue(), dictionary.getLabel());
         }
 
         List<Pilot> pilotsCache = pilotCache.get(cache_max_pilot_local_cache, s -> {
@@ -55,7 +54,7 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
             return pilotMapper.selectList(qw);
         });
         for (Pilot pilot : pilotsCache) {
-            pilot.setPilotTypeName(map.get(String.valueOf(pilot.getPilotType())));
+            pilot.setPilotTypeName(dictMap.get(String.valueOf(pilot.getPilotType())));
             ret.computeIfAbsent(pilot.getPilotTypeName(), key -> new ArrayList<>()).add(pilot);
         }
         return ret;
@@ -71,7 +70,7 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
     @Override
     public void pv( Integer itemId) {
         Pilot pilot = pilotMapper.selectById(itemId);
-        pilot.setId(itemId);
+        pilot.setId(Long.valueOf(itemId));
         pilot.setPageView(pilot.getPageView() + 1);
         pilotMapper.updateById(pilot);
     }

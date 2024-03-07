@@ -13,9 +13,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.yulichang.base.MPJBaseMapper;
 import com.github.yulichang.query.MPJQueryWrapper;
-import com.javaedge.common.repository.IBaseRepository;
+import com.javagpt.common.repository.IBaseRepository;
 import com.javagpt.common.annotation.*;
-import com.javagpt.common.constant.MPConstant;
+import com.javagpt.common.constant.EPConstant;
 import com.javagpt.common.constant.QueryEnum;
 import com.javagpt.common.req.BaseBean;
 import com.javagpt.common.req.BasePageBean;
@@ -145,7 +145,7 @@ public class BaseCrudRepositoryImpl<M extends BaseMapper<PO>, PO extends BasePO,
             mpjQueryWrapper.selectAll(entityClass);
             handleQueryWrapper(basePageBean, mpjQueryWrapper, getEntityClass());
             String deleteFlagCol = getColumn("deleteFlag");
-            mpjQueryWrapper.eq("t." + deleteFlagCol, MPConstant.NOT_DELETED);
+            mpjQueryWrapper.eq("t." + deleteFlagCol, EPConstant.NOT_DELETED);
             newPage = ((MPJBaseMapper<?>) this.baseMapper).selectJoinPage(page, dtoClass, mpjQueryWrapper);
         } else {
             QueryWrapper<PO> queryWrapper = new QueryWrapper<>();

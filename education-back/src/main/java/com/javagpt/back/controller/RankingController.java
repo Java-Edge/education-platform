@@ -1,7 +1,7 @@
 package com.javagpt.back.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.javagpt.back.dto.SpecialQueryDTO;
+import com.javagpt.back.dto.CourseQueryDTO;
 import com.javagpt.common.req.PageQueryParam;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Ranking;
@@ -32,7 +32,7 @@ public class RankingController {
      * 统计 pv 的接口
      */
     @PostMapping("/pv")
-    public ResultBody pv(@RequestBody PageQueryParam<SpecialQueryDTO> pageQueryParam) {
+    public ResultBody pv(@RequestBody PageQueryParam<CourseQueryDTO> pageQueryParam) {
         rankingService.pv(pageQueryParam.getParam().getItemId());
         return ResultBody.success();
     }

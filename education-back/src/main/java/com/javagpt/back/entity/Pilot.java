@@ -3,15 +3,13 @@ package com.javagpt.back.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.javagpt.infra.mysql.po.common.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Pilot  {
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+public class Pilot extends BasePO {
 
     /**
      * 导航名称
@@ -34,5 +32,4 @@ public class Pilot  {
 
     @TableField(exist = false)
     private String pilotTypeName;
-
 }

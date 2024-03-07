@@ -76,5 +76,5 @@ public class RoadMapDetail implements Serializable {
     private List<String> tags;
 
     @TableField(exist = false)
-    private CourseEntity course;
+    private CoursePO course;
 }

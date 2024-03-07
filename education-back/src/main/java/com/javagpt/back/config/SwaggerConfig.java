@@ -72,7 +72,7 @@
 //
 //    private ApiInfo webApiInfo() {
 //        return new ApiInfoBuilder()
-//                .contact(new Contact("issac.hu", "", ""))
+//                .contact(new Contact("JavaEdge", "", ""))
 //                .title("API文档")
 //                .description("API文档")
 //                .version("1.0")

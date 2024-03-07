@@ -4,8 +4,6 @@ import com.javagpt.back.entity.UserIntegral;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.common.resp.ResultBody;
 
-import java.util.Map;
-
 /**
  * <p>
  *  服务类

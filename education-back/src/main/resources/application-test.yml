@@ -19,7 +19,7 @@ spring:
     username: root
     password: 123456
   application:
-    name: back-server
+    name: education-platform
 
 pagehelper:
   helperDialect: mysql

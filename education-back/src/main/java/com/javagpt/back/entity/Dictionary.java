@@ -54,6 +54,4 @@ public class Dictionary implements Serializable {
     private Integer sort;
 
     private Long parentId;
-
-
 }

@@ -9,7 +9,6 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>
@@ -52,6 +51,6 @@ public class Comment implements Serializable {
     private Integer feId;
 
     @TableField(exist = false)
-    private UserEntity user;
+    private UserPO user;
 
 }

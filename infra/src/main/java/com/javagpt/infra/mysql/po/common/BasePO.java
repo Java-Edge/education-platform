@@ -17,9 +17,9 @@ public class BasePO implements Serializable {
     private Long id;
 
     /**
-     * 逻辑删除标记，1 删除 0 未删除
+     * 逻辑删除标记
      */
-    @TableLogic
+    @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
 
     /**
@@ -33,5 +33,4 @@ public class BasePO implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-
 }

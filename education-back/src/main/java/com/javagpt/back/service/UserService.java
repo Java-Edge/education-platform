@@ -1,13 +1,13 @@
 package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.javagpt.back.entity.UserPO;
 import com.javagpt.common.resp.ResultBody;
-import com.javagpt.back.dto.UserDTO;
-import com.javagpt.back.entity.UserEntity;
+import com.javagpt.application.user.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public interface UserService extends IService<UserEntity> {
+public interface UserService extends IService<UserPO> {
 
     /**
      * 检查用户名
@@ -22,7 +22,7 @@ public interface UserService extends IService<UserEntity> {
     /**
      * 根据用户名和密码查询用户
      */
-    UserEntity selectUser(String username, String md5);
+    UserPO selectUser(String username, String md5);
 
     /**
      * 用户注册

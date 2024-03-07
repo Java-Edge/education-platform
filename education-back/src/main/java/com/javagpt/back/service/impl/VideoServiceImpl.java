@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.CourseDTO;
-import com.javagpt.back.entity.CourseEntity;
+import com.javagpt.back.entity.CoursePO;
 import com.javagpt.back.mapper.CourseMapper;
 import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.VideoService;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class VideoServiceImpl extends ServiceImpl<CourseMapper, CourseEntity> implements VideoService {
+public class VideoServiceImpl extends ServiceImpl<CourseMapper, CoursePO> implements VideoService {
 
     @Autowired
     private CourseMapper courseMapper;
@@ -30,40 +30,40 @@ public class VideoServiceImpl extends ServiceImpl<CourseMapper, CourseEntity> im
     private DictMapper dictMapper;
 
     @Override
-    public List<CourseEntity> getFiveCourse() {
+    public List<CoursePO> getFiveCourse() {
 
-        LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
-                .eq(CourseEntity::getType, CourseEnum.VIDEO.getResultCode())
-                .orderByDesc(CourseEntity::getCreateTime)
+        LambdaQueryWrapper<CoursePO> wrapper = new LambdaQueryWrapper<CoursePO>()
+                .eq(CoursePO::getType, CourseEnum.VIDEO.getResultCode())
+                .orderByDesc(CoursePO::getCreateTime)
                 .last("limit 5");
-        List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
+        List<CoursePO> list = this.getBaseMapper().selectList(wrapper);
         return list;
     }
 
     @Override
-    public List<CourseEntity> getRecommendCourses() {
-        LambdaQueryWrapper<CourseEntity> wrapper = new LambdaQueryWrapper<CourseEntity>()
-                .eq(CourseEntity::getType, CourseEnum.VIDEO.getResultCode())
-                .orderByDesc(CourseEntity::getPageView)
+    public List<CoursePO> getRecommendCourses() {
+        LambdaQueryWrapper<CoursePO> wrapper = new LambdaQueryWrapper<CoursePO>()
+                .eq(CoursePO::getType, CourseEnum.VIDEO.getResultCode())
+                .orderByDesc(CoursePO::getPageView)
                 .last("limit 8");
-        List<CourseEntity> list = this.getBaseMapper().selectList(wrapper);
+        List<CoursePO> list = this.getBaseMapper().selectList(wrapper);
         return list;
     }
 
     @Override
-    public List<CourseEntity> selectList() {
-        QueryWrapper<CourseEntity> qw = new QueryWrapper<>();
+    public List<CoursePO> selectList() {
+        QueryWrapper<CoursePO> qw = new QueryWrapper<>();
         qw.eq("type", CourseEnum.VIDEO.getResultCode());
         qw.orderByDesc(Constants.PV);
-        List<CourseEntity> courseEntities = this.getBaseMapper().selectList(qw);
+        List<CoursePO> courseEntities = this.getBaseMapper().selectList(qw);
         return courseEntities;
     }
 
     @Override
-    public Map<Integer, CourseEntity> getCoursesMapById(List<Integer> courseIds) {
-        List<CourseEntity> courseEntities = this.getBaseMapper().selectBatchIds(courseIds);
-        Map<Integer, CourseEntity> result = new HashMap<>();
-        for (CourseEntity course : courseEntities) {
+    public Map<Integer, CoursePO> getCoursesMapById(List<Integer> courseIds) {
+        List<CoursePO> courseEntities = this.getBaseMapper().selectBatchIds(courseIds);
+        Map<Integer, CoursePO> result = new HashMap<>();
+        for (CoursePO course : courseEntities) {
             result.put(course.getId(), course);
         }
         return result;
@@ -71,7 +71,6 @@ public class VideoServiceImpl extends ServiceImpl<CourseMapper, CourseEntity> im
 
     @Override
     public Page<CourseVO> search(PageQueryParam<CourseDTO> pageQueryParam) {
-
         Page<CourseVO> page = new Page<>(pageQueryParam.getPageNo(), pageQueryParam.getPageSize());
         Page<CourseVO> courseVOPage = courseMapper.selectByPage(page, pageQueryParam.getParam());
         return courseVOPage;

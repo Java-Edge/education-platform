@@ -3,7 +3,7 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.back.entity.Comment;
-import com.javagpt.back.entity.UserEntity;
+import com.javagpt.back.entity.UserPO;
 import com.javagpt.back.mapper.CommentMapper;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.CommentService;
@@ -42,8 +42,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
          */
         for (Comment comment : page.getRecords()) {
             Integer userId = comment.getUserId();
-            UserEntity userEntity = userMapper.selectById(userId);
-            comment.setUser(userEntity);
+            UserPO userPO = userMapper.selectById(userId);
+            comment.setUser(userPO);
         }
         return page;
     }

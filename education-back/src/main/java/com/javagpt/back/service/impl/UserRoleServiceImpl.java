@@ -25,7 +25,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
     RoleMapper roleMapper;
 
     @Override
-    public List<String> getByUserId(Integer userId) {
+    public List<String> getByUserId(long userId) {
         QueryWrapper<UserRole> qw = new QueryWrapper<>();
         qw.eq("user_id", userId);
         List<UserRole> userRoles = userRoleMapper.selectList(qw);

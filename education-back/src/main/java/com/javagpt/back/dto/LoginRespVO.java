@@ -12,7 +12,7 @@ public class LoginRespVO implements Serializable {
     /**
      * 用户编号
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 用户真实名称

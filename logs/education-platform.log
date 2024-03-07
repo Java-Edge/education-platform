@@ -1,118 +1,269 @@
-2024-03-05T16:56:05.363+08:00  INFO 93471 --- [restartedMain] com.javagpt.back.BackApplication         : Starting BackApplication using Java 21.0.2 with PID 93471 (/Users/javaedge/Downloads/IDEAProjects/education-microservice/education-back/target/classes started by javaedge in /Users/javaedge/Downloads/IDEAProjects/education-microservice)
-2024-03-05T16:56:05.364+08:00  INFO 93471 --- [restartedMain] com.javagpt.back.BackApplication         : The following 1 profile is active: "prod"
-2024-03-05T16:56:05.511+08:00  INFO 93471 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2024-03-05T16:56:05.511+08:00  INFO 93471 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2024-03-05T16:56:06.289+08:00  INFO 93471 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2024-03-05T16:56:06.292+08:00  INFO 93471 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2024-03-05T16:56:06.324+08:00  INFO 93471 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
-2024-03-05T16:56:07.202+08:00  INFO 93471 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
-2024-03-05T16:56:07.210+08:00  INFO 93471 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2024-03-05T16:56:07.210+08:00  INFO 93471 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2024-03-05T16:56:07.256+08:00  INFO 93471 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2024-03-05T16:56:07.257+08:00  INFO 93471 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1745 ms
-2024-03-05T16:56:07.616+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
-2024-03-05T16:56:07.617+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
-2024-03-05T16:56:07.617+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
-2024-03-05T16:56:07.642+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
-2024-03-05T16:56:07.642+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
-2024-03-05T16:56:07.642+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
-2024-03-05T16:56:07.663+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
-2024-03-05T16:56:07.663+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
-2024-03-05T16:56:07.663+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
-2024-03-05T16:56:07.686+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
-2024-03-05T16:56:07.686+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
-2024-03-05T16:56:07.686+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
-2024-03-05T16:56:07.709+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
-2024-03-05T16:56:07.710+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
-2024-03-05T16:56:07.710+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
-2024-03-05T16:56:07.727+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
-2024-03-05T16:56:07.727+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
-2024-03-05T16:56:07.727+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
-2024-03-05T16:56:07.732+08:00  WARN 93471 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.DiscussOfferEntity".
-2024-03-05T16:56:07.733+08:00  WARN 93471 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.DiscussOfferEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2024-03-05T16:56:07.746+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
-2024-03-05T16:56:07.746+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
-2024-03-05T16:56:07.746+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
-2024-03-05T16:56:07.766+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
-2024-03-05T16:56:07.766+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
-2024-03-05T16:56:07.766+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
-2024-03-05T16:56:07.784+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
-2024-03-05T16:56:07.784+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
-2024-03-05T16:56:07.784+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
-2024-03-05T16:56:07.799+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
-2024-03-05T16:56:07.799+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
-2024-03-05T16:56:07.799+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
-2024-03-05T16:56:07.816+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
-2024-03-05T16:56:07.816+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
-2024-03-05T16:56:07.816+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
-2024-03-05T16:56:07.837+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
-2024-03-05T16:56:07.837+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
-2024-03-05T16:56:07.837+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
-2024-03-05T16:56:07.868+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
-2024-03-05T16:56:07.868+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
-2024-03-05T16:56:07.868+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
-2024-03-05T16:56:07.891+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
-2024-03-05T16:56:07.891+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
-2024-03-05T16:56:07.891+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
-2024-03-05T16:56:07.913+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
-2024-03-05T16:56:07.913+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
-2024-03-05T16:56:07.913+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
-2024-03-05T16:56:07.932+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
-2024-03-05T16:56:07.932+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
-2024-03-05T16:56:07.932+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
-2024-03-05T16:56:07.948+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
-2024-03-05T16:56:07.948+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
-2024-03-05T16:56:07.948+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
-2024-03-05T16:56:07.967+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:07.967+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:07.967+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:07.982+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserEntity not contain MppMultiId anno
-2024-03-05T16:56:07.983+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserEntity not contain MppMultiId anno
-2024-03-05T16:56:07.983+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserEntity not contain MppMultiId anno
-2024-03-05T16:56:08.007+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
-2024-03-05T16:56:08.007+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
-2024-03-05T16:56:08.007+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
-2024-03-05T16:56:08.027+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:08.027+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:08.028+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CourseEntity not contain MppMultiId anno
-2024-03-05T16:56:08.112+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
-2024-03-05T16:56:08.112+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
-2024-03-05T16:56:08.112+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
-2024-03-05T16:56:08.260+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
-2024-03-05T16:56:08.260+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
-2024-03-05T16:56:08.260+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
-2024-03-05T16:56:08.319+08:00  WARN 93471 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.CompanyDiscussion".
-2024-03-05T16:56:08.319+08:00  WARN 93471 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.CompanyDiscussion ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2024-03-05T16:56:08.326+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
-2024-03-05T16:56:08.326+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
-2024-03-05T16:56:08.326+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
-2024-03-05T16:56:08.395+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
-2024-03-05T16:56:08.395+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
-2024-03-05T16:56:08.395+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
-2024-03-05T16:56:08.655+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
-2024-03-05T16:56:08.656+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
-2024-03-05T16:56:08.656+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
-2024-03-05T16:56:08.941+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
-2024-03-05T16:56:08.941+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
-2024-03-05T16:56:08.941+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
-2024-03-05T16:56:09.025+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
-2024-03-05T16:56:09.026+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
-2024-03-05T16:56:09.026+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
-2024-03-05T16:56:09.042+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
-2024-03-05T16:56:09.042+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
-2024-03-05T16:56:09.042+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
-2024-03-05T16:56:09.067+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
-2024-03-05T16:56:09.067+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
-2024-03-05T16:56:09.067+08:00  INFO 93471 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
-2024-03-05T16:56:09.607+08:00  INFO 93471 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5792e640, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5bbebfcd, org.springframework.security.web.context.SecurityContextHolderFilter@25a1ee5e, org.springframework.security.web.header.HeaderWriterFilter@3b1157fe, org.springframework.security.web.authentication.logout.LogoutFilter@3c121a67, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40917a22, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76d734c3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3d181f03, org.springframework.security.web.session.SessionManagementFilter@95aeb50, org.springframework.security.web.access.ExceptionTranslationFilter@632d553, org.springframework.security.web.access.intercept.AuthorizationFilter@311aeb42]
-2024-03-05T16:56:09.912+08:00  INFO 93471 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-03-05T16:56:10.048+08:00  INFO 93471 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1d0fa530
-2024-03-05T16:56:10.049+08:00  INFO 93471 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-03-05T16:56:10.765+08:00  INFO 93471 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2024-03-05T16:56:10.818+08:00  INFO 93471 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
-2024-03-05T16:56:10.824+08:00  INFO 93471 --- [restartedMain] com.javagpt.back.BackApplication         : Started BackApplication in 5.77 seconds (process running for 6.494)
-2024-03-05T16:56:25.186+08:00  INFO 93471 --- [http-nio-8088-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-03-05T16:56:25.187+08:00  INFO 93471 --- [http-nio-8088-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2024-03-05T16:56:25.188+08:00  INFO 93471 --- [http-nio-8088-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2024-03-05T16:56:25.559+08:00  WARN 93471 --- [http-nio-8088-exec-5] c.b.m.c.t.support.ReflectLambdaMeta      : Unable to make field private final java.lang.Class java.lang.invoke.SerializedLambda.capturingClass accessible: module java.base does not "opens java.lang.invoke" to unnamed module @6b93d963
-2024-03-05T16:56:39.117+08:00  INFO 93471 --- [http-nio-8088-exec-4] c.j.back.service.impl.UserServiceImpl    : 获取验证码的值为: jSHU
+2024-05-28T14:23:27.323+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : Starting BackApplication using Java 22.0.1 with PID 71604 (/Users/javaedge/Downloads/IDEAProjects/education-microservice/education-back/target/classes started by javaedge in /Users/javaedge/Downloads/IDEAProjects/education-microservice)
+2024-05-28T14:23:27.355+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : The following 1 profile is active: "prod"
+2024-05-28T14:23:27.753+08:00  INFO 71604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-05-28T14:23:27.754+08:00  INFO 71604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-05-28T14:23:30.333+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-05-28T14:23:30.338+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-05-28T14:23:30.405+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 0 Redis repository interfaces.
+2024-05-28T14:23:31.832+08:00  INFO 71604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2024-05-28T14:23:31.843+08:00  INFO 71604 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-28T14:23:31.844+08:00  INFO 71604 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-05-28T14:23:31.922+08:00  INFO 71604 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-28T14:23:31.923+08:00  INFO 71604 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4169 ms
+2024-05-28T14:23:32.414+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:23:32.416+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:23:32.416+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:23:32.441+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:23:32.441+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:23:32.441+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:23:32.461+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:23:32.461+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:23:32.462+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:23:32.487+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:23:32.487+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:23:32.488+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:23:32.513+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:23:32.513+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:23:32.513+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:23:32.535+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:23:32.535+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:23:32.535+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:23:32.541+08:00  WARN 71604 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.DiscussOfferEntity".
+2024-05-28T14:23:32.542+08:00  WARN 71604 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.DiscussOfferEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-05-28T14:23:32.562+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:23:32.562+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:23:32.562+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:23:32.590+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:23:32.590+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:23:32.590+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:23:32.614+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:23:32.614+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:23:32.614+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:23:32.639+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:23:32.639+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:23:32.639+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:23:32.666+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:23:32.666+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:23:32.666+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:23:32.702+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:23:32.703+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:23:32.703+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:23:32.748+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:23:32.748+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:23:32.748+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:23:32.778+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:23:32.778+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:23:32.778+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:23:32.806+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:23:32.807+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:23:32.807+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:23:32.829+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:23:32.829+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:23:32.829+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:23:32.854+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:23:32.855+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:23:32.855+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:23:32.892+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:32.893+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:32.893+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:32.930+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:23:32.930+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:23:32.930+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:23:32.961+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:23:32.961+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:23:32.961+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:23:32.990+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:32.990+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:32.990+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:23:33.065+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:23:33.065+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:23:33.065+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:23:33.262+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:23:33.262+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:23:33.262+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:23:33.350+08:00  WARN 71604 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.CompanyDiscussion".
+2024-05-28T14:23:33.350+08:00  WARN 71604 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.CompanyDiscussion ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-05-28T14:23:33.372+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:23:33.372+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:23:33.372+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:23:33.496+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:23:33.496+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:23:33.496+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:23:33.705+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:23:33.705+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:23:33.705+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:23:33.844+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:23:33.844+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:23:33.844+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:23:34.009+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:23:34.009+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:23:34.009+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:23:34.408+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:23:34.428+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:23:34.429+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:23:34.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:23:34.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:23:34.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:23:34.539+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:23:34.539+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:23:34.539+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:23:34.584+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:23:34.584+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:23:34.584+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:23:35.369+08:00  INFO 71604 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b440b78, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6c532c98, org.springframework.security.web.context.SecurityContextHolderFilter@70961f78, org.springframework.security.web.header.HeaderWriterFilter@3e2d014c, org.springframework.security.web.authentication.logout.LogoutFilter@5432eb67, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73f02f16, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78f0200, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2253f7c5, org.springframework.security.web.session.SessionManagementFilter@362bc39b, org.springframework.security.web.access.ExceptionTranslationFilter@3c34383c, org.springframework.security.web.access.intercept.AuthorizationFilter@948f0df]
+2024-05-28T14:23:35.906+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-28T14:23:36.368+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a66b0c4
+2024-05-28T14:23:36.377+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-28T14:23:37.946+08:00  INFO 71604 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-28T14:23:38.044+08:00  INFO 71604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2024-05-28T14:23:38.057+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : Started BackApplication in 11.787 seconds (process running for 14.11)
+2024-05-28T14:42:53.580+08:00  INFO 71604 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 25 class path changes (0 additions, 0 deletions, 25 modifications)
+2024-05-28T14:42:54.602+08:00  WARN 71604 --- [Thread-5] org.apache.tomcat.util.net.NioEndpoint   : Failed to unlock acceptor for [http-nio-8088] because the local address was not available
+2024-05-28T14:42:54.602+08:00  INFO 71604 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-05-28T14:42:54.602+08:00 ERROR 71604 --- [http-nio-8088-Acceptor] org.apache.tomcat.util.net.Acceptor      : Socket accept failed
+
+java.nio.channels.AsynchronousCloseException: null
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:203) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.end(ServerSocketChannelImpl.java:383) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:407) ~[na:na]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:521) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:79) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:128) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+
+2024-05-28T14:42:54.649+08:00  INFO 71604 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-28T14:42:54.660+08:00  INFO 71604 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-28T14:42:54.835+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : Starting BackApplication using Java 22.0.1 with PID 71604 (/Users/javaedge/Downloads/IDEAProjects/education-microservice/education-back/target/classes started by javaedge in /Users/javaedge/Downloads/IDEAProjects/education-microservice)
+2024-05-28T14:42:54.836+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : The following 1 profile is active: "prod"
+2024-05-28T14:42:56.088+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-05-28T14:42:56.088+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-05-28T14:42:56.112+08:00  INFO 71604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
+2024-05-28T14:42:56.496+08:00  INFO 71604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2024-05-28T14:42:56.497+08:00  INFO 71604 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-28T14:42:56.497+08:00  INFO 71604 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-05-28T14:42:56.527+08:00  INFO 71604 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-28T14:42:56.527+08:00  INFO 71604 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1657 ms
+2024-05-28T14:42:56.808+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:42:56.808+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:42:56.808+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ArticleEntity not contain MppMultiId anno
+2024-05-28T14:42:56.839+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:42:56.839+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:42:56.839+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Career not contain MppMultiId anno
+2024-05-28T14:42:56.866+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:42:56.866+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:42:56.866+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Company not contain MppMultiId anno
+2024-05-28T14:42:56.892+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:42:56.892+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:42:56.892+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyNature not contain MppMultiId anno
+2024-05-28T14:42:56.928+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:42:56.928+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:42:56.929+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Dictionary not contain MppMultiId anno
+2024-05-28T14:42:56.973+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:42:56.974+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:42:56.974+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DictionaryType not contain MppMultiId anno
+2024-05-28T14:42:56.979+08:00  WARN 71604 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.DiscussOfferEntity".
+2024-05-28T14:42:56.979+08:00  WARN 71604 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.DiscussOfferEntity ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-05-28T14:42:57.015+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:42:57.015+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:42:57.015+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.DiscussOfferEntity not contain MppMultiId anno
+2024-05-28T14:42:57.162+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:42:57.162+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:42:57.162+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InnerRecommend not contain MppMultiId anno
+2024-05-28T14:42:57.220+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:42:57.220+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:42:57.220+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewEntity not contain MppMultiId anno
+2024-05-28T14:42:57.343+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:42:57.344+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:42:57.344+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Pilot not contain MppMultiId anno
+2024-05-28T14:42:57.379+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:42:57.379+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:42:57.379+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.ProjectEntity not contain MppMultiId anno
+2024-05-28T14:42:57.418+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:42:57.418+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:42:57.418+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Ranking not contain MppMultiId anno
+2024-05-28T14:42:57.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:42:57.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:42:57.520+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RecruitPO not contain MppMultiId anno
+2024-05-28T14:42:57.597+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:42:57.598+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:42:57.598+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapDetail not contain MppMultiId anno
+2024-05-28T14:42:57.713+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:42:57.713+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:42:57.713+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMap not contain MppMultiId anno
+2024-05-28T14:42:57.762+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:42:57.763+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:42:57.763+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.RoadMapTag not contain MppMultiId anno
+2024-05-28T14:42:57.832+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:42:57.834+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:42:57.834+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Role not contain MppMultiId anno
+2024-05-28T14:42:57.888+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:57.888+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:57.888+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:57.933+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:42:57.933+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:42:57.934+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserPO not contain MppMultiId anno
+2024-05-28T14:42:57.972+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:42:57.972+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:42:57.972+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserRole not contain MppMultiId anno
+2024-05-28T14:42:58.002+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:58.002+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:58.002+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CoursePO not contain MppMultiId anno
+2024-05-28T14:42:58.187+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:42:58.187+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:42:58.187+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.PermissionConfig not contain MppMultiId anno
+2024-05-28T14:42:58.383+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:42:58.383+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:42:58.383+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Comment not contain MppMultiId anno
+2024-05-28T14:42:58.464+08:00  WARN 71604 --- [restartedMain] c.b.m.core.metadata.TableInfoHelper      : Can not find table primary key in Class: "com.javagpt.back.entity.CompanyDiscussion".
+2024-05-28T14:42:58.464+08:00  WARN 71604 --- [restartedMain] c.g.j.mybatisplus.base.MppSqlInjector    : class com.javagpt.back.entity.CompanyDiscussion ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2024-05-28T14:42:58.477+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:42:58.477+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:42:58.477+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CompanyDiscussion not contain MppMultiId anno
+2024-05-28T14:42:58.567+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:42:58.567+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:42:58.567+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.CourseCategory not contain MppMultiId anno
+2024-05-28T14:42:58.759+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:42:58.760+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:42:58.760+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TDictionaryType not contain MppMultiId anno
+2024-05-28T14:42:58.935+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:42:58.935+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:42:58.935+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.infra.mysql.po.TFile not contain MppMultiId anno
+2024-05-28T14:42:59.081+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:42:59.081+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:42:59.081+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.InterviewSchedule not contain MppMultiId anno
+2024-05-28T14:42:59.358+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:42:59.358+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:42:59.358+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.Sideline not contain MppMultiId anno
+2024-05-28T14:42:59.486+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:42:59.486+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:42:59.486+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegral not contain MppMultiId anno
+2024-05-28T14:42:59.509+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:42:59.509+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:42:59.509+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.UserIntegralLog not contain MppMultiId anno
+2024-05-28T14:42:59.542+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.SelectByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:42:59.542+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.UpdateByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:42:59.542+08:00  INFO 71604 --- [restartedMain] c.g.j.m.base.DeleteByMultiIdMethod       : entity com.javagpt.back.entity.SignRecord not contain MppMultiId anno
+2024-05-28T14:43:00.036+08:00  INFO 71604 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@50c11685, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@aba3617, org.springframework.security.web.context.SecurityContextHolderFilter@930bb18, org.springframework.security.web.header.HeaderWriterFilter@73a32049, org.springframework.security.web.authentication.logout.LogoutFilter@16b98301, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78a57d06, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@126ebb33, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7368e5b4, org.springframework.security.web.session.SessionManagementFilter@25b5b1c6, org.springframework.security.web.access.ExceptionTranslationFilter@163cfb1b, org.springframework.security.web.access.intercept.AuthorizationFilter@22771d39]
+2024-05-28T14:43:00.447+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-05-28T14:43:00.453+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@15da1bd3
+2024-05-28T14:43:00.453+08:00  INFO 71604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-05-28T14:43:00.987+08:00  INFO 71604 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-05-28T14:43:01.037+08:00  INFO 71604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2024-05-28T14:43:01.041+08:00  INFO 71604 --- [restartedMain] com.javagpt.back.BackApplication         : Started BackApplication in 6.286 seconds (process running for 1177.088)
+2024-05-28T14:43:01.043+08:00  INFO 71604 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-05-28T14:55:17.047+08:00  INFO 71604 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-05-28T14:55:18.099+08:00  WARN 71604 --- [Thread-7] org.apache.tomcat.util.net.NioEndpoint   : Failed to unlock acceptor for [http-nio-8088] because the local address was not available
+2024-05-28T14:55:18.099+08:00  INFO 71604 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-05-28T14:55:18.099+08:00 ERROR 71604 --- [http-nio-8088-Acceptor] org.apache.tomcat.util.net.Acceptor      : Socket accept failed
+
+java.nio.channels.AsynchronousCloseException: null
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:203) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.end(ServerSocketChannelImpl.java:383) ~[na:na]
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:407) ~[na:na]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:521) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:79) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:128) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[na:na]
+
+2024-05-28T14:55:18.254+08:00  INFO 71604 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-05-28T14:55:18.258+08:00  INFO 71604 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

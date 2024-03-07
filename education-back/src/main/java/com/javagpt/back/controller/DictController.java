@@ -25,7 +25,7 @@ public class DictController {
 
     private final DictionaryTypeService dictionaryTypeService;
 
-//    private final DictTypeService dictTypeService;
+    private final DictTypeService dictTypeService;
 
     private final DictService dictService;
 
@@ -60,10 +60,10 @@ public class DictController {
         return ResultBody.success(dictionaryTypes);
     }
 
-//    @GetMapping("/currentPage")
-//    public IPage<DictionaryTypeDTO> logPage(@RequestParam(name = "typeKeys") List<String> typeKeys) {
-//        DictionaryTypeParam param = new DictionaryTypeParam();
-//        param.setTypeKeys(typeKeys);
-//        return dictTypeService.selectList(param);
-//    }
+    @GetMapping("/currentPage")
+    public IPage<DictionaryTypeDTO> logPage(@RequestParam(name = "typeKeys") List<String> typeKeys) {
+        DictionaryTypeParam param = new DictionaryTypeParam();
+        param.setTypeKeys(typeKeys);
+        return dictTypeService.selectList(param);
+    }
 }

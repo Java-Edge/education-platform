@@ -3,12 +3,11 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.LoginRespVO;
-import com.javagpt.back.dto.UserDTO;
-import com.javagpt.back.entity.UserEntity;
+import com.javagpt.application.user.UserDTO;
+import com.javagpt.back.entity.UserPO;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
 import com.javagpt.common.constant.ResultStatus;
-import com.javagpt.common.redis.RedisCrudService;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
@@ -21,7 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -37,40 +35,37 @@ import java.util.HashMap;
 @Service
 @Slf4j
 @Scope("singleton")
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements UserService {
 
     @Resource
     private UserMapper userMapper;
 
     @Override
     public int checkUsername(String username) {
-        UserEntity userEntity = this.getBaseMapper()
-                .selectOne(new LambdaQueryWrapper<UserEntity>()
-                        .eq(UserEntity::getUsername, username));
-        return userEntity != null ? 1 : 0;
+        UserPO userPO = this.getBaseMapper()
+                .selectOne(new LambdaQueryWrapper<UserPO>()
+                        .eq(UserPO::getUsername, username));
+        return userPO != null ? 1 : 0;
     }
 
     @Override
     public int insertUser(UserDTO user) {
-
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(user, userEntity);
-        userEntity.setCreatTime(new Date());
-        userEntity.setUpdateTime(new Date());
-
-        save(userEntity);
+        UserPO userPO = new UserPO();
+        BeanUtils.copyProperties(user, userPO);
+        userPO.setUpdateTime(new Date());
+        save(userPO);
         return 1;
     }
 
     @Override
-    public UserEntity selectUser(String username, String password) {
+    public UserPO selectUser(String username, String password) {
 
-        LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<UserEntity>()
-                .eq(UserEntity::getUsername, username)
-                .eq(UserEntity::getPassword, password);
+        LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<UserPO>()
+                .eq(UserPO::getUsername, username)
+                .eq(UserPO::getPassword, password);
 
-        UserEntity userEntity = this.getBaseMapper().selectOne(wrapper);
-        return userEntity;
+        UserPO userPO = this.getBaseMapper().selectOne(wrapper);
+        return userPO;
     }
 
     @Override
@@ -106,18 +101,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             return ResultBody.error(ResultStatus.ERROR_CODE, "验证码输入错误!");
         }
 
-        LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getUsername, user.getUsername());
-        UserEntity userEntity = userMapper.selectOne(wrapper);
+        LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<UserPO>().eq(UserPO::getUsername, user.getUsername());
+        UserPO userPO = userMapper.selectOne(wrapper);
 
         // 1. 用户不存在
-        if (userEntity == null) {
+        if (userPO == null) {
             return ResultBody.error(ResultStatus.USER_NOT_FOUND, "登录失败,用户名不存在");
         }
 
         // 2. 用户密码错误
         String md5Pwd = Md5Util.getMD5(user.getPassword());
         // 数据库密码是MD5加密过的，MD5算法又不可逆，所以只能把登录密码加密后去和数据库的密码比对
-        if (!userEntity.getPassword().equals(md5Pwd)) {
+        if (!userPO.getPassword().equals(md5Pwd)) {
             return ResultBody.error(ResultStatus.USER_ERROR_PASSWORD, "用户密码错误");
         }
 
@@ -126,31 +121,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         LoginRespVO loginRespVO = new LoginRespVO();
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userId", userEntity.getId());
+        map.put("userId", userPO.getId());
         map.put("key2", "value2");
         //载荷部分，主题，就是token中携带的数据，这里把用户名放进去
-        String token = builder.setSubject(userEntity.getUsername())
+        String token = builder.setSubject(userPO.getUsername())
                 //设置token的生成时间
                 .setIssuedAt(new Date())
                 //设置用户id为token  id ''是因为用户id是int类型，需要转换为字符串类型
-                .setId(userEntity.getId().toString())
+                .setId(userPO.getId().toString())
                 //map中可以存放用户的角色权限信息
                 .setClaims(map)
                 //设置token过期时间，当前时间加一天就是时效为一天过期。会话保留一天
-                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+//                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+                // 七天会话
+                .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000))
                 //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
                 .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
-        loginRespVO.setId(userEntity.getId());
-        loginRespVO.setUsername(userEntity.getUsername());
+        loginRespVO.setId(userPO.getId());
+        loginRespVO.setUsername(userPO.getUsername());
         loginRespVO.setToken(token);
         Cookie cookie = new Cookie("token", URLEncoder.encode(token, StandardCharsets.UTF_8));
         cookie.setMaxAge(7 * 24 * 60 * 60);
         cookie.setPath("/");
         response.addCookie(cookie);
         // 更新最近一次登录时间，以记录不活跃用户，以后刺激活跃
-        userEntity.setUpdateTime(new Date());
-        userMapper.updateById(userEntity);
+        userPO.setUpdateTime(new Date());
+        userMapper.updateById(userPO);
         return ResultBody.success(loginRespVO);
     }
 

@@ -1,8 +1,9 @@
 package com.javagpt.back.config.springsecurity;
 
-import com.javagpt.back.entity.UserEntity;
+import com.javagpt.back.entity.UserPO;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserRoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,9 @@ import java.util.List;
  * @author 千祎来了
  * @date 2023/9/24 19:26
  */
-@Component("ss") // SpringSecurity 缩写
+@Component("ss") // SpringSecurity
+@Slf4j
 public class MyExpressionRoot {
-
-    private final Logger logger = LoggerFactory.getLogger(MyExpressionRoot.class);
 
     @Autowired
     UserMapper userMapper;
@@ -50,13 +50,13 @@ public class MyExpressionRoot {
              * 如果用户未登录，则 authentication.getPrincipal 值为 anonymousUser ，不能转为 userId，那么直接拒绝就行
              */
             Integer userId = (Integer) authentication.getPrincipal();
-            UserEntity userEntity = userMapper.selectById(userId);
-            if (userEntity == null) {
+            UserPO userPO = userMapper.selectById(userId);
+            if (userPO == null) {
                 return false;
             }
-            List<String> rolePermissions = userRoleService.getByUserId(userEntity.getId());
-            logger.info("当前用户角色：{}", rolePermissions.toString());
-            logger.info("所需用户角色：{}", needRoles.toString());
+            List<String> rolePermissions = userRoleService.getByUserId(userPO.getId());
+            log.info("当前用户角色：{}", rolePermissions.toString());
+            log.info("所需用户角色：{}", needRoles);
             boolean permit = false;
             /**
              * 遍历用户当前角色，只要有一个角色在所需用户角色中，即可通过授权

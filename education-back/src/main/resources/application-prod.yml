@@ -1,9 +1,20 @@
 mybatis-plus:
+  auto-mapping-behavior: full # 自动映射
+  map-underscore-to-camel-case: true # 下划线转驼峰
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  type-aliases-package: com.javagpt.back.entity
+  type-aliases-package: com.javagpt.back.entity #扫描表映射的类，默认是自动加下划线
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      column-underline: true
+      logic-delete-field: deleteFlag # 指定字段名
+      logic-delete-value: 1 # 删除后设置成的值
+      logic-not-delete-value: 0 # 未删除的值
+
 
 server:
   port: 8088
@@ -15,11 +26,11 @@ spring:
 #    url: jdbc:mysql://152.32.191.118:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
 #    username: root
 #    password: Zxcvbnm1234567890
-    url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   application:
-    name: back-server
+    name: education-platform
 
 pagehelper:
   helperDialect: mysql

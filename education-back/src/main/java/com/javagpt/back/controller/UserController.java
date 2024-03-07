@@ -2,7 +2,7 @@ package com.javagpt.back.controller;
 
 
 import com.javagpt.common.resp.ResultBody;
-import com.javagpt.back.dto.UserDTO;
+import com.javagpt.application.user.UserDTO;
 import com.javagpt.back.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,7 +30,7 @@ public class UserController {
         return userService.register(request,user);
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/doLogin")
     public ResultBody login(HttpServletRequest request,HttpServletResponse response, @RequestBody UserDTO user) {
         return userService.doLogin(request,response, user);
     }

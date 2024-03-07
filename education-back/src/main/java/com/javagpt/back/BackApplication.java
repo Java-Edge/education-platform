@@ -1,6 +1,7 @@
 package com.javagpt.back;
 
 import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
@@ -9,8 +10,9 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
-@SpringBootApplication(scanBasePackages = {"com.javagpt", "com.javaedge"})
+@SpringBootApplication(scanBasePackages = {"com.javagpt"})
 @EnableMPP
+@MapperScan("com.javagpt.infra.mysql.mapper")
 public class BackApplication {
 
     public static void main(String[] args) {

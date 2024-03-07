@@ -1,12 +1,16 @@
 package com.javagpt.back.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.DdlApplicationRunner;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 
 @Configuration
@@ -40,4 +44,9 @@ public class MybatisPlusConfig {
         return interceptor;
     }
 
+    @Bean
+
+    public DdlApplicationRunner ddlApplicationRunner(@Autowired(required = false) List ddlList) {
+        return new DdlApplicationRunner(ddlList);
+    }
 }
