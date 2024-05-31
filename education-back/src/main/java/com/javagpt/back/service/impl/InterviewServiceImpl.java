@@ -54,7 +54,3 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
         return article;
     }
 }
-
-
-
-

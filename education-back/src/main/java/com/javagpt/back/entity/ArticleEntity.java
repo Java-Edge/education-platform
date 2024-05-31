@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class ArticleEntity implements Serializable {
 
     @TableId(type = IdType.AUTO)
-    private Integer articleId;
+    private Long articleId;
 
     private String title;
 

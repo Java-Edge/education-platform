@@ -1,5 +1,6 @@
 package com.javagpt.back.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.dto.LoginRespVO;
@@ -81,7 +82,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         if (checkUsername(user.getUsername()) == 1) {
             user.setOk(false);
             user.setMessage("用户名已存在！");
-            return ResultBody.success(user);
+            log.error("用户名已存在 user={}", JSON.toJSONString(user));
+            return ResultBody.error("用户名已存在！请更换一个昵称");
         }
         user.setPassword(Md5Util.getMD5(user.getPassword()));
         int num = insertUser(user);

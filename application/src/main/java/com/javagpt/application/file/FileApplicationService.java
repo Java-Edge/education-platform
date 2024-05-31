@@ -36,19 +36,19 @@ public class FileApplicationService {
     }
 
     @Transactional
-    public FileDTO saveFile(Long enterpriseId, MultipartFile file) {
-        FileEntity fileEntity = saveFile(enterpriseId, file, null);
+    public FileDTO saveFile(MultipartFile file) {
+        FileEntity fileEntity = saveFile(file, null);
         return ModelUtils.convert(fileEntity, FileDTO.class);
     }
 
     @Transactional
-    public FileEntity saveFile(Long enterpriseId, MultipartFile file, String fileName) {
+    public FileEntity saveFile(MultipartFile file, String fileName) {
         String originalFilename = file.getOriginalFilename();
         String name = StringUtils.isBlank(fileName) ? FilenameUtils.getBaseName(originalFilename) : fileName;
         String suffix = FilenameUtils.getExtension(originalFilename);
         long size = file.getSize();
         FileEntity fileEntity = new FileEntity();
-        fileEntity.setName(name).setSuffix(suffix).setSize(size).setEnterpriseId(enterpriseId);
+        fileEntity.setName(name).setSuffix(suffix).setSize(size);
         fileEntity = fileEntity.save();
         String key = fileEntity.getPath();
         InputStream inputStream = null;
@@ -86,7 +86,7 @@ public class FileApplicationService {
     }
 
 
-    public void downloadFile(HttpServletResponse response, Long fileId, Long enterpriseId) throws IOException {
+    public void downloadFile(HttpServletResponse response, Long fileId) throws IOException {
         FileEntity fileEntity = fileRepository.findById(fileId);
         if (fileEntity == null) {
             throw BusinessRuntimeException.error("无效的文件Id");
@@ -97,7 +97,7 @@ public class FileApplicationService {
     }
 
 
-    public void downloadVideo(HttpServletRequest request, HttpServletResponse response, Long fileId, Long enterpriseId) throws IOException {
+    public void downloadVideo(HttpServletRequest request, HttpServletResponse response, Long fileId) throws IOException {
 
         FileEntity fileEntity = fileRepository.findById(fileId);
         if (fileEntity == null) {

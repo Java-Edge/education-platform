@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ArticleVO {
 
-    private Integer articleId;
+    private Long articleId;
     /**
      * 标题
      */

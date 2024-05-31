@@ -29,8 +29,7 @@ public class FileController {
     @ApiOperation("通用文件上传")
     @PostMapping(value = "/uploadFile")
     public FileDTO uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        Long enterpriseId = UserAppContextHolder.getCurrentUser().getEnterpriseId();
-        FileDTO fileDTO = fileApplicationService.saveFile(enterpriseId, multipartFile);
+        FileDTO fileDTO = fileApplicationService.saveFile(multipartFile);
         return fileDTO;
     }
 
@@ -38,7 +37,7 @@ public class FileController {
     @ApiOperation("下载文件")
     @GetMapping(value = "/downloadFile")
     public void download(@RequestParam(value = "id") Long id, HttpServletResponse response) throws IOException {
-        fileApplicationService.downloadFile(response, id, UserAppContextHolder.getCurrentUser().getEnterpriseId());
+        fileApplicationService.downloadFile(response, id);
     }
 
     @ApiOperation("查看文件信息")
@@ -50,6 +49,6 @@ public class FileController {
     @ApiOperation("下载视频")
     @GetMapping(value = "/downloadFile2")
     public void download2(@RequestParam(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        fileApplicationService.downloadVideo(request, response, id, UserAppContextHolder.getCurrentUser().getEnterpriseId());
+        fileApplicationService.downloadVideo(request, response, id);
     }
 }

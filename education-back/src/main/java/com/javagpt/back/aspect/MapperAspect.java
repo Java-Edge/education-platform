@@ -22,23 +22,42 @@ public class MapperAspect {
     }
 
     @Before("mapperPointCut()")
-    public void before(JoinPoint joinPoint){
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (attributes == null){
-            return;
-        }
-        HttpServletRequest request =attributes.getRequest();
-        int pageNo = Integer.parseInt(request.getHeader("pageNo"));
-        int pageSize = Integer.parseInt(request.getHeader("pageSize"));
-        Object[] args = joinPoint.getArgs();
-        Object[] arguments  = new Object[args.length];
-        for (Object arg : args) {
-            if (arg instanceof PageQueryParam) {
-                PageQueryParam pageQueryParam = (PageQueryParam) arg;
-                pageQueryParam.setPageNo(pageNo);
-                pageQueryParam.setPageSize(pageSize);
-                arguments[args.length - 1] = pageQueryParam;
+    public void before(JoinPoint joinPoint) {
+        try {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attributes == null) {
+                return;
             }
+            HttpServletRequest request = attributes.getRequest();
+
+            // 获取分页参数
+            String pageNoHeader = request.getHeader("pageNo");
+            String pageSizeHeader = request.getHeader("pageSize");
+
+            // 验证分页参数是否为正数
+            if (pageNoHeader != null && pageSizeHeader != null) {
+                int pageNo = Integer.parseInt(pageNoHeader);
+                int pageSize = Integer.parseInt(pageSizeHeader);
+                if (pageNo > 0 && pageSize > 0) {
+                    Object[] args = joinPoint.getArgs();
+                    Object[] arguments = args.clone(); // 使用clone简化参数复制
+
+                    // 遍历参数并设置PageQueryParam
+                    for (int i = 0; i < args.length; i++) {
+                        Object arg = args[i];
+                        if (arg instanceof PageQueryParam) {
+                            PageQueryParam pageQueryParam = (PageQueryParam) arg;
+                            pageQueryParam.setPageNo(pageNo);
+                            pageQueryParam.setPageSize(pageSize);
+                            arguments[i] = pageQueryParam; // 更新参数数组
+                        }
+                    }
+                    // 这里可以添加逻辑来处理更新后的参数数组，如果需要的话
+                }
+            }
+        } catch (NumberFormatException e) {
+            // 处理数字格式异常，例如记录日志或抛出自定义异常
+            // log.error("Invalid page number or page size", e);
         }
     }
 }

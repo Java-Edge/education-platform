@@ -40,9 +40,4 @@ public class UserDTO {
      * token
      */
     private String token;
-
-    /**
-     * 企业id
-     */
-    private Long enterpriseId;
 }
