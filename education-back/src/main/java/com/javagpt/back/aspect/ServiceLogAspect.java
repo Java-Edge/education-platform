@@ -123,6 +123,8 @@ public class ServiceLogAspect {
         String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
         if (articles.contains(controllerClassName)) {
             entityMapperName = "com.javagpt.back.mapper.ArticleMapper";
+        } else {
+            entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
         }
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -131,10 +133,10 @@ public class ServiceLogAspect {
         }
         HttpServletRequest request =attributes.getRequest();
         Integer userId = U.getCurrentUserId(request);
-        if (userId != null && devUserIds.contains(userId)) {
-            // 排除开发人员的调试用户 id,不计入 pv
-            return;
-        }
+//        if (userId != null && devUserIds.contains(userId)) {
+//            // 排除开发人员的调试用户 id,不计入 pv
+//            return;
+//        }
         try {
             Class<?> entityMapperClass = Class.forName(entityMapperName);
             BaseMapper<Object> entityMapper = (BaseMapper<Object>) applicationContext.getBean(entityMapperClass);
