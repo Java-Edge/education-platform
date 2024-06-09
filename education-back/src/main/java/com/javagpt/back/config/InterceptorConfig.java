@@ -3,6 +3,7 @@ package com.javagpt.back.config;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javagpt.back.entity.PermissionConfig;
 import com.javagpt.back.interceptor.CheckTokenInterceptor;
+import com.javagpt.back.interceptor.CustomAsyncInterceptor;
 import com.javagpt.back.service.PermissionConfigService;
 import com.javagpt.common.enums.PermissionConfigTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         List<String> paths = permissionConfigService.list(qw).stream().map(PermissionConfig::getPath).collect(Collectors.toList());
         registry.addInterceptor(checkTokenInterceptor)
                 .addPathPatterns(paths);
+
+        registry.addInterceptor(new CustomAsyncInterceptor());
     }
 }
