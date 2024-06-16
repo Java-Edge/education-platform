@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.application.user.UserDTO;
 import com.javagpt.back.service.UserService;
@@ -9,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 /**
  * 文件描述: 用户登录，注册
@@ -55,6 +53,4 @@ public class UserController {
     public ResultBody logout(HttpServletResponse response, HttpServletRequest request) {
         return userService.logout(request, response);
     }
-
 }
-

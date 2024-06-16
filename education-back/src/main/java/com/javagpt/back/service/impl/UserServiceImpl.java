@@ -20,6 +20,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private RedissonClient redissonClient;
 
     @Override
     public int checkUsername(String username) {
@@ -97,6 +102,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public ResultBody doLogin(HttpServletRequest request, HttpServletResponse response, UserDTO user) {
+        // 使用 Redis 锁一个账号只能购买一次
+        String lockName = "loginUser";
+        // Redisson 分布式锁
+        RLock lock = redissonClient.getLock(lockName);
+
+
+
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
         log.info("获取验证码的值为: {}", verifyCode);
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
@@ -150,6 +162,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         // 更新最近一次登录时间，以记录不活跃用户，以后刺激活跃
         userPO.setUpdateTime(new Date());
         userMapper.updateById(userPO);
+
         return ResultBody.success(loginRespVO);
     }
 

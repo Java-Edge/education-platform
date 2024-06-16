@@ -149,6 +149,9 @@ public class ServiceLogAspect {
             Method setPageViewMethod = entityFromDB.getClass().getMethod("setPageView", Integer.class);
 
             Integer pageView = (Integer) getPageViewMethod.invoke(entityFromDB);
+            if (pageView == null) {
+                pageView = 0;
+            }
             setPageViewMethod.invoke(entityFromDB, pageView + 1);
 
             // 更新entity

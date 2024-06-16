@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.service.CompanyNatureService;
 import com.javagpt.back.vo.CompanyNatureVO;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
  *
  * @author zqy
  * @since 2023-08-10
@@ -32,7 +28,5 @@ public class CompanyNatureController {
         List<CompanyNatureVO> list = companyNatureService.getList();
         return ResultBody.success(list);
     }
-
-
 }
 
