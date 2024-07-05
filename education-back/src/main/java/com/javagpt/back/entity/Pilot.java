@@ -1,8 +1,6 @@
 package com.javagpt.back.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.javagpt.infra.mysql.po.common.BasePO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

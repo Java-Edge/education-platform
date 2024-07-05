@@ -1,12 +1,10 @@
 package com.javagpt.back.dto;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-@ApiModel("用户实体参数")
 public class LoginRespVO implements Serializable {
 
     /**

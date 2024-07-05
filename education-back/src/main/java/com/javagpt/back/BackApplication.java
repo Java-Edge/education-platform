@@ -8,11 +8,13 @@ import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.http.HttpStatus;
 
 @SpringBootApplication(scanBasePackages = {"com.javagpt"})
 @EnableMPP
 @MapperScan("com.javagpt.infra.mysql.mapper")
+@EnableReactiveMongoRepositories
 public class BackApplication {
 
     public static void main(String[] args) {
@@ -21,8 +23,6 @@ public class BackApplication {
 
     /**
      * 解决部署之后刷新页面404问题
-     *
-     * @return
      */
     @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {

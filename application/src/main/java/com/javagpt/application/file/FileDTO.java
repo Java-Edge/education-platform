@@ -1,6 +1,5 @@
 package com.javagpt.application.file;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -12,23 +11,17 @@ import java.util.Optional;
 public class FileDTO {
 
 
-    @ApiModelProperty("文件id")
     private Long id;
 
-    /**
-     * 文件名称
-     */
-    @ApiModelProperty("文件名称")
+
     private String name;
 
 
     /**
      * 文件后缀,如pdf，word
      */
-    @ApiModelProperty("文件后缀")
     private String suffix;
 
-    @ApiModelProperty("文件媒体类型 也称MIME Type、Content Type")
     private String mediaType;
 
 
