@@ -1,5 +1,6 @@
 package com.javagpt.application.user;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -13,28 +14,21 @@ public class UserDTO {
     /**
      * 用户名
      */
+    @NotBlank
     private String username;
 
     /**
      * 密码
      */
+    @NotBlank
     private String password;
 
 
     /**
      * 验证码
      */
+    @NotBlank
     private String validCode;
-
-    /**
-     *
-     */
-    private Boolean ok;
-
-    /**
-     * 信息
-     */
-    private String message;
 
     /**
      * token

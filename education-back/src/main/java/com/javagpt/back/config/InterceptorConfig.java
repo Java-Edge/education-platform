@@ -41,8 +41,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(checkTokenInterceptor)
                 .addPathPatterns(paths);
 
-        registry.addInterceptor(myAsyncHandlerInterceptor)
-                .addPathPatterns("/**");
+//        registry.addInterceptor(myAsyncHandlerInterceptor)
+//                .addPathPatterns("/**");
 
         registry.addInterceptor(fuseInterceptor)
                 .addPathPatterns("/**");

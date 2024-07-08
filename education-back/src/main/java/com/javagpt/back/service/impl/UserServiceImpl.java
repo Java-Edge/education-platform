@@ -15,10 +15,10 @@ import com.javagpt.common.util.VerifyCodeUtil;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -35,16 +35,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
+import static com.javagpt.common.constant.EPConstant.TOKEN_EXPIRE_TIME;
+
 @Service
 @Slf4j
 @Scope("singleton")
+@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements UserService {
 
-    @Resource
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
-    @Resource
-    private RedissonClient redissonClient;
+    private final RedissonClient redissonClient;
 
     @Override
     public int checkUsername(String username) {
@@ -59,34 +60,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         UserPO userPO = new UserPO();
         BeanUtils.copyProperties(user, userPO);
         userPO.setUpdateTime(new Date());
+        userPO.setCreateTime(new Date());
         save(userPO);
         return 1;
     }
 
     @Override
     public UserPO selectUser(String username, String password) {
-
         LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<UserPO>()
                 .eq(UserPO::getUsername, username)
                 .eq(UserPO::getPassword, password);
 
-        UserPO userPO = this.getBaseMapper().selectOne(wrapper);
-        return userPO;
+        return this.getBaseMapper().selectOne(wrapper);
     }
 
     @Override
     public ResultBody register(HttpServletRequest request, UserDTO user) {
-
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
         log.info("获取验证码的值为: {}", verifyCode);
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
-            user.setOk(false);
-            user.setMessage("验证码输入错误！");
-            return ResultBody.success(user);
+            return ResultBody.error("验证码输入错误！");
         }
         if (checkUsername(user.getUsername()) == 1) {
-            user.setOk(false);
-            user.setMessage("用户名已存在！");
             log.error("用户名已存在 user={}", JSON.toJSONString(user));
             return ResultBody.error("用户名已存在！请更换一个昵称");
         }
@@ -95,7 +90,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         if (num <= 0) {
             return ResultBody.error("注册失败！");
         }
-        user.setMessage("注册成功！");
         return ResultBody.success(user);
 
     }
@@ -107,16 +101,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         // Redisson 分布式锁
         RLock lock = redissonClient.getLock(lockName);
 
-
-
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
-        log.info("获取验证码的值为: {}", verifyCode);
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
+            log.error("登录接口获取到客户端请求的验证码为 {},和实际验证码 {} 不符", verifyCode, user.getValidCode());
             return ResultBody.error(ResultStatus.ERROR_CODE, "验证码输入错误!");
         }
 
-        LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<UserPO>().eq(UserPO::getUsername, user.getUsername());
-        UserPO userPO = userMapper.selectOne(wrapper);
+        UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getUsername, user.getUsername()));
 
         // 1. 用户不存在
         if (userPO == null) {
@@ -147,8 +138,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
                 .setClaims(map)
                 //设置token过期时间，当前时间加一天就是时效为一天过期。会话保留一天
 //                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
-                // 七天会话
-                .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000))
+                // 会话
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRE_TIME * 1000))
                 //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
                 .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
@@ -156,7 +147,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         loginRespVO.setUsername(userPO.getUsername());
         loginRespVO.setToken(token);
         Cookie cookie = new Cookie("token", URLEncoder.encode(token, StandardCharsets.UTF_8));
-        cookie.setMaxAge(7 * 24 * 60 * 60);
+        cookie.setMaxAge(TOKEN_EXPIRE_TIME);
         cookie.setPath("/");
         response.addCookie(cookie);
         // 更新最近一次登录时间，以记录不活跃用户，以后刺激活跃
@@ -168,22 +159,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public void getCheckCode(HttpServletRequest request, HttpServletResponse response) {
+        int width = 120;
+        int height = 40;
         try {
-            int width = 120;
-            int height = 40;
             BufferedImage verifyImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            //生成对应宽高的初始图片
+            // 生成对应宽高的初始图片
             String randomText = VerifyCodeUtil.drawRandomText(width, height, verifyImg);
             request.getSession().setAttribute("verifyCode", randomText);
             request.getSession().setAttribute("startTime", new Date());
-            //必须设置响应内容类型为图片，否则前台不识别
+            // 须设置响应内容类型为图片，否则前台不识别
             response.setContentType("image/png");
-            //获取文件输出流
-            OutputStream os = response.getOutputStream();
-            //输出图片流
-            ImageIO.write(verifyImg, "png", os);
-            os.flush();
-            os.close();//关闭流
+            try (OutputStream os = response.getOutputStream()) {
+                ImageIO.write(verifyImg, "png", os);
+            }
         } catch (IOException e) {
             log.error("获取验证码图片失败!", e);
         }
@@ -198,7 +186,3 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         return ResultBody.success();
     }
 }
-
-
-
-

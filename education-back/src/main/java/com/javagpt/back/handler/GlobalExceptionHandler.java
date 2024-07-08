@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultBody ExceptionHandler(HttpServletRequest req, Exception e) {
-        log.error("请求：{} 发生异常！原因是：", req.getRequestURI(), e);
+        log.error("请求：{} 异常！原因：", req.getRequestURI(), e);
         return ResultBody.error(SystemConstant.DEFAULT_FAIL_CODE, e.getMessage());
     }
 }

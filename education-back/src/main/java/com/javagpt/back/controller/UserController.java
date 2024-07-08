@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 /**
  * 文件描述: 用户登录，注册
@@ -23,12 +25,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public ResultBody register(HttpServletRequest request, @RequestBody UserDTO user) {
-        return userService.register(request,user);
+        try {
+            return userService.register(request, user);
+        } catch (Exception e) {
+            log.error("用户注册失败", e);
+            return ResultBody.error("注册失败，请稍后再试");
+        }
     }
 
-    @RequestMapping("/doLogin")
+    @PostMapping("/doLogin")
     public ResultBody login(HttpServletRequest request,HttpServletResponse response, @RequestBody UserDTO user) {
         return userService.doLogin(request,response, user);
     }
@@ -52,5 +59,10 @@ public class UserController {
     @GetMapping("/logout")
     public ResultBody logout(HttpServletResponse response, HttpServletRequest request) {
         return userService.logout(request, response);
+    }
+
+    @MessageMapping("hello")
+    public Mono<String> hello(String input) {
+        return Mono.just("Hello: " + input);
     }
 }

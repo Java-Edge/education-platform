@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 @SpringBootApplication(scanBasePackages = {"com.javagpt"})
 @EnableMPP
 @MapperScan("com.javagpt.infra.mysql.mapper")
-@EnableReactiveMongoRepositories
+//@EnableReactiveMongoRepositories
 public class BackApplication {
 
     public static void main(String[] args) {
