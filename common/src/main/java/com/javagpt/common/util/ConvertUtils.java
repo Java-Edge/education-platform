@@ -20,14 +20,14 @@ public class ConvertUtils {
             return null;
         }
         String str;
-        if (value instanceof String) {
-            str = (String) value;
+        if (value instanceof String s) {
+            str = s;
         } else if (value instanceof Number || value instanceof Boolean) {
             str = String.valueOf(value);
-        } else if (value instanceof Date) {
-            str = DateUtil.formatDateTime((Date) value);
-        } else if (value instanceof LocalDateTime) {
-            str = LocalDateTimeUtil.formatNormal((LocalDateTime) value);
+        } else if (value instanceof Date date) {
+            str = DateUtil.formatDateTime(date);
+        } else if (value instanceof LocalDateTime localDateTime) {
+            str = LocalDateTimeUtil.formatNormal(localDateTime);
         } else {
             str = toJsonString(value);
         }

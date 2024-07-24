@@ -3,24 +3,16 @@ package com.javagpt.back.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>
- *
- * </p>
- *
  * @author zqy
  * @since 2023-10-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RoadMap implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class RoadMap {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -61,5 +53,4 @@ public class RoadMap implements Serializable {
     private String img;
 
     private String img2;
-
 }

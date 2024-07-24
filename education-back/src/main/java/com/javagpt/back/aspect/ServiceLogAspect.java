@@ -133,10 +133,10 @@ public class ServiceLogAspect {
         }
         HttpServletRequest request =attributes.getRequest();
         Integer userId = U.getCurrentUserId(request);
-//        if (userId != null && devUserIds.contains(userId)) {
-//            // 排除开发人员的调试用户 id,不计入 pv
-//            return;
-//        }
+        if (userId != null && devUserIds.contains(userId)) {
+            // 排除开发人员的调试用户 id,不计入 pv
+            return;
+        }
         try {
             Class<?> entityMapperClass = Class.forName(entityMapperName);
             BaseMapper<Object> entityMapper = (BaseMapper<Object>) applicationContext.getBean(entityMapperClass);
@@ -183,10 +183,10 @@ public class ServiceLogAspect {
     }
 
     private Long getEntityId(Object arg) {
-        if (arg instanceof Long) {
-            return  (Long) arg;
-        } else if (arg instanceof Integer) {
-            return Long.valueOf((Integer) arg);
+        if (arg instanceof Long l) {
+            return  l;
+        } else if (arg instanceof Integer i) {
+            return Long.valueOf(i);
         } else {
             return Long.parseLong((String) arg);
         }
