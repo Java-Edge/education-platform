@@ -17,6 +17,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.javagpt.common.constant.EPConstant.SIGNING_KEY;
+
 @Component
 public class CheckTokenInterceptor implements HandlerInterceptor {
 
@@ -42,7 +44,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
             try {
                 JwtParser parser = Jwts.parser();
                 // 解析token的SigningKey必须和生成token时设置密码一致
-                parser.setSigningKey("JavaGPT");
+                parser.setSigningKey(SIGNING_KEY);
                 //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
                 Integer userId = (Integer) claimsJws.getBody().get("userId");

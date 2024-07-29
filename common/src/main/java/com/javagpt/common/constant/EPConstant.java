@@ -11,6 +11,8 @@ public class EPConstant {
     public static final Integer NOT_DELETED = 0;
 
     public static final String TOKEN = "token";
+
+    public static final String SIGNING_KEY = "JavaGPT";
     // 一天会话有效期
     public static final Integer TOKEN_EXPIRE_TIME = 1 * 24 * 60 * 60;
 }

@@ -20,8 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -35,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
+import static com.javagpt.common.constant.EPConstant.SIGNING_KEY;
 import static com.javagpt.common.constant.EPConstant.TOKEN_EXPIRE_TIME;
 
 @Service
@@ -44,8 +43,6 @@ import static com.javagpt.common.constant.EPConstant.TOKEN_EXPIRE_TIME;
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements UserService {
 
     private final UserMapper userMapper;
-
-    private final RedissonClient redissonClient;
 
     @Override
     public int checkUsername(String username) {
@@ -96,10 +93,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public ResultBody doLogin(HttpServletRequest request, HttpServletResponse response, UserDTO user) {
-        // 使用 Redis 锁一个账号只能购买一次
-        String lockName = "loginUser";
-        // Redisson 分布式锁
-        RLock lock = redissonClient.getLock(lockName);
 
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
@@ -139,7 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
                 // 会话
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRE_TIME * 1000))
                 // 签名部分，设置HS256加密方式和加密密码,ycj123456 是自定义的密码
-                .signWith(SignatureAlgorithm.HS256, "JavaGPT")
+                .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .compact();
         loginRespVO.setId(userPO.getId());
         loginRespVO.setUsername(userPO.getUsername());
