@@ -1,6 +1,5 @@
 package com.javagpt.common.redis;
 
-
 import com.javagpt.common.constant.RedisConstants;
 
 import java.util.ArrayList;

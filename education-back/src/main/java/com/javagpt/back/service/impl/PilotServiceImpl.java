@@ -38,8 +38,7 @@ public class PilotServiceImpl extends ServiceImpl<PilotMapper, Pilot> implements
 
     @Override
     public Map<String, List<Pilot>> getList() {
-        List<Dictionary> pilotTypesCache = dictCache.get(cache_max_dict_local_cache, s -> {
-//            log.info("pilotTypesCache过期，从 MySQL 查询");
+        List<Dictionary> pilotTypesCache = dictCache.get(cache_max_dict_local_cache, _ -> {
             return dictService.selectList("pilot_type");
         });
 

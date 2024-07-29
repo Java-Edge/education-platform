@@ -21,7 +21,7 @@ public interface RedisCrudService {
      *
      * @param redisKey
      * @param value
-     * @param seconds  过期时间 为null表示永不过期
+     * @param seconds  过期时间 null表示永不过期
      */
     void set(RedisKey redisKey, Object value, Long seconds);
 

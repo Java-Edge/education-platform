@@ -38,6 +38,9 @@ public class MapperAspect {
             if (pageNoHeader != null && pageSizeHeader != null) {
                 int pageNo = Integer.parseInt(pageNoHeader);
                 int pageSize = Integer.parseInt(pageSizeHeader);
+                if (pageSize > 20) {
+                    throw new IllegalArgumentException("Page size exceeds the maximum limit");
+                }
                 if (pageNo > 0 && pageSize > 0) {
                     Object[] args = joinPoint.getArgs();
                     Object[] arguments = args.clone(); // 使用clone简化参数复制
@@ -55,9 +58,9 @@ public class MapperAspect {
                     // 这里可以添加逻辑来处理更新后的参数数组，如果需要的话
                 }
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             // 处理数字格式异常，例如记录日志或抛出自定义异常
-            // log.error("Invalid page number or page size", e);
+             log.error("Invalid page number or page size", e);
         }
     }
 }

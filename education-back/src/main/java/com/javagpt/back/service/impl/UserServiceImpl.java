@@ -8,8 +8,11 @@ import com.javagpt.application.user.UserDTO;
 import com.javagpt.back.entity.UserPO;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
+import com.javagpt.back.util.UserContextHolder;
 import com.javagpt.common.constant.EPConstant;
 import com.javagpt.common.constant.ResultStatus;
+import com.javagpt.common.redis.RedisCrudService;
+import com.javagpt.common.redis.RootRedisKey;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
@@ -43,6 +46,8 @@ import static com.javagpt.common.constant.EPConstant.TOKEN_EXPIRE_TIME;
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements UserService {
 
     private final UserMapper userMapper;
+
+    private final RedisCrudService redisCrudService;
 
     @Override
     public int checkUsername(String username) {
@@ -93,7 +98,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public ResultBody doLogin(HttpServletRequest request, HttpServletResponse response, UserDTO user) {
-
         String verifyCode = (String) request.getSession().getAttribute("verifyCode");
         if (!user.getValidCode().equalsIgnoreCase(verifyCode)) {
             log.error("登录接口获取到客户端请求的验证码为 {},和实际验证码 {} 不符", verifyCode, user.getValidCode());
@@ -109,7 +113,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
         // 2. 用户密码错误
         String md5Pwd = Md5Util.getMD5(user.getPassword());
-        // 数据库密码是MD5加密过的，MD5算法又不可逆，所以只能把登录密码加密后去和数据库的密码比对
+        // 数据库密码是MD5加密过的，MD5算法又不可逆，只能把登录密码加密后去和数据库的密码比对
         if (!userPO.getPassword().equals(md5Pwd)) {
             return ResultBody.error(ResultStatus.USER_ERROR_PASSWORD, "用户密码错误");
         }
@@ -138,11 +142,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         loginRespVO.setUsername(userPO.getUsername());
         loginRespVO.setToken(token);
         Cookie cookie = new Cookie(EPConstant.TOKEN, URLEncoder.encode(token, StandardCharsets.UTF_8));
-        cookie.setMaxAge(TOKEN_EXPIRE_TIME);
+        cookie.setMaxAge(Math.toIntExact(TOKEN_EXPIRE_TIME));
         cookie.setPath("/");
         response.addCookie(cookie);
         userMapper.updateById(userPO);
-
+        redisCrudService.set(RootRedisKey.build().name("token", EPConstant.TOKEN + userPO.getId()), token, TOKEN_EXPIRE_TIME);
         return ResultBody.success(loginRespVO);
     }
 
@@ -172,6 +176,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
+        redisCrudService.del(RootRedisKey.build().name("token", EPConstant.TOKEN + UserContextHolder.getCurrentUserId(request)));
         return ResultBody.success();
     }
 }

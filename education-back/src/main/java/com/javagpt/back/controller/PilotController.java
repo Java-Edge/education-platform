@@ -24,7 +24,7 @@ public class PilotController {
     private PilotService pilotService;
 
     @GetMapping("getList")
-    public ResultBody getList() {
+    public ResultBody list() {
         Map<String, List<Pilot>> pilotServiceList = pilotService.getList();
         return ResultBody.success(pilotServiceList);
     }
