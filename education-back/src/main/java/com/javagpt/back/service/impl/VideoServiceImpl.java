@@ -10,7 +10,7 @@ import com.javagpt.back.mapper.CourseMapper;
 import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.service.VideoService;
 import com.javagpt.back.vo.course.CourseVO;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.enums.CourseEnum;
 import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class VideoServiceImpl extends ServiceImpl<CourseMapper, CoursePO> implem
     public List<CoursePO> selectList() {
         QueryWrapper<CoursePO> qw = new QueryWrapper<>();
         qw.eq("type", CourseEnum.VIDEO.getResultCode());
-        qw.orderByDesc(Constants.PV);
+        qw.orderByDesc(CommonConstants.PV);
         List<CoursePO> courseEntities = this.getBaseMapper().selectList(qw);
         return courseEntities;
     }

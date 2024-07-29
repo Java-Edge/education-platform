@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.mapper.ArticleMapper;
 import com.javagpt.back.service.DownloadService;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.enums.ArticleTypeEnums;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntit
     public Page<ArticleEntity> listByPage(Integer current, Integer size) {
         Page<ArticleEntity> page = new Page<>(current, size);
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
-        qw.eq(Constants.DELETE_FLAG, 0);
+        qw.eq(CommonConstants.DELETE_FLAG, 0);
         qw.eq("type", ArticleTypeEnums.DOWNLOAD.getCode());
         qw.orderByDesc("create_time");
         qw.select("article_id", "img", "href", "title", "left(content, 50) content", "page_view");

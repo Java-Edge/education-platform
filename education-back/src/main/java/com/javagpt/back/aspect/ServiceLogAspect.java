@@ -5,7 +5,7 @@ import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.RateLimiter;
-import com.javagpt.back.util.U;
+import com.javagpt.back.util.UserContextHolder;
 import com.javagpt.common.resp.ResultBody;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletRequest;
@@ -132,7 +132,7 @@ public class ServiceLogAspect {
             return;
         }
         HttpServletRequest request =attributes.getRequest();
-        Integer userId = U.getCurrentUserId(request);
+        Integer userId = UserContextHolder.getCurrentUserId(request);
         if (userId != null && devUserIds.contains(userId)) {
             // 排除开发人员的调试用户 id,不计入 pv
             return;
@@ -157,7 +157,7 @@ public class ServiceLogAspect {
             // 更新entity
             entityMapper.updateById(entityFromDB);
 
-            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
+//            log.info(String.format("[%s]实体被访问了[%s]次.", entityId, pageView));
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             log.error("Error in calPageView: " + e.getMessage(), e);
         }

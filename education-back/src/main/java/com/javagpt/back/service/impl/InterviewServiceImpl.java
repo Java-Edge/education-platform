@@ -9,7 +9,7 @@ import com.javagpt.back.entity.InterviewEntity;
 import com.javagpt.back.mapper.CareerMapper;
 import com.javagpt.back.mapper.InterviewMapper;
 import com.javagpt.back.service.InterviewService;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class InterviewServiceImpl extends ServiceImpl<InterviewMapper, Interview
     public IPage<InterviewEntity> selectByCondition(PageQueryParam<InterviewDTO> pageQueryParam) {
         if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
                 // jobId=-1：查询全部岗位
-                && pageQueryParam.getParam().getJobId() == Constants.select_all) {
+                && pageQueryParam.getParam().getJobId() == CommonConstants.select_all) {
             pageQueryParam.getParam().setJobId(null);
         }
 

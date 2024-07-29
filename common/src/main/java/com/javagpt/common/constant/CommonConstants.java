@@ -6,7 +6,7 @@ package com.javagpt.common.constant;
  * @author JavaEdge
  * @date 2023/3/20
  */
-public interface Constants {
+public interface CommonConstants {
 
     String UTF_8 = "utf-8";
 

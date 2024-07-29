@@ -1,9 +1,10 @@
 package com.javagpt.back.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javagpt.common.constant.EPConstant;
 import com.javagpt.common.constant.ResultStatus;
 import com.javagpt.common.resp.ResultBody;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,7 +34,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         if ("OPTIONS".equalsIgnoreCase(method)) {
             return true;
         }
-        String token = request.getHeader("token");
+        String token = request.getHeader(EPConstant.TOKEN);
         if (token == null) {
             ResultBody resultVO = new ResultBody(ResultStatus.LOGIN_FAIL_NOT, "请先登录！", null);
             doResponse(response, resultVO);
@@ -75,7 +76,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
      */
     private void doResponse(HttpServletResponse response, ResultBody resultVO) throws IOException {
         response.setContentType("application/json");
-        response.setCharacterEncoding(Constants.UTF_8);
+        response.setCharacterEncoding(CommonConstants.UTF_8);
         PrintWriter out = response.getWriter();
         String s = new ObjectMapper().writeValueAsString(resultVO);
         out.print(s);

@@ -9,7 +9,7 @@ import com.javagpt.back.entity.InnerRecommend;
 import com.javagpt.back.mapper.CareerMapper;
 import com.javagpt.back.mapper.InnerRecommendMapper;
 import com.javagpt.back.service.InnerRecommendService;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.req.PageQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class InnerRecommendServiceImpl extends ServiceImpl<InnerRecommendMapper,
     public IPage<InnerRecommend> selectByCondition(PageQueryParam<InnerRecommendQueryDTO> pageQueryParam) {
         if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
                 // jobId=-1：查询全部岗位
-                && pageQueryParam.getParam().getJobId() == Constants.select_all) {
+                && pageQueryParam.getParam().getJobId() == CommonConstants.select_all) {
             pageQueryParam.getParam().setJobId(null);
         }
 

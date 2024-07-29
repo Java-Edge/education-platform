@@ -8,7 +8,7 @@ import com.javagpt.back.mapper.CommentMapper;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.CommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.back.util.U;
+import com.javagpt.back.util.UserContextHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +50,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void saveComment(Comment comment, HttpServletRequest request) {
-        Integer userId = U.getCurrentUserId(request);
+        Integer userId = UserContextHolder.getCurrentUserId(request);
         if (userId == null) {
             throw new RuntimeException("用户未登录，无法评论！");
         }

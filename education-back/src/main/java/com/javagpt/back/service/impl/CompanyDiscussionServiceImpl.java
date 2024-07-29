@@ -7,7 +7,7 @@ import com.javagpt.back.dto.InnerRecommendQueryDTO;
 import com.javagpt.back.entity.CompanyDiscussion;
 import com.javagpt.back.mapper.CompanyDiscussionMapper;
 import com.javagpt.back.service.CompanyDiscussionService;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.req.PageQueryParam;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class CompanyDiscussionServiceImpl extends ServiceImpl<CompanyDiscussionM
     public IPage<CompanyDiscussion> selectByCondition(PageQueryParam<InnerRecommendQueryDTO> pageQueryParam) {
         if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
                 // jobId=-1：查询全部岗位
-                && pageQueryParam.getParam().getJobId() == Constants.select_all) {
+                && pageQueryParam.getParam().getJobId() == CommonConstants.select_all) {
             pageQueryParam.getParam().setJobId(null);
         }
 

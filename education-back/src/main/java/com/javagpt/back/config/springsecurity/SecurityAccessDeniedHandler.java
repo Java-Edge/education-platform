@@ -3,7 +3,7 @@ package com.javagpt.back.config.springsecurity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.constant.ResultStatus;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ public class SecurityAccessDeniedHandler implements AccessDeniedHandler {
      */
     private void doResponse(HttpServletResponse response, ResultBody resultVO) throws IOException {
         response.setContentType("application/json");
-        response.setCharacterEncoding(Constants.UTF_8);
+        response.setCharacterEncoding(CommonConstants.UTF_8);
         PrintWriter out = response.getWriter();
         String s = new ObjectMapper().writeValueAsString(resultVO);
         out.print(s);

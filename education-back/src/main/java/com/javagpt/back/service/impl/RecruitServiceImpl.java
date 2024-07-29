@@ -11,7 +11,7 @@ import com.javagpt.back.mapper.DictMapper;
 import com.javagpt.back.mapper.RecruitMapper;
 import com.javagpt.back.service.RecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.javagpt.back.util.U;
+import com.javagpt.back.util.UserContextHolder;
 import com.javagpt.back.vo.RecruitEntity;
 import com.javagpt.common.enums.SalaryType;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +33,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, RecruitPO> im
 
     @Override
     public Page<RecruitPO> selectPage(Integer current, Integer size, HttpServletRequest request) {
-        Integer userId = U.getCurrentUserId(request);
+        Integer userId = UserContextHolder.getCurrentUserId(request);
         Page<RecruitPO> page = new Page<>(current, size);
         // 如果用户未登录，直接返回空数据
         if (userId == null) {
@@ -51,7 +51,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, RecruitPO> im
         page.setCurrent(pageQueryParam.getPageNo());
         page.setSize(pageQueryParam.getPageSize());
 
-        Integer userId = U.getCurrentUserId(request);
+        Integer userId = UserContextHolder.getCurrentUserId(request);
         // 如果用户未登录，直接返回空数据
         if (userId == null) {
             return new Page<>();

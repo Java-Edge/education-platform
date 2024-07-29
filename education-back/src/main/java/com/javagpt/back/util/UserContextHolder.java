@@ -1,6 +1,7 @@
 package com.javagpt.back.util;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.javagpt.common.constant.EPConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
@@ -11,10 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
  * @author 千祎来了
  * @date 2023/10/18 21:27
  */
-public class U {
+public class UserContextHolder {
 
     public static Integer getCurrentUserId(HttpServletRequest request) {
-        String token = request.getHeader("token");
+        String token = request.getHeader(EPConstant.TOKEN);
         if (StringUtils.isBlank(token)) {
             return null;
         }

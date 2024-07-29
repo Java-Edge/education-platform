@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.mapper.ArticleMapper;
 import com.javagpt.back.service.ArticleService;
-import com.javagpt.common.constant.Constants;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.enums.ArticleTypeEnums;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +36,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
 
         Page<ArticleEntity> page = new Page<>(current, size);
         QueryWrapper<ArticleEntity> qw = new QueryWrapper<>();
-        qw.eq(Constants.DELETE_FLAG, 0);
+        qw.eq(CommonConstants.DELETE_FLAG, 0);
         qw.eq("type", ArticleTypeEnums.TIME_LINE.getCode());
         qw.orderByDesc("create_time");
         qw.select("article_id",

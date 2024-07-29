@@ -8,11 +8,11 @@ import com.javagpt.application.user.UserDTO;
 import com.javagpt.back.entity.UserPO;
 import com.javagpt.back.mapper.UserMapper;
 import com.javagpt.back.service.UserService;
+import com.javagpt.common.constant.EPConstant;
 import com.javagpt.common.constant.ResultStatus;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.common.util.Md5Util;
 import com.javagpt.common.util.VerifyCodeUtil;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.Cookie;
@@ -122,36 +122,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         }
 
         // 3. 登录成功，生成token
-        JwtBuilder builder = Jwts.builder();
         LoginRespVO loginRespVO = new LoginRespVO();
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("userId", userPO.getId());
         map.put("key2", "value2");
-        //载荷部分，主题，就是token中携带的数据，这里把用户名放进去
-        String token = builder.setSubject(userPO.getUsername())
+        String token = Jwts.builder()
+                // token中携带的数据，这里把用户名放进去
+                .setSubject(userPO.getUsername())
                 //设置token的生成时间
                 .setIssuedAt(new Date())
-                //设置用户id为token  id ''是因为用户id是int类型，需要转换为字符串类型
+                //设置用户id为token
                 .setId(userPO.getId().toString())
-                //map中可以存放用户的角色权限信息
+                // 用户的角色权限信息
                 .setClaims(map)
-                //设置token过期时间，当前时间加一天就是时效为一天过期。会话保留一天
-//                .setExpiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
                 // 会话
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRE_TIME * 1000))
-                //签名部分，设置HS256加密方式和加密密码,ycj123456是自定义的密码
+                // 签名部分，设置HS256加密方式和加密密码,ycj123456 是自定义的密码
                 .signWith(SignatureAlgorithm.HS256, "JavaGPT")
                 .compact();
         loginRespVO.setId(userPO.getId());
         loginRespVO.setUsername(userPO.getUsername());
         loginRespVO.setToken(token);
-        Cookie cookie = new Cookie("token", URLEncoder.encode(token, StandardCharsets.UTF_8));
+        Cookie cookie = new Cookie(EPConstant.TOKEN, URLEncoder.encode(token, StandardCharsets.UTF_8));
         cookie.setMaxAge(TOKEN_EXPIRE_TIME);
         cookie.setPath("/");
         response.addCookie(cookie);
-        // 更新最近一次登录时间，以记录不活跃用户，以后刺激活跃
-        userPO.setUpdateTime(new Date());
         userMapper.updateById(userPO);
 
         return ResultBody.success(loginRespVO);
@@ -179,7 +175,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public ResultBody logout(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("token", "");
+        Cookie cookie = new Cookie(EPConstant.TOKEN, "");
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);

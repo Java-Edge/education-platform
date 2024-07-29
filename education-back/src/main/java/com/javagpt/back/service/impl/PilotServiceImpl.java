@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
-import static com.javagpt.common.constant.Constants.cache_max_pilot_local_cache;
+import static com.javagpt.common.constant.CommonConstants.cache_max_dict_local_cache;
+import static com.javagpt.common.constant.CommonConstants.cache_max_pilot_local_cache;
 
 @Service
 @Slf4j

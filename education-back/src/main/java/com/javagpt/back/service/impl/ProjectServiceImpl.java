@@ -9,7 +9,7 @@ import com.javagpt.back.service.ProjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import static com.javagpt.common.constant.Constants.DELETE_FLAG;
+import static com.javagpt.common.constant.CommonConstants.DELETE_FLAG;
 
 @Service
 public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, ProjectEntity> implements ProjectService {

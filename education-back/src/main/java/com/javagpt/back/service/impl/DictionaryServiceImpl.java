@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
-import static com.javagpt.common.constant.Constants.type_key;
+import static com.javagpt.common.constant.CommonConstants.cache_max_dict_local_cache;
+import static com.javagpt.common.constant.CommonConstants.type_key;
 
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> implements DictService {

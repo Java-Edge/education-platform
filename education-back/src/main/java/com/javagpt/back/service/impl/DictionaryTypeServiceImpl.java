@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.javagpt.common.constant.Constants.cache_max_dict_local_cache;
-import static com.javagpt.common.constant.Constants.type_key;
+import static com.javagpt.common.constant.CommonConstants.cache_max_dict_local_cache;
+import static com.javagpt.common.constant.CommonConstants.type_key;
 
 @Service
 public class DictionaryTypeServiceImpl extends ServiceImpl<DictTypeMapper, DictionaryType> implements DictionaryTypeService {

@@ -25,7 +25,7 @@
 //    @Override
 //    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //        //获取token
-//        String token = request.getHeader("token");
+//        String token = request.getHeader(EPConstant.TOKEN);
 //        System.out.println(token);
 //        if (!StringUtils.isBlank(token)) {
 //            try {

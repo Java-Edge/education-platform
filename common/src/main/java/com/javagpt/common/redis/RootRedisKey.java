@@ -1,7 +1,7 @@
 package com.javagpt.common.redis;
 
 
-import com.javagpt.common.constant.Constant;
+import com.javagpt.common.constant.RedisConstants;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class RootRedisKey implements RedisKey {
     protected ArrayList<String> moduleKeyList = new ArrayList<>();
 
     {
-        addModuleKey(Constant.REDIS_ROOT);
+        addModuleKey(RedisConstants.REDIS_ROOT);
     }
 
     protected RootRedisKey() {
