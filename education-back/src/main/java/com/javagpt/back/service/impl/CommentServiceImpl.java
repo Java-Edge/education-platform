@@ -31,7 +31,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private UserMapper userMapper;
 
     @Override
-    public Page<Comment> getComponentByFid(Integer fId, Integer current, Integer size) {
+    public Page<Comment> getComponentByFid(Long fId, Integer current, Integer size) {
         Page<Comment> page = new Page<>(current, size);
         QueryWrapper<Comment> qw = new QueryWrapper<>();
         qw.eq("fe_id", fId);

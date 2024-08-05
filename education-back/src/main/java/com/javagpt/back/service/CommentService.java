@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public interface CommentService extends IService<Comment> {
 
-    Page<Comment> getComponentByFid(Integer fId, Integer current, Integer size);
+    Page<Comment> getComponentByFid(Long fId, Integer current, Integer size);
 
     void saveComment(Comment comment, HttpServletRequest request);
 }

@@ -123,7 +123,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("userId", userPO.getId());
-        map.put("key2", "value2");
         String token = Jwts.builder()
                 // token中携带的数据，这里把用户名放进去
                 .setSubject(userPO.getUsername())

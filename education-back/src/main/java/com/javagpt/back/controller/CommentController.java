@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.entity.Comment;
@@ -10,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
  * @author zqy
  * @since 2023-10-17
  */
@@ -25,7 +20,7 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("getComponentByFid/{feId}")
-    public ResultBody getComponentByFid(@PathVariable Integer feId, Integer current, Integer size) {
+    public ResultBody getComponentByFid(@PathVariable Long feId, Integer current, Integer size) {
         Page<Comment> comments = commentService.getComponentByFid(feId, current, size);
         return ResultBody.success(comments);
     }

@@ -25,7 +25,6 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
     @Value("${spring.profiles.active}")
     private String env;
 
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (env.equals("dev")) {
@@ -45,15 +44,15 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
                 JwtParser parser = Jwts.parser();
                 // 解析token的SigningKey必须和生成token时设置密码一致
                 parser.setSigningKey(SIGNING_KEY);
-                //如果token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
+                // 如token检验通过（密码正确，有效期内）则正常执行，否则抛出异常
                 Jws<Claims> claimsJws = parser.parseClaimsJws(token);
                 Integer userId = (Integer) claimsJws.getBody().get("userId");
                 if (userId != null) {
                     UsernamePasswordAuthenticationToken authenticationToken =
-                            new UsernamePasswordAuthenticationToken(userId,null,null);
+                            new UsernamePasswordAuthenticationToken(userId, null, null);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
-                //true就是验证通过，放行
+                // 验证通过，放行
                 return true;
             } catch (ExpiredJwtException e) {
                 ResultBody resultVO = new ResultBody(ResultStatus.LOGIN_FAIL_OVERDUE, "登录过期，请重新登录！", null);
@@ -86,7 +85,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         out.close();
     }
 
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response){
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
