@@ -46,7 +46,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
 
         registry.addMapping("/**")
-                //允许所有方法
+                // 允许所有方法
                 .allowedMethods(CorsConfiguration.ALL);
     }
 }
