@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-import com.javagpt.application.context.UserAppContextHolder;
 import com.javagpt.application.file.FileApplicationService;
 import com.javagpt.application.file.FileDTO;
 import com.javagpt.common.annotation.RespSuccess;

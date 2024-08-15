@@ -21,7 +21,7 @@ public class CourseCategoryController {
 
     @GetMapping("/mainCategoryList")
     public ResultBody list(){
-        List<CourseCategoryVO> list = courseCategoryService.mianCategoryList();
+        List<CourseCategoryVO> list = courseCategoryService.mainCategoryList();
         return ResultBody.success(list);
     }
 }

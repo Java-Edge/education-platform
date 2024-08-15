@@ -4,17 +4,18 @@ import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.http.HttpStatus;
 
-@SpringBootApplication(scanBasePackages = {"com.javagpt"})
+@SpringBootApplication(scanBasePackages = {"com.javagpt"}, exclude = {
+        MongoAutoConfiguration.class
+})
 @EnableMPP
 @MapperScan("com.javagpt.infra.mysql.mapper")
-//@EnableReactiveMongoRepositories
 public class BackApplication {
 
     public static void main(String[] args) {

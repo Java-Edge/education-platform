@@ -29,7 +29,7 @@ public class FuseInterceptor implements HandlerInterceptor {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    //设置超时时间。guava的Cache
+    // 设置超时时间
     public static Cache<String, Object> moduleCache = CacheBuilder.
             newBuilder().
             // 写入缓存后，10s后过期
@@ -44,7 +44,7 @@ public class FuseInterceptor implements HandlerInterceptor {
             String value = stringRedisTemplate.opsForValue().get("service_xx:module");
             return StringUtils.isBlank(value) ? "close" : value;
         });
-        //拦截器处理。
+        // 拦截器处理
         return true;
     }
 

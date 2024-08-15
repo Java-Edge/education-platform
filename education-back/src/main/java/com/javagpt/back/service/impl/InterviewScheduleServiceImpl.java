@@ -9,14 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javagpt.common.constant.CommonConstants;
 import org.springframework.stereotype.Service;
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author robot
- * @since 2023-11-14
- */
 @Service
 public class InterviewScheduleServiceImpl extends ServiceImpl<InterviewScheduleMapper, InterviewSchedule> implements InterviewScheduleService {
 

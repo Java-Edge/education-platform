@@ -4,8 +4,8 @@
 
 ## 1 环境要求
 
-- JDK21
-- SpringBoot 3.2
+- JDK22
+- SpringBoot3.3.0
 
 ## 2 配置
 
@@ -14,4 +14,4 @@ properties
 包括数据库连接配置
 
 ## SQL脚本
-联系微信【iJavaEdge】，本人获取
+联系公众号【JavaEdge】获取

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CourseCategoryService extends IService<CourseCategory> {
 
-    List<CourseCategoryVO> mianCategoryList();
+    List<CourseCategoryVO> mainCategoryList();
 }

@@ -4,8 +4,6 @@ import com.javagpt.dict.entity.DictionaryTypeEntity;
 import org.springframework.data.repository.ListCrudRepository;
 
 /**
- * JPA实现
- *
  * @author JavaEdge
  * @date 2024/3/5
  */

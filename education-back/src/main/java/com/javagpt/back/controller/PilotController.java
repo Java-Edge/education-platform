@@ -7,6 +7,7 @@ import com.javagpt.common.resp.ResultBody;
 import com.javagpt.back.service.PilotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,6 @@ public class PilotController {
         return ResultBody.success(pilotServiceList);
     }
 
-
     /**
      * 统计 pv 的接口
      */
@@ -39,4 +39,3 @@ public class PilotController {
         return ResultBody.success();
     }
 }
-
