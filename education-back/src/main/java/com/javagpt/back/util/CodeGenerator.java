@@ -1,6 +1,5 @@
 package com.javagpt.back.util;
 
-
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -12,8 +11,6 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class CodeGenerator {
 
     public static void main(String[] args) {
-
-
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
 

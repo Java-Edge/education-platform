@@ -14,7 +14,6 @@ public class InterviewScheduleController {
     @Resource
     private InterviewScheduleService interviewScheduleService;
 
-    // 新增一条记录的save 方法
     @PostMapping("/save")
     public ResultBody save(@RequestBody InterviewSchedule interviewSchedule) {
         interviewScheduleService.insert(interviewSchedule);

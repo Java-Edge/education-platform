@@ -9,6 +9,10 @@ import org.kie.api.KieServices;
 public class Demo {
 
     public static void main(String[] args) {
-        KieServices kieServices = KieServices.Factory.get();
+        System.getenv().forEach((k, v) -> {
+            System.out.println(k + ":" + v);
+        });
+//        String property = System.getenv("user.dir");
+//        System.out.println(property);
     }
 }

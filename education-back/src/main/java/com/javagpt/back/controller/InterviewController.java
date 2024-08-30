@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 面经页面入口
+ * 面经
  */
 @RestController
 @RequestMapping("/interview")

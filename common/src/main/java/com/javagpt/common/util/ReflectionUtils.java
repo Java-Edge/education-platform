@@ -1,6 +1,5 @@
 package com.javagpt.common.util;
 
-
 import javassist.Modifier;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,9 +14,6 @@ public class ReflectionUtils {
 
     /**
      * 获取对象的所有字段，包括父类
-     *
-     * @param o
-     * @return
      */
     public static List<Field> getAllFields(Object o) {
         Class tempReqClass = o.getClass();
@@ -26,9 +22,6 @@ public class ReflectionUtils {
 
     /**
      * 获取类的所有字段，包括父类
-     *
-     * @param clazz
-     * @return
      */
     public static List<Field> getAllFields(Class<?> clazz) {
         Class tempReqClass = clazz;
@@ -46,10 +39,6 @@ public class ReflectionUtils {
 
     /**
      * 设置拷贝的对象的特定字段的值为null
-     *
-     * @param source
-     * @param target
-     * @param overrideFields
      */
     public static List<String> setNullValueForOverrideFields(Object source, Object target, String[] overrideFields) {
         if (overrideFields == null || overrideFields.length == 0) {
@@ -96,5 +85,4 @@ public class ReflectionUtils {
         }
         return resultSetNullFields;
     }
-
 }
