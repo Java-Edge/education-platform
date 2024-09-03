@@ -7,7 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FileStorageTypeEnum {
 
-    BAIDU(1);
+    BAIDU(1),
+
+    ALIYUN(2),
+    ;
 
     private final Integer type;
 }

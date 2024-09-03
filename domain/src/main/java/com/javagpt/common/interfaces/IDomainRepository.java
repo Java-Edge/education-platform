@@ -1,6 +1,5 @@
 package com.javagpt.common.interfaces;
 
-
 import com.javagpt.common.repository.IBaseRepository;
 import com.javagpt.common.req.BaseBean;
 

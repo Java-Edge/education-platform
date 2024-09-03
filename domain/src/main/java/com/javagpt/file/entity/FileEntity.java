@@ -15,11 +15,6 @@ import java.util.UUID;
 public class FileEntity extends BaseAuditEntity<FileEntity, FileRepository> {
 
     /**
-     * 企业id
-     */
-    private Long enterpriseId;
-
-    /**
      * 存储类型 1、百度云
      */
     private Integer storageType;
@@ -48,17 +43,13 @@ public class FileEntity extends BaseAuditEntity<FileEntity, FileRepository> {
     public FileEntity save() {
         setId(IdUnsafeGenerator.nextId());
         if (Objects.isNull(storageType)) {
-            setStorageType(FileStorageTypeEnum.BAIDU.getType());
-        }
-        if (Objects.isNull(enterpriseId)) {
-            setEnterpriseId(0L);
+            setStorageType(FileStorageTypeEnum.ALIYUN.getType());
         }
         if (Objects.isNull(suffix)) {
             setSuffix("");
         }
         StringBuilder pathBuilder = new StringBuilder();
         pathBuilder
-                .append(enterpriseId)
                 .append("/")
                 .append(UUID.randomUUID().toString().replace("-", ""))
                 .append(".")

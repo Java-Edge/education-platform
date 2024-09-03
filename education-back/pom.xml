@@ -260,6 +260,15 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- Allow JUnit to access the test classes -->
+                    <argLine>--add-opens java.base/java.lang=ALL_UNNAMED</argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

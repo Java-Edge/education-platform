@@ -1,6 +1,5 @@
 package com.javagpt.common.entity;
 
-import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.javagpt.common.factory.RepositoryFactory;
 import com.javagpt.common.interfaces.IDomainCRUD;
 import com.javagpt.common.interfaces.IDomainRepository;
@@ -8,9 +7,13 @@ import com.javagpt.common.repository.IBaseRepository;
 import com.javagpt.common.exception.BusinessRuntimeException;
 import com.javagpt.common.req.BaseAuditBean;
 import com.javagpt.common.req.BaseBean;
+import com.javagpt.common.util.ReflectionKit;
+import com.javagpt.file.entity.FileEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -20,7 +23,7 @@ public abstract class BaseAuditEntity<Entity extends BaseBean, R extends IBaseRe
 
 
     protected Class<R> currentRepositoryClass() {
-        return (Class<R>) ReflectionKit.getSuperClassGenericType(getClass(), Object.class, 1);
+        return (Class<R>) ReflectionKit.getSuperClassGenericType(getClass(), 1);
     }
 
     @Override
@@ -85,9 +88,9 @@ public abstract class BaseAuditEntity<Entity extends BaseBean, R extends IBaseRe
     }
 
     public Entity clearUpdate() {
-        this.setUpdateTime(null);
-        this.setUpdateBy(null);
-        this.setUpdateById(null);
+//        this.setUpdateTime(null);
+//        this.setUpdateBy(null);
+//        this.setUpdateById(null);
         return (Entity) this;
     }
 

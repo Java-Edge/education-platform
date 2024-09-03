@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.Assert;
-import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.yulichang.base.MPJBaseMapper;
@@ -21,6 +20,7 @@ import com.javagpt.common.req.BaseBean;
 import com.javagpt.common.req.BasePageBean;
 import com.javagpt.common.util.ModelUtils;
 import com.javagpt.common.util.MyStringUtils;
+import com.javagpt.common.util.ReflectionKit;
 import com.javagpt.common.util.ReflectionUtils;
 import com.javagpt.infra.mysql.po.common.BasePO;
 import org.apache.commons.collections4.CollectionUtils;
@@ -61,11 +61,11 @@ public class BaseCrudRepositoryImpl<M extends BaseMapper<PO>, PO extends BasePO,
      * @return
      */
     protected Class<BEAN> currentVoClass() {
-        return (Class<BEAN>) ReflectionKit.getSuperClassGenericType(getClass(), Object.class,2);
+        return (Class<BEAN>) ReflectionKit.getSuperClassGenericType(getClass(), 2);
     }
 
     protected Class<PO> currentModelClass() {
-        return (Class<PO>) ReflectionKit.getSuperClassGenericType(getClass(), Object.class, 1);
+        return (Class<PO>) com.javagpt.common.util.ReflectionKit.getSuperClassGenericType(getClass(), 1);
     }
 
     protected boolean isJoinMapper() {

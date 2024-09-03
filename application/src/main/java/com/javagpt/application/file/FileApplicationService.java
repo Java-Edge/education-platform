@@ -63,7 +63,6 @@ public class FileApplicationService {
         return fileEntity;
     }
 
-
     @Transactional
     public FileEntity saveFile(File file) {
         long size = file.length();

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * 仓储工厂用来统一获取仓储实现
+ * 统一获取仓储实现
  */
 public class RepositoryFactory {
 

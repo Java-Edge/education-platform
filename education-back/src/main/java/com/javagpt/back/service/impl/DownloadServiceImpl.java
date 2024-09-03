@@ -3,12 +3,14 @@ package com.javagpt.back.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javagpt.application.file.FileDTO;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.mapper.ArticleMapper;
 import com.javagpt.back.service.DownloadService;
 import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.enums.ArticleTypeEnums;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class DownloadServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity> implements DownloadService {
