@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 /**
@@ -52,11 +53,7 @@ public class SpringResponseUtils {
         headers.add(HttpHeaders.PRAGMA, "no-cache");
         headers.add(HttpHeaders.EXPIRES, "0");
         String encodeFileName = null;
-        try {
-            encodeFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");// 编码解决乱码问题,解决空格问题
-        } catch (UnsupportedEncodingException e) {
-            //ignore
-        }
+        encodeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");// 编码解决乱码问题,解决空格问题
         String contentType = getContentType(fileName);
         //https://tools.ietf.org/html/rfc6266 协议规范
         //headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename*=utf-8''" + encodeFileName);
@@ -77,12 +74,7 @@ public class SpringResponseUtils {
             response.setHeader(HttpHeaders.EXPIRES, "0");
         }
         response.setContentType("application/octet-stream");
-        String encodeFileName = null;
-        try {
-            encodeFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");// 编码解决乱码问题,解决空格问题
-        } catch (UnsupportedEncodingException e) {
-            //ignore
-        }
+        String encodeFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");// 编码解决乱码问题,解决空格问题
         String contentType = getContentType(fileName);
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + encodeFileName + ";filename*=utf-8''" + encodeFileName);
         response.setHeader(HttpHeaders.CONTENT_TYPE, contentType);
@@ -99,22 +91,13 @@ public class SpringResponseUtils {
         return contentType;
     }
 
-
     /**
      * 直接写到Response中
-     *
-     * @param inputStream
-     * @param response
-     * @param fileName
-     * @throws IOException
      */
     public static void writeAndFlushResponse(InputStream inputStream, HttpServletResponse response, String fileName) throws IOException {
         setResponse(response, fileName);
         ServletOutputStream outputStream = response.getOutputStream();
         IOUtils.copy(inputStream, outputStream);
-        IOUtils.closeQuietly(inputStream);
         response.flushBuffer();
     }
-
-
 }

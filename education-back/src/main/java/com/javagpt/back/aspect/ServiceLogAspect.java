@@ -120,6 +120,10 @@ public class ServiceLogAspect {
         // 提取 entityId 和 mapper 信息
         Long entityId = getEntityId(args[0]);
         String controllerClassName = joinPoint.getTarget().getClass().getSimpleName();
+        if (controllerClassName.equals("DownloadController")) {
+            return;
+        }
+        // 获取 entity 类名
         String entityMapperName = "com.javagpt.back.mapper." + controllerClassName.replace("Controller", "Mapper");
         if (articles.contains(controllerClassName)) {
             entityMapperName = "com.javagpt.back.mapper.ArticleMapper";

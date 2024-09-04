@@ -1,5 +1,6 @@
 package com.javagpt.application.file;
 
+import com.aliyun.oss.model.ObjectMetadata;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,6 +12,7 @@ import com.javagpt.common.util.ModelUtils;
 import com.javagpt.common.util.SpringResponseUtils;
 import com.javagpt.file.entity.FileEntity;
 import com.javagpt.file.repository.FileRepository;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLEncoder;
 
 @Service
 @Slf4j
@@ -45,7 +49,6 @@ public class FileApplicationService {
         return ModelUtils.convert(fileEntity, FileDTO.class);
     }
 
-    @Transactional
     public FileEntity saveFile(MultipartFile file, String fileName) {
         String originalFilename = file.getOriginalFilename();
         String name = StringUtils.isBlank(fileName) ? FilenameUtils.getBaseName(originalFilename) : fileName;
@@ -54,7 +57,7 @@ public class FileApplicationService {
         FileEntity fileEntity = new FileEntity();
         fileEntity.setName(name).setSuffix(suffix).setSize(size);
         fileEntity = fileEntity.save();
-        String key = fileEntity.getPath();
+        String objectName = fileEntity.getPath();
         InputStream inputStream = null;
         try {
             inputStream = file.getInputStream();
@@ -62,40 +65,30 @@ public class FileApplicationService {
             log.error("saveFile error:", e);
             throw BusinessRuntimeException.error("上传文件失败");
         }
-        ossService.uploadFile(inputStream, key);
-        IOUtils.closeQuietly(inputStream);
+        ossService.uploadFile(inputStream, objectName);
+//        IOUtils.closeQuietly(inputStream);
         return fileEntity;
     }
 
-    @Transactional
-    public FileEntity saveFile(File file) {
-        long size = file.length();
-        FileEntity fileEntity = new FileEntity();
-        String baseName = FilenameUtils.getBaseName(file.getName());
-        String extension = FilenameUtils.getExtension(file.getName());
-        fileEntity.setName(baseName).setSuffix(extension).setSize(size);
-        fileEntity = fileEntity.save();
-        String key = fileEntity.getPath();
-        FileInputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(file);
-            ossService.uploadFile(inputStream, key);
-        } catch (FileNotFoundException e) {
-            log.error("saveFile error:", e);
-            throw BusinessRuntimeException.error("上传文件失败");
-        }
-        IOUtils.closeQuietly(inputStream);
-        return fileEntity;
-    }
-
-
-    public void downloadFile(HttpServletResponse response, Long fileId) throws IOException {
+    public URL downloadFileUrl(HttpServletResponse response, Long fileId) throws IOException {
         FileEntity fileEntity = fileRepository.findById(fileId);
         if (fileEntity == null) {
             throw BusinessRuntimeException.error("无效的文件Id");
         }
         String key = fileEntity.getPath();
-        InputStream inputStream = ossService.downloadFile(key);
+
+        return ossService.downloadFile(key);
+    }
+
+    public void downloadFileStream(HttpServletResponse response, Long fileId) throws IOException {
+        FileEntity fileEntity = fileRepository.findById(fileId);
+        if (fileEntity == null) {
+            throw BusinessRuntimeException.error("无效的文件Id");
+        }
+        String key = fileEntity.getPath();
+
+        InputStream inputStream = ossService.downloadFileStream(key);
+        // 由于inputStream得到 File
         SpringResponseUtils.writeAndFlushResponse(inputStream, response, fileEntity.fileFullName());
     }
 
@@ -131,7 +124,7 @@ public class FileApplicationService {
         response.setHeader(HttpHeaders.CONTENT_RANGE, contentRange);
         response.setHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(rangeLength));
         String key = fileEntity.getPath();
-        InputStream inputStream = ossService.downloadFile2(key, start, end);
+        InputStream inputStream = ossService.downloadVideo(key, start, end);
         SpringResponseUtils.writeAndFlushResponse(inputStream, response, fileEntity.fileFullName());
     }
 

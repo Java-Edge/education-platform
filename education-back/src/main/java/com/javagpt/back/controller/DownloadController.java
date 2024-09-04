@@ -1,15 +1,18 @@
 package com.javagpt.back.controller;
 
+import com.aliyun.oss.model.ObjectMetadata;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.javagpt.application.file.FileApplicationService;
 import com.javagpt.application.file.FileDTO;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.file.entity.FileEntity;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * 文件上传下载
@@ -33,10 +36,15 @@ public class DownloadController {
         return ResultBody.success(fileDTO);
     }
 
-    // 上传接口 upload
     @PostMapping("upload")
     public ResultBody uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         FileDTO fileDTO = fileApplicationService.saveFile(multipartFile);
         return ResultBody.success(fileDTO);
+    }
+
+    @PostMapping(value = "/downloadFile/{id}")
+    public ResultBody download(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        URL url = fileApplicationService.downloadFileUrl(response, id);
+        return ResultBody.success(url);
     }
 }

@@ -31,7 +31,7 @@ public class FileController {
     //@PreAuthorize("hasAuthority('mp:file:download')")
     @GetMapping(value = "/downloadFile")
     public void download(@RequestParam(value = "id") Long id, HttpServletResponse response) throws IOException {
-        fileApplicationService.downloadFile(response, id);
+//        fileApplicationService.downloadFileStream(response, id);
     }
 
     @GetMapping(value = "/info")
