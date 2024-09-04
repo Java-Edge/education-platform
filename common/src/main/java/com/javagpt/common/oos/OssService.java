@@ -1,8 +1,5 @@
 package com.javagpt.common.oos;
 
-
-import com.aliyun.oss.model.GetObjectRequest;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;

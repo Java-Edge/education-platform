@@ -16,12 +16,7 @@ public class TFile extends BaseAuditPO {
     private Long id;
 
     /**
-     * 企业id
-     */
-    private Long enterpriseId;
-
-    /**
-     * 存储类型 1、百度云
+     * 存储类型 1、百度云 2 阿里云
      */
     private Integer storageType;
 

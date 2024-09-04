@@ -50,7 +50,7 @@ public class FileEntity extends BaseAuditEntity<FileEntity, FileRepository> {
         }
         StringBuilder pathBuilder = new StringBuilder();
         pathBuilder
-                .append("/")
+                .append("img/")
                 .append(UUID.randomUUID().toString().replace("-", ""))
                 .append(".")
                 .append(suffix);

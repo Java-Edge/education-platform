@@ -35,3 +35,4 @@ build/
 *.log
 /logs
 logs/education-platform.log
+education-back/src/main/resources/application-prod.yml

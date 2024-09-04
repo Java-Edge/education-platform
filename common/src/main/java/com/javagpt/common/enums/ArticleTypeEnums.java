@@ -12,7 +12,7 @@ public enum ArticleTypeEnums {
 
     TIME_LINE(0, "动态"),
 
-    DOWNLOAD(1, "下载");
+    ;
 
     private final int code;
 

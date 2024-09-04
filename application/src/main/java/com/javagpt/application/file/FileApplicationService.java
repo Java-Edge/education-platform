@@ -1,7 +1,12 @@
 package com.javagpt.application.file;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.javagpt.common.constant.CommonConstants;
 import com.javagpt.common.exception.BusinessRuntimeException;
 import com.javagpt.common.oos.OssService;
+import com.javagpt.common.req.BasePageBean;
 import com.javagpt.common.util.ModelUtils;
 import com.javagpt.common.util.SpringResponseUtils;
 import com.javagpt.file.entity.FileEntity;
@@ -28,7 +33,6 @@ public class FileApplicationService {
     private final OssService ossService;
 
     private final FileRepository fileRepository;
-
 
     public FileDTO findById(Long id) {
         FileEntity fileEntity = fileRepository.findById(id);
@@ -129,5 +133,19 @@ public class FileApplicationService {
         String key = fileEntity.getPath();
         InputStream inputStream = ossService.downloadFile2(key, start, end);
         SpringResponseUtils.writeAndFlushResponse(inputStream, response, fileEntity.fileFullName());
+    }
+
+    public IPage<FileEntity> listByPage(Integer current, Integer size) {
+        Page<FileEntity> page = new Page<>(current, size);
+        QueryWrapper<FileEntity> qw = new QueryWrapper<>();
+        qw.eq(CommonConstants.DELETE_FLAG, 0);
+        qw.orderByDesc("create_time");
+        BasePageBean  pageBean = new BasePageBean();
+        pageBean.setPage(current);
+        pageBean.setSize(size);
+        page.setCurrent(pageBean.getPage());
+        page.setSize(pageBean.getSize());
+        IPage<FileEntity> fileEntityIPage = fileRepository.page(pageBean);
+        return fileEntityIPage;
     }
 }
