@@ -45,5 +45,4 @@ public class DictionaryTypeEntity extends BaseAuditEntity<DictionaryTypeEntity, 
      */
     @TableField(exist = false)
     private List<Dictionary> list;
-
 }

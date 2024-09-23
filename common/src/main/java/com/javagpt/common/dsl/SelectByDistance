@@ -1,0 +1,12 @@
+GET bas_activity/_search
+{
+  "query": {
+    "geo_distance":{
+      "distance": "5km",
+      "location":{
+        "lat": "31.36897",
+        "lon": "120.64247"
+      }
+    }
+  }
+}

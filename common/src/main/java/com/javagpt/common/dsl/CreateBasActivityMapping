@@ -1,0 +1,221 @@
+PUT /bas_activity
+{
+  "mappings": {
+      "properties": {
+        "activityAddress": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "activityAmount": {
+          "type": "float"
+        },
+        "activityCity": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "activityContent": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "activityContentPicture": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "activityNo": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "activityTheme": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "alreadyJoin": {
+          "type": "long"
+        },
+        "circleId": {
+          "type": "long"
+        },
+        "circleName": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "cityCode": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "contact": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "costType": {
+          "type": "long"
+        },
+        "createTime": {
+          "type": "long"
+        },
+        "createUser": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "createUserName": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "district": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "endTime": {
+          "type": "long"
+        },
+        "erCodeUrl": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "expectNumber": {
+          "type": "long"
+        },
+        "id": {
+          "type": "long"
+        },
+        "isDeleted": {
+          "type": "long"
+        },
+        "isHot": {
+          "type": "long"
+        },
+        "isPayEnd": {
+          "type": "long"
+        },
+        "latitude": {
+          "type": "float"
+        },
+        "location": {
+          "type": "geo_point",
+          "ignore_malformed": true
+        },
+        "longitude": {
+          "type": "float"
+        },
+        "platform": {
+          "type": "long"
+        },
+        "postersList": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "primaryClassification": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "primaryId": {
+          "type": "long"
+        },
+        "registrationDeadline": {
+          "type": "long"
+        },
+        "secondaryClassification": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "secondaryId": {
+          "type": "long"
+        },
+        "startTime": {
+          "type": "long"
+        },
+        "userId": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "whetherPublic": {
+          "type": "long"
+        }
+      }
+    }
+}

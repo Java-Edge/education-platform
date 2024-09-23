@@ -1,6 +1,5 @@
 package com.javagpt.back.controller;
 
-import com.aliyun.oss.model.ObjectMetadata;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.javagpt.application.file.FileApplicationService;
 import com.javagpt.application.file.FileDTO;
