@@ -7,12 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author mkingg
- * @since 2023-11-05
+ * 用户签到
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -20,7 +15,7 @@ public class SignRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**

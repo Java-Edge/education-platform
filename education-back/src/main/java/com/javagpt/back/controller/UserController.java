@@ -47,9 +47,6 @@ public class UserController {
 
     /**
      * description: 获取验证码图片
-     * param [response, request]
-     * author yuzonghao
-     * createTime 2020/3/7 13:36
      **/
     @GetMapping("/getCheckCode")
     public void getCheckCode(HttpServletResponse response, HttpServletRequest request) {

@@ -7,5 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/test")
 @Slf4j
 public class TestController {
+
 }
 

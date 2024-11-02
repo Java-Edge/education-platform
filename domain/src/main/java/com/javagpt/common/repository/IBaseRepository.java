@@ -65,8 +65,8 @@ public interface IBaseRepository<Bean extends BaseBean> {
     /**
      * 分页
      *
-     * @param basePageReq
-     * @return
+     * @param basePageReq 包含分页请求信息的对象
+     * @return 包含分页后的Bean列表
      */
     IPage<Bean> page(BasePageBean basePageReq);
 
@@ -74,23 +74,23 @@ public interface IBaseRepository<Bean extends BaseBean> {
      * 分页
      *
      * @param basePageReq
-     * @param dtoClass
+     * @param dtoClass 还接受一个DTO类
      * @param <DTO>
-     * @return
+     * @return 返回DTO类型的分页结果
      */
-    <DTO> IPage<DTO> page2(BasePageBean basePageReq, Class<DTO> dtoClass);
+    <DTO> IPage<DTO> pageWithDTO(BasePageBean basePageReq, Class<DTO> dtoClass);
 
     /**
      * 分页查询
      *
      * @param basePageReq
-     * @param consumer
+     * @param consumer 多了一个Consumer参数 用于对查询结果进行消费或处理。
      * @return
      */
     IPage<Bean> page(BasePageBean basePageReq, Consumer<List<Bean>> consumer);
 
     /**
-     * 分页查询
+     * 综合了page2和page的功能，既支持DTO类型转换，也支持在分页查询后进行额外处理
      *
      * @param basePageBean
      * @param consumer
@@ -98,7 +98,7 @@ public interface IBaseRepository<Bean extends BaseBean> {
      * @param <DTO>
      * @return
      */
-    <DTO> IPage<DTO> page2(BasePageBean basePageBean, Class<DTO> dtoClass, Consumer<List<DTO>> consumer);
+    <DTO> IPage<DTO> pageWithDTO(BasePageBean basePageBean, Class<DTO> dtoClass, Consumer<List<DTO>> consumer);
 
 
     default <T> IPage<T> emptyPage(BasePageBean basePageBean) {

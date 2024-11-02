@@ -5,9 +5,6 @@
 #    map-underscore-toVO-camel-case: true
 #    use-generated-keys: true
 #
-#server:
-#  port: 8088
-#
 ## DataSource Config
 #spring:
 #  datasource:
@@ -53,6 +50,16 @@ spring:
       host: localhost
       port: 6379
       database: 1
+  threads:
+    virtual:
+      enabled: true
+  es:
+    host: localhost
+    port: 9200
+  elasticsearch:
+    uris: http://127.0.0.1:9200
+    username: elastic
+    password: HYnyGbJ7LOXVUN*8XByl
 #  kafka:
 #    bootstrap-servers: 10.51.51.2:9093
 #    producer:
@@ -84,3 +91,10 @@ springdoc: # http://localhost:8089/swagger-ui/index.html#/
     version: OPENAPI_3_1
   swagger-ui:
     enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
+
+#对象存储
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5tM11FARgMsCGjaYtCQk
+  accessKeySecret: g80zES4Xygyrx4stk2XhEYeV0xRSiK
+  bucketName: sss970722

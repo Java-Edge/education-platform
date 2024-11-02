@@ -1,4 +1,4 @@
-package com.javagpt.infra.bos;
+package com.javagpt.infra.oss;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
@@ -34,7 +34,7 @@ public class OssConfig {
     }
 
     @Bean
-    OssService bosService(OSS ossClient) {
+    OssService ossService(OSS ossClient) {
         return new OssServiceImpl(ossClient, bucketName);
     }
 }

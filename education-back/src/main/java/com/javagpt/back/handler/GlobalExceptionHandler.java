@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultBody bizExceptionHandler(HttpServletRequest req, BizException e) {
         // 业务异常无需打印详细错误日志
-        log.error("请求：{} 发生业务异常！原因是：{}", req.getRequestURI(), e.getErrorMsg());
+//        log.error("请求：{} 发生业务异常！原因是：{}", req.getRequestURI(), e.getErrorMsg());
         return ResultBody.error(e.getErrorCode(), e.getErrorMsg());
     }
 
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseBody
     public ResultBody MethodArgumentNotValidExceptionHandler(HttpServletRequest req, MethodArgumentNotValidException e) {
-        log.error("请求：{} 发生參數异常!", req.getRequestURI());
+//        log.error("请求：{} 发生參數异常!", req.getRequestURI());
         return ResultBody.error(SystemConstant.PARAMETER_INVALID_CODE, e.getLocalizedMessage());
     }
 
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultBody ExceptionHandler(HttpServletRequest req, Exception e) {
-        log.error("请求：{} 异常！原因：", req.getRequestURI(), e);
+//        log.error("请求：{} 异常！原因：", req.getRequestURI(), e);
         return ResultBody.error(SystemConstant.DEFAULT_FAIL_CODE, e.getMessage());
     }
 }

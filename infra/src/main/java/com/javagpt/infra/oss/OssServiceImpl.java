@@ -1,17 +1,13 @@
-package com.javagpt.infra.bos;
+package com.javagpt.infra.oss;
 
-import com.aliyun.oss.ClientException;
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.GeneratePresignedUrlRequest;
-import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.ObjectMetadata;
 import com.javagpt.common.oos.OssService;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;

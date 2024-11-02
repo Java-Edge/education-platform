@@ -126,18 +126,18 @@ public class BaseCrudRepositoryImpl<M extends BaseMapper<PO>, PO extends BasePO,
     }
 
     @Override
-    public <DTO> IPage<DTO> page2(BasePageBean basePageReq, Class<DTO> dtoClass) {
-        return page2(basePageReq, dtoClass, null);
+    public <DTO> IPage<DTO> pageWithDTO(BasePageBean basePageReq, Class<DTO> dtoClass) {
+        return pageWithDTO(basePageReq, dtoClass, null);
     }
 
     @Override
     public IPage<BEAN> page(BasePageBean basePageBean, Consumer<List<BEAN>> consumer) {
-        return page2(basePageBean, voClass, consumer);
+        return pageWithDTO(basePageBean, voClass, consumer);
     }
 
 
     @Override
-    public <DTO> IPage<DTO> page2(BasePageBean basePageBean, Class<DTO> dtoClass, Consumer<List<DTO>> consumer) {
+    public <DTO> IPage<DTO> pageWithDTO(BasePageBean basePageBean, Class<DTO> dtoClass, Consumer<List<DTO>> consumer) {
         IPage<DTO> newPage;
         IPage<PO> page = convertPageReq(basePageBean);
         if (isJoinMapper()) {
