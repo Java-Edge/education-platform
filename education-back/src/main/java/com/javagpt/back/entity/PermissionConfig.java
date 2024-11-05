@@ -11,7 +11,6 @@ import lombok.EqualsAndHashCode;
  * @since 2023-10-16
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class PermissionConfig {
 
     @TableId(value = "id", type = IdType.AUTO)
