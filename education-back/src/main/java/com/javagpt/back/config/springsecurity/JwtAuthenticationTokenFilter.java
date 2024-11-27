@@ -25,7 +25,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        //获取token
+        // 获取token
         String token = request.getHeader(EPConstant.TOKEN);
         if (!StringUtils.isBlank(token)) {
             try {
@@ -56,7 +56,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
 
         }
-        //放行
+        // 放行
         filterChain.doFilter(request, response);
     }
 

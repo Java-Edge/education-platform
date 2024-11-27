@@ -2,6 +2,7 @@ package com.javagpt.back.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.javagpt.back.entity.UserPO;
+import com.javagpt.common.enums.SceneTypeEnum;
 import com.javagpt.common.resp.ResultBody;
 import com.javagpt.application.user.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,4 +44,6 @@ public interface UserService extends IService<UserPO> {
      * 登出
      */
     ResultBody logout(HttpServletRequest request, HttpServletResponse response);
+
+    int checkPermission(Integer userId, SceneTypeEnum sceneEnums);
 }

@@ -9,8 +9,8 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PermissionConfigTypeEnum {
-    NEED_LOGIN(1, "需要登录");
+public enum SceneTypeEnum {
+    TIMELINE_DETAIL_NEED_AUTH_CODE(1, "动态文章详情需要邀请码");
 
     private int resultCode;
 

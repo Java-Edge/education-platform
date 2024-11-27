@@ -31,8 +31,8 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         List<UserRole> userRoles = userRoleMapper.selectList(qw);
         // 提前设置大小，避免扩容
         List<Integer> roleIds = new ArrayList<>(userRoles.size());
-        for (UserRole ur : userRoles) {
-            roleIds.add(ur.getRoleId());
+        for (UserRole userRole : userRoles) {
+            roleIds.add(userRole.getRoleId());
         }
         if (CollectionUtils.isEmpty(roleIds)) {
             return new ArrayList<>();

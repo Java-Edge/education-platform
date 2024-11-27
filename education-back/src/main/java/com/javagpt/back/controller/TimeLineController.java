@@ -6,7 +6,9 @@ import com.google.common.collect.Lists;
 import com.javagpt.back.converter.ArticleConverter;
 import com.javagpt.back.entity.ArticleEntity;
 import com.javagpt.back.service.ArticleService;
+import com.javagpt.back.service.UserService;
 import com.javagpt.back.vo.ArticleVO;
+import com.javagpt.common.enums.SceneTypeEnum;
 import com.javagpt.common.resp.ResultBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,9 @@ public class TimeLineController {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/save")
     public ResultBody save(@RequestBody ArticleEntity articleEntity) {
         articleService.insert(articleEntity);
@@ -33,6 +38,9 @@ public class TimeLineController {
 
     @GetMapping("/getById/{id}")
     public ResultBody getById(@PathVariable Integer id) {
+        // 校验当前登录用户的可用状态
+        userService.checkPermission(id, SceneTypeEnum.TIMELINE_DETAIL_NEED_AUTH_CODE);
+
         ArticleEntity article = articleService.selectById(id);
         return ResultBody.success(article);
     }

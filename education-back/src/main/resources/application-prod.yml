@@ -16,19 +16,22 @@ mybatis-plus:
       logic-not-delete-value: 0 # 未删除的值
 
 server:
-  port: 8088
+  port: 8089
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://152.32.191.118:3306/education?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
-#    username: root
-#    password: Zxcvbnm1234567890
     url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   application:
     name: education-platform
+  threads:
+    virtual:
+      enabled: true
+  es:
+    host: localhost
+    port: 9200
 
 pagehelper:
   helperDialect: mysql
@@ -44,3 +47,10 @@ logging:
     name: "logs/education-platform.log"
   level:
     root: info
+
+#对象存储
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5tM11FARgMsCGjaYtCQk
+  accessKeySecret: g80zES4Xygyrx4stk2XhEYeV0xRSiK
+  bucketName: sss970722

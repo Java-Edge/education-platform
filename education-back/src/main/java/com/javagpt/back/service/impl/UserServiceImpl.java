@@ -11,6 +11,7 @@ import com.javagpt.back.service.UserService;
 import com.javagpt.back.util.UserContextHolder;
 import com.javagpt.common.constant.EPConstant;
 import com.javagpt.common.constant.ResultStatus;
+import com.javagpt.common.enums.SceneTypeEnum;
 import com.javagpt.common.redis.RedisCrudService;
 import com.javagpt.common.redis.RootRedisKey;
 import com.javagpt.common.resp.ResultBody;
@@ -35,6 +36,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 import static com.javagpt.common.constant.EPConstant.SIGNING_KEY;
 import static com.javagpt.common.constant.EPConstant.TOKEN_EXPIRE_TIME;
@@ -177,5 +180,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
         response.addCookie(cookie);
         redisCrudService.del(RootRedisKey.build().name("token", EPConstant.TOKEN + UserContextHolder.getCurrentUserId(request)));
         return ResultBody.success();
+    }
+
+    @Override
+    public int checkPermission(Integer userId, SceneTypeEnum sceneEnums) {
+        return 1;
     }
 }
