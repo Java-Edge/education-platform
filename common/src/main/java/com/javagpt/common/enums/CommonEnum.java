@@ -19,4 +19,9 @@ public enum CommonEnum implements BaseInfoInterface {
     private final int resultCode;
 
     private final String resultMsg;
+
+    @Override
+    public String getResultMsg() {
+        return this.resultMsg;
+    }
 }

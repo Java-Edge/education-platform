@@ -4,8 +4,8 @@
 
 ## 1 环境要求
 
-- JDK22
-- SpringBoot3.3.0
+- JDK最新版
+- SpringBoot最新版
 
 ## 2 配置
 
