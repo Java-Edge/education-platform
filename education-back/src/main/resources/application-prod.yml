@@ -48,6 +48,8 @@ logging:
   level:
     root: info
 
+LOG_PATH: "logs/"
+
 #对象存储
 oss:
   endpoint: https://oss-cn-beijing.aliyuncs.com
