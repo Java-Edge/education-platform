@@ -75,11 +75,21 @@ public class ESController {
      */
     @GetMapping("range")
     public Object range() {
-        Query query = RangeQuery
-                .of(r -> r.field("activityAmount")
-                        .gte(JsonData.of(0))
-                        .lte(JsonData.of(10)))
-                ._toQuery();
+// SpringBoot3.4.0后过时
+//        Query query = RangeQuery
+//                .of(r -> r.field("activityAmount")
+//                        .gte(JsonData.of(0))
+//                        .lte(JsonData.of(10)))
+//                ._toQuery();
+        Query query = Query.of(q -> q
+                .range(r -> r
+                        .number(nr -> nr
+                                .field("activityAmount")
+                                .gte(0.0)  // Use Double directly
+                                .lte(10.0) // Use Double directly
+                        )
+                )
+        );
 
         SearchResponse<UserPO> response = esDocUtils.getDocsByCustomize(indexName, UserPO.class, query);
         for (Hit<UserPO> hit : response.hits().hits()) {
@@ -161,7 +171,15 @@ public class ESController {
         Query query2 = Queries.idsQueryAsQuery(Arrays.asList(activityId.toString(), "45646546456"));
 
         //3、range-范围查询-活动报名费用在0元到10元之间的活动
-        Query query3 = RangeQuery.of(r -> r.field("activityAmount").gte(JsonData.of(0)).lte(JsonData.of(10)))._toQuery();
+// SpringBoot3.4.0后过时
+//        Query query3 = RangeQuery.of(r -> r.field("activityAmount").gte(JsonData.of(0)).lte(JsonData.of(10)))._toQuery();
+        Query query3 = RangeQuery.of(r -> r
+                .number(nr -> nr
+                        .field("activityAmount")
+                        .gte(0.0)  // Use Double directly
+                        .lte(10.0) // Use Double directly
+                )
+        )._toQuery();
         //4、prefix-前缀匹配查询
         Query query4 = PrefixQuery.of(r -> r.field("activityCity.keyword").value("苏"))._toQuery();
         //5、wildcard 通配符查询* 任意多个字符
