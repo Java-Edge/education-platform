@@ -16,7 +16,7 @@ mybatis-plus:
       logic-not-delete-value: 0 # 未删除的值
 
 server:
-  port: 8089
+  port: 8088
 
 spring:
   datasource:
@@ -43,13 +43,13 @@ mpp:
   entityBasePath: com.javagpt.back.entity
 
 logging:
-  file:
-    name: "logs/education-platform.log"
   level:
     root: info
-
-LOG_PATH: "logs/"
-
+  structured:
+    format:
+      console: ecs
+  #  file:
+  #    name: "logs/education-platform.log"
 #对象存储
 oss:
   endpoint: https://oss-cn-beijing.aliyuncs.com

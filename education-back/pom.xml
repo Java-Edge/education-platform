@@ -97,7 +97,6 @@
             </exclusions>
         </dependency>
 
-        <!--swagger3-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
