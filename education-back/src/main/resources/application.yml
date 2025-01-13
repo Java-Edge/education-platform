@@ -1,3 +1,28 @@
 spring:
   profiles:
     active: prod
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    sentinel:
+      filter:
+        # 打开/关闭掉对 Spring MVC 端点的保护
+        enabled: true
+      transport:
+        # 指定控制台的地址
+        dashboard: localhost:8080
+        # 指定和控制台通信的IP
+        # 如不配置，会自动选择一个IP注册
+        client-ip: 127.0.0.1
+        # 指定和控制台通信的端口，默认值8719
+        # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
+        port: 8719
+        # 心跳发送周期，默认值null
+        # 但在SimpleHttpHeartbeatSender会用默认值10秒
+        heartbeat- interval-ms: 10000
+      eager: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 开启所有端点
