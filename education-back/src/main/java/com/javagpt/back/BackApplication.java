@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 })
 @EnableMPP
 @MapperScan("com.javagpt.infra.mysql.mapper")
+@EnableFeignClients
 public class BackApplication {
 
     public static void main(String[] args) {
