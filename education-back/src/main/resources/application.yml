@@ -27,6 +27,32 @@ management:
       exposure:
         include: '*' # 开启所有端点
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis-plus:
+  auto-mapping-behavior: full # 自动映射
+  map-underscore-to-camel-case: true # 下划线转驼峰
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  type-aliases-package: com.javagpt.back.entity #扫描表映射的类，默认是自动加下划线
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      column-underline: true
+      logic-delete-field: deleteFlag # 指定字段名
+      logic-delete-value: 1 # 删除后设置成的值
+      logic-not-delete-value: 0 # 未删除的值
+
+mpp:
+  entityBasePath: com.javagpt.back.entity
+
 exclude-url:
   ip-limit-urls:
     - /back/pilot/getList
