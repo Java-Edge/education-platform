@@ -7,4 +7,4 @@ spring:
   application:
     name: content-center
   profiles:
-    active: dev
+    active: prod

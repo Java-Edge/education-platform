@@ -1,6 +1,39 @@
+server:
+  port: 8088
+
 spring:
-  profiles:
-    active: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  application:
+    name: education-platform
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 1
+  threads:
+    virtual:
+      enabled: true
+  es:
+    host: localhost
+    port: 9200
+  elasticsearch:
+    uris: http://127.0.0.1:9200
+    username: elastic
+    password: HYnyGbJ7LOXVUN*8XByl
+  #  kafka:
+  #    bootstrap-servers: 10.51.51.2:9093
+  #    producer:
+  #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  #      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  #    consumer:
+  #      group-id: my-group # 消费者组 ID
+  #      auto-offset-reset: earliest
+  #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   cloud:
     compatibility-verifier:
       enabled: false
@@ -26,6 +59,15 @@ management:
     web:
       exposure:
         include: '*' # 开启所有端点
+
+logging:
+  level:
+    root: info
+  structured:
+    format:
+      console: ecs
+  #  file:
+  #    name: "logs/education-platform.log"
 
 pagehelper:
   helperDialect: mysql
@@ -56,3 +98,10 @@ mpp:
 exclude-url:
   ip-limit-urls:
     - /back/pilot/getList
+
+springdoc: # http://localhost:8089/swagger-ui/index.html#/
+  api-docs:
+    enabled: true # 开启OpenApi接口
+    version: OPENAPI_3_1
+  swagger-ui:
+    enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
