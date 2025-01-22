@@ -158,16 +158,6 @@
             <artifactId>swagger-annotations</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.vavr</groupId>-->
-<!--            <artifactId>vavr</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
@@ -262,6 +252,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
@@ -270,27 +265,15 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>prod</id>
             <properties>
-                <profiles.active>dev</profiles.active>
-            </properties>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <profiles.active>test</profiles.active>
+                <profiles.active>prod</profiles.active>
             </properties>
             <!--activation用来指定激活方式，可以根据jdk环境，环境变量，文件的存在或缺失-->
             <activation>
                 <!--这个字段表示默认激活-->
                 <activeByDefault>true</activeByDefault>
             </activation>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <profiles.active>prod</profiles.active>
-            </properties>
         </profile>
     </profiles>
 

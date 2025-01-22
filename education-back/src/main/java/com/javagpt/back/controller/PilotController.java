@@ -34,9 +34,6 @@ public class PilotController {
         return ResultBody.success(pilotServiceList);
     }
 
-    /**
-     * 统计 pv 的接口
-     */
     @PostMapping("/pv")
     public ResultBody pv(@RequestBody PageQueryParam<CourseQueryDTO> pageQueryParam) {
         pilotService.pv(pageQueryParam.getParam().getItemId());

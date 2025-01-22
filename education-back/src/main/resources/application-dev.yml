@@ -1,20 +1,5 @@
-#nacos:
-#  config:
-#    server-addr: localhost:8848
-#    # 配置所属命名空间的id
-#    namespace: ${spring.profiles.active}
-#    # 配置所属分组
-#    group: icv-archetype
-#    # 配置ID
-#    data-id: application.yml
-#    type: yaml
-#    # 开启自动刷新nacos配置
-#    auto-refresh: true
-#    enable-remote-sync-config: true
-#    # 针对配置项同名的情况，是否允许 nacos 的配置覆盖本地的配置
-#    remote-first: true
-#    bootstrap:
-#      enable: true
+server:
+  port: 8088
 
 feign:
   client:

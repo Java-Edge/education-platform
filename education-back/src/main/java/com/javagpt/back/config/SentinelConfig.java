@@ -25,7 +25,7 @@ public class SentinelConfig implements BlockExceptionHandler {
         // 创建流控规则
         FlowRule rule = new FlowRule();
         // 设置受保护的资源
-        rule.setResource("pilot_list");
+        rule.setResource("pilotList");
         // 设置流控规则 QPS
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         // 设置受保护的资源阈值
