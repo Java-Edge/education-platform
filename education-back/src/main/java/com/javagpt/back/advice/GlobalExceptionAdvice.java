@@ -5,6 +5,7 @@ import com.javagpt.common.exception.Error401RuntimeException;
 import com.javagpt.common.exception.Error403RuntimeException;
 import com.javagpt.common.exception.Error404RuntimeException;
 import com.javagpt.common.resp.ResultBody;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
@@ -35,9 +36,12 @@ public class GlobalExceptionAdvice {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ResultBody exception(Exception e) {
-        log.error("global ex:", e);
-        return ResultBody.error("系统异常");
+    public ResultBody exception(Exception e, HttpServletResponse response) {
+        if (!response.isCommitted()) {
+            // 只有响应未提交时才写入
+            return ResultBody.error("系统异常");
+        }
+        return null;
     }
 
     @ResponseBody
@@ -50,7 +54,6 @@ public class GlobalExceptionAdvice {
         return result;
     }
 
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RuntimeException.class)
     public ResultBody exception(RuntimeException e) {
@@ -58,13 +61,9 @@ public class GlobalExceptionAdvice {
         return ResultBody.error(e.getMessage());
     }
 
-
     /**
      * 处理参数验证异常
      * valid注解 和 bean上的注解结合
-     *
-     * @param e
-     * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BindException.class)
@@ -93,9 +92,6 @@ public class GlobalExceptionAdvice {
      * 处理参数验证异常
      * <p>
      * validate注解controller和当个参数验证
-     *
-     * @param e
-     * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
@@ -137,9 +133,6 @@ public class GlobalExceptionAdvice {
 
     /**
      * 接口 method不支持，会报错
-     *
-     * @param e
-     * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -154,5 +147,4 @@ public class GlobalExceptionAdvice {
         log.error("global DuplicateKeyException:", e);
         return ResultBody.error("数据已存在！");
     }
-
 }

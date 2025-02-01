@@ -21,4 +21,6 @@ public interface CommonConstants {
     String PV = "page_view";
 
     String type_key = "type_key";
+
+     String CONTENT_TYPE_JSON = "application/json";
 }
