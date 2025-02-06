@@ -180,8 +180,8 @@ public class ServiceLogAspect {
             log.warn("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
         }
         long cost = System.currentTimeMillis() - startTime;
-        if (cost > 1000) {
-            log.warn("------------- 结束 耗时：{} ms -------------", cost);
+        if (cost > 200) {
+            log.warn("------------- {} 结束 耗时：{} ms -------------", point.getSignature(), cost);
         }
         return result;
     }
