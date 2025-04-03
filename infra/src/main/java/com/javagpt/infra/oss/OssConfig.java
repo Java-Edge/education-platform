@@ -7,22 +7,24 @@ import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyuncs.exceptions.ClientException;
 import com.javagpt.common.oos.OssService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties(prefix = "oss")
 public class OssConfig {
 
-    @Value("${oss.bucketName}")
+    @Value("${bucketName}")
     private String bucketName;
 
-    @Value("${oss.endpoint}")
+    @Value("${endpoint}")
     private String endpoint;
 
-    @Value("${oss.accessKeyId}")
+    @Value("${accessKeyId}")
     private String accessKeyId;
 
-    @Value("${oss.accessKeySecret}")
+    @Value("${accessKeySecret}")
     private String accessKeySecret;
 
     @Bean

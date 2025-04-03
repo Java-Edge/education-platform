@@ -1,7 +1,5 @@
 package com.javagpt.common.oos;
 
-import com.aliyun.oss.model.ObjectMetadata;
-
 import java.io.InputStream;
 import java.net.URL;
 
