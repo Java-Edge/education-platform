@@ -177,7 +177,7 @@ public class ServiceLogAspect {
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
         if (Objects.isNull(result)) {
-            log.warn("返回结果: {}", JSONObject.toJSONString(result, excludeFilter));
+            log.error("返回结果为null");
         }
         long cost = System.currentTimeMillis() - startTime;
         if (cost > 200) {
