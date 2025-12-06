@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.javagpt.back.mapper.DictMapper">
+<mapper namespace="com.javaedge.back.mapper.DictMapper">
 
-    <resultMap id="BaseResultMap" type="com.javagpt.back.entity.Dictionary">
+    <resultMap id="BaseResultMap" type="com.javaedge.back.entity.Dictionary">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="typeKey" column="type_key" jdbcType="VARCHAR"/>
             <result property="label" column="label" jdbcType="VARCHAR"/>
@@ -25,11 +25,11 @@
     </sql>
 
 
-    <resultMap id="MenuVOMap" type="com.javagpt.back.vo.MenuVO">
+    <resultMap id="MenuVOMap" type="com.javaedge.back.vo.MenuVO">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="sort" column="sort" jdbcType="INTEGER"/>
-        <collection property="children" column="{typeKey=type_key,parentId=id}" javaType="java.util.List" ofType="com.javagpt.back.vo.MenuVO" select="selectChildMenuList"/>
+        <collection property="children" column="{typeKey=type_key,parentId=id}" javaType="java.util.List" ofType="com.javaedge.back.vo.MenuVO" select="selectChildMenuList"/>
     </resultMap>
 
     <select id="selectMenuList" resultMap="MenuVOMap">
@@ -43,7 +43,7 @@
           and d.status = 1
     </select>
 
-    <select id="selectChildMenuList" parameterType="java.util.Map" resultType="com.javagpt.back.vo.MenuVO">
+    <select id="selectChildMenuList" parameterType="java.util.Map" resultType="com.javaedge.back.vo.MenuVO">
         select d.value as id,
                d.label as name,
                d.sort  as sort
@@ -54,7 +54,7 @@
     </select>
 
 
-    <resultMap id="SuperMenuVOMap" type="com.javagpt.back.vo.SuperMenuVO">
+    <resultMap id="SuperMenuVOMap" type="com.javaedge.back.vo.SuperMenuVO">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="sort" column="sort" jdbcType="INTEGER"/>

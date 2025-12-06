@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.javagpt</groupId>
+        <groupId>com.javaedge</groupId>
         <artifactId>education</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -13,17 +13,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.javagpt</groupId>
+            <groupId>com.javaedge</groupId>
             <artifactId>common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.javagpt</groupId>
+            <groupId>com.javaedge</groupId>
             <artifactId>infra</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.javagpt</groupId>
+            <groupId>com.javaedge</groupId>
             <artifactId>application</artifactId>
         </dependency>
 

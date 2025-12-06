@@ -1,0 +1,65 @@
+package com.javaedge.back.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.time.LocalDateTime;
+import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@TableName(value = "project")
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class ProjectEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 项目id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 项目标题
+     */
+    private String title;
+
+    /**
+     * 项目简介
+     */
+    private String des;
+
+    /**
+     * 项目架构图
+     */
+    private String architectureImg;
+
+    /**
+     * 通过项目将要学习到
+     */
+    private String willLearn;
+
+    /**
+     * 项目亮点
+     */
+    private String highlight;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
+
+    private Integer deleteFlag;
+
+    private String href;
+
+    private String img;
+
+    private Integer pageView;
+}

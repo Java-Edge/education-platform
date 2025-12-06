@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.javagpt.back.mapper.InterviewMapper">
+<mapper namespace="com.javaedge.back.mapper.InterviewMapper">
 
-    <resultMap id="BaseResultMap" type="com.javagpt.back.entity.InterviewEntity">
+    <resultMap id="BaseResultMap" type="com.javaedge.back.entity.InterviewEntity">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
@@ -17,7 +17,7 @@
     </sql>
 
 
-    <resultMap id="InterviewEntityMap" type="com.javagpt.back.entity.InterviewEntity">
+    <resultMap id="InterviewEntityMap" type="com.javaedge.back.entity.InterviewEntity">
         <id property="id" column="id" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
@@ -26,7 +26,7 @@
         <result property="careerName" column="career_name" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectByCondition" parameterType="com.javagpt.back.dto.InterviewDTO" resultMap="InterviewEntityMap">
+    <select id="selectByCondition" parameterType="com.javaedge.back.dto.InterviewDTO" resultMap="InterviewEntityMap">
 
         select interview.id                id,
         interview.title             title,

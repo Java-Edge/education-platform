@@ -1,0 +1,61 @@
+package com.javaedge.back.service.impl;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javaedge.back.dto.InnerRecommendQueryDTO;
+import com.javaedge.back.entity.Career;
+import com.javaedge.back.entity.InnerRecommend;
+import com.javaedge.back.mapper.CareerMapper;
+import com.javaedge.back.mapper.InnerRecommendMapper;
+import com.javaedge.back.service.InnerRecommendService;
+import com.javaedge.common.constant.CommonConstants;
+import com.javaedge.common.req.PageQueryParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Objects;
+
+@Service
+public class InnerRecommendServiceImpl extends ServiceImpl<InnerRecommendMapper, InnerRecommend>
+        implements InnerRecommendService {
+
+    @Autowired
+    private InnerRecommendMapper innerRecommendMapper;
+
+    @Autowired
+    private CareerMapper careerMapper;
+
+    @Override
+    public IPage<InnerRecommend> selectByCondition(PageQueryParam<InnerRecommendQueryDTO> pageQueryParam) {
+        if (Objects.nonNull(pageQueryParam.getParam()) && Objects.nonNull(pageQueryParam.getParam().getJobId())
+                // jobId=-1：查询全部岗位
+                && pageQueryParam.getParam().getJobId() == CommonConstants.select_all) {
+            pageQueryParam.getParam().setJobId(null);
+        }
+
+        Page<InnerRecommend> page = new Page<>();
+        page.setSize(pageQueryParam.getPageSize());
+        page.setCurrent(pageQueryParam.getPageNo());
+        if (pageQueryParam.getParam() == null) {
+            pageQueryParam.setParam(new InnerRecommendQueryDTO());
+        }
+        return innerRecommendMapper.selectByCondition(page, pageQueryParam.getParam());
+    }
+
+    @Override
+    public InnerRecommend articleOf(String id) {
+        InnerRecommend article = getById(id);
+        Integer jobId = article.getJobId();
+        if (jobId != null) {
+            Career byId = careerMapper.selectById(jobId);
+            article.setCareerName(byId.getName());
+        }
+        return article;
+    }
+
+}
+
+
+
+
