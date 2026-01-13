@@ -18,12 +18,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.release>25</maven.compiler.release>
-        <maven.compiler.compilerVersion>25</maven.compiler.compilerVersion>
-        <java.version>25</java.version>
+        <maven.compiler.release>23</maven.compiler.release>
+        <maven.compiler.compilerVersion>23</maven.compiler.compilerVersion>
+        <java.version>23</java.version>
         <skipTests>true</skipTests>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <lombok.version>1.18.36</lombok.version>
+        <xxl-job.version>2.3.1</xxl-job.version>
     </properties>
     <modules>
         <module>education-back</module>
@@ -415,6 +416,12 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-commons</artifactId>
                 <version>4.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
             </dependency>
 
         </dependencies>
