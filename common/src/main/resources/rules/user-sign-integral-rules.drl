@@ -1,0 +1,102 @@
+package com.javaedge.rules.integral
+
+import com.javaedge.common.drools.model.UserSignIntegralFact
+
+// 全局变量声明
+global org.slf4j.Logger logger
+
+/**
+ * 用户签到积分规则
+ * 规则优先级：salience值越大优先级越高
+ */
+
+// 规则1：基础签到积分
+rule "基础签到积分"
+    salience 100
+    when
+        $fact : UserSignIntegralFact()
+    then
+        logger.info("触发规则：基础签到积分，用户ID：{}", $fact.getUserId());
+        $fact.setBaseIntegral(10);  // 每次签到基础10积分
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则2：连续签到3天奖励
+rule "连续签到3天奖励"
+    salience 90
+    when
+        $fact : UserSignIntegralFact(continuousSignDays >= 3 && continuousSignDays < 7)
+    then
+        logger.info("触发规则：连续签到3天奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 5);
+        $fact.setBonusDescription($fact.getBonusDescription() + "连续签到3天+5分;");
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则3：连续签到7天奖励
+rule "连续签到7天奖励"
+    salience 90
+    when
+        $fact : UserSignIntegralFact(continuousSignDays >= 7 && continuousSignDays < 15)
+    then
+        logger.info("触发规则：连续签到7天奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 20);
+        $fact.setBonusDescription($fact.getBonusDescription() + "连续签到7天+20分;");
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则4：连续签到15天奖励
+rule "连续签到15天奖励"
+    salience 90
+    when
+        $fact : UserSignIntegralFact(continuousSignDays >= 15 && continuousSignDays < 30)
+    then
+        logger.info("触发规则：连续签到15天奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 50);
+        $fact.setBonusDescription($fact.getBonusDescription() + "连续签到15天+50分;");
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则5：连续签到30天奖励
+rule "连续签到30天奖励"
+    salience 90
+    when
+        $fact : UserSignIntegralFact(continuousSignDays >= 30 && isFullMonthSign == false)
+    then
+        logger.info("触发规则：连续签到30天奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 100);
+        $fact.setBonusDescription($fact.getBonusDescription() + "连续签到30天+100分;");
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则6：整月签到特别奖励
+rule "整月签到特别奖励"
+    salience 95
+    when
+        $fact : UserSignIntegralFact(isFullMonthSign == true)
+    then
+        logger.info("触发规则：整月签到特别奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 200);
+        $fact.setBonusDescription($fact.getBonusDescription() + "整月全勤签到+200分;");
+        $fact.calculateTotal();
+        update($fact);
+end
+
+// 规则7：周末签到额外奖励
+rule "周末签到额外奖励"
+    salience 85
+    when
+        $fact : UserSignIntegralFact()
+        eval(java.time.LocalDate.now().getDayOfWeek().getValue() >= 6)
+    then
+        logger.info("触发规则：周末签到额外奖励，用户ID：{}", $fact.getUserId());
+        $fact.setBonusIntegral($fact.getBonusIntegral() + 3);
+        $fact.setBonusDescription($fact.getBonusDescription() + "周末签到+3分;");
+        $fact.calculateTotal();
+        update($fact);
+end

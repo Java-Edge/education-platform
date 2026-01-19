@@ -1,0 +1,118 @@
+package com.javaedge.rules.level
+
+import com.javaedge.common.drools.model.UserLevelFact
+
+global org.slf4j.Logger logger
+
+/**
+ * 用户等级规则
+ * 根据用户积分、签到、学习情况综合评定用户等级
+ */
+
+// 规则1：青铜用户 (0-100积分)
+rule "青铜用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral < 100)
+    then
+        logger.info("触发规则：青铜用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(1);
+        $fact.setLevelName("青铜会员");
+        $fact.setLevelBenefits("基础学习权限");
+        $fact.setNextLevelIntegral(100);
+        update($fact);
+end
+
+// 规则2：白银用户 (100-500积分)
+rule "白银用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral >= 100 && totalIntegral < 500)
+    then
+        logger.info("触发规则：白银用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(2);
+        $fact.setLevelName("白银会员");
+        $fact.setLevelBenefits("免费试看部分专栏课程");
+        $fact.setNextLevelIntegral(500);
+        update($fact);
+end
+
+// 规则3：黄金用户 (500-1500积分)
+rule "黄金用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral >= 500 && totalIntegral < 1500)
+    then
+        logger.info("触发规则：黄金用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(3);
+        $fact.setLevelName("黄金会员");
+        $fact.setLevelBenefits("免费观看指定视频课程，专栏9折");
+        $fact.setNextLevelIntegral(1500);
+        update($fact);
+end
+
+// 规则4：铂金用户 (1500-3000积分)
+rule "铂金用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral >= 1500 && totalIntegral < 3000)
+    then
+        logger.info("触发规则：铂金用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(4);
+        $fact.setLevelName("铂金会员");
+        $fact.setLevelBenefits("专栏8折，免费技术咨询1次");
+        $fact.setNextLevelIntegral(3000);
+        update($fact);
+end
+
+// 规则5：钻石用户 (3000-5000积分)
+rule "钻石用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral >= 3000 && totalIntegral < 5000)
+    then
+        logger.info("触发规则：钻石用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(5);
+        $fact.setLevelName("钻石会员");
+        $fact.setLevelBenefits("专栏7折，免费下载课程资料，优先技术支持");
+        $fact.setNextLevelIntegral(5000);
+        update($fact);
+end
+
+// 规则6：至尊用户 (5000+积分)
+rule "至尊用户"
+    salience 100
+    when
+        $fact : UserLevelFact(totalIntegral >= 5000)
+    then
+        logger.info("触发规则：至尊用户，用户ID：{}", $fact.getUserId());
+        $fact.setUserLevel(6);
+        $fact.setLevelName("至尊会员");
+        $fact.setLevelBenefits("全站课程免费，VIP技术咨询，定制学习计划");
+        $fact.setNextLevelIntegral(-1);  // -1表示已达最高等级
+        update($fact);
+end
+
+// 规则7：活跃用户额外加成
+rule "活跃用户额外加成"
+    salience 90
+    when
+        $fact : UserLevelFact(continuousSignDays >= 30, userLevel < 6)
+    then
+        logger.info("触发规则：活跃用户额外加成，用户ID：{}，当前等级：{}", $fact.getUserId(), $fact.getUserLevel());
+        $fact.setUserLevel($fact.getUserLevel() + 1);
+        $fact.setLevelBenefits($fact.getLevelBenefits() + " [活跃用户特权]");
+        update($fact);
+end
+
+// 规则8：课程达人额外加成
+rule "课程达人额外加成"
+    salience 85
+    when
+        $fact : UserLevelFact(courseLearnCount >= 20, userLevel < 6)
+    then
+        logger.info("触发规则：课程达人额外加成，用户ID：{}，学习课程数：{}", $fact.getUserId(), $fact.getCourseLearnCount());
+        $fact.setUserLevel($fact.getUserLevel() + 1);
+        $fact.setLevelBenefits($fact.getLevelBenefits() + " [课程达人特权]");
+        update($fact);
+end

@@ -1,0 +1,91 @@
+package com.javaedge.rules.course
+
+import com.javaedge.common.drools.model.CourseRecommendFact
+
+global org.slf4j.Logger logger
+
+/**
+ * 课程推荐规则
+ * 根据课程的各项指标计算推荐分数和优先级
+ */
+
+// 规则1：高人气课程推荐
+rule "高人气课程推荐"
+    salience 100
+    when
+        $fact : CourseRecommendFact(pageView >= 10000, isRecommended == null)
+    then
+        logger.info("触发规则：高人气课程推荐，课程：{}", $fact.getCourseName());
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() + 50 : 50);
+        $fact.setRecommendReason($fact.getRecommendReason() != null ? $fact.getRecommendReason() + "高人气课程;" : "高人气课程;");
+        $fact.setIsRecommended(true);
+        $fact.setPriority(5);
+        update($fact);
+end
+
+// 规则2：热门课程推荐
+rule "热门课程推荐"
+    salience 90
+    when
+        $fact : CourseRecommendFact(pageView >= 5000 && pageView < 10000, isRecommended == null)
+    then
+        logger.info("触发规则：热门课程推荐，课程：{}", $fact.getCourseName());
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() + 30 : 30);
+        $fact.setRecommendReason($fact.getRecommendReason() != null ? $fact.getRecommendReason() + "热门课程;" : "热门课程;");
+        $fact.setIsRecommended(true);
+        $fact.setPriority(4);
+        update($fact);
+end
+
+// 规则3：新课程推荐
+rule "新课程推荐"
+    salience 85
+    when
+        $fact : CourseRecommendFact(pageView < 1000)
+    then
+        logger.info("触发规则：新课程推荐，课程：{}", $fact.getCourseName());
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() + 15 : 15);
+        $fact.setRecommendReason($fact.getRecommendReason() != null ? $fact.getRecommendReason() + "新课程推荐;" : "新课程推荐;");
+        $fact.setIsRecommended(true);
+        $fact.setPriority(3);
+        update($fact);
+end
+
+// 规则4：专栏课程额外加分
+rule "专栏课程额外加分"
+    salience 80
+    when
+        $fact : CourseRecommendFact(courseType == 1)
+    then
+        logger.info("触发规则：专栏课程额外加分，课程：{}", $fact.getCourseName());
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() + 10 : 10);
+        $fact.setRecommendReason($fact.getRecommendReason() != null ? $fact.getRecommendReason() + "专栏课程;" : "专栏课程;");
+        update($fact);
+end
+
+// 规则5：视频课程基础推荐
+rule "视频课程基础推荐"
+    salience 75
+    when
+        $fact : CourseRecommendFact(courseType == 0, pageView >= 1000)
+    then
+        logger.info("触发规则：视频课程基础推荐，课程：{}", $fact.getCourseName());
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() + 20 : 20);
+        $fact.setRecommendReason($fact.getRecommendReason() != null ? $fact.getRecommendReason() + "优质视频课程;" : "优质视频课程;");
+        $fact.setIsRecommended(true);
+        $fact.setPriority(3);
+        update($fact);
+end
+
+// 规则6：设置默认推荐状态
+rule "设置默认推荐状态"
+    salience 50
+    when
+        $fact : CourseRecommendFact(isRecommended == null)
+    then
+        logger.info("触发规则：设置默认推荐状态，课程：{}", $fact.getCourseName());
+        $fact.setIsRecommended(false);
+        $fact.setPriority(1);
+        $fact.setRecommendScore($fact.getRecommendScore() != null ? $fact.getRecommendScore() : 0);
+        update($fact);
+end
