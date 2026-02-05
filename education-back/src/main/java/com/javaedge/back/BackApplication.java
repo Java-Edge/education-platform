@@ -8,17 +8,24 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 后台应用启动类
+ *
+ * @author zqy
+ */
 @SpringBootApplication(scanBasePackages = {"com.javaedge"}, exclude = {
         MongoAutoConfiguration.class
 })
 @EnableMPP
 @MapperScan("com.javaedge.infra.mysql.mapper")
 @EnableFeignClients
+@EnableCaching
 @Import(DemoConfig.class)
 public class BackApplication {
 
