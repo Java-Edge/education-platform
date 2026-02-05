@@ -42,3 +42,9 @@ education-back/src/main/resources/application-prod.yml
 education-back/.DS_Store
 .codiumai.qodo
 .qodo/indexes.sqlite
+
+# AI配置文件（包含API Key）
+**/application-ai.yml
+**/.env
+.env.local
+
