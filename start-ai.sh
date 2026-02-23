@@ -45,12 +45,12 @@ fi
 # 检查模型是否已下载
 echo ""
 echo "检查AI模型..."
-if ollama list | grep -q "qwen2.5:7b"; then
-    echo "✅ 模型 qwen2.5:7b 已安装"
+if ollama list | grep -q "gemini-3-flash-preview:cloud"; then
+    echo "✅ 模型 gemini-3-flash-preview:cloud 已安装"
 else
-    echo "⚠️  模型 qwen2.5:7b 未安装"
+    echo "⚠️  模型 gemini-3-flash-preview:cloud 未安装"
     echo "正在下载模型（约4.7GB，首次下载需要一些时间）..."
-    ollama pull qwen2.5:7b
+    ollama pull gemini-3-flash-preview:cloud
     echo "✅ 模型下载完成"
 fi
 

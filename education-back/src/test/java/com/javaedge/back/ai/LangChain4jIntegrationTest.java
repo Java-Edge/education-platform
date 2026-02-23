@@ -18,7 +18,7 @@ import java.util.List;
  *
  * 运行前请确保：
  * 1. Ollama服务已启动（ollama serve）
- * 2. 已下载模型（ollama pull qwen2.5:7b）
+ * 2. 已下载模型（ollama pull gemini-3-flash-preview:cloud）
  * 或者配置了有效的OpenAI API Key
  *
  * @author JavaEdge

@@ -48,7 +48,7 @@ public class LangChain4jConfig {
     @Value("${langchain4j.ollama.base-url:http://localhost:11434}")
     private String ollamaBaseUrl;
 
-    @Value("${langchain4j.ollama.model-name:qwen2.5:7b}")
+    @Value("${langchain4j.ollama.model-name:gemini-3-flash-preview:cloud}")
     private String ollamaModelName;
 
     @Value("${langchain4j.timeout:60}")

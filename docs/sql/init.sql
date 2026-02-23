@@ -1,0 +1,1 @@
+mysql -u root -p123456 education < education_backup_clean_20260103_204527.sql

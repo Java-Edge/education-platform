@@ -158,7 +158,7 @@ education-back/src/main/resources/
 ollama serve
 
 # 2. 下载模型
-ollama pull qwen2.5:7b
+ollama pull gemini-3-flash-preview:cloud
 
 # 3. 编译项目
 mvn clean install -DskipTests
@@ -247,7 +247,7 @@ langchain4j:
   # Ollama本地模型
   ollama:
     base-url: http://localhost:11434
-    model-name: qwen2.5:7b
+    model-name: gemini-3-flash-preview:cloud
   
   # 通用参数
   timeout: 60
@@ -351,7 +351,7 @@ langchain4j:
 
 ## 📈 性能指标
 
-### 响应时间（基于Ollama qwen2.5:7b）
+### 响应时间（基于Ollama gemini-3-flash-preview:cloud）
 - 简单聊天：1-3秒
 - 带提示聊天：2-4秒
 - 课程推荐：3-5秒

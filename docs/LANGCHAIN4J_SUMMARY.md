@@ -65,7 +65,7 @@ langchain4j:
     endpoint: ${AZURE_OPENAI_ENDPOINT:}
   ollama:
     base-url: http://localhost:11434
-    model-name: qwen2.5:7b
+    model-name: gemini-3-flash-preview:cloud
   timeout: 60
   temperature: 0.7
   max-tokens: 2000
@@ -169,7 +169,7 @@ brew install ollama  # macOS
 ollama serve
 
 # 3. 下载模型
-ollama pull qwen2.5:7b
+ollama pull gemini-3-flash-preview:cloud
 
 # 4. 启动项目
 mvn clean install -DskipTests

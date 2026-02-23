@@ -27,7 +27,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
 
 # 3. 下载推荐模型（中文支持好）
-ollama pull qwen2.5:7b
+ollama pull gemini-3-flash-preview:cloud
 
 # 或者使用其他模型
 # ollama pull llama3.1:8b
@@ -278,7 +278,7 @@ langchain4j:
   # Ollama本地模型配置
   ollama:
     base-url: http://localhost:11434
-    model-name: qwen2.5:7b  # qwen2.5:7b | llama3.1:8b | mistral:7b
+    model-name: gemini-3-flash-preview:cloud  # gemini-3-flash-preview:cloud | llama3.1:8b | mistral:7b
   
   # 通用参数
   timeout: 60           # 超时时间（秒）

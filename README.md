@@ -35,7 +35,7 @@ brew install ollama
 ollama serve
 
 # 下载中文模型
-ollama pull qwen2.5:7b
+ollama pull gemini-3-flash-preview:cloud
 ```
 
 ### 3. 启动项目
@@ -123,7 +123,7 @@ langchain4j:
   provider: ollama  # openai | azure | ollama
   ollama:
     base-url: http://localhost:11434
-    model-name: qwen2.5:7b
+    model-name: gemini-3-flash-preview:cloud
 ```
 
 ## 🔑 API端点
@@ -204,7 +204,7 @@ langchain4j:
   provider: ollama
   ollama:
     base-url: http://localhost:11434
-    model-name: qwen2.5:7b
+    model-name: gemini-3-flash-preview:cloud
 ```
 
 ## 🎯 业务场景

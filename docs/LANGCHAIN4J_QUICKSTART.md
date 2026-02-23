@@ -18,7 +18,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
 
 # 新开终端，下载中文模型（推荐）
-ollama pull qwen2.5:7b
+ollama pull gemini-3-flash-preview:cloud
 ```
 
 ### 3. 启动项目
@@ -82,20 +82,20 @@ langchain4j:
 ollama list
 
 # 运行模型（测试）
-ollama run qwen2.5:7b
+ollama run gemini-3-flash-preview:cloud
 
 # 删除模型
-ollama rm qwen2.5:7b
+ollama rm gemini-3-flash-preview:cloud
 
 # 查看模型信息
-ollama show qwen2.5:7b
+ollama show gemini-3-flash-preview:cloud
 ```
 
 ## 推荐模型
 
 | 模型 | 大小 | 特点 | 推荐场景 |
 |------|------|------|----------|
-| qwen2.5:7b | 4.7GB | 中文优秀，速度快 | **推荐** |
+| gemini-3-flash-preview:cloud | 4.7GB | 中文优秀，速度快 | **推荐** |
 | llama3.1:8b | 4.7GB | 英文强，通用 | 英文场景 |
 | mistral:7b | 4.1GB | 速度最快 | 低配机器 |
 | qwen2.5:14b | 9.0GB | 更强能力 | 高配机器 |
