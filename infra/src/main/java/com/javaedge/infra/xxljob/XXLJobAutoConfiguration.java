@@ -2,6 +2,7 @@ package com.javaedge.infra.xxljob;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author javaedge
  */
 @Configuration
+@ConditionalOnProperty(name = "xxl-job.enabled", havingValue = "true", matchIfMissing = false)
 public class XXLJobAutoConfiguration {
 
     @Value("${xxl-job.admin.addresses}")

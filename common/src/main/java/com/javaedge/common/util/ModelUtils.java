@@ -9,7 +9,6 @@ import org.springframework.cglib.beans.BeanMap;
 import org.springframework.objenesis.instantiator.util.ClassUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 模型转换工具类
@@ -126,9 +125,10 @@ public class ModelUtils {
      * @param list  the list
      */
     public static <T> List<T> convertList(List<?> list, Class<T> clazz) {
-        return CollectionUtils.isEmpty(list) ?
-                Collections.emptyList() :
-                list.stream().map(e -> convert(e, clazz)).collect(Collectors.toList());
+        // JDK 16+ Stream#toList: 返回不可变列表，减少中间 Collectors 开销。
+        return CollectionUtils.isEmpty(list)
+                ? List.of()
+                : list.stream().map(e -> convert(e, clazz)).toList();
     }
 
     /**

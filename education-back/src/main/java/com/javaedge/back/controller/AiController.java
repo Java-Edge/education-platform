@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -187,20 +186,20 @@ public class AiController {
         try {
             String response = aiChatService.simpleChat("Hello");
 
-            Map<String, Object> health = new HashMap<>();
-            health.put("status", "UP");
-            health.put("message", "AI service is running");
-            health.put("testResponse", response);
-
+            Map<String, Object> health = Map.of(
+                "status", "UP",
+                "message", "AI service is running",
+                "testResponse", response
+            );
             return ResultBody.success(health);
         } catch (Exception e) {
             log.error("AI服务健康检查失败", e);
 
-            Map<String, Object> health = new HashMap<>();
-            health.put("status", "DOWN");
-            health.put("message", "AI service is unavailable");
-            health.put("error", e.getMessage());
-
+            Map<String, Object> health = Map.of(
+                "status", "DOWN",
+                "message", "AI service is unavailable",
+                "error", e.getMessage()
+            );
             ResultBody body = ResultBody.error("AI服务不可用");
             body.setResult(health);
             return body;

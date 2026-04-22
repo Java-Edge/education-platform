@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author JavaEdge
@@ -16,7 +15,7 @@ public class ReflectionUtils {
      * 获取对象的所有字段，包括父类
      */
     public static List<Field> getAllFields(Object o) {
-        Class tempReqClass = o.getClass();
+        Class<?> tempReqClass = o.getClass();
         return getAllFields(tempReqClass);
     }
 
@@ -24,14 +23,19 @@ public class ReflectionUtils {
      * 获取类的所有字段，包括父类
      */
     public static List<Field> getAllFields(Class<?> clazz) {
-        Class tempReqClass = clazz;
+        Class<?> tempReqClass = clazz;
         List<Field> allFields = new ArrayList<>();
         Set<String> tempFieldNameSet = new HashSet<>();
         while (tempReqClass != null && Object.class != tempReqClass) {
             List<Field> fields = Arrays.asList(tempReqClass.getDeclaredFields());
-            List<Field> AddFields = fields.stream().filter(it -> !Modifier.isStatic(it.getModifiers())).filter(it -> !tempFieldNameSet.contains(it.getName())).collect(Collectors.toList());
-            allFields.addAll(AddFields);
-            tempFieldNameSet.addAll(fields.stream().map(it -> it.getName()).collect(Collectors.toSet()));
+            // JDK 16+ Stream#toList: 返回不可变列表，避免无谓的收集器对象创建。
+            List<Field> addFields = fields.stream()
+                    .filter(it -> !Modifier.isStatic(it.getModifiers()))
+                    .filter(it -> !tempFieldNameSet.contains(it.getName()))
+                    .toList();
+            allFields.addAll(addFields);
+            // 这里不需要 Set 语义，后续仅用于 contains 检查。
+            tempFieldNameSet.addAll(fields.stream().map(Field::getName).toList());
             tempReqClass = tempReqClass.getSuperclass();
         }
         return allFields;
@@ -44,7 +48,8 @@ public class ReflectionUtils {
         if (overrideFields == null || overrideFields.length == 0) {
             return null;
         }
-        List<String> fields = Arrays.asList(overrideFields);
+        // JDK 9+ List.of: 明确不可变，避免意外修改调用方传入数组语义。
+        List<String> fields = List.of(overrideFields);
         List<String> setNullFields = new ArrayList<>();
         List<String> resultSetNullFields = new ArrayList<>();
         List<Field> allFields = getAllFields(source);
@@ -54,14 +59,13 @@ public class ReflectionUtils {
                 sourceField.setAccessible(true);
                 try {
                     Object fieldVal = sourceField.get(source);
-                    if (fieldVal instanceof String) {
-                        if (StringUtils.isBlank((String) fieldVal)) {
+                    // JDK 16+ instanceof 模式匹配：减少显式强转与重复变量。
+                    if (fieldVal instanceof String s) {
+                        if (StringUtils.isBlank(s)) {
                             setNullFields.add(sourceFieldName);
                         }
-                    } else {
-                        if (fieldVal == null) {
-                            setNullFields.add(sourceFieldName);
-                        }
+                    } else if (fieldVal == null) {
+                        setNullFields.add(sourceFieldName);
                     }
                 } catch (IllegalAccessException e) {
                 }

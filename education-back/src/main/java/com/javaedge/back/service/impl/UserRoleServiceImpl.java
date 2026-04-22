@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
@@ -35,8 +34,10 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
             roleIds.add(userRole.getRoleId());
         }
         if (CollectionUtils.isEmpty(roleIds)) {
-            return new ArrayList<>();
+            // JDK 9+ List.of: 返回不可变空列表，表达“无结果”的语义更明确。
+            return List.of();
         }
-        return roleMapper.selectBatchIds(roleIds).stream().map(Role::getPermission).collect(Collectors.toList());
+        // JDK 16+ Stream#toList: 直接返回不可变结果列表。
+        return roleMapper.selectBatchIds(roleIds).stream().map(Role::getPermission).toList();
     }
 }
