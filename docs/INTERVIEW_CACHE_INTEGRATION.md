@@ -35,23 +35,6 @@ public Cache<String, IPage<InterviewEntity>> interviewPageCache() {
 - **过期时间**: 5分钟
 - **适用场景**: 用户在不同页码间切换、按岗位筛选面经
 
-#### 1.2 面经详情缓存 (interviewDetailCache)
-```java
-@Bean
-public Cache<String, InterviewEntity> interviewDetailCache() {
-    return Caffeine.newBuilder()
-            .maximumSize(500)           // 最多缓存500个面经详情
-            .expireAfterWrite(10, TimeUnit.MINUTES) // 10分钟后过期
-            .build();
-}
-```
-
-**配置说明**:
-- **缓存键格式**: 面经ID (例如: `"12345"`)
-- **最大容量**: 500个面经详情
-- **过期时间**: 10分钟
-- **适用场景**: 用户查看面经详情、重复访问热门面经
-
 ### 2. InterviewServiceImpl.java
 **文件路径**: `education-back/src/main/java/com/javaedge/back/service/impl/InterviewServiceImpl.java`
 

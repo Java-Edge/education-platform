@@ -1,15 +1,11 @@
-# 🎯 立即执行：数据库权限修复指令
+# 数据库权限修复
 
-## 当前问题确认 ✅
-
-通过诊断脚本确认：
-- ✅ 数据库服务器可访问（192.168.5.16:3306）
-- ✅ 应用配置已修复（Hibernate 方言已配置）
-- ❌ **问题根因**：MySQL 未授权 `root@192.168.6.129` 访问
+## 问题根因
+MySQL 未授权 `root@192.168.6.129` 访问
 
 ---
 
-## 🚨 立即执行（3 步）
+## 立即执行（3 步）
 
 ### **第 1 步：在 MySQL 服务器上执行授权**
 
@@ -56,32 +52,6 @@ EXIT;
 ---
 
 ### **第 2 步：重启 Spring Boot 应用**
-
-```bash
-# 在本机执行
-cd /Users/javaedge/soft/IDEAProjects/education-platform
-
-# 清理并启动
-mvn clean spring-boot:run
-```
-
----
-
-### **第 3 步：验证启动**
-
-```bash
-# 打开新终端，监控日志
-tail -f LOG_PATH_IS_UNDEFINED/$(date +%Y-%m-%d)/info.0.log
-
-# 如果有错误，查看错误日志
-tail -f LOG_PATH_IS_UNDEFINED/$(date +%Y-%m-%d)/error.0.log
-```
-
-**成功标志**：
-- 看到 `Started BackApplication in X.XXX seconds`
-- 可以访问 http://localhost:8088
-
----
 
 ## 🔍 如果还有问题
 
