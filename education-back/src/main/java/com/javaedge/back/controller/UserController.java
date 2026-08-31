@@ -11,12 +11,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-/**
- * 文件描述: 用户登录，注册
- *
- * @author yuzonghao
- * @date 2020/05/22 14:43
- **/
 @RestController
 @RequestMapping("/user")
 @Slf4j

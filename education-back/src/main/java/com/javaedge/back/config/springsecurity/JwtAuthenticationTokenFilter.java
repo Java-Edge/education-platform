@@ -17,7 +17,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static com.javaedge.common.constant.EPConstant.SIGNING_KEY;
 
@@ -69,13 +68,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
      * 没带token或者检验失败响应给前端
      */
     private void doResponse(HttpServletResponse response, ResultBody resultVO) throws IOException {
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("utf-8");
-//        PrintWriter out = response.getWriter();
-//        String s = new ObjectMapper().writeValueAsString(resultVO);
-//        out.print(s);
-//        out.flush();
-//        out.close();
         // 确保只操作一次响应流
         if (!response.isCommitted()) {
             response.setContentType("application/json");
