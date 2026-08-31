@@ -45,5 +45,10 @@ public interface UserService extends IService<UserPO> {
      */
     ResultBody logout(HttpServletRequest request, HttpServletResponse response);
 
+    /**
+     * 获取当前登录用户信息
+     */
+    ResultBody getUserInfo(HttpServletRequest request);
+
     int checkPermission(Integer userId, SceneTypeEnum sceneEnums);
 }

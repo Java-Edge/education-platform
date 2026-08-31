@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
 import static com.javaedge.common.constant.EPConstant.SIGNING_KEY;
@@ -17,7 +18,7 @@ import static com.javaedge.common.constant.EPConstant.SIGNING_KEY;
 public class UserContextHolder {
 
     public static Integer getCurrentUserId(HttpServletRequest request) {
-        String token = request.getHeader(EPConstant.TOKEN);
+        String token = getToken(request);
         if (StringUtils.isBlank(token)) {
             return null;
         }
@@ -27,5 +28,25 @@ public class UserContextHolder {
         // 如果token检验通过（密码正确，有效期内）则正常执行，否则抛异常
         Jws<Claims> claimsJws = parser.parseClaimsJws(token);
         return (Integer) claimsJws.getBody().get("userId");
+    }
+
+    public static String getToken(HttpServletRequest request) {
+        String token = request.getHeader(EPConstant.TOKEN);
+        if (!StringUtils.isBlank(token)) {
+            return token;
+        }
+        String authorization = request.getHeader("Authorization");
+        if (!StringUtils.isBlank(authorization) && authorization.startsWith("Bearer ")) {
+            return authorization.substring("Bearer ".length()).trim();
+        }
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (EPConstant.TOKEN.equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 }

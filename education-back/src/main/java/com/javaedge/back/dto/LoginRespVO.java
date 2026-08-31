@@ -23,6 +23,11 @@ public class LoginRespVO implements Serializable {
     private String avatar;
 
     /**
+     * 展示昵称
+     */
+    private String nickname;
+
+    /**
      * 令牌
      */
     private String token;

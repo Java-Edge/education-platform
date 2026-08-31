@@ -16,6 +16,10 @@ public class UserPO extends BasePO {
 
     private Integer status;
 
+    private String nickname;
+
+    private String avatar;
+
     public UserPO(String user1, int i) {
         this.username = user1;
         this.status = i;

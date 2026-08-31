@@ -5,12 +5,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaedge.common.constant.EPConstant;
 import com.javaedge.common.resp.ResultBody;
 import com.javaedge.common.constant.ResultStatus;
+import com.javaedge.common.redis.RedisCrudService;
+import com.javaedge.common.redis.RootRedisKey;
+import com.javaedge.back.util.UserContextHolder;
 import groovy.util.logging.Slf4j;
 import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import lombok.RequiredArgsConstructor;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,11 +26,14 @@ import static com.javaedge.common.constant.EPConstant.SIGNING_KEY;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+
+    private final RedisCrudService redisCrudService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = request.getHeader(EPConstant.TOKEN);
+        String token = UserContextHolder.getToken(request);
         if (!StringUtils.isBlank(token)) {
             try {
                 JwtParser parser = Jwts.parser();
@@ -41,6 +48,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 if (userId == null) {
                     filterChain.doFilter(request, response);
                     return; // 明确返回
+                }
+                String activeToken = redisCrudService.get(RootRedisKey.build().name("token", EPConstant.TOKEN + userId));
+                if (!token.equals(activeToken)) {
+                    ResultBody resultVO = new ResultBody(ResultStatus.LOGIN_FAIL_NOT, "请先登录！", null);
+                    doResponse(response, resultVO);
+                    return;
                 }
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userId,null,null);

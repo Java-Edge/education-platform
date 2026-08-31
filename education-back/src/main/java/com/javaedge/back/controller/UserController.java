@@ -52,6 +52,11 @@ public class UserController {
         return userService.logout(request, response);
     }
 
+    @GetMapping("/info")
+    public ResultBody info(HttpServletRequest request) {
+        return userService.getUserInfo(request);
+    }
+
     @MessageMapping("hello")
     public Mono<String> hello(String input) {
         return Mono.just("Hello: " + input);

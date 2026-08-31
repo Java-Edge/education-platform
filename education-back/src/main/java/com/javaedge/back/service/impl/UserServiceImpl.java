@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.javaedge.back.dto.LoginRespVO;
+import com.javaedge.back.dto.UserInfoRespVO;
 import com.javaedge.application.user.UserDTO;
 import com.javaedge.back.entity.UserPO;
 import com.javaedge.back.mapper.UserMapper;
@@ -142,6 +143,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
                 .compact();
         loginRespVO.setId(userPO.getId());
         loginRespVO.setUsername(userPO.getUsername());
+        loginRespVO.setNickname(userPO.getNickname());
+        loginRespVO.setAvatar(userPO.getAvatar());
         loginRespVO.setToken(token);
         Cookie cookie = new Cookie(EPConstant.TOKEN, URLEncoder.encode(token, StandardCharsets.UTF_8));
         cookie.setMaxAge(Math.toIntExact(TOKEN_EXPIRE_TIME));
@@ -174,12 +177,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public ResultBody logout(HttpServletRequest request, HttpServletResponse response) {
+        Integer userId = UserContextHolder.getCurrentUserId(request);
+        if (userId == null) {
+            return ResultBody.error(ResultStatus.LOGIN_FAIL_NOT, "请先登录！");
+        }
         Cookie cookie = new Cookie(EPConstant.TOKEN, "");
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
-        redisCrudService.del(RootRedisKey.build().name("token", EPConstant.TOKEN + UserContextHolder.getCurrentUserId(request)));
+        redisCrudService.del(RootRedisKey.build().name("token", EPConstant.TOKEN + userId));
         return ResultBody.success();
+    }
+
+    @Override
+    public ResultBody getUserInfo(HttpServletRequest request) {
+        Integer userId = UserContextHolder.getCurrentUserId(request);
+        if (userId == null) {
+            return ResultBody.error(ResultStatus.LOGIN_FAIL_NOT, "请先登录！");
+        }
+        UserPO userPO = userMapper.selectById(userId);
+        if (userPO == null) {
+            return ResultBody.error(ResultStatus.USER_NOT_FOUND, "用户不存在");
+        }
+        UserInfoRespVO userInfo = new UserInfoRespVO();
+        BeanUtils.copyProperties(userPO, userInfo);
+        return ResultBody.success(userInfo);
     }
 
     @Override
