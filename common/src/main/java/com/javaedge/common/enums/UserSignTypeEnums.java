@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum UserSignTypeEnums {
     SIGN_NORMAL_INTEGRAL(1, "正常签到所得积分"),
-    SIGN_CONTINOUS_INTEGRAL(2, "连续签到所得积分");
+    SIGN_CONTINOUS_INTEGRAL(2, "连续签到所得积分"),
+    COURSE_COMPLETION_INTEGRAL(3, "课程完成赠送积分");
 
     private int type;
 
