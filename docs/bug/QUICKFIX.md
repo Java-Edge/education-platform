@@ -1,14 +1,3 @@
-# 数据库权限修复
-
-## 问题根因
-MySQL 未授权 `root@192.168.6.129` 访问
-
----
-
-## 立即执行（3 步）
-
-### **第 1 步：在 MySQL 服务器上执行授权**
-
 #### 选项 A：使用 SQL 脚本（推荐）⭐
 ```bash
 # 1. 将 fix_database_access.sql 复制到 MySQL 服务器
@@ -114,20 +103,3 @@ spring:
     username: eduapp
     password: StrongPassword123!
 ```
-
----
-
-## 📞 紧急求助
-
-如果执行后仍有问题，提供以下信息：
-1. MySQL 错误日志：`cat /var/log/mysql/error.log | tail -50`
-2. 应用错误日志：最新的 `error.0.log` 内容
-3. MySQL 用户列表：`SELECT host, user FROM mysql.user WHERE user='root';`
-4. 网络连接测试：`telnet 192.168.5.16 3306`
-
----
-
-**创建时间**：2025-12-05  
-**预计修复时间**：5 分钟  
-**优先级**：🔴 高
-

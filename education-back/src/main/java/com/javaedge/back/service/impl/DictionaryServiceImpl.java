@@ -40,8 +40,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
         queryWrapper.eq(type_key, typeKey);
         queryWrapper.eq("status", 1);
         queryWrapper.orderByAsc("sort");
-        List<Dictionary> dictionaries = this.getBaseMapper().selectList(queryWrapper);
-        return dictionaries;
+        return this.getBaseMapper().selectList(queryWrapper);
     }
 
     @Override
@@ -99,5 +98,4 @@ public class DictionaryServiceImpl extends ServiceImpl<DictMapper, Dictionary> i
         }
         return parentMenuList;
     }
-
 }
