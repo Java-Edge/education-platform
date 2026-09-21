@@ -5,7 +5,7 @@
 ## ✨ 核心特性
 
 - 🎓 **在线课程管理** - 视频课程、专栏、学习路线
-- 🤖 **AI智能助手** - 基于LangChain4j的AI对话和推荐
+- 🤖 **AI智能助手** - AI对话和推荐能力（架构预留）
 - 📊 **智能推荐** - AI驱动的个性化课程推荐
 - 📝 **内容生成** - AI自动生成课程描述和大纲
 - 🎯 **学习规划** - 智能学习路径分析
@@ -81,9 +81,7 @@ education-platform/
 
 ## 📖 文档
 
-- [AI集成文档](docs/LANGCHAIN4J_INTEGRATION.md) - LangChain4j完整使用指南
-- [AI快速入门](docs/LANGCHAIN4J_QUICKSTART.md) - 5分钟快速上手
-- [AI功能总结](docs/LANGCHAIN4J_SUMMARY.md) - 集成功能概览
+- [AI集成文档](docs/AI_INTEGRATION.md) - AI能力接入指南
 - [Drools规则引擎](docs/DROOLS_INTEGRATION.md) - 规则引擎使用指南
 
 ## 🛠️ 技术栈
@@ -92,17 +90,15 @@ education-platform/
 - Spring Boot 3.4.1
 - Spring Security
 - MyBatis Plus 3.5.3
-- **LangChain4j 0.36.2** - AI集成框架
 - Drools 9.44.0 - 规则引擎
 - Elasticsearch 8.x
 - Redis
 - MySQL 8.0
 
-### AI能力
+### AI能力（架构预留）
 - **OpenAI** - GPT-4, GPT-4o-mini
 - **Azure OpenAI** - 企业级AI服务
 - **Ollama** - 本地大模型（qwen2.5、llama3等）
-- **嵌入模型** - All-MiniLM-L6-V2
 
 ## 📊 数据库配置
 
@@ -116,28 +112,7 @@ spring:
     password: 123456
 ```
 
-## 🤖 AI配置
-
-```yaml
-langchain4j:
-  provider: ollama  # openai | azure | ollama
-  ollama:
-    base-url: http://localhost:11434
-    model-name: gemini-3-flash-preview:cloud
-```
-
 ## 🔑 API端点
-
-### AI功能
-- `POST /ai/chat` - AI对话
-- `GET /ai/chat/simple` - 快速聊天
-- `GET /ai/learning-assistant` - 学习助手
-- `POST /ai/course/recommend` - 智能推荐
-- `POST /ai/course/description` - 生成课程描述
-- `POST /ai/course/outline` - 生成课程大纲
-- `POST /ai/learning-path/analyze` - 学习路径分析
-
-### 课程管理
 - `GET /course/list` - 课程列表
 - `GET /course/detail/{id}` - 课程详情
 - `POST /course/create` - 创建课程
@@ -184,35 +159,11 @@ public List<Integer> recommend(Integer userId) {
 
 ### 切换AI模型
 
-```yaml
-# 使用OpenAI
-langchain4j:
-  provider: openai
-  openai:
-    api-key: sk-your-api-key
-    model-name: gpt-4o-mini
-
-# 使用Azure OpenAI
-langchain4j:
-  provider: azure
-  azure:
-    api-key: your-azure-key
-    endpoint: https://your-resource.openai.azure.com/
-
-# 使用本地Ollama（推荐开发环境）
-langchain4j:
-  provider: ollama
-  ollama:
-    base-url: http://localhost:11434
-    model-name: gemini-3-flash-preview:cloud
-```
-
 ## 🎯 业务场景
 
-1. **智能客服** - AI助手回答学员问题
-2. **个性化推荐** - 根据用户画像推荐课程
-3. **内容创作** - 自动生成课程描述和大纲
-4. **学习规划** - 智能分析学习路径
+1. **在线课程管理** - 视频课程、专栏、学习路线
+2. **学习规则引擎** - Drools 驱动的业务规则
+3. **全文搜索** - Elasticsearch 课程检索
 5. **知识问答** - 解答技术问题
 
 ## 📦 SQL脚本
