@@ -143,8 +143,14 @@
                     #{item,jdbcType=INTEGER}
                 </foreach>
             </if>
+            <if test="dto.jobCity != null and dto.jobCity != ''">
+                and SUBSTRING_INDEX(r.job_city, ',', 1) = #{dto.jobCity,jdbcType=VARCHAR}
+            </if>
             <if test="dto.keyword != null and dto.keyword != ''">
-                and r.title like concat('%',#{dto.keyword,jdbcType=VARCHAR},'%')
+                and
+                <foreach collection="dto.keyword.trim().split('\\s+')" item="kw" open="(" close=")" separator=" and ">
+                    lower(replace(r.title, ' ', '')) like concat('%', lower(replace(#{kw}, ' ', '')), '%')
+                </foreach>
             </if>
         </where>
         order by r.create_time desc
@@ -180,7 +186,7 @@
                c.company_short_name
         from recruit r
                  left join company c on r.company_id = c.id
-        where r.id = #{id,jdbcType=INTEGER}
+        where r.id = #{id,jdbcType=VARCHAR}
     </select>
 
 </mapper>
