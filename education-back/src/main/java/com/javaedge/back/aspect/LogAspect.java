@@ -96,9 +96,11 @@ public class LogAspect {
         }
     }
 
-    @SneakyThrows // 使用之后不需要抛出异常，lombok会自动在编译时加上try/catch
+    // 不用 @SneakyThrows：它生成 Lombok.sneakyThrow() 调用，运行时需要 lombok 类，
+    // 而 boot 打包 exclude 了 lombok → proceed() 一抛异常就 NoClassDefFoundError 盖住真实异常。
+    // @Around 方法直接声明 throws Throwable 即可
     @Around("rateLimitPointCut()")
-    public Object rateLimit(ProceedingJoinPoint joinPoint) {
+    public Object rateLimit(ProceedingJoinPoint joinPoint) throws Throwable {
         if (rateLimiter.tryAcquire()) {
             return joinPoint.proceed();
         } else {
@@ -119,6 +121,11 @@ public class LogAspect {
 
         // 提取 entityId 和 mapper 信息
         Long entityId = getEntityId(args[0]);
+        // 非数字 id（如 BOSS 直聘的字母加密 id）无法计入数字主键的 PV，跳过；
+        // PV 统计属于旁路逻辑，任何情况下都不应阻断主请求
+        if (entityId == null) {
+            return;
+        }
         String controllerClassName = joinPoint.getTarget().getClass().getSimpleName();
         if (controllerClassName.equals("DownloadController")) {
             return;
@@ -147,6 +154,10 @@ public class LogAspect {
 
             // 获取 entity
             Object entityFromDB = entityMapper.selectById(entityId);
+            if (entityFromDB == null) {
+                // 不存在的 id（已删除岗位等）：PV 无从统计，跳过而非 NPE
+                return;
+            }
 
             // 更新pageView
             Method getPageViewMethod = entityFromDB.getClass().getMethod("getPageView");
@@ -186,13 +197,22 @@ public class LogAspect {
         return result;
     }
 
+    /**
+     * 提取数字实体 id。非数字字符串（如 BOSS 的字母加密 id）返回 null，
+     * 由调用方跳过 PV 统计（绝不能抛 NumberFormatException 阻断主请求）。
+     */
     private Long getEntityId(Object arg) {
         if (arg instanceof Long l) {
             return  l;
         } else if (arg instanceof Integer i) {
             return Long.valueOf(i);
-        } else {
-            return Long.parseLong((String) arg);
+        } else if (arg instanceof String s) {
+            try {
+                return Long.parseLong(s);
+            } catch (NumberFormatException e) {
+                return null;
+            }
         }
+        return null;
     }
 }

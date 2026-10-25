@@ -37,6 +37,8 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ResultBody exception(Exception e, HttpServletResponse response) {
+        // 兜底异常必须留堆栈，否则线上问题（如 mapper 绑定类型错误）无法定位
+        log.error("全局异常: {}", e.getMessage(), e);
         if (!response.isCommitted()) {
             // 只有响应未提交时才写入
             return ResultBody.error("系统异常");
