@@ -2,18 +2,43 @@ server:
   port: 8088
 
 spring:
+  profiles:
+    active: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/education?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123456
-  application:
-    name: education-platform
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Shanghai
   data:
     redis:
       host: localhost
       port: 6379
-      database: 1
+      database: 0
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
   threads:
     virtual:
       enabled: true
@@ -24,6 +49,12 @@ spring:
     uris: http://127.0.0.1:9200
     username: elastic
     password: HYnyGbJ7LOXVUN*8XByl
+  # Neo4j 派生只读图（混合持久化：MySQL 唯一事实源，Neo4j 只承载关系遍历类查询）
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: dev12345
   #  kafka:
   #    bootstrap-servers: 10.51.51.2:9093
   #    producer:
@@ -39,19 +70,16 @@ spring:
       enabled: false
     sentinel:
       filter:
-        # 打开/关闭掉对 Spring MVC 端点的保护
+        # 打开对 Spring MVC 端点的保护
         enabled: true
       transport:
         # 指定控制台的地址
         dashboard: localhost:8080
-        # 指定和控制台通信的IP
-        # 如不配置，会自动选择一个IP注册
+        # 指定和控制台通信的IP 如不配置，会自动选择一个IP注册
         client-ip: 127.0.0.1
-        # 指定和控制台通信的端口，默认值8719
-        # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
+        # 指定和控制台通信的端口，默认值8719 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
         port: 8719
-        # 心跳发送周期，默认值null
-        # 但在SimpleHttpHeartbeatSender会用默认值10秒
+        # 心跳发送周期，默认值null 但在SimpleHttpHeartbeatSender会用默认值10秒
         heartbeat- interval-ms: 10000
       eager: true
 management:
@@ -77,11 +105,10 @@ pagehelper:
 
 mybatis-plus:
   auto-mapping-behavior: full # 自动映射
-  map-underscore-to-camel-case: true # 下划线转驼峰
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  type-aliases-package: com.javagpt.back.entity #扫描表映射的类，默认是自动加下划线
+  type-aliases-package: com.javaedge.back.entity #扫描表映射的类，默认是自动加下划线
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: true # 下划线转驼峰
     use-generated-keys: true
   global-config:
     banner: false
@@ -93,15 +120,47 @@ mybatis-plus:
       logic-not-delete-value: 0 # 未删除的值
 
 mpp:
-  entityBasePath: com.javagpt.back.entity
+  entityBasePath: com.javaedge.back.entity
 
 exclude-url:
   ip-limit-urls:
     - /back/pilot/getList
 
-springdoc: # http://localhost:8089/swagger-ui/index.html#/
+springdoc: # http://localhost:8088/swagger-ui/index.html#/
   api-docs:
     enabled: true # 开启OpenApi接口
     version: OPENAPI_3_1
   swagger-ui:
     enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
+
+xxl-job:
+  enabled: false  # 暂不接入 xxl-job，保留配置，需要时改为 true
+  accessToken: default_token
+  admin:
+    addresses: http://localhost:8080/xxl-job-admin
+  executor:
+    appname: xxl-job-executor-sample
+    ip: localhost
+    logpath: /Users/single/data/xxljob
+    logretentiondays: 30
+    port: 19999
+
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5tM11FARgMsCGjaYtCQk
+  accessKeySecret: g80zES4Xygyrx4stk2XhEYeV0xRSiK
+  bucketName: sss970722
+
+endpoint: https://oss-cn-beijing.aliyuncs.com
+accessKeyId: LTAI5tM11FARgMsCGjaYtCQk
+accessKeySecret: g80zES4Xygyrx4stk2XhEYeV0xRSiK
+bucketName: sss970722
+
+cloudflare:
+  r2:
+    access-key-id: d48e5f339b3b5227ca23222837556db1
+    secret-access-key: 58dd49202c640dfc06a928d37a8aeee5f501f5e68b844c469f81da8397f97310
+    bucket-name: javaedge-blog
+    region: auto
+    endpoint: https://92212c014013ed8970afcf0e9e9119f4.r2.cloudflarestorage.com/javaedge-blog
+

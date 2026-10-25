@@ -48,3 +48,6 @@ education-back/.DS_Store
 **/.env
 .env.local
 
+.playwright-cli/
+.playwright-mcp/
+.workbuddy/

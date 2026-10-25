@@ -133,6 +133,12 @@
             <artifactId>mybatis-plus-join</artifactId>
         </dependency>
 
+        <!-- Neo4j 图数据库客户端（Neo4jClient / Driver），版本由根 BOM 托管 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-neo4j</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.kie</groupId>

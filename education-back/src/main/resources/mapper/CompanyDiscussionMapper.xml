@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaedge.back.mapper.CompanyDiscussionMapper">
+
+    <resultMap id="companyDiscussionMap" type="com.javaedge.back.entity.CompanyDiscussion">
+        <id property="contentId" column="content_id" jdbcType="VARCHAR"/>
+        <result property="authDisplayInfo" column="auth_display_info" jdbcType="VARCHAR"/>
+        <result property="contentUrl" column="content_url" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="companyName" column="company_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="listByCondition" parameterType="com.javaedge.back.dto.InnerRecommendQueryDTO"
+            resultMap="companyDiscussionMap">
+        select cd.content_id,
+        cd.company_name,
+        cd.title,
+        cd.auth_display_info,
+        cd.content_url,
+        LEFT(cd.content, 300) content,
+        cd.create_time
+        from company_discussion cd
+        <where>
+            <if test="dto.keyword != null and dto.keyword !=''">
+                and (cd.title like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                or
+                cd.content like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                or
+                cd.company_name like concat('%', #{dto.keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+            <if test="dto.company != null and dto.company.size() > 0">
+                and cd.company_name in
+                <foreach collection="dto.company" item="company" open="(" separator="," close=")">
+                    #{company,jdbcType=VARCHAR}
+                </foreach>
+            </if>
+        </where>
+        order by cd.create_time desc
+    </select>
+</mapper>

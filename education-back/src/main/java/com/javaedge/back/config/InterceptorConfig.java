@@ -35,7 +35,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         qw.eq("status", 1);
         List<String> paths = permissionConfigService.list(qw).stream().map(PermissionConfig::getPath).collect(Collectors.toList());
         registry.addInterceptor(checkTokenInterceptor)
-                .addPathPatterns(paths);
+                .addPathPatterns(paths)
+                .excludePathPatterns("/graph/**");
 
         registry.addInterceptor(fuseInterceptor)
                 .addPathPatterns("/**");

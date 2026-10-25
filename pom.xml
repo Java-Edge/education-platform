@@ -282,6 +282,14 @@
                 <version>3.3.2</version>
             </dependency>
 
+            <!-- Neo4j 图数据库（派生只读图存储）。与 Spring Boot 3.4.1 对齐：
+                 Spring Data Neo4j 7.4.x + neo4j-java-driver 5.25.0 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-neo4j</artifactId>
+                <version>3.4.1</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-orchestration-spring-boot-starter</artifactId>

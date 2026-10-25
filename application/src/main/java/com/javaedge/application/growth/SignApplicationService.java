@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 会员成长应用服务（Application Service）。
+ * 会员成长应用服务。
  *
  * <p>应用服务是"用例"的编排者，它<b>不含业务规则</b>，只负责：
  * <ol>
