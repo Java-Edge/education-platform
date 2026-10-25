@@ -3,6 +3,7 @@ package com.javaedge.back.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -103,4 +104,31 @@ public class RecruitQO implements Serializable {
      * 关键词
      */
     private String keyword;
+
+    /**
+     * 关键词拆分后的搜索 token（setKeyword 时自动生成）：按空格 + 中英文边界切分，
+     * 统一小写去空格。让「ai应用开发」与「ai 应用开发」召回一致，Mapper 按此列表 AND 匹配。
+     */
+    private List<String> keywordTokens;
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+        this.keywordTokens = tokenize(keyword);
+    }
+
+    private static List<String> tokenize(String keyword) {
+        List<String> tokens = new ArrayList<>();
+        if (keyword == null || keyword.isBlank()) {
+            return tokens;
+        }
+        for (String seg : keyword.trim().split("\\s+")) {
+            for (String part : seg.split("(?<=[0-9a-zA-Z])(?=[\\u4e00-\\u9fa5])|(?<=[\\u4e00-\\u9fa5])(?=[0-9a-zA-Z])")) {
+                String token = part.trim().toLowerCase().replace(" ", "");
+                if (!token.isEmpty()) {
+                    tokens.add(token);
+                }
+            }
+        }
+        return tokens;
+    }
 }

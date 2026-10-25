@@ -146,10 +146,10 @@
             <if test="dto.jobCity != null and dto.jobCity != ''">
                 and SUBSTRING_INDEX(r.job_city, ',', 1) = #{dto.jobCity,jdbcType=VARCHAR}
             </if>
-            <if test="dto.keyword != null and dto.keyword != ''">
+            <if test="dto.keywordTokens != null and dto.keywordTokens.size() > 0">
                 and
-                <foreach collection="dto.keyword.trim().split('\\s+')" item="kw" open="(" close=")" separator=" and ">
-                    lower(replace(r.title, ' ', '')) like concat('%', lower(replace(#{kw}, ' ', '')), '%')
+                <foreach collection="dto.keywordTokens" item="kw" open="(" close=")" separator=" and ">
+                    lower(replace(r.title, ' ', '')) like concat('%', #{kw}, '%')
                 </foreach>
             </if>
         </where>
