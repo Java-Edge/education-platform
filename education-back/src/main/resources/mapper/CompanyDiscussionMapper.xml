@@ -12,6 +12,9 @@
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="companyName" column="company_name" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="source" column="source" jdbcType="VARCHAR"/>
+        <result property="likeCount" column="like_count" jdbcType="INTEGER"/>
+        <result property="commentCount" column="comment_count" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="listByCondition" parameterType="com.javaedge.back.dto.InnerRecommendQueryDTO"
@@ -22,7 +25,10 @@
         cd.auth_display_info,
         cd.content_url,
         LEFT(cd.content, 300) content,
-        cd.create_time
+        cd.create_time,
+        cd.source,
+        cd.like_count,
+        cd.comment_count
         from company_discussion cd
         <where>
             <if test="dto.keyword != null and dto.keyword !=''">

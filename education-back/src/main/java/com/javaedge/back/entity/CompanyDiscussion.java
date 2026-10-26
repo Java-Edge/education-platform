@@ -41,4 +41,19 @@ public class CompanyDiscussion implements Serializable {
     private LocalDateTime createTime;
 
     private String companyName;
+
+    /**
+     * 数据来源平台（牛客/知乎/脉脉）
+     */
+    private String source;
+
+    /**
+     * 点赞数
+     */
+    private Integer likeCount;
+
+    /**
+     * 评论数
+     */
+    private Integer commentCount;
 }
